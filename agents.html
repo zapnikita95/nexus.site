@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — Модели агентов</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+/* Agent model diagram */
+.agent-diagram{background:linear-gradient(165deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid var(--border);border-radius:12px;padding:40px 48px;position:relative;overflow:visible}
+.agent-diagram::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(129,140,248,0.03) 1px,transparent 0);background-size:20px 20px;pointer-events:none;border-radius:12px}
+.agent-svg{width:100%;height:auto;display:block}
+.agent-svg .node-rect{fill:var(--bg);stroke:var(--border);stroke-width:1;rx:8;transition:all .3s;cursor:pointer}
+.agent-svg .node-rect:hover{stroke:var(--accent);filter:drop-shadow(0 0 20px rgba(129,140,248,0.2))}
+.agent-svg .node-rect.accent{stroke:var(--accent);fill:rgba(129,140,248,0.06)}
+.agent-svg .node-rect.agent-node--highlight{stroke:var(--accent);fill:rgba(129,140,248,0.08);filter:drop-shadow(0 0 16px rgba(129,140,248,0.25))}
+.agent-svg .node-text{fill:var(--text);font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:800}
+.agent-svg .node-desc{fill:var(--text3);font-family:Inter,system-ui,sans-serif;font-size:10px}
+.agent-svg .arrow-main{stroke:var(--accent);stroke-width:2;fill:none;opacity:0.5}
+.agent-svg .arrow-cycle{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 4;fill:none;opacity:0.4}
+.agent-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;position:relative;z-index:1}
+.agent-node{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:20px 28px;min-width:140px;text-align:center;transition:all .4s}
+.agent-node:hover{border-color:var(--accent);box-shadow:0 0 32px rgba(129,140,248,0.08)}
+.agent-node.accent{border-color:var(--accent);background:rgba(129,140,248,0.04)}
+.agent-node .an-name{font-size:13px;font-weight:800;letter-spacing:-0.3px;margin-bottom:4px}
+.agent-node .an-desc{font-size:11px;color:var(--text3);line-height:1.5}
+.agent-arrow{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--accent);opacity:0.4;flex-shrink:0}
+.agent-arrow svg{width:16px;height:16px}
+.agent-cycle{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;text-align:center;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border)}
+.diagram-svg-wrap{position:relative;z-index:1}
+.model-section{padding:80px 0 100px}
+.model-section:nth-child(even) .model-content{flex-direction:row-reverse}
+.model-content{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.model-diagram-wrap{position:sticky;top:100px}
+.model-text h3{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:24px}
+.model-text .model-desc{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:32px}
+.role-rationale{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:20px}
+.role-rationale h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:0.5px}
+.role-rationale p{font-size:13px;color:var(--text2);line-height:1.75}
+.faq-list{display:flex;flex-direction:column;gap:24px;margin-top:40px}
+.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:28px 36px}
+.faq-q{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--text)}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.8}
+.role-rationale--highlight{border-color:var(--accent);background:rgba(129,140,248,0.04);box-shadow:0 0 24px rgba(129,140,248,0.06)}
+.agent-node--highlight{border-color:var(--accent);background:rgba(129,140,248,0.06);box-shadow:0 0 40px rgba(129,140,248,0.12)}
+@media(max-width:960px){
+  .model-content{grid-template-columns:1fr}
+  .model-section:nth-child(even) .model-content{flex-direction:column}
+  .agent-flow{flex-direction:column;gap:12px}
+  .agent-arrow{transform:rotate(90deg)}
+  .agent-diagram{padding:24px 20px}
+  .agent-svg{min-height:140px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">NEX<span>US</span></a>
+    <ul class="nav-links">
+      <li><a href="solutions.html">Решения</a></li>
+      <li><a href="security.html">Безопасность</a></li>
+      <li><a href="technology.html">Технологии</a></li>
+      <li><a href="agents.html" class="active">Модели агентов</a></li>
+      <li><a href="partnership.html">Партнёрство</a></li>
+    </ul>
+    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="solutions.html">Решения</a>
+    <a href="security.html">Безопасность</a>
+    <a href="technology.html">Технологии</a>
+    <a href="agents.html">Модели агентов</a>
+    <a href="partnership.html">Партнёрство</a>
+    <a href="order.html" class="nav-cta">Заказать тест</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
+  <div class="s-pad" style="position:relative;z-index:1">
+    <div class="s-label rv">Модели агентов</div>
+    <div class="s-title rv">Взаимодействие агентов<br>в графе.</div>
+    <div class="s-sub rv">Три бизнес-модели с разной топологией графа. Роли и оркестратор — только там, где нужны декомпозиция и маршрутизация.</div>
+  </div>
+</section>
+
+<!-- MODEL COMPARISON TABLE -->
+<section style="padding:0 0 80px">
+  <div class="s-pad">
+    <div class="s-label rv">Сравнение моделей</div>
+    <div class="s-title rv">Три модели, три топологии.</div>
+    <div class="s-sub rv">Compliance и Feedback — линейный поток с циклом критики. Operations — иерархия с декомпозицией задач.</div>
+  </div>
+  <div class="content-wrap">
+    <div class="comp-table rv" style="margin-top:24px">
+      <thead><tr><th>Модель</th><th>Граф</th><th>Оркестратор</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Compliance</strong></td><td>Extractor &rarr; Checker &rarr; Risk &rarr; Critic &rarr; Action</td><td>Нет</td></tr>
+        <tr><td><strong>Feedback</strong></td><td>Collector &rarr; Analyzer &rarr; Researcher &rarr; Responder &rarr; Critic &rarr; Escalation</td><td>Нет</td></tr>
+        <tr><td><strong>Operations</strong></td><td>Orchestrator &rarr; Resolver &rarr; Critic &rarr; Executor &rarr; Notify</td><td>Да</td></tr>
+      </tbody>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section id="compliance" class="model-section">
+  <div class="content-wrap">
+    <div class="s-title rv">Compliance — проверка документов.</div>
+    <div class="model-content">
+      <div class="model-diagram-wrap rv-scale">
+        <div class="agent-diagram">
+          <div class="diagram-svg-wrap">
+            <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
+              <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--accent)" opacity="0.6"/></marker>
+              <marker id="arrCyc" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="var(--accent)" opacity="0.5"/></marker></defs>
+              <path class="arrow-cycle" d="M 565 110 Q 350 -15 10 75" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrCyc)" opacity="0.5"/>
+              <g class="agent-node" data-role="Extractor" style="cursor:pointer"><rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/><text class="node-text" x="65" y="68" text-anchor="middle">Extractor</text><text class="node-desc" x="65" y="88" text-anchor="middle">Извлечение данных</text></g>
+              <path class="arrow-main" d="M 125 75 L 155 75" marker-end="url(#arr)"/>
+              <g class="agent-node" data-role="Checker" style="cursor:pointer"><rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/><text class="node-text" x="215" y="68" text-anchor="middle">Checker</text><text class="node-desc" x="215" y="88" text-anchor="middle">Нормативы</text></g>
+              <path class="arrow-main" d="M 275 75 L 305 75" marker-end="url(#arr)"/>
+              <g class="agent-node" data-role="Risk" style="cursor:pointer"><rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/><text class="node-text" x="365" y="68" text-anchor="middle">Risk</text><text class="node-desc" x="365" y="88" text-anchor="middle">Оценка штрафов</text></g>
+              <path class="arrow-main" d="M 425 75 L 455 75" marker-end="url(#arr)"/>
+              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/><text class="node-text" x="515" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="515" y="88" text-anchor="middle">Верификация</text></g>
+              <path class="arrow-main" d="M 575 75 L 605 75" marker-end="url(#arr)"/>
+              <g class="agent-node" data-role="Action" style="cursor:pointer"><rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/><text class="node-text" x="660" y="68" text-anchor="middle">Action</text><text class="node-desc" x="660" y="88" text-anchor="middle">OK / Блок</text></g>
+            </svg>
+          </div>
+          <div class="agent-cycle" data-default="Critic может вернуть задачу на Extractor (цикл до 3 итераций)">Critic может вернуть задачу на Extractor (цикл до 3 итераций)</div>
+        </div>
+      </div>
+      <div class="model-text rv">
+        <p class="model-desc">Документ проходит фиксированную последовательность: извлечение сущностей, проверка на соответствие нормам, оценка рисков, верификация и финальное решение. Каждый шаг не требует разбиения на подзадачи — поток жёстко определён.</p>
+
+        <div class="role-rationale" data-role="Extractor" data-cycle-text="Извлекает стороны договора, суммы, даты, коды маркировки, номера сертификатов.">
+          <h4>Extractor</h4>
+          <p>Извлекает стороны договора, суммы, даты, коды маркировки, номера сертификатов. Отдельная роль — чтобы не смешивать OCR/парсинг с логикой проверки. Ошибка извлечения не должна влиять на интерпретацию норм.</p>
+        </div>
+        <div class="role-rationale" data-role="Checker" data-cycle-text="Проверяет соответствие нормативам: 152-ФЗ, ФСТЭК, Честный Знак. Набор настраивается под клиента.">
+          <h4>Checker</h4>
+          <p>Проверяет соответствие нормативам: 152-ФЗ, ФСТЭК (приказы 17/21/117), маркировка Честный Знак. Набор нормативов настраивается под клиента. Результат — структурированный список нарушений или подтверждение соответствия.</p>
+        </div>
+<div class="role-rationale" data-role="Risk" data-cycle-text="Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата.">
+          <h4>Risk</h4>
+          <p>Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата. Отдельная роль — оценка риска требует иной prompt-логики, чем проверка формальных требований.</p>
+        </div>
+        <div class="role-rationale" data-role="Critic" data-cycle-text="Верифицирует результат. Может вернуть задачу на Extractor. Цикл до 3 итераций.">
+          <h4>Critic</h4>
+          <p>Верифицирует результат перед финальным действием. Может вернуть задачу на Extractor при недостаточной полноте извлечения. Цикл до 3 итераций снижает долю ложных срабатываний и пропусков.</p>
+        </div>
+
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEEDBACK -->
+<section id="feedback" class="model-section" style="background:var(--surface)">
+  <div class="content-wrap">
+    <div class="s-title rv">Feedback — анализ обращений.</div>
+    <div class="model-content">
+      <div class="model-text rv">
+        <p class="model-desc">Обращение клиента собирается из каналов (WB, Ozon, Telegram), анализируется по тональности и темам, генерируется ответ или эскалация. Поток линейный с возможностью возврата на доработку.</p>
+
+<div class="role-rationale" data-role="Collector" data-cycle-text="Собирает обращения из WB, Ozon, Telegram.">
+          <h4>Collector</h4>
+          <p>Сбор обращений из каналов: Wildberries, Ozon, Telegram. Подготовка данных для анализа.</p>
+        </div>
+        <div class="role-rationale" data-role="Analyzer" data-cycle-text="Классифицирует тональность, извлекает темы и сущности.">
+          <h4>Analyzer</h4>
+          <p>Классифицирует тональность, извлекает ключевые темы и сущности. Отдельная роль — анализ не должен смешиваться с генерацией ответа. Структурированный вывод в JSON упрощает маршрутизацию.</p>
+        </div>
+        <div class="role-rationale" data-role="Researcher" data-cycle-text="RAG-запросы к базе знаний: FAQ, регламенты, прецеденты.">
+          <h4>Researcher</h4>
+          <p>RAG-запросы к базе знаний: FAQ, регламенты, прецеденты. Поиск контекста перед ответом снижает галлюцинации и обеспечивает привязку к внутренним правилам компании.</p>
+        </div>
+        <div class="role-rationale" data-role="Responder" data-cycle-text="Генерирует авто-ответ на основе анализа и контекста.">
+          <h4>Responder</h4>
+          <p>Генерирует авто-ответ на основе анализа и найденного контекста. Узкая задача — только текст ответа, без принятия решения об эскалации.</p>
+        </div>
+        <div class="role-rationale" data-role="Critic" data-cycle-text="Проверяет уместность ответа. Может вернуть на Responder или направить в эскалацию.">
+          <h4>Critic</h4>
+          <p>Проверяет уместность ответа, соответствие тональности и полноту. Может вернуть на Responder или направить в эскалацию при негативе или неопределённости.</p>
+        </div>
+        <div class="role-rationale" data-role="Escalation" data-cycle-text="Передача критичного обращения менеджеру.">
+          <h4>Escalation</h4>
+          <p>Передача обращения менеджеру при негативе или неопределённости. Интеграция с CRM.</p>
+        </div>
+
+</div>
+      <div class="model-diagram-wrap rv-scale">
+        <div class="agent-diagram">
+          <div class="diagram-svg-wrap">
+            <svg class="agent-svg" viewBox="0 0 800 180" preserveAspectRatio="xMidYMid meet">
+              <defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--accent)" opacity="0.6"/></marker>
+              <marker id="arrCyc2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="var(--accent)" opacity="0.5"/></marker></defs>
+              <path class="arrow-cycle" d="M 390 110 Q 200 -20 65 75" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrCyc2)" opacity="0.5"/>
+              <g class="agent-node" data-role="Collector" style="cursor:pointer"><rect class="node-rect" x="5" y="40" width="95" height="70" rx="8"/><text class="node-text" x="52" y="68" text-anchor="middle">Collector</text><text class="node-desc" x="52" y="88" text-anchor="middle">Сбор</text></g>
+              <path class="arrow-main" d="M 105 75 L 125 75" marker-end="url(#arr2)"/>
+              <g class="agent-node" data-role="Analyzer" style="cursor:pointer"><rect class="node-rect" x="130" y="40" width="95" height="70" rx="8"/><text class="node-text" x="177" y="68" text-anchor="middle">Analyzer</text><text class="node-desc" x="177" y="88" text-anchor="middle">Тональность</text></g>
+              <path class="arrow-main" d="M 230 75 L 250 75" marker-end="url(#arr2)"/>
+              <g class="agent-node" data-role="Researcher" style="cursor:pointer"><rect class="node-rect" x="255" y="40" width="95" height="70" rx="8"/><text class="node-text" x="302" y="68" text-anchor="middle">Researcher</text><text class="node-desc" x="302" y="88" text-anchor="middle">RAG</text></g>
+              <path class="arrow-main" d="M 355 75 L 375 75" marker-end="url(#arr2)"/>
+              <g class="agent-node" data-role="Responder" style="cursor:pointer"><rect class="node-rect" x="380" y="40" width="95" height="70" rx="8"/><text class="node-text" x="427" y="68" text-anchor="middle">Responder</text><text class="node-desc" x="427" y="88" text-anchor="middle">Ответ</text></g>
+              <path class="arrow-main" d="M 480 75 L 500 75" marker-end="url(#arr2)"/>
+              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="505" y="40" width="95" height="70" rx="8"/><text class="node-text" x="552" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="552" y="88" text-anchor="middle">Проверка</text></g>
+              <path class="arrow-main" d="M 605 75 L 625 75" marker-end="url(#arr2)"/>
+              <g class="agent-node" data-role="Escalation" style="cursor:pointer"><rect class="node-rect" x="630" y="40" width="100" height="70" rx="8"/><text class="node-text" x="680" y="68" text-anchor="middle">Escalation</text><text class="node-desc" x="680" y="88" text-anchor="middle">Эскалация</text></g>
+            </svg>
+          </div>
+          <div class="agent-cycle" data-default="Critic проверяет и маршрутизирует: ответ / доработка / эскалация">Critic проверяет и маршрутизирует: ответ / доработка / эскалация</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPERATIONS -->
+<section id="operations" class="model-section">
+  <div class="content-wrap">
+    <div class="s-title rv">Operations — согласования и процессы.</div>
+    <div class="model-content">
+      <div class="model-diagram-wrap rv-scale">
+        <div class="agent-diagram">
+          <div class="diagram-svg-wrap">
+            <svg class="agent-svg" viewBox="0 0 720 200" preserveAspectRatio="xMidYMid meet">
+              <defs><marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--accent)" opacity="0.6"/></marker>
+              <marker id="arrDown" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0 0 L8 0 L4 8 Z" fill="var(--accent)" opacity="0.6"/></marker></defs>
+              <g class="agent-node accent" data-role="Orchestrator" style="cursor:pointer"><rect class="node-rect accent" x="260" y="5" width="200" height="55" rx="8"/><text class="node-text" x="360" y="35" text-anchor="middle">Orchestrator</text><text class="node-desc" x="360" y="50" text-anchor="middle">Декомпозиция, маршрутизация</text></g>
+              <path class="arrow-main" d="M 360 65 L 360 95" marker-end="url(#arrDown)"/>
+              <path class="arrow-main" d="M 125 135 L 155 135" marker-end="url(#arr3)"/>
+              <path class="arrow-main" d="M 275 135 L 305 135" marker-end="url(#arr3)"/>
+              <path class="arrow-main" d="M 425 135 L 455 135" marker-end="url(#arr3)"/>
+              <path class="arrow-main" d="M 575 135 L 605 135" marker-end="url(#arr3)"/>
+              <g class="agent-node" data-role="Resolver" style="cursor:pointer"><rect class="node-rect" x="10" y="105" width="110" height="70" rx="8"/><text class="node-text" x="65" y="133" text-anchor="middle">Resolver</text><text class="node-desc" x="65" y="153" text-anchor="middle">Согласующие</text></g>
+              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="160" y="105" width="110" height="70" rx="8"/><text class="node-text" x="215" y="133" text-anchor="middle">Critic</text><text class="node-desc" x="215" y="153" text-anchor="middle">HITL</text></g>
+              <g class="agent-node" data-role="Executor" style="cursor:pointer"><rect class="node-rect" x="310" y="105" width="110" height="70" rx="8"/><text class="node-text" x="365" y="133" text-anchor="middle">Executor</text><text class="node-desc" x="365" y="153" text-anchor="middle">ERP</text></g>
+              <g class="agent-node" data-role="Notify" style="cursor:pointer"><rect class="node-rect" x="460" y="105" width="110" height="70" rx="8"/><text class="node-text" x="515" y="133" text-anchor="middle">Notify</text><text class="node-desc" x="515" y="153" text-anchor="middle">Уведомления</text></g>
+            </svg>
+          </div>
+          <div class="agent-cycle" data-default="Orchestrator классифицирует тип запроса и выбирает маршрут">Orchestrator классифицирует тип запроса и выбирает маршрут</div>
+        </div>
+      </div>
+      <div class="model-text rv">
+        <p class="model-desc">Операционные процессы требуют декомпозиции: запрос на согласование договора, закупки или отпуска — разные типы с разными цепочками. Оркестратор определяет маршрут и подзадачи.</p>
+
+<div class="role-rationale" data-role="Orchestrator" data-cycle-text="Классифицирует тип запроса, декомпозирует на подзадачи, выбирает цепочку согласующих.">
+          <h4>Orchestrator</h4>
+          <p>Классифицирует тип запроса (договор, закупка, отпуск, IT-запрос), декомпозирует на подзадачи и выбирает цепочку согласующих. Маршрутизация зависит от суммы, срочности и регламентов. Модель 70B для сложных решений.</p>
+        </div>
+        <div class="role-rationale" data-role="Resolver" data-cycle-text="Назначает согласующих по оргструктуре. Учитывает делегирование, отпуска.">
+          <h4>Resolver</h4>
+          <p>Назначает конкретных согласующих по оргструктуре (LDAP/AD). Учитывает делегирование, отпуска, нагрузку. Формирует цепочку: юрист, финдир, ГД — в зависимости от типа и порога.</p>
+        </div>
+        <div class="role-rationale" data-role="Critic" data-cycle-text="Checkpoint для Human-in-the-Loop. Resume с любой точки графа.">
+          <h4>Critic</h4>
+          <p>Checkpoint для ожидания решения человека. Может вернуть на Resolver при изменении маршрута или делегировании. Resume с любой точки графа.</p>
+        </div>
+        <div class="role-rationale" data-role="Executor" data-cycle-text="Выполняет действие после одобрения: задача в 1С, Bitrix24, ЭДО.">
+          <h4>Executor</h4>
+          <p>Выполняет действие после одобрения: создание задачи в 1С, Bitrix24, отправка в ЭДО. Не принимает решений — только исполнение по результату Human-in-the-Loop.</p>
+        </div>
+        <div class="role-rationale" data-role="Notify" data-cycle-text="Уведомления по Email, Telegram, CRM.">
+          <h4>Notify</h4>
+          <p>Отправка уведомлений согласующим и инициатору. Интеграция с Email, Telegram, Bitrix24.</p>
+        </div>
+
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="padding:80px 0 120px;background:var(--surface)">
+  <div class="content-wrap">
+    <div class="s-label rv">FAQ</div>
+    <div class="s-title rv">Частые вопросы.</div>
+  </div>
+  <div class="content-wrap">
+    <div class="faq-list rv">
+      <div class="faq-item">
+        <h4 class="faq-q">Почему в одной модели есть Оркестратор, а в другой — нет?</h4>
+        <p class="faq-a">Оркестратор нужен там, где есть декомпозиция запроса на подзадачи, маршрутизация по типу запроса или параллельное выполнение. В Compliance и Feedback поток линейный с одной точкой ветвления (Critic) — роли жёстко заданы, документ или обращение проходят один путь. В Operations один запрос порождает несколько подзадач, маршрут зависит от суммы и типа — без оркестратора граф стал бы неподдерживаемым.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Как я могу настраивать работу моделей?</h4>
+        <p class="faq-a">Администраторы настраивают веса агентов (strictness, verbosity и др.) и общие задачи модели через конфигурацию. Пресеты задают профиль под сценарий: быстрая проверка, глубокая проверка, регрессия — с разными параметрами по ролям.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Можно ли поменять схему модели?</h4>
+        <p class="faq-a">Схему менять не требуется. Гибкость достигается настройкой весов и параметров агентов под задачи клиента. Разные пресеты меняют поведение без изменения топологии графа.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-geo"><div class="cta-geo-tri"></div><div class="cta-geo-circ"></div></div>
+  <h2 class="rv">Готовы к пилоту?</h2>
+  <p class="rv">Выберите модель и разверните граф агентов внутри вашего периметра.</p>
+  <a href="order.html" class="btn-accent rv">Заказать тест</a>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <a href="index.html" class="logo">NEX<span>US</span></a>
+      <div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div>
+    </div>
+    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a></div>
+    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
+    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
+  </div>
+  <div class="ft-bottom"><span>&copy; 2026 NEXUS</span><span>Политика конфиденциальности</span></div>
+</footer>
+
+<script>
+document.getElementById('navBurger')?.addEventListener('click', () => {
+  document.getElementById('navMobile').classList.toggle('open');
+});
+document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('navMobile').classList.remove('open');
+}));
+
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
+
+// Hover: agent-node <-> role-rationale, agent-cycle
+document.querySelectorAll('.model-content').forEach(mc => {
+  const diagram = mc.querySelector('.agent-diagram');
+  const cycleEl = diagram?.querySelector('.agent-cycle');
+  const nodes = diagram?.querySelectorAll('g[data-role]') || [];
+  const blocks = mc.querySelectorAll('.role-rationale[data-role]') || [];
+  if (!cycleEl) return;
+  const defaultText = cycleEl.dataset.default || cycleEl.textContent;
+
+  nodes.forEach(node => {
+    const role = node.getAttribute('data-role');
+    if (!role) return;
+    const block = mc.querySelector(`.role-rationale[data-role="${role}"]`);
+    node.addEventListener('mouseenter', () => { if (block) block.classList.add('role-rationale--highlight'); });
+    node.addEventListener('mouseleave', () => { if (block) block.classList.remove('role-rationale--highlight'); });
+  });
+
+  blocks.forEach(block => {
+    const role = block.dataset.role;
+    const cycleText = block.dataset.cycleText;
+    const node = diagram?.querySelector(`[data-role="${role}"]`);
+    block.addEventListener('mouseenter', () => {
+      const rect = node?.querySelector('.node-rect');
+      if (rect) rect.classList.add('agent-node--highlight');
+      if (cycleText) cycleEl.textContent = cycleText;
+    });
+    block.addEventListener('mouseleave', () => {
+      diagram?.querySelectorAll('.node-rect.agent-node--highlight').forEach(r => r.classList.remove('agent-node--highlight'));
+      cycleEl.textContent = defaultText;
+    });
+  });
+});
+</script>
+</body>
+</html>
