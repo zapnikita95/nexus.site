@@ -95,14 +95,14 @@
     <div class="s-sub rv">Compliance и Feedback — линейный поток с циклом критики. Operations — иерархия с декомпозицией задач.</div>
   </div>
   <div class="content-wrap">
-    <div class="comp-table rv" style="margin-top:24px">
+    <table class="comp-table rv" style="margin-top:24px">
       <thead><tr><th>Модель</th><th>Граф</th><th>Оркестратор</th></tr></thead>
       <tbody>
         <tr><td><strong>Compliance</strong></td><td>Extractor &rarr; Checker &rarr; Risk &rarr; Critic &rarr; Action</td><td>Нет</td></tr>
         <tr><td><strong>Feedback</strong></td><td>Collector &rarr; Analyzer &rarr; Researcher &rarr; Responder &rarr; Critic &rarr; Escalation</td><td>Нет</td></tr>
         <tr><td><strong>Operations</strong></td><td>Orchestrator &rarr; Resolver &rarr; Critic &rarr; Executor &rarr; Notify</td><td>Да</td></tr>
       </tbody>
-    </div>
+    </table>
   </div>
 </section>
 
@@ -143,7 +143,7 @@
           <h4>Checker</h4>
           <p>Проверяет соответствие нормативам: 152-ФЗ, ФСТЭК (приказы 17/21/117), маркировка Честный Знак. Набор нормативов настраивается под клиента. Результат — структурированный список нарушений или подтверждение соответствия.</p>
         </div>
-<div class="role-rationale" data-role="Risk" data-cycle-text="Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата.">
+        <div class="role-rationale" data-role="Risk" data-cycle-text="Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата.">
           <h4>Risk</h4>
           <p>Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата. Отдельная роль — оценка риска требует иной prompt-логики, чем проверка формальных требований.</p>
         </div>
@@ -165,7 +165,7 @@
       <div class="model-text rv">
         <p class="model-desc">Обращение клиента собирается из каналов (WB, Ozon, Telegram), анализируется по тональности и темам, генерируется ответ или эскалация. Поток линейный с возможностью возврата на доработку.</p>
 
-<div class="role-rationale" data-role="Collector" data-cycle-text="Собирает обращения из WB, Ozon, Telegram.">
+        <div class="role-rationale" data-role="Collector" data-cycle-text="Собирает обращения из WB, Ozon, Telegram.">
           <h4>Collector</h4>
           <p>Сбор обращений из каналов: Wildberries, Ozon, Telegram. Подготовка данных для анализа.</p>
         </div>
