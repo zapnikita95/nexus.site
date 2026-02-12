@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — Технологии</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">NEX<span>US</span></a>
+    <ul class="nav-links">
+      <li><a href="solutions.html">Решения</a></li>
+      <li><a href="security.html">Безопасность</a></li>
+      <li><a href="technology.html" class="active">Технологии</a></li>
+      <li><a href="partnership.html">Партнёрство</a></li>
+    </ul>
+    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="solutions.html">Решения</a>
+    <a href="security.html">Безопасность</a>
+    <a href="technology.html">Технологии</a>
+    <a href="partnership.html">Партнёрство</a>
+    <a href="order.html" class="nav-cta">Заказать тест</a>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
+  <div class="s-pad" style="position:relative;z-index:1">
+    <div class="s-label rv">Технологии</div>
+    <div class="s-title rv">Полный контроль<br>над стеком.</div>
+    <div class="s-sub rv">Полная прозрачность. Независимость от облачных провайдеров.</div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE (interactive) -->
+<section style="padding:0 0 120px">
+  <div style="max-width:1360px;margin:0 auto;padding:0 56px">
+    <div class="arch-box rv-scale">
+      <div class="arch-label"><span>Периметр клиента</span></div>
+      <div class="a-row">
+        <div class="an" data-node="documents"><div class="an-t">Документы</div><div class="an-s">PDF / Скан / ЭДО</div></div>
+        <div class="an" data-node="agents"><div class="an-t">AI-агенты</div><div class="an-s">LangGraph</div></div>
+        <div class="an" data-node="result"><div class="an-t">Результат</div><div class="an-s">Решение + действие</div></div>
+      </div>
+      <div class="a-div"></div>
+      <div class="a-row">
+        <div class="an" data-node="llm"><div class="an-t">LLM</div><div class="an-s">Qwen 2.5 / Llama 3.2</div></div>
+        <div class="an" data-node="vectordb"><div class="an-t">Vector DB</div><div class="an-s">Qdrant / PgVector</div></div>
+        <div class="an" data-node="inference"><div class="an-t">Inference</div><div class="an-s">Ollama / vLLM</div></div>
+        <div class="an" data-node="api"><div class="an-t">API</div><div class="an-s">FastAPI</div></div>
+      </div>
+      <div class="a-div"></div>
+      <div class="a-row">
+        <div class="an" data-node="erp"><div class="an-t">1С</div><div class="an-s">ERP / Бухгалтерия</div></div>
+        <div class="an" data-node="crm"><div class="an-t">Bitrix24</div><div class="an-s">CRM</div></div>
+        <div class="an" data-node="edo"><div class="an-t">ЭДО</div><div class="an-s">Диадок / СБИС</div></div>
+        <div class="an" data-node="marking"><div class="an-t">Маркировка</div><div class="an-s">Честный Знак</div></div>
+        <div class="an" data-node="monitoring"><div class="an-t">Monitoring</div><div class="an-s">Prometheus + Grafana</div></div>
+      </div>
+    </div>
+    <!-- DETAIL PANEL -->
+    <div class="arch-detail" id="archDetail">
+      <div class="arch-detail-head">
+        <div>
+          <h3 id="detailTitle"></h3>
+          <p id="detailDesc"></p>
+        </div>
+        <button class="arch-detail-close" id="detailClose">&times;</button>
+      </div>
+      <div class="arch-detail-grid" id="detailGrid"></div>
+      <div class="arch-detail-tags" id="detailTags"></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT ROLES -->
+<section style="padding:0 0 120px">
+  <div class="s-pad">
+    <div class="s-label rv">Команда агентов</div>
+    <div class="s-title rv">6 специализированных ролей.</div>
+    <div class="s-sub rv">Каждый агент отвечает за свою задачу. Orchestrator координирует всю команду через LangGraph.</div>
+  </div>
+  <div class="feat-grid" style="max-width:1360px;margin:0 auto;padding:0 56px">
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+      <h4>Orchestrator</h4>
+      <p>Планирование, декомпозиция задач, координация команды. Модель 70B для сложных решений.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+      <h4>Researcher</h4>
+      <p>Поиск информации, RAG-запросы к базе знаний, извлечение контекста из документов.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <h4>Analyst</h4>
+      <p>Извлечение сущностей, классификация, оценка рисков. Структурированный вывод в JSON.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg></div>
+      <h4>Executor</h4>
+      <p>Выполнение действий: создание задач, отправка уведомлений, вызов API внешних систем.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <h4>Critic</h4>
+      <p>Контроль качества, верификация результатов. Может вернуть задачу на доработку (цикл).</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+      <h4>Reporter</h4>
+      <p>Формирование отчётов, суммаризация результатов, генерация рекомендаций.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INTERACTION PATTERNS -->
+<section style="padding:0 0 120px">
+  <div class="s-pad">
+    <div class="s-label rv">Паттерны</div>
+    <div class="s-title rv">5 моделей взаимодействия.</div>
+    <div class="s-sub rv">От простого последовательного до циклических графов с возвратом задач на доработку.</div>
+  </div>
+  <div class="feat-grid" style="max-width:1360px;margin:0 auto;padding:0 56px">
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <h4>Sequential</h4>
+      <p>Линейная цепочка: Agent A &rarr; B &rarr; C &rarr; Result. Для простых процессов с чёткой последовательностью.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <h4>Hierarchical</h4>
+      <p>Orchestrator декомпозирует задачу и распределяет между агентами. Для сложных задач.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg></div>
+      <h4>Cyclic</h4>
+      <p>Critic проверяет результат и возвращает на доработку. Итеративное улучшение до достижения качества.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+      <h4>Debate</h4>
+      <p>Два агента аргументируют позиции, Judge выносит решение. Снижение галлюцинаций.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+      <h4>Operations</h4>
+      <p>Распределение задач, согласования, Human-in-the-Loop. Для внутренних процессов компании.</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <h4>Human-in-the-Loop</h4>
+      <p>Checkpoints для остановки и ожидания решения человека. Resume с любой точки графа.</p>
+    </div>
+  </div>
+
+  <!-- Main workflow diagram -->
+  <div style="max-width:1360px;margin:0 auto;padding:0 56px">
+    <div class="workflow-box rv-scale">
+      <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Пример: Compliance Graph (Cyclic)</span></div>
+      <div class="workflow-steps">
+        <div class="workflow-step"><h5>Extractor</h5><p>Извлечение</p></div>
+        <div class="workflow-arrow">&rarr;</div>
+        <div class="workflow-step"><h5>Checker</h5><p>Проверка</p></div>
+        <div class="workflow-arrow">&rarr;</div>
+        <div class="workflow-step"><h5>Risk</h5><p>Оценка</p></div>
+        <div class="workflow-arrow">&rarr;</div>
+        <div class="workflow-step" style="border-color:var(--accent)"><h5>Critic</h5><p>Верификация</p></div>
+        <div class="workflow-arrow">&rarr;</div>
+        <div class="workflow-step"><h5>Finalize</h5><p>Результат</p></div>
+      </div>
+      <div style="text-align:center;margin-top:16px;font-size:11px;color:var(--text3)">Critic может вернуть задачу на Extractor (цикл до 3 итераций)</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-geo"><div class="cta-geo-tri"></div><div class="cta-geo-circ"></div></div>
+  <h2 class="rv">Готовы к пилоту?</h2>
+  <p class="rv">Разверните всю архитектуру внутри вашего периметра за 1-2 месяца.</p>
+  <a href="order.html" class="btn-accent rv">Заказать тест</a>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <a href="index.html" class="logo">NEX<span>US</span></a>
+      <div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div>
+    </div>
+    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a></div>
+    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
+    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
+  </div>
+  <div class="ft-bottom"><span>&copy; 2026 NEXUS</span><span>Политика конфиденциальности</span></div>
+</footer>
+
+<script>
+// ═══ ARCHITECTURE NODE DETAIL DATA ═══
+const nodeData = {
+  documents: {
+    title: 'Документы',
+    desc: 'Система принимает документы любого формата из различных источников. OCR, table extraction, автоматическая классификация и извлечение ключевых полей.',
+    items: [
+      { title: 'Форматы', text: 'PDF, сканы (OCR), XML/EDI, Excel, Word. Автоматическое распознавание таблиц и структур.' },
+      { title: 'Классификация', text: 'Авто-определение типа: договор, акт, накладная, счёт-фактура, сертификат, акт сверки.' },
+      { title: 'Извлечение', text: 'Стороны (название, ИНН), суммы, даты, коды маркировки, номера сертификатов.' }
+    ],
+    tags: ['PDF Parser', 'OCR', 'Table Extractor', 'Диадок', 'СБИС']
+  },
+  agents: {
+    title: 'AI-агенты (LangGraph)',
+    desc: 'Команда из 6 специализированных агентов на базе LangGraph. Граф с условными переходами, циклами и Human-in-the-Loop.',
+    items: [
+      { title: 'Роли', text: 'Orchestrator (планирование), Researcher (поиск), Analyst (анализ), Executor (действия), Critic (контроль), Reporter (отчёты).' },
+      { title: 'Графы с циклами', text: 'Critic может вернуть задачу на доработку. Conditional edges маршрутизируют по результату. До 3 итераций.' },
+      { title: 'Human-in-the-Loop', text: 'Checkpoints на базе SQLite/PostgreSQL. Остановка для решения человека, resume с любой точки.' }
+    ],
+    tags: ['LangGraph', 'StateGraph', 'Checkpoints', 'Conditional Edges', 'HITL']
+  },
+  result: {
+    title: 'Результат',
+    desc: 'Каждый workflow завершается конкретным действием: одобрение документа, блокировка оплаты, создание задачи, авто-ответ клиенту.',
+    items: [
+      { title: 'Комплаенс', text: 'Approved / Risk / Fail. При Risk — уведомление юристу. При Fail — блокировка оплаты и задача в 1С.' },
+      { title: 'Обращения', text: 'Авто-ответ (позитив/нейтрал), эскалация менеджеру (негатив), тренд-отчёты (аналитика).' },
+      { title: 'Процессы', text: 'Маршрутизация заявки по цепочке согласования. Дедлайны, напоминания, действие в ERP.' }
+    ],
+    tags: ['Автодействия', '1С', 'Bitrix24', 'Email', 'Telegram']
+  },
+  llm: {
+    title: 'LLM (локальные модели)',
+    desc: 'Только локальные open-weight модели. Ни один токен не покидает периметр. Маршрутизация по сложности задачи.',
+    items: [
+      { title: 'Модели', text: 'Qwen 2.5 (7B/14B/32B/72B), Llama 3.2 (3B/8B/70B), GigaChat (опционально). Выбор по задаче.' },
+      { title: 'Маршрутизация', text: 'Простые задачи — 7B (быстро). Анализ — 14-32B. Планирование, критика — 70B (точно).' },
+      { title: 'Оптимизация', text: 'Quantization (GGUF/AWQ), KV cache, speculative decoding. Работа на потребительских GPU.' }
+    ],
+    tags: ['Qwen 2.5', 'Llama 3.2', 'GigaChat', 'GGUF', 'AWQ']
+  },
+  vectordb: {
+    title: 'Vector DB',
+    desc: 'Семантический поиск по базе знаний компании. RAG для обогащения контекста агентов.',
+    items: [
+      { title: 'Движки', text: 'Qdrant (primary) — высокая производительность. PgVector (fallback) — если уже есть PostgreSQL.' },
+      { title: 'RAG Pipeline', text: 'Chunking документов &rarr; Embeddings (e5-small, multilingual) &rarr; Semantic search &rarr; Контекст в LLM.' },
+      { title: 'Источники', text: 'Регламенты, инструкции, база прецедентов, FAQ, шаблоны ответов — всё индексируется.' }
+    ],
+    tags: ['Qdrant', 'PgVector', 'RAG', 'Embeddings', 'e5-small']
+  },
+  inference: {
+    title: 'Inference Engine',
+    desc: 'Локальный inference на GPU. Два режима: Ollama для разработки, vLLM для production.',
+    items: [
+      { title: 'Ollama', text: 'Быстрый старт, удобный API. Идеально для пилота и разработки. Apple Silicon, NVIDIA.' },
+      { title: 'vLLM', text: 'Production-grade: batching, PagedAttention, continuous batching. Высокий throughput.' },
+      { title: 'GPU', text: 'NVIDIA CUDA (рекомендовано), AMD ROCm (поддержка), Apple Silicon (через Ollama).' }
+    ],
+    tags: ['Ollama', 'vLLM', 'CUDA', 'PagedAttention', 'Batching']
+  },
+  api: {
+    title: 'API Layer',
+    desc: 'FastAPI — единая точка входа для всех операций. REST + WebSocket, авторизация, rate limiting.',
+    items: [
+      { title: 'Endpoints', text: 'REST API для запуска агентов, получения результатов, управления конфигурацией. WebSocket для streaming.' },
+      { title: 'Авторизация', text: 'JWT токены + API keys. RBAC middleware. Интеграция с LDAP/AD.' },
+      { title: 'Документация', text: 'OpenAPI/Swagger — автогенерация. Rate limiting, request validation, structured logging.' }
+    ],
+    tags: ['FastAPI', 'REST', 'WebSocket', 'JWT', 'Swagger']
+  },
+  erp: {
+    title: '1С (ERP / Бухгалтерия)',
+    desc: 'Двусторонняя интеграция через REST API. Синхронизация документов, создание задач, обновление статусов.',
+    items: [
+      { title: 'Документы', text: 'Получение входящих документов из 1С. Автоматическое создание записей по результатам проверки.' },
+      { title: 'Задачи', text: 'Создание задач на согласование, уведомления ответственным, отслеживание дедлайнов.' },
+      { title: 'Действия', text: 'Блокировка оплат при нарушениях, обновление статусов, формирование отчётов.' }
+    ],
+    tags: ['1С:Бухгалтерия', '1С:ERP', 'REST API', 'Проводки']
+  },
+  crm: {
+    title: 'Bitrix24 (CRM)',
+    desc: 'Интеграция с CRM для управления задачами, сделками и коммуникациями. REST API.',
+    items: [
+      { title: 'Задачи', text: 'Автоматическое создание задач для менеджеров. Отслеживание статусов, напоминания.' },
+      { title: 'Сделки', text: 'Обновление карточек клиентов по результатам анализа обращений. Воронка продаж.' },
+      { title: 'Уведомления', text: 'Push, email, Telegram-бот. Эскалация при критичных обращениях.' }
+    ],
+    tags: ['Bitrix24', 'REST API', 'Воронка', 'Push']
+  },
+  edo: {
+    title: 'ЭДО (электронный документооборот)',
+    desc: 'Интеграция с операторами ЭДО для автоматического получения и обработки документов.',
+    items: [
+      { title: 'Диадок', text: 'API Контура: получение входящих, проверка подписей, отправка ответных документов.' },
+      { title: 'СБИС', text: 'Альтернативный оператор. Аналогичный набор операций через API.' },
+      { title: 'Обработка', text: 'Авто-разбор → AI-проверка → уведомление/действие. Без ручного участия.' }
+    ],
+    tags: ['Диадок', 'СБИС', 'ЭЦП', 'XML', 'API']
+  },
+  marking: {
+    title: 'Маркировка (Честный Знак)',
+    desc: 'Проверка кодов маркировки через API Честного Знака. Автоматическая блокировка при нарушениях.',
+    items: [
+      { title: 'Валидация', text: 'Проверка наличия, срока годности, соответствия документу. Пакетная верификация.' },
+      { title: 'Автоблокировка', text: 'При отсутствии или некорректной маркировке — блокировка документа, уведомление.' },
+      { title: 'Штрафы', text: '10-20к за единицу без маркировки (с марта 2026 — автоштрафы через онлайн-кассы).' }
+    ],
+    tags: ['Честный Знак', 'DataMatrix', 'GS1', 'Маркировка']
+  },
+  monitoring: {
+    title: 'Monitoring',
+    desc: 'Prometheus + Grafana для полного мониторинга системы. Alerting, SIEM-совместимость.',
+    items: [
+      { title: 'Метрики', text: 'Latency, throughput, error rate, tokens/sec, queue depth. Кастомные метрики по агентам.' },
+      { title: 'Дашборды', text: 'Grafana: системные метрики, бизнес-KPI, состояние агентов. Настраиваемые под клиента.' },
+      { title: 'Alerting', text: 'Telegram, email, webhook. Интеграция с SIEM. Audit logs в JSON для автоматического разбора.' }
+    ],
+    tags: ['Prometheus', 'Grafana', 'SIEM', 'Alerting', 'JSON Logs']
+  }
+};
+
+// ═══ DETAIL PANEL INTERACTION ═══
+const detailPanel = document.getElementById('archDetail');
+const detailTitle = document.getElementById('detailTitle');
+const detailDesc = document.getElementById('detailDesc');
+const detailGrid = document.getElementById('detailGrid');
+const detailTags = document.getElementById('detailTags');
+const detailClose = document.getElementById('detailClose');
+
+function openDetail(data) {
+  detailTitle.textContent = data.title;
+  detailDesc.textContent = data.desc;
+  detailGrid.innerHTML = data.items.map(i =>
+    `<div class="arch-detail-item"><h5>${i.title}</h5><p>${i.text}</p></div>`
+  ).join('');
+  detailTags.innerHTML = data.tags.map(t =>
+    `<span class="arch-detail-tag">${t}</span>`
+  ).join('');
+  detailPanel.classList.add('open');
+}
+
+function closeDetail() {
+  detailPanel.classList.remove('open');
+  document.querySelectorAll('.an.active').forEach(n => n.classList.remove('active'));
+}
+
+document.querySelectorAll('.an[data-node]').forEach(node => {
+  node.addEventListener('click', () => {
+    const key = node.dataset.node;
+    const data = nodeData[key];
+    if (!data) return;
+
+    if (node.classList.contains('active')) {
+      closeDetail();
+      return;
+    }
+
+    document.querySelectorAll('.an.active').forEach(n => n.classList.remove('active'));
+    node.classList.add('active');
+    openDetail(data);
+    detailPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+});
+
+detailClose.addEventListener('click', closeDetail);
+
+// Mobile menu
+document.getElementById('navBurger')?.addEventListener('click', () => {
+  document.getElementById('navMobile').classList.toggle('open');
+});
+document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('navMobile').classList.remove('open');
+}));
+
+// ═══ REVEAL ═══
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
