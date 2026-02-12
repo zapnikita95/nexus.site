@@ -1,4 +1,4 @@
-# NEXUS — Enterprise AI Platform
+# Нексус-Тех — ИИ-платформа для крупного бизнеса
 
 Мультиагентная AI-платформа для enterprise. 100% on-premise.
 

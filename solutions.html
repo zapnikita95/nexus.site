@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXUS — Решения</title>
+<title>Нексус-Тех — Решения</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">NEX<span>US</span></a>
+    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a>
     <ul class="nav-links">
       <li><a href="solutions.html" class="active">Решения</a></li>
       <li><a href="security.html">Безопасность</a></li>
@@ -36,7 +36,7 @@
   <div class="s-pad" style="position:relative;z-index:1">
     <div class="s-label rv">Решения</div>
     <div class="s-title rv">Глубокая экспертиза.</div>
-    <div class="s-sub rv">Не универсальный ассистент. Точное решение конкретной боли с измеримым ROI.</div>
+    <div class="s-sub rv">Не универсальный ассистент. Точное решение конкретной боли с измеримой окупаемостью.</div>
   </div>
 </section>
 
@@ -70,7 +70,7 @@
     </div>
 
     <div class="workflow-box rv-scale">
-      <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Workflow: Compliance</span></div>
+      <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Процесс: Комплаенс</span></div>
       <div class="workflow-steps">
         <div class="workflow-step"><h5>Extractor</h5><p>Извлечение данных</p></div>
         <div class="workflow-arrow">&rarr;</div>
@@ -126,7 +126,7 @@
     </div>
 
     <div class="workflow-box rv-scale">
-      <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Workflow: Feedback Analysis</span></div>
+      <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Процесс: Анализ обращений</span></div>
       <div class="workflow-steps">
         <div class="workflow-step"><h5>Collector</h5><p>Сбор из каналов</p></div>
         <div class="workflow-arrow">&rarr;</div>
@@ -181,7 +181,7 @@
     </div>
 
     <div class="workflow-box rv-scale">
-      <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Workflow: Operations</span></div>
+      <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Процесс: Операции</span></div>
       <div class="workflow-steps">
         <div class="workflow-step"><h5>Classifier</h5><p>Тип запроса</p></div>
         <div class="workflow-arrow">&rarr;</div>
@@ -215,15 +215,16 @@
 
 <footer>
   <div class="ft-grid">
-    <div><a href="index.html" class="logo">NEX<span>US</span></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div></div>
+    <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div></div>
     <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a></div>
     <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
     <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
   </div>
-  <div class="ft-bottom"><span>&copy; 2026 NEXUS</span><span>Политика конфиденциальности</span></div>
+  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span>Политика конфиденциальности</span></div>
 </footer>
 
 <script>
+document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
 document.getElementById('navBurger')?.addEventListener('click', () => {
   document.getElementById('navMobile').classList.toggle('open');
 });

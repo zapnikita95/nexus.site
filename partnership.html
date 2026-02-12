@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXUS — Партнёрство</title>
+<title>Нексус-Тех — Партнёрство</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">NEX<span>US</span></a>
+    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a>
     <ul class="nav-links">
       <li><a href="solutions.html">Решения</a></li>
       <li><a href="security.html">Безопасность</a></li>
@@ -48,7 +48,7 @@
         <div class="mt-step rv">
           <div class="mt-tag">Фаза 1</div>
           <h4>Пилотный проект</h4>
-          <p>Развёртывание MVP в вашем контуре за 1-2 месяца. Интеграция с ключевыми системами. Обучение команды. Итоговый ROI-отчёт с реальными метриками.</p>
+          <p>Развёртывание MVP в вашем контуре за 1-2 месяца. Интеграция с ключевыми системами. Обучение команды. Итоговый отчёт по окупаемости с реальными метриками.</p>
         </div>
         <div class="mt-step rv">
           <div class="mt-tag">Фаза 2</div>
@@ -64,13 +64,13 @@
       <div class="monet-values">
         <div class="mv-card rv">
           <div class="mv-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <h5>Value-Based Pricing</h5>
+          <h5>Ценообразование по ценности</h5>
           <p>Цена привязана к экономии клиента, а не к количеству серверов. Вы платите долю от реального результата.</p>
         </div>
         <div class="mv-card rv">
           <div class="mv-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
           <h5>Низкий порог входа</h5>
-          <p>Минимальные вложения на старте. Масштабирование — только после подтверждённого ROI.</p>
+          <p>Минимальные вложения на старте. Масштабирование — только после подтверждённой окупаемости.</p>
         </div>
         <div class="mv-card rv">
           <div class="mv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
@@ -105,12 +105,12 @@
 <section style="padding:0 0 120px">
   <div class="s-pad">
     <div class="s-label rv">Сравнение</div>
-    <div class="s-title rv">Почему NEXUS</div>
+    <div class="s-title rv">Почему Нексус-Тех</div>
     <div class="s-sub rv">Быстрое внедрение. Независимость от экосистем. Результат с первого месяца.</div>
   </div>
   <div style="max-width:1360px;margin:0 auto;padding:0 56px;overflow-x:auto">
     <table class="comp-table rv">
-      <thead><tr><th>Критерий</th><th class="us">NEXUS</th><th>Just AI</th><th>Сбер</th><th>Яндекс</th></tr></thead>
+      <thead><tr><th>Критерий</th><th class="us">Нексус-Тех</th><th>Just AI</th><th>Сбер</th><th>Яндекс</th></tr></thead>
       <tbody>
         <tr><td>On-Premise</td><td class="us"><span class="ck">100%</span></td><td>Да</td><td class="lo">Cloud.ru</td><td class="lo">Нет</td></tr>
         <tr><td>Multi-Agent</td><td class="us"><span class="ck">Полноценный</span></td><td>Да</td><td class="lo">Частично</td><td class="lo">Частично</td></tr>
@@ -133,15 +133,16 @@
 
 <footer>
   <div class="ft-grid">
-    <div><a href="index.html" class="logo">NEX<span>US</span></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div></div>
+    <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div></div>
     <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a></div>
     <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
     <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
   </div>
-  <div class="ft-bottom"><span>&copy; 2026 NEXUS</span><span>Политика конфиденциальности</span></div>
+  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span>Политика конфиденциальности</span></div>
 </footer>
 
 <script>
+document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
 document.getElementById('navBurger')?.addEventListener('click', () => {
   document.getElementById('navMobile').classList.toggle('open');
 });

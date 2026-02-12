@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXUS — Enterprise AI Platform</title>
+<title>Нексус-Тех — ИИ-платформа для крупного бизнеса</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">NEX<span>US</span></a>
+    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a>
     <ul class="nav-links">
       <li><a href="solutions.html">Решения</a></li>
       <li><a href="security.html">Безопасность</a></li>
@@ -42,7 +42,7 @@
     <div class="geo-shape geo-dot d3"></div>
   </div>
   <div class="hero-inner">
-    <div class="hero-tag">On-Premise AI Platform</div>
+    <div class="hero-tag">ИИ-платформа на вашем периметре</div>
     <h1>Мультиагентный AI<br><span class="thin">для вашего периметра</span></h1>
     <p class="hero-desc">Автономные команды AI-агентов для комплаенса, аналитики обращений и автоматизации процессов. Все вычисления и данные остаются внутри вашей инфраструктуры.</p>
     <div class="hero-actions">
@@ -55,7 +55,7 @@
 <!-- METRICS -->
 <div class="metrics-section">
   <div class="metrics-grid rv">
-    <div class="mg-item"><div class="mg-val hi">100%</div><div class="mg-desc">On-Premise</div></div>
+    <div class="mg-item"><div class="mg-val hi">100%</div><div class="mg-desc">В вашем периметре</div></div>
     <div class="mg-item"><div class="mg-val">152-ФЗ</div><div class="mg-desc">Полное соответствие</div></div>
     <div class="mg-item"><div class="mg-val hi">1-2</div><div class="mg-desc">Месяца внедрение</div></div>
     <div class="mg-item"><div class="mg-val">0</div><div class="mg-desc">Данных во вне</div></div>
@@ -67,7 +67,7 @@
   <div class="s-pad">
     <div class="s-label rv">Решения</div>
     <div class="s-title rv">Глубокая экспертиза.</div>
-    <div class="s-sub rv">Не универсальный ассистент. Точное решение конкретной боли с измеримым ROI.</div>
+    <div class="s-sub rv">Не универсальный ассистент. Точное решение конкретной боли с измеримой окупаемостью.</div>
   </div>
   <div class="sol-grid content-wrap">
     <a href="solutions.html#compliance" class="sol-card rv">
@@ -183,14 +183,14 @@
 <footer>
   <div class="ft-grid">
     <div>
-      <a href="index.html" class="logo">NEX<span>US</span></a>
+      <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a>
       <div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div>
     </div>
     <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a></div>
     <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
     <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
   </div>
-  <div class="ft-bottom"><span>&copy; 2026 NEXUS</span><span>Политика конфиденциальности</span></div>
+  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span>Политика конфиденциальности</span></div>
 </footer>
 
 <script>
@@ -223,6 +223,7 @@ document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('clic
   document.getElementById('navMobile').classList.remove('open');
 }));
 
+document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
 // Reveal on scroll
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
