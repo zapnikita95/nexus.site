@@ -3,7 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Нексус-Тех — Модели агентов</title>
+<title>Модели агентов: мультиагентная система для комплаенса и автоматизации — Нексус-Тех</title>
+<meta name="description" content="Три модели мультиагентного ИИ: Compliance (проверка документов 152-ФЗ), Feedback (анализ обращений), Operations (согласования). Оркестратор, роли, граф агентов.">
+<link rel="canonical" href="https://нексус-тех.рф/agents.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://нексус-тех.рф/agents.html">
+<meta property="og:title" content="Модели агентов: мультиагентная система — Нексус-Тех">
+<meta property="og:description" content="Compliance, Feedback, Operations — граф агентов для комплаенса, обращений и автоматизации.">
+<meta property="og:locale" content="ru_RU">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Почему мультиагенты лучше обычного одного агента?","acceptedAnswer":{"@type":"Answer","text":"Когда один агент и извлекает данные, и проверяет нормы, и решает — он чаще ошибается и «галлюцинирует». Мы разбиваем работу на роли: один извлекает, другой проверяет, третий оценивает риски, четвёртый может отправить на доработку. Каждый делает своё, следующий перепроверяет. В итоге меньше пропусков и ложных срабатываний, и всегда понятно, на каком шаге что произошло. Плюс под новый сценарий можно перенастроить цепочку, а не переписывать одну большую модель."}},
+{"@type":"Question","name":"Как быстро можно внедрить мультиагентный ИИ у себя?","acceptedAnswer":{"@type":"Answer","text":"Пилотный контур обычно поднимаем за 1–2 месяца: развёртывание на ваших серверах, подключение к ключевым системам (1С, CRM, ЭДО — по необходимости), обучение команды. Дальше — масштабирование под ваши процессы. Срок зависит от объёма интеграций и сложности регламентов."}},
+{"@type":"Question","name":"Подходит ли платформа для автоматической проверки документов на 152-ФЗ и маркировку?","acceptedAnswer":{"@type":"Answer","text":"Да. Одна из основных моделей — комплаенс: проверка договоров, актов, накладных на соответствие 152-ФЗ и маркировке Честный Знак. Цепочка агентов извлекает данные, сверяет с нормативами, оценивает риски и штрафы, верифицирует результат. Всё на вашем периметре, без отправки документов вовне."}},
+{"@type":"Question","name":"Как вы защищаетесь от prompt injection?","acceptedAnswer":{"@type":"Answer","text":"То, что вводит пользователь, у нас не подмешивается к служебным инструкциям агентов — у ввода своё место, агенты работают уже с обработанными данными. По критичным решениям всегда есть шаг с человеком. Всё крутится у вас на серверах, в облако ничего не уходит — подменить промпт извне по сути некуда, плюс вы видите все логи."}},
+{"@type":"Question","name":"Где хранятся данные и как обеспечивается конфиденциальность?","acceptedAnswer":{"@type":"Answer","text":"Всё считается у вас: ставите модели на свои серверы или в своё облако — документы и обращения за пределы вашей инфраструктуры не уходят. В публичные API мы ничего не шлём. Смотреть данные и логи могут только ваши люди. Под 152-ФЗ и отраслевые требования закладываемся с самого начала."}},
+{"@type":"Question","name":"Почему в одной модели есть Оркестратор, а в другой — нет?","acceptedAnswer":{"@type":"Answer","text":"Оркестратор нужен там, где есть декомпозиция запроса на подзадачи, маршрутизация по типу запроса или параллельное выполнение. В Compliance и Feedback поток линейный с одной точкой ветвления (Critic). В Operations один запрос порождает несколько подзадач — без оркестратора граф стал бы неподдерживаемым."}},
+{"@type":"Question","name":"Можно ли встроить ваших агентов в наши регламенты и базы знаний?","acceptedAnswer":{"@type":"Answer","text":"Да. Агенты работают с вашими нормативами, регламентами и прецедентами через RAG: база знаний настраивается под клиента. Ответы и проверки привязаны к внутренним правилам компании. Пресеты можно менять под сценарий без смены топологии графа."}},
+{"@type":"Question","name":"Как я могу настраивать работу моделей?","acceptedAnswer":{"@type":"Answer","text":"Администраторы настраивают веса агентов и общие задачи модели через конфигурацию. Пресеты задают профиль под сценарий: быстрая проверка, глубокая проверка, регрессия — с разными параметрами по ролям."}},
+{"@type":"Question","name":"Можно ли поменять схему модели?","acceptedAnswer":{"@type":"Answer","text":"Схему менять не требуется. Гибкость достигается настройкой весов и параметров агентов под задачи клиента. Разные пресеты меняют поведение без изменения топологии графа."}}
+]}
+</script>
 <link rel="stylesheet" href="styles.css">
 <style>
 /* Agent model diagram */
@@ -11,11 +31,13 @@
 .agent-diagram::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(129,140,248,0.03) 1px,transparent 0);background-size:20px 20px;pointer-events:none;border-radius:12px}
 .agent-svg{width:100%;height:auto;display:block}
 .agent-svg .node-rect{fill:var(--bg);stroke:var(--border);stroke-width:1;rx:8;transition:all .3s;cursor:pointer}
-.agent-svg .node-rect:hover{stroke:var(--accent);filter:drop-shadow(0 0 20px rgba(129,140,248,0.2))}
+.agent-svg .agent-node:hover .node-rect{stroke:var(--accent);filter:drop-shadow(0 0 20px rgba(129,140,248,0.2))}
 .agent-svg .node-rect.accent{stroke:var(--accent);fill:rgba(129,140,248,0.06)}
-.agent-svg .node-rect.agent-node--highlight{stroke:var(--accent);fill:rgba(129,140,248,0.08);filter:drop-shadow(0 0 16px rgba(129,140,248,0.25))}
-.agent-svg .node-text{fill:var(--text);font-family:Inter,system-ui,sans-serif;font-size:12px;font-weight:800}
-.agent-svg .node-desc{fill:var(--text3);font-family:Inter,system-ui,sans-serif;font-size:10px}
+.agent-svg .agent-node--highlight .node-rect,.agent-svg .agent-node.agent-node--highlight .node-rect{stroke:var(--accent);fill:rgba(129,140,248,0.08);filter:drop-shadow(0 0 16px rgba(129,140,248,0.25))}
+.agent-svg .node-text,.agent-svg .node-desc{fill:var(--text);font-family:Inter,system-ui,sans-serif;pointer-events:none}
+.agent-svg .node-text{font-size:12px;font-weight:800}
+.agent-svg .node-desc{fill:var(--text3);font-size:10px}
+.agent-svg .arrow-main,.agent-svg .arrow-cycle{pointer-events:none}
 .agent-svg .arrow-main{stroke:var(--accent);stroke-width:2;fill:none;opacity:0.5}
 .agent-svg .arrow-cycle{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 4;fill:none;opacity:0.4}
 .agent-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;position:relative;z-index:1}
@@ -37,10 +59,14 @@
 .role-rationale{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:20px}
 .role-rationale h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:0.5px}
 .role-rationale p{font-size:13px;color:var(--text2);line-height:1.75}
-.faq-list{display:flex;flex-direction:column;gap:24px;margin-top:40px}
-.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:28px 36px}
-.faq-q{font-size:15px;font-weight:700;margin-bottom:12px;color:var(--text)}
-.faq-a{font-size:14px;color:var(--text2);line-height:1.8}
+.faq-list{display:flex;flex-direction:column;gap:12px;margin-top:40px}
+.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .3s}
+.faq-item.open{border-color:var(--accent)}
+.faq-q{font-size:15px;font-weight:700;color:var(--text);padding:20px 36px 20px 20px;cursor:pointer;position:relative;margin:0;user-select:none}
+.faq-q::after{content:'';position:absolute;right:20px;top:50%;transform:translateY(-50%) rotate(0deg);width:10px;height:10px;border-right:2px solid var(--text3);border-bottom:2px solid var(--text3);transition:transform .3s}
+.faq-item.open .faq-q::after{transform:translateY(-30%) rotate(-135deg)}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.8;padding:0 36px 20px 20px;max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-item.open .faq-a{max-height:800px;padding-top:0;padding-bottom:24px}
 .role-rationale--highlight{border-color:var(--accent);background:rgba(129,140,248,0.04);box-shadow:0 0 24px rgba(129,140,248,0.06)}
 .agent-node--highlight{border-color:var(--accent);background:rgba(129,140,248,0.06);box-shadow:0 0 40px rgba(129,140,248,0.12)}
 @media(max-width:960px){
@@ -82,7 +108,7 @@
   <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
   <div class="s-pad" style="position:relative;z-index:1">
     <div class="s-label rv">Модели агентов</div>
-    <div class="s-title rv">Взаимодействие агентов<br>в графе.</div>
+    <h1 class="s-title rv">Модели агентов: мультиагентная система<br>для комплаенса и автоматизации</h1>
     <div class="s-sub rv">Три бизнес-модели с разной топологией графа. Роли и оркестратор — только там, где нужны декомпозиция и маршрутизация.</div>
   </div>
 </section>
@@ -115,17 +141,15 @@
         <div class="agent-diagram">
           <div class="diagram-svg-wrap">
             <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
-              <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--accent)" opacity="0.6"/></marker>
-              <marker id="arrCyc" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="var(--accent)" opacity="0.5"/></marker></defs>
-              <path class="arrow-cycle" d="M 565 110 Q 350 -15 10 75" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrCyc)" opacity="0.5"/>
+              <path class="arrow-cycle" d="M 565 110 Q 350 -15 10 75" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
               <g class="agent-node" data-role="Extractor" style="cursor:pointer"><rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/><text class="node-text" x="65" y="68" text-anchor="middle">Extractor</text><text class="node-desc" x="65" y="88" text-anchor="middle">Извлечение данных</text></g>
-              <path class="arrow-main" d="M 125 75 L 155 75" marker-end="url(#arr)"/>
+              <path class="arrow-main" d="M 125 75 L 155 75"/>
               <g class="agent-node" data-role="Checker" style="cursor:pointer"><rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/><text class="node-text" x="215" y="68" text-anchor="middle">Checker</text><text class="node-desc" x="215" y="88" text-anchor="middle">Нормативы</text></g>
-              <path class="arrow-main" d="M 275 75 L 305 75" marker-end="url(#arr)"/>
+              <path class="arrow-main" d="M 275 75 L 305 75"/>
               <g class="agent-node" data-role="Risk" style="cursor:pointer"><rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/><text class="node-text" x="365" y="68" text-anchor="middle">Risk</text><text class="node-desc" x="365" y="88" text-anchor="middle">Оценка штрафов</text></g>
-              <path class="arrow-main" d="M 425 75 L 455 75" marker-end="url(#arr)"/>
+              <path class="arrow-main" d="M 425 75 L 455 75"/>
               <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/><text class="node-text" x="515" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="515" y="88" text-anchor="middle">Верификация</text></g>
-              <path class="arrow-main" d="M 575 75 L 605 75" marker-end="url(#arr)"/>
+              <path class="arrow-main" d="M 575 75 L 605 75"/>
               <g class="agent-node" data-role="Action" style="cursor:pointer"><rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/><text class="node-text" x="660" y="68" text-anchor="middle">Action</text><text class="node-desc" x="660" y="88" text-anchor="middle">OK / Блок</text></g>
             </svg>
           </div>
@@ -195,19 +219,17 @@
         <div class="agent-diagram">
           <div class="diagram-svg-wrap">
             <svg class="agent-svg" viewBox="0 0 800 180" preserveAspectRatio="xMidYMid meet">
-              <defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--accent)" opacity="0.6"/></marker>
-              <marker id="arrCyc2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="var(--accent)" opacity="0.5"/></marker></defs>
-              <path class="arrow-cycle" d="M 390 110 Q 200 -20 65 75" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" marker-end="url(#arrCyc2)" opacity="0.5"/>
+              <path class="arrow-cycle" d="M 390 110 Q 200 -20 65 75" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
               <g class="agent-node" data-role="Collector" style="cursor:pointer"><rect class="node-rect" x="5" y="40" width="95" height="70" rx="8"/><text class="node-text" x="52" y="68" text-anchor="middle">Collector</text><text class="node-desc" x="52" y="88" text-anchor="middle">Сбор</text></g>
-              <path class="arrow-main" d="M 105 75 L 125 75" marker-end="url(#arr2)"/>
+              <path class="arrow-main" d="M 105 75 L 125 75"/>
               <g class="agent-node" data-role="Analyzer" style="cursor:pointer"><rect class="node-rect" x="130" y="40" width="95" height="70" rx="8"/><text class="node-text" x="177" y="68" text-anchor="middle">Analyzer</text><text class="node-desc" x="177" y="88" text-anchor="middle">Тональность</text></g>
-              <path class="arrow-main" d="M 230 75 L 250 75" marker-end="url(#arr2)"/>
+              <path class="arrow-main" d="M 230 75 L 250 75"/>
               <g class="agent-node" data-role="Researcher" style="cursor:pointer"><rect class="node-rect" x="255" y="40" width="95" height="70" rx="8"/><text class="node-text" x="302" y="68" text-anchor="middle">Researcher</text><text class="node-desc" x="302" y="88" text-anchor="middle">RAG</text></g>
-              <path class="arrow-main" d="M 355 75 L 375 75" marker-end="url(#arr2)"/>
+              <path class="arrow-main" d="M 355 75 L 375 75"/>
               <g class="agent-node" data-role="Responder" style="cursor:pointer"><rect class="node-rect" x="380" y="40" width="95" height="70" rx="8"/><text class="node-text" x="427" y="68" text-anchor="middle">Responder</text><text class="node-desc" x="427" y="88" text-anchor="middle">Ответ</text></g>
-              <path class="arrow-main" d="M 480 75 L 500 75" marker-end="url(#arr2)"/>
+              <path class="arrow-main" d="M 480 75 L 500 75"/>
               <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="505" y="40" width="95" height="70" rx="8"/><text class="node-text" x="552" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="552" y="88" text-anchor="middle">Проверка</text></g>
-              <path class="arrow-main" d="M 605 75 L 625 75" marker-end="url(#arr2)"/>
+              <path class="arrow-main" d="M 605 75 L 625 75"/>
               <g class="agent-node" data-role="Escalation" style="cursor:pointer"><rect class="node-rect" x="630" y="40" width="100" height="70" rx="8"/><text class="node-text" x="680" y="68" text-anchor="middle">Escalation</text><text class="node-desc" x="680" y="88" text-anchor="middle">Эскалация</text></g>
             </svg>
           </div>
@@ -227,14 +249,15 @@
         <div class="agent-diagram">
           <div class="diagram-svg-wrap">
             <svg class="agent-svg" viewBox="0 0 720 200" preserveAspectRatio="xMidYMid meet">
-              <defs><marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="var(--accent)" opacity="0.6"/></marker>
-              <marker id="arrDown" markerWidth="8" markerHeight="8" refX="4" refY="6" orient="auto"><path d="M0 0 L8 0 L4 8 Z" fill="var(--accent)" opacity="0.6"/></marker></defs>
               <g class="agent-node accent" data-role="Orchestrator" style="cursor:pointer"><rect class="node-rect accent" x="260" y="5" width="200" height="55" rx="8"/><text class="node-text" x="360" y="35" text-anchor="middle">Orchestrator</text><text class="node-desc" x="360" y="50" text-anchor="middle">Декомпозиция, маршрутизация</text></g>
-              <path class="arrow-main" d="M 360 65 L 360 95" marker-end="url(#arrDown)"/>
-              <path class="arrow-main" d="M 125 135 L 155 135" marker-end="url(#arr3)"/>
-              <path class="arrow-main" d="M 275 135 L 305 135" marker-end="url(#arr3)"/>
-              <path class="arrow-main" d="M 425 135 L 455 135" marker-end="url(#arr3)"/>
-              <path class="arrow-main" d="M 575 135 L 605 135" marker-end="url(#arr3)"/>
+              <path class="arrow-main" d="M 360 60 L 65 105"/>
+              <path class="arrow-main" d="M 360 60 L 215 105"/>
+              <path class="arrow-main" d="M 360 60 L 365 105"/>
+              <path class="arrow-main" d="M 360 60 L 515 105"/>
+              <path class="arrow-main" d="M 125 135 L 155 135"/>
+              <path class="arrow-main" d="M 275 135 L 305 135"/>
+              <path class="arrow-main" d="M 425 135 L 455 135"/>
+              <path class="arrow-main" d="M 575 135 L 605 135"/>
               <g class="agent-node" data-role="Resolver" style="cursor:pointer"><rect class="node-rect" x="10" y="105" width="110" height="70" rx="8"/><text class="node-text" x="65" y="133" text-anchor="middle">Resolver</text><text class="node-desc" x="65" y="153" text-anchor="middle">Согласующие</text></g>
               <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="160" y="105" width="110" height="70" rx="8"/><text class="node-text" x="215" y="133" text-anchor="middle">Critic</text><text class="node-desc" x="215" y="153" text-anchor="middle">HITL</text></g>
               <g class="agent-node" data-role="Executor" style="cursor:pointer"><rect class="node-rect" x="310" y="105" width="110" height="70" rx="8"/><text class="node-text" x="365" y="133" text-anchor="middle">Executor</text><text class="node-desc" x="365" y="153" text-anchor="middle">ERP</text></g>
@@ -281,9 +304,33 @@
   </div>
   <div class="content-wrap">
     <div class="faq-list rv">
+      <div class="faq-item open">
+        <h4 class="faq-q">Почему мультиагенты лучше обычного одного агента?</h4>
+        <p class="faq-a">Когда один агент и извлекает данные, и проверяет нормы, и решает — он чаще ошибается и «галлюцинирует». Мы разбиваем работу на роли: один извлекает, другой проверяет, третий оценивает риски, четвёртый может отправить на доработку. Каждый делает своё, следующий перепроверяет. В итоге меньше пропусков и ложных срабатываний, и всегда понятно, на каком шаге что произошло. Плюс под новый сценарий можно перенастроить цепочку, а не переписывать одну большую модель.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Как быстро можно внедрить мультиагентный ИИ у себя?</h4>
+        <p class="faq-a">Пилотный контур обычно поднимаем за 1–2 месяца: развёртывание на ваших серверах, подключение к ключевым системам (1С, CRM, ЭДО — по необходимости), обучение команды. Дальше — масштабирование под ваши процессы. Срок зависит от объёма интеграций и сложности регламентов.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Подходит ли платформа для автоматической проверки документов на 152-ФЗ и маркировку?</h4>
+        <p class="faq-a">Да. Одна из основных моделей — комплаенс: проверка договоров, актов, накладных на соответствие 152-ФЗ и маркировке Честный Знак. Цепочка агентов извлекает данные, сверяет с нормативами, оценивает риски и штрафы, верифицирует результат. Всё на вашем периметре, без отправки документов вовне.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Как вы защищаетесь от prompt injection?</h4>
+        <p class="faq-a">То, что вводит пользователь, у нас не подмешивается к служебным инструкциям агентов — у ввода своё место, агенты работают уже с обработанными данными. По критичным решениям (например, «документ прошёл» или «заблокировать») всегда есть шаг с человеком: система предлагает, человек подтверждает. Всё крутится у вас на серверах, в облако ничего не уходит — значит, и подменить промпт извне по сути некуда, плюс вы видите все логи.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Где хранятся данные и как обеспечивается конфиденциальность?</h4>
+        <p class="faq-a">Всё считается у вас: ставите модели на свои серверы или в своё облако — документы и обращения за пределы вашей инфраструктуры не уходят. В публичные API мы ничего не шлём. Смотреть данные и логи могут только ваши люди. Под 152-ФЗ и отраслевые требования закладываемся с самого начала, когда проектируем контур и настраиваем проверки.</p>
+      </div>
       <div class="faq-item">
         <h4 class="faq-q">Почему в одной модели есть Оркестратор, а в другой — нет?</h4>
         <p class="faq-a">Оркестратор нужен там, где есть декомпозиция запроса на подзадачи, маршрутизация по типу запроса или параллельное выполнение. В Compliance и Feedback поток линейный с одной точкой ветвления (Critic) — роли жёстко заданы, документ или обращение проходят один путь. В Operations один запрос порождает несколько подзадач, маршрут зависит от суммы и типа — без оркестратора граф стал бы неподдерживаемым.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Можно ли встроить ваших агентов в наши регламенты и базы знаний?</h4>
+        <p class="faq-a">Да. Агенты работают с вашими нормативами, регламентами и прецедентами через RAG: база знаний настраивается под клиента, запросы к ней выполняют выделенные роли (например, Researcher в Feedback). Так ответы и проверки привязаны к внутренним правилам компании, а не к общим данным модели. Пресеты можно менять под сценарий без смены топологии графа.</p>
       </div>
       <div class="faq-item">
         <h4 class="faq-q">Как я могу настраивать работу моделей?</h4>
@@ -326,6 +373,16 @@ document.getElementById('navBurger')?.addEventListener('click', () => {
 document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
   document.getElementById('navMobile').classList.remove('open');
 }));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
 
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
