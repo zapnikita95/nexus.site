@@ -151,26 +151,26 @@
     <div class="s-sub rv">Полная прозрачность. Независимость от облачных провайдеров.</div>
   </div>
   <div class="content-wrap">
-    <div class="arch-box rv-scale">
+    <div class="arch-box arch-box--home rv-scale">
       <div class="a-row">
-        <div class="an"><div class="an-t">Документы</div><div class="an-s">PDF / Скан / ЭДО</div></div>
-        <div class="an"><div class="an-t">AI-агенты</div><div class="an-s">LangGraph</div></div>
-        <div class="an"><div class="an-t">Результат</div><div class="an-s">Решение + действие</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">Документы</div><div class="an-s">PDF / Скан / ЭДО</div><div class="an-expand">Входные документы в любом формате: скан, PDF, выгрузки из ЭДО. Обработка внутри вашего периметра.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">AI-агенты</div><div class="an-s">LangGraph</div><div class="an-expand">Граф агентов: извлечение, проверка, маршрутизация. Каждая роль — отдельный агент с чёткой задачей.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">Результат</div><div class="an-s">Решение + действие</div><div class="an-expand">Структурированный вывод, интеграция с 1С, CRM, ЭДО. Human-in-the-Loop для критичных решений.</div></div>
       </div>
       <div class="a-div"></div>
       <div class="a-row">
-        <div class="an"><div class="an-t">LLM</div><div class="an-s">Qwen 2.5 / Llama 3.2</div></div>
-        <div class="an"><div class="an-t">Vector DB</div><div class="an-s">Qdrant / PgVector</div></div>
-        <div class="an"><div class="an-t">Inference</div><div class="an-s">Ollama / vLLM</div></div>
-        <div class="an"><div class="an-t">API</div><div class="an-s">FastAPI</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">LLM</div><div class="an-s">Qwen 2.5 / Llama 3.2</div><div class="an-expand">Модели развёрнуты on-premise. Нет отправки данных в облако. Поддержка открытых LLM.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">Vector DB</div><div class="an-s">Qdrant / PgVector</div><div class="an-expand">База знаний для RAG: регламенты, прецеденты, нормативы. Поиск контекста перед ответом.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">Inference</div><div class="an-s">Ollama / vLLM</div><div class="an-expand">Локальный инференс на ваших серверах. Масштабирование под нагрузку.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">API</div><div class="an-s">FastAPI</div><div class="an-expand">Единый API для интеграции с вашими системами и скриптами.</div></div>
       </div>
       <div class="a-div"></div>
       <div class="a-row">
-        <div class="an"><div class="an-t">1С</div><div class="an-s">ERP</div></div>
-        <div class="an"><div class="an-t">Bitrix24</div><div class="an-s">CRM</div></div>
-        <div class="an"><div class="an-t">ЭДО</div><div class="an-s">Диадок / СБИС</div></div>
-        <div class="an"><div class="an-t">Маркировка</div><div class="an-s">Честный Знак</div></div>
-        <div class="an"><div class="an-t">Monitoring</div><div class="an-s">Prometheus</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">1С</div><div class="an-s">ERP</div><div class="an-expand">Обмен данными с 1С: документы, справочники, проведение.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">Bitrix24</div><div class="an-s">CRM</div><div class="an-expand">Интеграция с CRM: заявки, контакты, задачи.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">ЭДО</div><div class="an-s">Диадок / СБИС</div><div class="an-expand">Электронный документооборот: отправка и приём документов.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">Маркировка</div><div class="an-s">Честный Знак</div><div class="an-expand">Проверка маркировки и соответствия регламентам.</div></div>
+        <div class="an an--expand" role="button" tabindex="0"><div class="an-t">Monitoring</div><div class="an-s">Prometheus</div><div class="an-expand">Метрики, алерты, дашборды для контроля работы системы.</div></div>
       </div>
     </div>
     <div style="text-align:center;margin-top:48px">
@@ -239,6 +239,21 @@ const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
+
+// Архитектура на главной: раскрывающийся текст по клику
+document.querySelectorAll('.arch-box--home .an--expand').forEach(block => {
+  block.addEventListener('click', () => {
+    const wasOpen = block.classList.contains('open');
+    document.querySelectorAll('.arch-box--home .an--expand').forEach(b => b.classList.remove('open'));
+    if (!wasOpen) block.classList.add('open');
+  });
+  block.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      block.click();
+    }
+  });
+});
 </script>
 </body>
 </html>
