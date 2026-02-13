@@ -267,15 +267,17 @@ footer .logo img{height:38px;opacity:0.95;max-width:200px}
 .int-item h5{font-size:13px;font-weight:700;margin-bottom:4px}
 .int-item p{font-size:10px;color:var(--text3);letter-spacing:0.5px}
 
-/* ── FOOTER (светлая тема под тёмный логотип) ── */
-footer{background:rgba(248,248,250,0.98);border-top:1px solid rgba(0,0,0,0.08);max-width:1360px;margin:0 auto;padding:56px 56px 28px;color:#1d1d1f}
+/* ── FOOTER (светлая тема: тёмный текст и логотип хорошо видны) ── */
+footer{width:100%;background:#f5f5f7;border-top:1px solid rgba(0,0,0,0.1);color:#1d1d1f;box-sizing:border-box}
+footer .ft-grid{max-width:1360px;margin:0 auto;padding:56px 56px 28px}
 .ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
-.ft-brand{font-size:13px;color:#52555a;margin-top:14px;line-height:1.8}
-.ft-col h4{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#52555a;margin-bottom:14px}
+.ft-brand{font-size:13px;color:#424245;margin-top:14px;line-height:1.8}
+.ft-col h4{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#424245;margin-bottom:14px}
 .ft-col a{display:block;color:#1d1d1f;text-decoration:none;font-size:13px;margin-bottom:8px;transition:color .2s}
 .ft-col a:hover{color:var(--accent)}
-.ft-bottom{margin-top:40px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.08);font-size:11px;color:#6e6e73;display:flex;justify-content:space-between}
-footer .logo img{opacity:1}
+.ft-bottom{margin-top:40px;padding-top:20px;border-top:1px solid rgba(0,0,0,0.1);font-size:11px;color:#6e6e73;display:flex;justify-content:space-between}
+footer .logo img{opacity:1;filter:none}
+footer a.logo{color:#1d1d1f}
 
 /* ── RESPONSIVE ── */
 @media(max-width:960px){
@@ -302,6 +304,7 @@ footer .logo img{opacity:1}
   .form-grid{grid-template-columns:1fr}
   .form-full{grid-column:auto}
   .ft-grid{grid-template-columns:1fr}
+  footer .ft-grid{padding:40px 16px 24px}
   .comp-table{font-size:11px}
   .comp-table th,.comp-table td{padding:12px 10px}
   .int-row{grid-template-columns:repeat(3,1fr)}
