@@ -134,8 +134,8 @@
 <section style="padding:0 0 120px">
   <div class="s-pad">
     <div class="s-label rv">Паттерны</div>
-    <div class="s-title rv">5 моделей взаимодействия.</div>
-    <div class="s-sub rv">От простого последовательного до циклических графов с возвратом задач на доработку.</div>
+    <div class="s-title rv">7 моделей взаимодействия.</div>
+    <div class="s-sub rv">От простого последовательного до циклических графов, голосования и дебатов. Voting и Debate — надстройки внутри пресетов (аудит, эскалация жалоб, аналитика).</div>
   </div>
   <div class="feat-grid" style="max-width:1360px;margin:0 auto;padding:0 56px">
     <div class="feat-card rv">
@@ -156,7 +156,12 @@
     <div class="feat-card rv">
       <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
       <h4>Debate</h4>
-      <p>Два агента аргументируют позиции, Judge выносит решение. Снижение галлюцинаций.</p>
+      <p>Два агента генерируют разные ответы (эмпатичный/формальный), Judge выбирает лучший. Часть пресетов: «Быстрая эскалация жалоб», «Служба поддержки».</p>
+    </div>
+    <div class="feat-card rv">
+      <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg></div>
+      <h4>Voting</h4>
+      <p>4 агента голосуют по risk_level или sentiment, majority выносит решение. Часть пресетов: «Аудит», «Юр. превью», «Акцент на аналитику», «Жёсткое согласование».</p>
     </div>
     <div class="feat-card rv">
       <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
@@ -208,7 +213,7 @@
     <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
     <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
   </div>
-  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span>Политика конфиденциальности</span></div>
+  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span><a href="privacy.html">Политика конфиденциальности</a></span></div>
 </footer>
 
 <script>
@@ -237,13 +242,12 @@ const nodeData = {
   },
   result: {
     title: 'Результат',
-    desc: 'Каждый workflow завершается конкретным действием: одобрение документа, блокировка оплаты, создание задачи, авто-ответ клиенту.',
+    desc: 'Каждый workflow завершается конкретным действием: одобрение документа, блокировка оплаты, создание задачи в 1С.',
     items: [
       { title: 'Комплаенс', text: 'Approved / Risk / Fail. При Risk — уведомление юристу. При Fail — блокировка оплаты и задача в 1С.' },
-      { title: 'Обращения', text: 'Авто-ответ (позитив/нейтрал), эскалация менеджеру (негатив), тренд-отчёты (аналитика).' },
-      { title: 'Процессы', text: 'Маршрутизация заявки по цепочке согласования. Дедлайны, напоминания, действие в ERP.' }
+      { title: 'Операции', text: 'Маршрутизация заявки по цепочке согласования. Дедлайны, напоминания, действие в ERP.' }
     ],
-    tags: ['Автодействия', '1С', 'Bitrix24', 'Email', 'Telegram']
+    tags: ['Автодействия', '1С', 'Bitrix24', 'Email']
   },
   llm: {
     title: 'LLM (локальные модели)',
@@ -300,8 +304,8 @@ const nodeData = {
     desc: 'Интеграция с CRM для управления задачами, сделками и коммуникациями. REST API.',
     items: [
       { title: 'Задачи', text: 'Автоматическое создание задач для менеджеров. Отслеживание статусов, напоминания.' },
-      { title: 'Сделки', text: 'Обновление карточек клиентов по результатам анализа обращений. Воронка продаж.' },
-      { title: 'Уведомления', text: 'Push, email, Telegram-бот. Эскалация при критичных обращениях.' }
+      { title: 'Сделки', text: 'Обновление карточек клиентов, воронка продаж. Интеграция с CRM.' },
+      { title: 'Уведомления', text: 'Push, email. Эскалация при критичных событиях.' }
     ],
     tags: ['Bitrix24', 'REST API', 'Воронка', 'Push']
   },
@@ -331,7 +335,7 @@ const nodeData = {
     items: [
       { title: 'Метрики', text: 'Latency, throughput, error rate, tokens/sec, queue depth. Кастомные метрики по агентам.' },
       { title: 'Дашборды', text: 'Grafana: системные метрики, бизнес-KPI, состояние агентов. Настраиваемые под клиента.' },
-      { title: 'Alerting', text: 'Telegram, email, webhook. Интеграция с SIEM. Audit logs в JSON для автоматического разбора.' }
+      { title: 'Alerting', text: 'Email, webhook. Интеграция с SIEM. Audit logs в JSON.' }
     ],
     tags: ['Prometheus', 'Grafana', 'SIEM', 'Alerting', 'JSON Logs']
   }

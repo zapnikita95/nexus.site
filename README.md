@@ -8,14 +8,14 @@
 
 ### GitHub Pages
 
-1. Создай репозиторий `nexus.site` на GitHub
+1. Создай репозиторий на GitHub (например `nexus.site` для ENT, или используй корневой репо проекта)
 2. Включи Pages: Settings → Pages → Source: main branch, / (root)
-3. Запушь код:
+3. Добавь remote и запушь:
 
 ```bash
 git remote add origin https://github.com/ТВОЙ_USERNAME/nexus.site.git
-git branch -M main
 git push -u origin main
 ```
 
-Сайт будет доступен по адресу: `https://ТВОЙ_USERNAME.github.io/nexus.site/`
+Сайт ENT: `site-drafts/site/` (оставить только ENT on-prem).  
+Сайт SMB: `site-drafts/site-smb/` — отдельно для WB/Ozon/Telegram (малый и средний бизнес).

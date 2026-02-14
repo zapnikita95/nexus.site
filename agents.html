@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Модели агентов: мультиагентная система для комплаенса и автоматизации — Нексус-Тех</title>
-<meta name="description" content="Три модели мультиагентного ИИ: Compliance (проверка документов 152-ФЗ), Feedback (анализ обращений), Operations (согласования). Оркестратор, роли, граф агентов.">
+<meta name="description" content="Модели мультиагентного ИИ для enterprise: Compliance (проверка документов 152-ФЗ), Operations (согласования). Оркестратор, роли, граф агентов.">
 <link rel="canonical" href="https://нексус-тех.рф/agents.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://нексус-тех.рф/agents.html">
 <meta property="og:title" content="Модели агентов: мультиагентная система — Нексус-Тех">
-<meta property="og:description" content="Compliance, Feedback, Operations — граф агентов для комплаенса, обращений и автоматизации.">
+<meta property="og:description" content="Compliance, Operations — граф агентов для комплаенса и автоматизации. Enterprise on-premise.">
 <meta property="og:locale" content="ru_RU">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -70,7 +70,9 @@
 .role-rationale--highlight{border-color:var(--accent);background:rgba(129,140,248,0.04);box-shadow:0 0 24px rgba(129,140,248,0.06)}
 .agent-node--highlight{border-color:var(--accent);background:rgba(129,140,248,0.06);box-shadow:0 0 40px rgba(129,140,248,0.12)}
 @media(max-width:960px){
-  .model-content{grid-template-columns:1fr}
+  .model-content{display:flex;flex-direction:column;grid-template-columns:1fr}
+  .model-text{order:1}
+  .model-diagram-wrap{order:2;position:static}
   .model-section:nth-child(even) .model-content{flex-direction:column}
   .agent-flow{flex-direction:column;gap:12px}
   .agent-arrow{transform:rotate(90deg)}
@@ -109,7 +111,7 @@
   <div class="s-pad" style="position:relative;z-index:1">
     <div class="s-label rv">Модели агентов</div>
     <h1 class="s-title rv">Модели агентов: мультиагентная система<br>для комплаенса и автоматизации</h1>
-    <div class="s-sub rv">Три бизнес-модели с разной топологией графа. Роли и оркестратор — только там, где нужны декомпозиция и маршрутизация.</div>
+    <div class="s-sub rv">Две бизнес-модели: Compliance — линейный поток, Operations — иерархия с оркестратором и декомпозицией задач.</div>
   </div>
 </section>
 
@@ -117,15 +119,15 @@
 <section style="padding:0 0 80px">
   <div class="s-pad">
     <div class="s-label rv">Сравнение моделей</div>
-    <div class="s-title rv">Три модели, три топологии.</div>
-    <div class="s-sub rv">Compliance и Feedback — линейный поток с циклом критики. Operations — иерархия с декомпозицией задач.</div>
+    <div class="s-title rv">Две модели, две топологии.</div>
+    <div class="s-sub rv">Compliance — линейный поток с циклом критики. Feedback — анализ обращений. Operations — иерархия с оркестратором и декомпозицией.</div>
   </div>
   <div class="content-wrap">
     <table class="comp-table rv" style="margin-top:24px">
       <thead><tr><th>Модель</th><th>Граф</th><th>Оркестратор</th></tr></thead>
       <tbody>
         <tr><td><strong>Compliance</strong></td><td>Extractor &rarr; Checker &rarr; Risk &rarr; Critic &rarr; Action</td><td>Нет</td></tr>
-        <tr><td><strong>Feedback</strong></td><td>Collector &rarr; Analyzer &rarr; Researcher &rarr; Responder &rarr; Critic &rarr; Escalation</td><td>Нет</td></tr>
+        <tr><td><strong>Feedback</strong></td><td>Analyzer &rarr; Researcher &rarr; Responder &rarr; Critic &rarr; Escalation</td><td>Нет</td></tr>
         <tr><td><strong>Operations</strong></td><td>Orchestrator &rarr; Resolver &rarr; Critic &rarr; Executor &rarr; Notify</td><td>Да</td></tr>
       </tbody>
     </table>
@@ -182,58 +184,50 @@
 </section>
 
 <!-- FEEDBACK -->
-<section id="feedback" class="model-section" style="background:var(--surface)">
+<section id="feedback" class="model-section">
   <div class="content-wrap">
     <div class="s-title rv">Feedback — анализ обращений.</div>
     <div class="model-content">
-      <div class="model-text rv">
-        <p class="model-desc">Обращение клиента собирается из каналов (WB, Ozon, Telegram), анализируется по тональности и темам, генерируется ответ или эскалация. Поток линейный с возможностью возврата на доработку.</p>
-
-        <div class="role-rationale" data-role="Collector" data-cycle-text="Собирает обращения из WB, Ozon, Telegram.">
-          <h4>Collector</h4>
-          <p>Сбор обращений из каналов: Wildberries, Ozon, Telegram. Подготовка данных для анализа.</p>
-        </div>
-        <div class="role-rationale" data-role="Analyzer" data-cycle-text="Классифицирует тональность, извлекает темы и сущности.">
-          <h4>Analyzer</h4>
-          <p>Классифицирует тональность, извлекает ключевые темы и сущности. Отдельная роль — анализ не должен смешиваться с генерацией ответа. Структурированный вывод в JSON упрощает маршрутизацию.</p>
-        </div>
-        <div class="role-rationale" data-role="Researcher" data-cycle-text="RAG-запросы к базе знаний: FAQ, регламенты, прецеденты.">
-          <h4>Researcher</h4>
-          <p>RAG-запросы к базе знаний: FAQ, регламенты, прецеденты. Поиск контекста перед ответом снижает галлюцинации и обеспечивает привязку к внутренним правилам компании.</p>
-        </div>
-        <div class="role-rationale" data-role="Responder" data-cycle-text="Генерирует авто-ответ на основе анализа и контекста.">
-          <h4>Responder</h4>
-          <p>Генерирует авто-ответ на основе анализа и найденного контекста. Узкая задача — только текст ответа, без принятия решения об эскалации.</p>
-        </div>
-        <div class="role-rationale" data-role="Critic" data-cycle-text="Проверяет уместность ответа. Может вернуть на Responder или направить в эскалацию.">
-          <h4>Critic</h4>
-          <p>Проверяет уместность ответа, соответствие тональности и полноту. Может вернуть на Responder или направить в эскалацию при негативе или неопределённости.</p>
-        </div>
-        <div class="role-rationale" data-role="Escalation" data-cycle-text="Передача критичного обращения менеджеру.">
-          <h4>Escalation</h4>
-          <p>Передача обращения менеджеру при негативе или неопределённости. Интеграция с CRM.</p>
-        </div>
-
-</div>
       <div class="model-diagram-wrap rv-scale">
         <div class="agent-diagram">
           <div class="diagram-svg-wrap">
-            <svg class="agent-svg" viewBox="0 0 800 180" preserveAspectRatio="xMidYMid meet">
-              <path class="arrow-cycle" d="M 390 110 Q 200 -20 65 75" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-              <g class="agent-node" data-role="Collector" style="cursor:pointer"><rect class="node-rect" x="5" y="40" width="95" height="70" rx="8"/><text class="node-text" x="52" y="68" text-anchor="middle">Collector</text><text class="node-desc" x="52" y="88" text-anchor="middle">Сбор</text></g>
-              <path class="arrow-main" d="M 105 75 L 125 75"/>
-              <g class="agent-node" data-role="Analyzer" style="cursor:pointer"><rect class="node-rect" x="130" y="40" width="95" height="70" rx="8"/><text class="node-text" x="177" y="68" text-anchor="middle">Analyzer</text><text class="node-desc" x="177" y="88" text-anchor="middle">Тональность</text></g>
-              <path class="arrow-main" d="M 230 75 L 250 75"/>
-              <g class="agent-node" data-role="Researcher" style="cursor:pointer"><rect class="node-rect" x="255" y="40" width="95" height="70" rx="8"/><text class="node-text" x="302" y="68" text-anchor="middle">Researcher</text><text class="node-desc" x="302" y="88" text-anchor="middle">RAG</text></g>
-              <path class="arrow-main" d="M 355 75 L 375 75"/>
-              <g class="agent-node" data-role="Responder" style="cursor:pointer"><rect class="node-rect" x="380" y="40" width="95" height="70" rx="8"/><text class="node-text" x="427" y="68" text-anchor="middle">Responder</text><text class="node-desc" x="427" y="88" text-anchor="middle">Ответ</text></g>
-              <path class="arrow-main" d="M 480 75 L 500 75"/>
-              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="505" y="40" width="95" height="70" rx="8"/><text class="node-text" x="552" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="552" y="88" text-anchor="middle">Проверка</text></g>
-              <path class="arrow-main" d="M 605 75 L 625 75"/>
-              <g class="agent-node" data-role="Escalation" style="cursor:pointer"><rect class="node-rect" x="630" y="40" width="100" height="70" rx="8"/><text class="node-text" x="680" y="68" text-anchor="middle">Escalation</text><text class="node-desc" x="680" y="88" text-anchor="middle">Эскалация</text></g>
+            <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
+              <g class="agent-node" data-role="Analyzer" style="cursor:pointer"><rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/><text class="node-text" x="65" y="68" text-anchor="middle">Analyzer</text><text class="node-desc" x="65" y="88" text-anchor="middle">Тональность, темы</text></g>
+              <path class="arrow-main" d="M 125 75 L 155 75"/>
+              <g class="agent-node" data-role="Researcher" style="cursor:pointer"><rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/><text class="node-text" x="215" y="68" text-anchor="middle">Researcher</text><text class="node-desc" x="215" y="88" text-anchor="middle">RAG, контекст</text></g>
+              <path class="arrow-main" d="M 275 75 L 305 75"/>
+              <g class="agent-node" data-role="Responder" style="cursor:pointer"><rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/><text class="node-text" x="365" y="68" text-anchor="middle">Responder</text><text class="node-desc" x="365" y="88" text-anchor="middle">Генерация ответа</text></g>
+              <path class="arrow-main" d="M 425 75 L 455 75"/>
+              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/><text class="node-text" x="515" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="515" y="88" text-anchor="middle">Проверка</text></g>
+              <path class="arrow-main" d="M 575 75 L 605 75"/>
+              <g class="agent-node" data-role="Escalation" style="cursor:pointer"><rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/><text class="node-text" x="660" y="68" text-anchor="middle">Escalation</text><text class="node-desc" x="660" y="88" text-anchor="middle">Эскалация</text></g>
             </svg>
           </div>
-          <div class="agent-cycle" data-default="Critic проверяет и маршрутизирует: ответ / доработка / эскалация">Critic проверяет и маршрутизирует: ответ / доработка / эскалация</div>
+          <div class="agent-cycle" data-default="Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости">Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости</div>
+        </div>
+      </div>
+      <div class="model-text rv">
+        <p class="model-desc">Обращение клиента проходит цепочку: анализ тональности и тем, поиск в базе знаний (RAG), генерация ответа, проверка качества и решение об эскалации. Поток жёстко определён, без оркестратора.</p>
+
+        <div class="role-rationale" data-role="Analyzer" data-cycle-text="Анализирует тональность, темы и срочность обращения.">
+          <h4>Analyzer</h4>
+          <p>Определяет тональность (негатив, нейтрал, позитив), выделяет темы и срочность. Результат используется Responder и Escalation. Отдельная роль — не смешивать анализ с генерацией ответа.</p>
+        </div>
+        <div class="role-rationale" data-role="Researcher" data-cycle-text="Поиск в RAG по теме обращения.">
+          <h4>Researcher</h4>
+          <p>Ищет в базе знаний релевантный контекст: регламенты, прецеденты, FAQ. Ответ привязывается к вашим правилам и документам, а не только к общей модели.</p>
+        </div>
+        <div class="role-rationale" data-role="Responder" data-cycle-text="Генерирует ответ клиенту с учётом тона и контекста.">
+          <h4>Responder</h4>
+          <p>Генерирует ответ клиенту на основе анализа и контекста из RAG. Настраивается по тону (эмпатия, формальность) и целям пресета.</p>
+        </div>
+        <div class="role-rationale" data-role="Critic" data-cycle-text="Проверяет качество ответа, может отправить на доработку.">
+          <h4>Critic</h4>
+          <p>Проверяет ответ на соответствие регламенту и тону. Может вернуть на доработку. Снижает риск некорректных или грубых ответов.</p>
+        </div>
+        <div class="role-rationale" data-role="Escalation" data-cycle-text="Решает, нужна ли эскалация человеку.">
+          <h4>Escalation</h4>
+          <p>Определяет, нужно ли передать обращение человеку (жалоба, негатив, сложный кейс). Флаг эскалации передаётся в CRM или тикет-систему.</p>
         </div>
       </div>
     </div>
@@ -293,6 +287,24 @@
 
 </div>
     </div>
+  </div>
+</section>
+
+<!-- Дебаты и голосование -->
+<section id="voting-debate" class="model-section" style="background:var(--surface)">
+  <div class="content-wrap">
+    <div class="s-label rv">Надстройки</div>
+    <div class="s-title rv">Дебаты и голосование.</div>
+    <div class="s-sub rv" style="max-width:720px;margin-bottom:32px">В трёх моделях — Compliance, Обращения (Feedback), Operations — доступны опциональные режимы без смены основной схемы. Включаются в пресетах и задаются в дашборде или API флагами use_voting и use_debate.</div>
+    <div class="role-rationale" style="margin-bottom:20px">
+      <h4>Голосование (Voting)</h4>
+      <p>Несколько агентов одной роли (например, 4 Risk или 4 Critic) независимо дают ответ; итог определяется по большинству — уровень риска, одобрить/отклонить, тональность обращения, нужна ли эскалация. Снижает влияние случайной ошибки одного агента. В логах и диалоге агентов отображаются реплики вида «Risk Assessor (голосование)», «Critic (голосование)».</p>
+    </div>
+    <div class="role-rationale" style="margin-bottom:20px">
+      <h4>Дебаты (Debate)</h4>
+      <p>Два агента дают разные варианты (например, «одобрить» vs «отклонить» или два варианта ответа клиенту), затем отдельный узел Judge выбирает лучший вариант по аргументам. Используется там, где важно сравнить обоснования, а не просто усреднить. В диалоге видны «Critic (дебаты)», «Judge» и т.д. Точная схема зависит от модели и пресета и отображается в дашборде в разделе «Диалог агентов».</p>
+    </div>
+    <p class="model-desc" style="font-size:13px;color:var(--text3)">Примеры пресетов с надстройками: Аудит перед ревизией, Юр. превью (Voting), Быстрая эскалация жалоб (Debate), Акцент на аналитику (Voting), Жёсткое согласование (Voting).</p>
   </div>
 </section>
 
@@ -362,7 +374,7 @@
     <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
     <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
   </div>
-  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span>Политика конфиденциальности</span></div>
+  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span><a href="privacy.html">Политика конфиденциальности</a></span></div>
 </footer>
 
 <script>
