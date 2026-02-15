@@ -162,7 +162,14 @@ document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('clic
   document.getElementById('navMobile').classList.remove('open');
 }));
 
-// Form submit → API /api/order-form (отправка на почту). API base: data-order-api на body или текущий origin.
+// API base для формы: из config.json (Railway). Ждём загрузки конфига перед отправкой, иначе уйдёт на origin (405).
+var orderFormApiBase = (document.body.dataset.orderApi || window.location.origin).replace(/\/$/, '');
+var orderFormConfigReady = fetch('config.json').then(function(r) { return r.ok ? r.json() : {}; }).then(function(c) {
+  if (c && c.apiBase && typeof c.apiBase === 'string') orderFormApiBase = c.apiBase.replace(/\/$/, '');
+  return orderFormApiBase;
+}).catch(function() { return orderFormApiBase; });
+
+// Form submit → API /api/order-form (отправка на почту)
 document.getElementById('orderForm').addEventListener('submit', function(e) {
   e.preventDefault();
   var form = this;
@@ -170,7 +177,8 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
   var errEl = document.getElementById('formError');
   errEl.style.display = 'none';
   errEl.textContent = '';
-  var apiBase = (document.body.dataset.orderApi || window.location.origin).replace(/\/$/, '');
+  btn.disabled = true;
+  btn.textContent = 'Отправка…';
   var payload = {
     name: form.querySelector('[name="name"]').value.trim() || null,
     position: form.querySelector('[name="position"]').value.trim() || null,
@@ -181,22 +189,23 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
     solution: (form.querySelector('[name="solution"]').value || '').trim() || null,
     message: (form.querySelector('[name="message"]').value || '').trim() || null
   };
-  btn.disabled = true;
-  btn.textContent = 'Отправка…';
-  fetch(apiBase + '/api/order-form', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  }).then(function(r) {
-    if (r.ok) {
-      form.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-    } else {
-      return r.json().then(function(d) { throw new Error(d.detail || r.statusText); });
-    }
+  orderFormConfigReady.then(function(apiBase) {
+    return fetch(apiBase + '/api/order-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(r) {
+      if (r.ok) {
+        form.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      } else {
+        return r.json().then(function(d) { throw new Error(d.detail || r.statusText); });
+      }
+    });
   }).catch(function(err) {
     errEl.textContent = err.message || 'Ошибка отправки. Попробуйте позже или напишите на sales@нексус-тех.рф';
     errEl.style.display = 'block';
+  }).finally(function() {
     btn.disabled = false;
     btn.textContent = 'Отправить заявку';
   });
