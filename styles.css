@@ -323,4 +323,11 @@ footer a.logo{color:#1d1d1f}
   .arch-box--home .an{min-width:auto;padding:12px 14px;flex:1 1 calc(50% - 6px)}
   .arch-box--home .an-t{font-size:11px}
   .arch-box--home .an-s{font-size:10px}
+  .arch-section-inner{padding-left:16px !important;padding-right:16px !important}
+  .arch-section-inner .arch-box{padding:24px 16px}
+  .arch-section-inner .a-row{flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .arch-section-inner .an{min-width:0;flex:1 1 calc(50% - 4px);padding:10px 12px;max-width:100%}
+  .arch-section-inner .an-t{font-size:10px;word-break:break-word;line-height:1.3}
+  .arch-section-inner .an-s{font-size:9px;word-break:break-word;line-height:1.3;margin-top:2px}
+  .arch-section-inner .a-div{padding:10px 0}
 }

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Технологии и архитектура мультиагентного ИИ on-premise — Нексус-Тех</title>
-<meta name="description" content="Полный контроль над стеком: LLM на ваших серверах, AI-агенты, интеграция с 1С, Bitrix24, ЭДО. Независимость от облака.">
+<meta name="description" content="Архитектура мультиагентного ИИ on-premise: LLM на ваших серверах, AI-агенты LangGraph, интеграция с 1С, Bitrix24, ЭДО. Полный контроль. Читайте на сайте.">
 <link rel="canonical" href="https://нексус-тех.рф/technology.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://нексус-тех.рф/technology.html">
@@ -17,7 +17,7 @@
 
 <nav class="nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a>
+    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — архитектура мультиагентного ИИ on-premise"></a>
     <ul class="nav-links">
       <li><a href="solutions.html">Решения</a></li>
       <li><a href="security.html">Безопасность</a></li>
@@ -50,7 +50,7 @@
 
 <!-- ARCHITECTURE (interactive) -->
 <section style="padding:0 0 120px">
-  <div style="max-width:1360px;margin:0 auto;padding:0 56px">
+  <div class="arch-section-inner" style="max-width:1360px;margin:0 auto;padding:0 56px">
     <div class="arch-box rv-scale">
       <div class="arch-label"><span>Периметр клиента</span></div>
       <div class="a-row">
@@ -85,6 +85,28 @@
       </div>
       <div class="arch-detail-grid" id="detailGrid"></div>
       <div class="arch-detail-tags" id="detailTags"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ПРЕСЕТЫ -->
+<section id="presets" style="padding:0 0 120px">
+  <div class="s-pad">
+    <div class="s-label rv">Пресеты</div>
+    <h2 class="s-title rv">Что такое пресеты</h2>
+    <p class="s-sub rv" style="max-width:720px;margin-bottom:24px">Пресет — готовый сценарий под вашу задачу: проверка документов, поддержка клиентов, согласования. Меняется поведение агентов и режимы (голосование, дебаты), схема графа остаётся той же. Выбираете пресет в дашборде или через API.</p>
+    <div class="content-wrap" style="overflow-x:auto">
+      <table class="comp-table rv" style="margin-top:0">
+        <thead><tr><th>Пресет</th><th>Для чего</th><th>Где применяется</th></tr></thead>
+        <tbody>
+          <tr><td>Аудит</td><td>Голосование нескольких агентов по уровню риска</td><td>Проверка документов перед ревизией</td></tr>
+          <tr><td>Юр. превью</td><td>То же + жёсткие критерии</td><td>Юридическая проверка договоров</td></tr>
+          <tr><td>Быстрая эскалация жалоб</td><td>Два варианта ответа, Judge выбирает лучший</td><td>Поддержка, негативные обращения</td></tr>
+          <tr><td>Служба поддержки</td><td>Эмпатичный и формальный ответ, выбор по контексту</td><td>Обращения в CRM, тикеты</td></tr>
+          <tr><td>Акцент на аналитику</td><td>Голосование по тональности и метрикам</td><td>Анализ обращений, отчёты</td></tr>
+          <tr><td>Жёсткое согласование</td><td>Голосование по решению «одобрить/отклонить»</td><td>Согласования договоров, закупок</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -135,7 +157,7 @@
   <div class="s-pad">
     <div class="s-label rv">Паттерны</div>
     <div class="s-title rv">7 моделей взаимодействия.</div>
-    <div class="s-sub rv">От простого последовательного до циклических графов, голосования и дебатов. Voting и Debate — надстройки внутри пресетов (аудит, эскалация жалоб, аналитика).</div>
+    <div class="s-sub rv">От простого последовательного до циклических графов, голосования и дебатов. Режимы Voting и Debate включаются в пресетах под задачу (аудит, эскалация жалоб, аналитика).</div>
   </div>
   <div class="feat-grid" style="max-width:1360px;margin:0 auto;padding:0 56px">
     <div class="feat-card rv">
@@ -156,12 +178,12 @@
     <div class="feat-card rv">
       <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
       <h4>Debate</h4>
-      <p>Два агента генерируют разные ответы (эмпатичный/формальный), Judge выбирает лучший. Часть пресетов: «Быстрая эскалация жалоб», «Служба поддержки».</p>
+      <p>Два варианта ответа (например, мягкий и формальный), агент роли Judge выбирает лучший. Подходит для поддержки и эскалации жалоб — меньше ошибок и единый тон.</p>
     </div>
     <div class="feat-card rv">
       <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg></div>
       <h4>Voting</h4>
-      <p>4 агента голосуют по risk_level или sentiment, majority выносит решение. Часть пресетов: «Аудит», «Юр. превью», «Акцент на аналитику», «Жёсткое согласование».</p>
+      <p>Несколько агентов оценивают риск или тон — итог по большинству. Нужно для аудита, юр. превью и жёсткого согласования — выше точность решений.</p>
     </div>
     <div class="feat-card rv">
       <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
@@ -171,12 +193,12 @@
     <div class="feat-card rv">
       <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
       <h4>Human-in-the-Loop</h4>
-      <p>Checkpoints для остановки и ожидания решения человека. Resume с любой точки графа.</p>
+      <p>Система ставит процесс на паузу, когда нужно решение человека. Продолжить можно с того же шага в любой момент.</p>
     </div>
   </div>
 
   <!-- Main workflow diagram -->
-  <div style="max-width:1360px;margin:0 auto;padding:0 56px">
+  <div class="arch-section-inner" style="max-width:1360px;margin:0 auto;padding:0 56px">
     <div class="workflow-box rv-scale">
       <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Пример: Граф комплаенса (циклический)</span></div>
       <div class="workflow-steps">
@@ -190,8 +212,9 @@
         <div class="workflow-arrow">&rarr;</div>
         <div class="workflow-step"><h5>Finalize</h5><p>Результат</p></div>
       </div>
-      <div style="text-align:center;margin-top:16px;font-size:11px;color:var(--text3)">Critic может вернуть задачу на Extractor (цикл до 3 итераций)</div>
+      <div style="text-align:center;margin-top:16px;font-size:11px;color:var(--text3)">Агент роли Critic может вернуть задачу к агенту роли Extractor (цикл до 3 итераций)</div>
     </div>
+    <p style="text-align:center;margin-top:24px"><a href="agents.html" class="btn-accent" style="display:inline-block;padding:10px 20px;font-size:13px;text-decoration:none">Подробнее о схемах работы агентов</a></p>
   </div>
 </section>
 
@@ -206,7 +229,7 @@
 <footer>
   <div class="ft-grid">
     <div>
-      <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a>
+      <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — архитектура мультиагентного ИИ on-premise" loading="lazy"></a>
       <div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div>
     </div>
     <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a></div>
@@ -235,8 +258,8 @@ const nodeData = {
     desc: 'Команда из 6 специализированных агентов на базе LangGraph. Граф с условными переходами, циклами и Human-in-the-Loop.',
     items: [
       { title: 'Роли', text: 'Orchestrator (планирование), Researcher (поиск), Analyst (анализ), Executor (действия), Critic (контроль), Reporter (отчёты).' },
-      { title: 'Графы с циклами', text: 'Critic может вернуть задачу на доработку. Conditional edges маршрутизируют по результату. До 3 итераций.' },
-      { title: 'Human-in-the-Loop', text: 'Checkpoints на базе SQLite/PostgreSQL. Остановка для решения человека, resume с любой точки.' }
+      { title: 'Графы с циклами', text: 'Агент роли Critic может вернуть задачу на доработку. Условные переходы по результату. До 3 итераций.' },
+      { title: 'Human-in-the-Loop', text: 'Пауза для решения человека на базе SQLite/PostgreSQL. Продолжение с любой точки графа в любой момент.' }
     ],
     tags: ['LangGraph', 'StateGraph', 'Checkpoints', 'Conditional Edges', 'HITL']
   },
