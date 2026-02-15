@@ -115,6 +115,30 @@
   </div>
 </section>
 
+<!-- МОДЕЛИ LLM -->
+<section id="llm-models" style="padding:0 0 120px">
+  <div class="s-pad">
+    <div class="s-label rv">Модели LLM</div>
+    <h2 class="s-title rv">Языковые модели, которые мы используем</h2>
+    <p class="s-sub rv" style="max-width:720px;margin-bottom:24px">Администратор заказчика выбирает модель под своё железо и задачи. Рекомендуемая — Qwen3 8B.</p>
+    <div class="content-wrap" style="overflow-x:auto">
+      <table class="comp-table rv" style="margin-top:0">
+        <thead><tr><th>Модель</th><th>VRAM</th><th>Назначение</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Qwen3 8B</strong></td><td>5–9 GB</td><td>Рекомендуемая для prod</td></tr>
+          <tr><td><strong>Qwen2.5 14B</strong></td><td>10–12 GB</td><td>Тяжёлые задачи, reasoning</td></tr>
+          <tr><td><strong>Qwen2.5 7B</strong></td><td>4–6 GB</td><td>M1 8GB, слабое железо</td></tr>
+          <tr><td><strong>Qwen2.5 32B</strong></td><td>20–22 GB</td><td>Critic, верификация</td></tr>
+          <tr><td><strong>Qwen2.5-Coder 14B</strong></td><td>10–12 GB</td><td>Код, SQL, 1С</td></tr>
+          <tr><td><strong>Llama 3.2 3B</strong></td><td>2–4 GB</td><td>Лёгкие задачи</td></tr>
+          <tr><td><strong>Mistral Nemo 12B</strong></td><td>8–10 GB</td><td>Apache 2.0</td></tr>
+          <tr><td><strong>llava 7B</strong></td><td>4–6 GB</td><td>Vision: печати, скриншоты</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
 <!-- ПРЕСЕТЫ -->
 <section id="presets" style="padding:0 0 120px">
   <div class="s-pad">
@@ -326,7 +350,7 @@ document.getElementById('cpyear') && (document.getElementById('cpyear').textCont
   }
 })();
 // Калькулятор KV-cache: веса модели (ГБ), KV на 1K токенов (МБ)
-var kvModelMeta = { 7: { weights: 14, kvPer1k: 0.6 }, 14: { weights: 28, kvPer1k: 1.2 }, 32: { weights: 64, kvPer1k: 2.4 }, 72: { weights: 144, kvPer1k: 5 } };
+var kvModelMeta = { 7: { weights: 14, kvPer1k: 0.6 }, 8: { weights: 16, kvPer1k: 0.7 }, 14: { weights: 28, kvPer1k: 1.2 }, 32: { weights: 64, kvPer1k: 2.4 }, 72: { weights: 144, kvPer1k: 5 } };
 (function(){
   var vramEl = document.getElementById('kv-vram');
   var modelEl = document.getElementById('kv-model');
@@ -338,7 +362,7 @@ var kvModelMeta = { 7: { weights: 14, kvPer1k: 0.6 }, 14: { weights: 28, kvPer1k
     var vram = parseInt(vramEl.value, 10) || 24;
     var model = parseInt(modelEl.value, 10) || 7;
     var rag = parseInt(ragEl.value, 10) || 0;
-    var meta = kvModelMeta[model] || kvModelMeta[7];
+    var meta = kvModelMeta[model] || kvModelMeta[8];
     var reserve = 2;
     var availableKV = Math.max(0, vram - meta.weights - reserve);
     var maxTokens = meta.kvPer1k > 0 ? Math.floor((availableKV * 1024) / meta.kvPer1k) : 0;
