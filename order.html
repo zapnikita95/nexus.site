@@ -54,51 +54,54 @@
       <form id="orderForm" class="form-grid">
         <div class="form-group">
           <label class="form-label">Имя</label>
-          <input type="text" class="form-input" placeholder="Иван Петров" required>
+          <input type="text" name="name" class="form-input" placeholder="Иван Петров" required>
         </div>
         <div class="form-group">
           <label class="form-label">Должность</label>
-          <input type="text" class="form-input" placeholder="CTO / Руководитель ИТ">
+          <input type="text" name="position" class="form-input" placeholder="CTO / Руководитель ИТ">
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input type="email" class="form-input" placeholder="ivan@company.ru" required>
+          <input type="email" name="email" class="form-input" placeholder="ivan@company.ru" required>
         </div>
         <div class="form-group">
           <label class="form-label">Телефон</label>
-          <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__">
+          <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__">
         </div>
         <div class="form-group form-full">
           <label class="form-label">Компания</label>
-          <input type="text" class="form-input" placeholder="Название компании" required>
+          <input type="text" name="company" class="form-input" placeholder="Название компании" required>
         </div>
         <div class="form-group">
           <label class="form-label">Оборот компании</label>
-          <select class="form-select" required>
+          <select class="form-select" name="turnover" required>
             <option value="" disabled selected>Выберите диапазон</option>
-            <option>500 млн — 1 млрд</option>
-            <option>1 — 5 млрд</option>
-            <option>5 — 20 млрд</option>
-            <option>20+ млрд</option>
+            <option value="до 500 млн/год">до 500 млн/год</option>
+            <option value="500 млн — 1 млрд">500 млн — 1 млрд</option>
+            <option value="1 — 5 млрд">1 — 5 млрд</option>
+            <option value="5 — 20 млрд">5 — 20 млрд</option>
+            <option value="20+ млрд">20+ млрд</option>
           </select>
         </div>
         <div class="form-group">
           <label class="form-label">Интересующее решение</label>
-          <select class="form-select">
+          <select class="form-select" name="solution">
             <option value="" disabled selected>Выберите решение</option>
-            <option>Комплаенс-документы</option>
-            <option>Автоматизация процессов</option>
-            <option>Несколько решений</option>
-            <option>Пока не определился</option>
+            <option value="Комплаенс">Комплаенс</option>
+            <option value="Обработка обращений">Обработка обращений</option>
+            <option value="Операционная автоматизация">Операционная автоматизация</option>
+            <option value="Несколько решений">Несколько решений</option>
+            <option value="Нужна консультация">Нужна консультация</option>
           </select>
         </div>
         <div class="form-group form-full">
           <label class="form-label">Опишите задачу или вопрос</label>
-          <textarea class="form-textarea" placeholder="Расскажите о текущих процессах, объёмах документов, используемых системах..."></textarea>
+          <textarea name="message" class="form-textarea" placeholder="Расскажите о текущих процессах, объёмах документов, используемых системах..."></textarea>
         </div>
         <div class="form-group form-full form-submit">
-          <button type="submit" class="btn-accent" style="width:100%;text-align:center;padding:18px 44px">Отправить заявку</button>
+          <button type="submit" id="orderSubmitBtn" class="btn-accent" style="width:100%;text-align:center;padding:18px 44px">Отправить заявку</button>
         </div>
+        <div id="formError" style="display:none;margin-top:12px;padding:12px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;color:#f87171;font-size:14px;"></div>
         <div class="form-note form-full">Мы не передаём ваши данные третьим лицам. Ответ — в течение рабочего дня.</div>
       </form>
 
@@ -159,11 +162,44 @@ document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('clic
   document.getElementById('navMobile').classList.remove('open');
 }));
 
-// Form submit
+// Form submit → API /api/order-form (отправка на почту). API base: data-order-api на body или текущий origin.
 document.getElementById('orderForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  this.style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
+  var form = this;
+  var btn = document.getElementById('orderSubmitBtn');
+  var errEl = document.getElementById('formError');
+  errEl.style.display = 'none';
+  errEl.textContent = '';
+  var apiBase = (document.body.dataset.orderApi || window.location.origin).replace(/\/$/, '');
+  var payload = {
+    name: form.querySelector('[name="name"]').value.trim() || null,
+    position: form.querySelector('[name="position"]').value.trim() || null,
+    email: form.querySelector('[name="email"]').value.trim() || null,
+    phone: form.querySelector('[name="phone"]').value.trim() || null,
+    company: form.querySelector('[name="company"]').value.trim() || null,
+    turnover: (form.querySelector('[name="turnover"]').value || '').trim() || null,
+    solution: (form.querySelector('[name="solution"]').value || '').trim() || null,
+    message: (form.querySelector('[name="message"]').value || '').trim() || null
+  };
+  btn.disabled = true;
+  btn.textContent = 'Отправка…';
+  fetch(apiBase + '/api/order-form', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function(r) {
+    if (r.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      return r.json().then(function(d) { throw new Error(d.detail || r.statusText); });
+    }
+  }).catch(function(err) {
+    errEl.textContent = err.message || 'Ошибка отправки. Попробуйте позже или напишите на sales@нексус-тех.рф';
+    errEl.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Отправить заявку';
+  });
 });
 
 // Reveal
