@@ -231,9 +231,9 @@ footer .logo img{height:64px;opacity:0.95;max-width:200px}
 .form-submit{margin-top:8px}
 .form-note{font-size:11px;color:var(--text3);line-height:1.6;margin-top:24px;text-align:center}
 
-/* ── FEATURE GRID (liquid glass) ── */
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.feat-card{background:rgba(22,28,53,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.05);padding:44px 36px;transition:all .5s;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+/* ── FEATURE GRID (liquid glass), flex чтобы последняя строка с 1 карточкой центрировалась ── */
+.feat-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:2px}
+.feat-card{flex:0 1 calc(33.333% - 2px);min-width:260px;box-sizing:border-box;background:rgba(22,28,53,0.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.05);padding:44px 36px;transition:all .5s;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
 .feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .5s}
 .feat-card:hover{background:rgba(28,35,64,0.6);border-color:rgba(129,140,248,0.12)}
 .feat-card:hover::before{transform:scaleX(1)}
@@ -295,7 +295,8 @@ footer a.logo{color:#1d1d1f}
   .hero-actions{gap:12px}
   .hero-actions .btn-accent,.hero-actions .btn-outline{padding:14px 20px;font-size:11px;white-space:nowrap}
   .metrics-grid{grid-template-columns:repeat(2,1fr)}
-  .sol-grid,.feat-grid{grid-template-columns:1fr}
+  .sol-grid{grid-template-columns:1fr}
+  .feat-grid .feat-card{flex:1 1 100%;min-width:100%}
   .sec-split,.detail-split{grid-template-columns:1fr}
   .sec-left,.sec-right{padding:60px 16px}
   .sec-levels-row{grid-template-columns:1fr}
