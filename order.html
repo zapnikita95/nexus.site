@@ -24,6 +24,7 @@
       <li><a href="security.html">Безопасность</a></li>
       <li><a href="technology.html">Технологии</a></li>
       <li><a href="agents.html">Модели агентов</a></li>
+      <li><a href="articles.html">Статьи</a></li>
       <li><a href="partnership.html">Партнёрство</a></li>
     </ul>
     <a href="order.html" class="nav-cta">Заказать тест</a>
@@ -34,6 +35,7 @@
     <a href="security.html">Безопасность</a>
     <a href="technology.html">Технологии</a>
     <a href="agents.html">Модели агентов</a>
+    <a href="articles.html">Статьи</a>
     <a href="partnership.html">Партнёрство</a>
     <a href="order.html" class="nav-cta">Заказать тест</a>
   </div>
@@ -44,7 +46,7 @@
   <div class="s-pad" style="position:relative;z-index:1">
     <div class="s-label rv">Пилотный проект</div>
     <h1 class="s-title rv">Заказать пилот мультиагентного ИИ</h1>
-    <div class="s-sub rv">Оставьте заявку — мы свяжемся в течение рабочего дня для обсуждения пилота.</div>
+    <div class="s-sub rv">Оставьте заявку — специалисты свяжутся с вами в ближайшее время.</div>
   </div>
 </section>
 
@@ -54,64 +56,67 @@
       <form id="orderForm" class="form-grid">
         <div class="form-group">
           <label class="form-label">Имя</label>
-          <input type="text" name="name" class="form-input" placeholder="Иван Петров" required>
+          <input type="text" class="form-input" placeholder="Иван Петров" required>
         </div>
         <div class="form-group">
           <label class="form-label">Должность</label>
-          <input type="text" name="position" class="form-input" placeholder="CTO / Руководитель ИТ">
+          <input type="text" class="form-input" placeholder="CTO / Руководитель ИТ">
         </div>
         <div class="form-group">
           <label class="form-label">Email</label>
-          <input type="email" name="email" class="form-input" placeholder="ivan@company.ru" required>
+          <input type="email" class="form-input" placeholder="ivan@company.ru" required>
         </div>
         <div class="form-group">
           <label class="form-label">Телефон</label>
-          <input type="tel" name="phone" class="form-input" placeholder="+7 (___) ___-__-__">
+          <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__">
         </div>
         <div class="form-group form-full">
           <label class="form-label">Компания</label>
-          <input type="text" name="company" class="form-input" placeholder="Название компании" required>
+          <input type="text" class="form-input" placeholder="Название компании" required>
         </div>
         <div class="form-group">
           <label class="form-label">Оборот компании</label>
-          <select class="form-select" name="turnover" required>
+          <select class="form-select" required>
             <option value="" disabled selected>Выберите диапазон</option>
-            <option value="до 500 млн/год">до 500 млн/год</option>
-            <option value="500 млн — 1 млрд">500 млн — 1 млрд</option>
-            <option value="1 — 5 млрд">1 — 5 млрд</option>
-            <option value="5 — 20 млрд">5 — 20 млрд</option>
-            <option value="20+ млрд">20+ млрд</option>
+            <option>500 млн — 1 млрд</option>
+            <option>1 — 5 млрд</option>
+            <option>5 — 20 млрд</option>
+            <option>20+ млрд</option>
           </select>
         </div>
         <div class="form-group">
           <label class="form-label">Интересующее решение</label>
-          <select class="form-select" name="solution">
+          <select class="form-select">
             <option value="" disabled selected>Выберите решение</option>
-            <option value="Комплаенс">Комплаенс</option>
-            <option value="Обработка обращений">Обработка обращений</option>
-            <option value="Операционная автоматизация">Операционная автоматизация</option>
-            <option value="Несколько решений">Несколько решений</option>
-            <option value="Нужна консультация">Нужна консультация</option>
+            <option>Комплаенс-документы</option>
+            <option>Автоматизация процессов</option>
+            <option>Несколько решений</option>
+            <option>Пока не определился</option>
           </select>
         </div>
         <div class="form-group form-full">
           <label class="form-label">Опишите задачу или вопрос</label>
-          <textarea name="message" class="form-textarea" placeholder="Расскажите о текущих процессах, объёмах документов, используемых системах..."></textarea>
+          <textarea class="form-textarea" placeholder="Расскажите о текущих процессах, объёмах документов, используемых системах..."></textarea>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-checkbox">
+            <input type="checkbox" name="consent" required>
+            <span>Я даю согласие на <a href="privacy.html" target="_blank" rel="noopener">обработку персональных данных</a> в соответствии с политикой конфиденциальности.</span>
+          </label>
         </div>
         <div class="form-group form-full form-submit">
-          <button type="submit" id="orderSubmitBtn" class="btn-accent" style="width:100%;text-align:center;padding:18px 44px">Отправить заявку</button>
+          <button type="submit" class="btn-accent" style="width:100%;text-align:center;padding:18px 44px">Отправить заявку</button>
         </div>
-        <div id="formError" style="display:none;margin-top:12px;padding:12px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;color:#f87171;font-size:14px;"></div>
-        <div class="form-note form-full">Мы не передаём ваши данные третьим лицам. Ответ — в течение рабочего дня.</div>
+        <div class="form-note form-full">Мы не передаём ваши данные третьим лицам. Специалисты свяжутся с вами в ближайшее время.</div>
       </form>
 
-      <!-- Success state (под формой) -->
+      <!-- Success state -->
       <div id="formSuccess" style="display:none;text-align:center;padding:80px 0">
         <div style="width:64px;height:64px;margin:0 auto 24px;border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h3 style="font-size:28px;font-weight:800;margin-bottom:12px">Заявка отправлена</h3>
-        <p style="font-size:15px;color:var(--text2);line-height:1.8;max-width:400px;margin:0 auto">Мы свяжемся с вами в течение рабочего дня для обсуждения пилотного проекта.</p>
+        <p style="font-size:15px;color:var(--text2);line-height:1.8;max-width:400px;margin:0 auto">Специалисты свяжутся с вами в ближайшее время для обсуждения пилотного проекта.</p>
       </div>
     </div>
   </div>
@@ -145,24 +150,12 @@
 <footer>
   <div class="ft-grid">
     <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — заявка на пилот мультиагентного ИИ" loading="lazy"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div></div>
-    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a></div>
+    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
     <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
     <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
   </div>
   <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span><a href="privacy.html">Политика конфиденциальности</a></span></div>
 </footer>
-
-<!-- Попап поверх всего экрана (в конце body, вне секций) -->
-<div id="orderSuccessPopup" class="order-popup-overlay" aria-hidden="true">
-  <div class="order-popup-box">
-    <button type="button" class="order-popup-close" aria-label="Закрыть" id="orderPopupClose">&times;</button>
-    <div class="order-popup-icon">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <h3 class="order-popup-title">Ваш запрос получен</h3>
-    <p class="order-popup-text">В ближайшее время с вами свяжутся наши специалисты.</p>
-  </div>
-</div>
 
 <script>
 document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
@@ -174,69 +167,11 @@ document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('clic
   document.getElementById('navMobile').classList.remove('open');
 }));
 
-// API base для формы: из config.json (Railway). Ждём загрузки конфига перед отправкой, иначе уйдёт на origin (405).
-var orderFormApiBase = (document.body.dataset.orderApi || window.location.origin).replace(/\/$/, '');
-var orderFormConfigReady = fetch('config.json').then(function(r) { return r.ok ? r.json() : {}; }).then(function(c) {
-  if (c && c.apiBase && typeof c.apiBase === 'string') orderFormApiBase = c.apiBase.replace(/\/$/, '');
-  return orderFormApiBase;
-}).catch(function() { return orderFormApiBase; });
-
-// Form submit → API /api/order-form (отправка на почту)
+// Form submit
 document.getElementById('orderForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  var form = this;
-  var btn = document.getElementById('orderSubmitBtn');
-  var errEl = document.getElementById('formError');
-  errEl.style.display = 'none';
-  errEl.textContent = '';
-  btn.disabled = true;
-  btn.textContent = 'Отправка…';
-  var payload = {
-    name: form.querySelector('[name="name"]').value.trim() || null,
-    position: form.querySelector('[name="position"]').value.trim() || null,
-    email: form.querySelector('[name="email"]').value.trim() || null,
-    phone: form.querySelector('[name="phone"]').value.trim() || null,
-    company: form.querySelector('[name="company"]').value.trim() || null,
-    turnover: (form.querySelector('[name="turnover"]').value || '').trim() || null,
-    solution: (form.querySelector('[name="solution"]').value || '').trim() || null,
-    message: (form.querySelector('[name="message"]').value || '').trim() || null
-  };
-  var timeoutId;
-  var controller = new AbortController();
-  timeoutId = setTimeout(function() { controller.abort(); }, 25000);
-  orderFormConfigReady.then(function(apiBase) {
-    return fetch(apiBase + '/api/order-form', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-      signal: controller.signal
-    });
-  }).then(function(r) {
-    clearTimeout(timeoutId);
-    if (r.ok) {
-      form.style.display = 'none';
-      document.getElementById('formSuccess').style.display = 'block';
-      var popup = document.getElementById('orderSuccessPopup');
-      if (popup) { popup.classList.add('order-popup-open'); popup.setAttribute('aria-hidden', 'false'); }
-    } else {
-      return r.json().then(function(d) { throw new Error(d.detail || r.statusText); }, function() { throw new Error('Ошибка сервера'); });
-    }
-  }).catch(function(err) {
-    var msg = (err && err.name === 'AbortError') ? 'Превышено время ожидания. Попробуйте ещё раз или напишите на sales@нексус-тех.рф' : (err && err.message) || 'Ошибка отправки. Попробуйте позже или напишите на sales@нексус-тех.рф';
-    errEl.textContent = msg;
-    errEl.style.display = 'block';
-  }).finally(function() {
-    clearTimeout(timeoutId);
-    btn.disabled = false;
-    btn.textContent = 'Отправить заявку';
-  });
-});
-document.getElementById('orderPopupClose') && document.getElementById('orderPopupClose').addEventListener('click', function() {
-  var popup = document.getElementById('orderSuccessPopup');
-  if (popup) { popup.classList.remove('order-popup-open'); popup.setAttribute('aria-hidden', 'true'); }
-});
-document.getElementById('orderSuccessPopup') && document.getElementById('orderSuccessPopup').addEventListener('click', function(e) {
-  if (e.target === this) { this.classList.remove('order-popup-open'); this.setAttribute('aria-hidden', 'true'); }
+  this.style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
 });
 
 // Reveal
