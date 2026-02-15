@@ -333,10 +333,10 @@ footer a.logo{color:#1d1d1f}
   .arch-section-inner .a-div{padding:10px 0}
 }
 
-/* Попап «Запрос получен» (order.html) */
-.order-popup-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
-.order-popup-overlay.order-popup-open{opacity:1;visibility:visible}
-.order-popup-box{position:relative;background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:40px 32px;max-width:420px;width:100%;box-shadow:var(--glass-shadow);text-align:center}
+/* Попап «Запрос получен» (order.html) — поверх всего экрана */
+.order-popup-overlay{position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.65);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:24px;display:none;pointer-events:none}
+.order-popup-overlay.order-popup-open{display:flex;pointer-events:auto}
+.order-popup-box{position:relative;background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:40px 32px;max-width:420px;width:100%;box-shadow:0 24px 80px rgba(0,0,0,0.4);text-align:center;pointer-events:auto}
 .order-popup-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:none;background:transparent;color:var(--text2);font-size:28px;line-height:1;cursor:pointer;border-radius:8px;transition:color .2s,background .2s;padding:0;display:flex;align-items:center;justify-content:center}
 .order-popup-close:hover{color:var(--text);background:var(--glass-bg)}
 .order-popup-icon{width:56px;height:56px;margin:0 auto 20px;border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent)}

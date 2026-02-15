@@ -113,18 +113,6 @@
         <h3 style="font-size:28px;font-weight:800;margin-bottom:12px">Заявка отправлена</h3>
         <p style="font-size:15px;color:var(--text2);line-height:1.8;max-width:400px;margin:0 auto">Мы свяжемся с вами в течение рабочего дня для обсуждения пилотного проекта.</p>
       </div>
-
-      <!-- Попап после отправки: закрыть крестиком -->
-      <div id="orderSuccessPopup" class="order-popup-overlay" aria-hidden="true">
-        <div class="order-popup-box">
-          <button type="button" class="order-popup-close" aria-label="Закрыть" id="orderPopupClose">&times;</button>
-          <div class="order-popup-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <h3 class="order-popup-title">Ваш запрос получен</h3>
-          <p class="order-popup-text">В ближайшее время с вами свяжутся наши специалисты.</p>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -163,6 +151,18 @@
   </div>
   <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span><a href="privacy.html">Политика конфиденциальности</a></span></div>
 </footer>
+
+<!-- Попап поверх всего экрана (в конце body, вне секций) -->
+<div id="orderSuccessPopup" class="order-popup-overlay" aria-hidden="true">
+  <div class="order-popup-box">
+    <button type="button" class="order-popup-close" aria-label="Закрыть" id="orderPopupClose">&times;</button>
+    <div class="order-popup-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h3 class="order-popup-title">Ваш запрос получен</h3>
+    <p class="order-popup-text">В ближайшее время с вами свяжутся наши специалисты.</p>
+  </div>
+</div>
 
 <script>
 document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
@@ -203,25 +203,27 @@ document.getElementById('orderForm').addEventListener('submit', function(e) {
   };
   var timeoutId;
   var controller = new AbortController();
-  timeoutId = setTimeout(function() { controller.abort(); }, 15000);
+  timeoutId = setTimeout(function() { controller.abort(); }, 25000);
   orderFormConfigReady.then(function(apiBase) {
     return fetch(apiBase + '/api/order-form', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
       signal: controller.signal
-    }).then(function(r) {
-      if (r.ok) {
-        form.style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-        var popup = document.getElementById('orderSuccessPopup');
-        if (popup) { popup.classList.add('order-popup-open'); popup.setAttribute('aria-hidden', 'false'); }
-      } else {
-        return r.json().then(function(d) { throw new Error(d.detail || r.statusText); }).catch(function() { throw new Error('Ошибка сервера'); });
-      }
     });
+  }).then(function(r) {
+    clearTimeout(timeoutId);
+    if (r.ok) {
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+      var popup = document.getElementById('orderSuccessPopup');
+      if (popup) { popup.classList.add('order-popup-open'); popup.setAttribute('aria-hidden', 'false'); }
+    } else {
+      return r.json().then(function(d) { throw new Error(d.detail || r.statusText); }, function() { throw new Error('Ошибка сервера'); });
+    }
   }).catch(function(err) {
-    errEl.textContent = (err.name === 'AbortError' ? 'Превышено время ожидания. ' : '') + (err.message || 'Ошибка отправки. Попробуйте позже или напишите на sales@нексус-тех.рф');
+    var msg = (err && err.name === 'AbortError') ? 'Превышено время ожидания. Попробуйте ещё раз или напишите на sales@нексус-тех.рф' : (err && err.message) || 'Ошибка отправки. Попробуйте позже или напишите на sales@нексус-тех.рф';
+    errEl.textContent = msg;
     errEl.style.display = 'block';
   }).finally(function() {
     clearTimeout(timeoutId);
