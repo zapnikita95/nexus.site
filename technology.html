@@ -340,12 +340,19 @@
           <label style="display:grid;gap:6px">
             <span style="font-size:13px;font-weight:700;color:var(--text)">Задача</span>
             <select id="rec-task" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
-              <option value="prod">Prod, комплаенс, документы</option>
-              <option value="reasoning">Верификатор, reasoning</option>
-              <option value="vision">Vision: печати, сканы</option>
-              <option value="code">Код, SQL, 1С</option>
-              <option value="light">Лёгкий / эскалация</option>
-              <option value="premium">Премиум, флагман</option>
+              <option value="audit">Аудит перед ревизией</option>
+              <option value="standard">Стандартная проверка документов</option>
+              <option value="fast">Быстрая проверка</option>
+              <option value="soft">Мягкая с рекомендациями</option>
+              <option value="legal">Юр. превью договоров</option>
+              <option value="support">Служба поддержки</option>
+              <option value="neutral">Нейтральные ответы, FAQ</option>
+              <option value="escalation">Быстрая эскалация жалоб</option>
+              <option value="objections">Отработка возражений</option>
+              <option value="sales">Продающий ответ</option>
+              <option value="approval">Жёсткое согласование</option>
+              <option value="routine">Рутинные операции</option>
+              <option value="urgent">Срочные задачи</option>
             </select>
           </label>
         </div>
@@ -415,16 +422,14 @@ var kvModelMeta = { 4: { weights: 8, kvPer1k: 0.35 }, 7: { weights: 14, kvPer1k:
 })();
 // Калькулятор подбора модели: VRAM + желаемое окно + задача
 var recModelMeta = [
-  { name: 'Phi-4 mini 3.8B', vram: 4, size: 4, tasks: ['light'] },
-  { name: 'Qwen2.5 7B', vram: 6, size: 7, tasks: ['light'] },
-  { name: 'Qwen3 8B', vram: 9, size: 8, tasks: ['prod'] },
-  { name: 'Mistral Nemo 12B', vram: 12, size: 12, tasks: ['prod', 'light'] },
-  { name: 'Qwen3 14B', vram: 14, size: 14, tasks: ['prod', 'reasoning'] },
-  { name: 'Qwen3-Coder 7B', vram: 8, size: 7, tasks: ['code'] },
-  { name: 'Qwen2.5-VL 7B', vram: 10, size: 7, tasks: ['vision'] },
-  { name: 'Gemma-2 27B', vram: 28, size: 27, tasks: ['reasoning', 'prod'] },
-  { name: 'Qwen3 32B', vram: 36, size: 32, tasks: ['reasoning', 'premium'] },
-  { name: 'Qwen3 72B', vram: 80, size: 72, tasks: ['premium'] }
+  { name: 'Phi-4 mini 3.8B', vram: 4, size: 4, tasks: ['fast', 'soft'] },
+  { name: 'Qwen2.5 7B', vram: 6, size: 7, tasks: ['fast', 'soft', 'neutral'] },
+  { name: 'Qwen3 8B', vram: 9, size: 8, tasks: ['standard', 'fast', 'soft', 'support', 'neutral', 'objections', 'sales', 'routine', 'urgent'] },
+  { name: 'Mistral Nemo 12B', vram: 12, size: 12, tasks: ['standard', 'fast', 'soft', 'support', 'neutral', 'objections', 'sales', 'routine', 'urgent'] },
+  { name: 'Qwen3 14B', vram: 14, size: 14, tasks: ['audit', 'standard', 'legal', 'support', 'escalation', 'approval', 'objections', 'sales', 'routine', 'urgent'] },
+  { name: 'Gemma-2 27B', vram: 28, size: 27, tasks: ['audit', 'standard', 'legal', 'escalation', 'approval'] },
+  { name: 'Qwen3 32B', vram: 36, size: 32, tasks: ['audit', 'standard', 'legal', 'escalation', 'approval'] },
+  { name: 'Qwen3 72B', vram: 80, size: 72, tasks: ['audit', 'legal', 'approval'] }
 ];
 (function(){
   var vramEl = document.getElementById('rec-vram');
@@ -436,7 +441,7 @@ var recModelMeta = [
   btn.addEventListener('click', function(){
     var vram = parseInt(vramEl.value, 10) || 24;
     var contextTokens = parseInt(contextEl.value, 10) || 35000;
-    var task = (taskEl && taskEl.value) || 'prod';
+    var task = (taskEl && taskEl.value) || 'standard';
     var candidates = recModelMeta.filter(function(m){ return m.vram <= vram; });
     if (candidates.length === 0) {
       resultEl.style.display = 'block';
