@@ -86,7 +86,7 @@
       </div>
       <div class="a-div"></div>
       <div class="a-row">
-        <div class="an" data-node="llm"><div class="an-t">LLM</div><div class="an-s">Qwen3 / Qwen2.5 / Llama 3.2</div></div>
+        <div class="an" data-node="llm"><div class="an-t">LLM</div><div class="an-s">Qwen 2.5 / Llama 3.2</div></div>
         <div class="an" data-node="vectordb"><div class="an-t">Vector DB</div><div class="an-s">Qdrant / PgVector</div></div>
         <div class="an" data-node="inference"><div class="an-t">Inference</div><div class="an-s">Ollama / vLLM</div></div>
         <div class="an" data-node="api"><div class="an-t">API</div><div class="an-s">FastAPI</div></div>
@@ -257,7 +257,7 @@
   </div>
 
   <!-- Main workflow diagram (SVG as on agents.html) -->
-  <div class="arch-section-inner" style="max-width:1360px;margin:0 auto;padding:0 56px">
+  <div class="arch-section-inner" style="max-width:1360px;margin:0 auto;padding:0 56px;margin-top:56px">
     <div class="agent-diagram rv-scale">
       <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Пример: Граф комплаенса (циклический)</span></div>
       <a href="agents.html#compliance" class="diagram-svg-wrap" style="display:block;text-decoration:none;color:inherit">
@@ -292,12 +292,11 @@
       <div style="display:grid;gap:20px;margin-bottom:24px">
         <label style="display:grid;gap:6px">
           <span style="font-size:13px;font-weight:700;color:var(--text)">VRAM, ГБ</span>
-          <input type="number" id="kv-vram" min="8" max="256" value="24" step="1" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface)">
+          <input type="number" id="kv-vram" min="8" max="256" value="24" step="1" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
         </label>
         <label style="display:grid;gap:6px">
           <span style="font-size:13px;font-weight:700;color:var(--text)">Модель (размер)</span>
           <select id="kv-model" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
-            <option value="8">Qwen3 — 8B</option>
             <option value="7">Qwen 2.5 / Llama 3.2 — 7B</option>
             <option value="14">Qwen 2.5 / Llama — 14B</option>
             <option value="32">Qwen 2.5 — 32B</option>
@@ -306,7 +305,7 @@
         </label>
         <label style="display:grid;gap:6px">
           <span style="font-size:13px;font-weight:700;color:var(--text)">RAG: объём базы знаний, тыс. документов (опционально)</span>
-          <input type="number" id="kv-rag" min="0" value="10" step="1" placeholder="0" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface)">
+          <input type="number" id="kv-rag" min="0" value="10" step="1" placeholder="0" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
         </label>
       </div>
       <button type="button" id="kv-calc-btn" class="btn-accent" style="padding:12px 24px;font-size:14px;border:none;cursor:pointer;border-radius:8px">Рассчитать</button>
@@ -366,10 +365,11 @@ var kvModelMeta = { 7: { weights: 14, kvPer1k: 0.6 }, 8: { weights: 16, kvPer1k:
     var reserve = 2;
     var availableKV = Math.max(0, vram - meta.weights - reserve);
     var maxTokens = meta.kvPer1k > 0 ? Math.floor((availableKV * 1024) / meta.kvPer1k) : 0;
+    var tokenStr = maxTokens >= 1000 ? (maxTokens / 1000).toFixed(1) + 'K' : String(maxTokens);
     var ragNote = rag > 0 ? ' Учитывайте: при RAG с ' + rag + ' тыс. документов в контекст подмешивается выборка чанков; рекомендуем окно не меньше 8–16K токенов для стабильного поиска.' : '';
     var warn = availableKV <= 0 ? ' Недостаточно VRAM для выбранной модели на этом GPU. Рассмотрите меньшую модель или увеличение VRAM.' : '';
     resultEl.style.display = 'block';
-    resultEl.innerHTML = '<strong>Ориентировочное контекстное окно:</strong> до ' + (maxTokens >= 1000 ? (maxTokens / 1000).toFixed(1) + 'K' : maxTokens) + ' токенов (при fp16, один запрос).' + ragNote + warn;
+    resultEl.innerHTML = '<div style="font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em">до ' + tokenStr + ' токенов</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">(при fp16, один запрос).' + ragNote + warn + '</p>';
   });
 })();
 // ═══ ARCHITECTURE NODE DETAIL DATA ═══
