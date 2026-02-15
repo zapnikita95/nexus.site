@@ -319,8 +319,8 @@
             </select>
           </label>
           <label style="display:grid;gap:6px">
-            <span style="font-size:13px;font-weight:700;color:var(--text)">RAG: объём базы, тыс. док. (опц.)</span>
-            <input type="number" id="kv-rag" min="0" value="10" step="1" placeholder="0" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">Объём базы, кол-во документов</span>
+            <input type="number" id="kv-rag" min="0" value="2000" step="1" placeholder="2000" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
           </label>
         </div>
         <button type="button" id="kv-calc-btn" class="btn-accent" style="padding:12px 24px;font-size:14px;border:none;cursor:pointer;border-radius:8px">Рассчитать</button>
@@ -334,8 +334,8 @@
             <input type="number" id="rec-vram" min="4" max="256" value="24" step="1" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
           </label>
           <label style="display:grid;gap:6px">
-            <span style="font-size:13px;font-weight:700;color:var(--text)">Желаемое контекстное окно, K токенов</span>
-            <input type="number" id="rec-context" min="2" max="128" value="16" step="1" placeholder="8" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">Желаемое контекстное окно в токенах</span>
+            <input type="number" id="rec-context" min="1000" max="512000" value="35000" step="1000" placeholder="130000" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
           </label>
           <label style="display:grid;gap:6px">
             <span style="font-size:13px;font-weight:700;color:var(--text)">Задача</span>
@@ -407,7 +407,7 @@ var kvModelMeta = { 4: { weights: 8, kvPer1k: 0.35 }, 7: { weights: 14, kvPer1k:
     var reserve = 2;
     var availableKV = Math.max(0, vram - meta.weights - reserve);
     var maxTokens = meta.kvPer1k > 0 ? Math.floor((availableKV * 1024) / meta.kvPer1k) : 0;
-    var ragNote = rag > 0 ? ' Учитывайте: при RAG с ' + rag + ' тыс. документов в контекст подмешивается выборка чанков; рекомендуем окно не меньше 8–16K токенов для стабильного поиска.' : '';
+    var ragNote = rag > 0 ? ' Учитывайте: при RAG с ' + rag + ' документами в контекст подмешивается выборка чанков; рекомендуем окно не меньше 8–16K токенов для стабильного поиска.' : '';
     var warn = availableKV <= 0 ? ' Недостаточно VRAM для выбранной модели на этом GPU. Рассмотрите меньшую модель или увеличение VRAM.' : '';
     resultEl.style.display = 'block';
     resultEl.innerHTML = '<div style="font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em">до ' + (maxTokens >= 1000 ? (maxTokens / 1000).toFixed(1) + 'K' : maxTokens) + ' токенов</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">(при fp16, один запрос).' + ragNote + warn + '</p>';
@@ -435,7 +435,7 @@ var recModelMeta = [
   if (!btn || !resultEl) return;
   btn.addEventListener('click', function(){
     var vram = parseInt(vramEl.value, 10) || 24;
-    var contextK = parseInt(contextEl.value, 10) || 16;
+    var contextTokens = parseInt(contextEl.value, 10) || 35000;
     var task = (taskEl && taskEl.value) || 'prod';
     var candidates = recModelMeta.filter(function(m){ return m.vram <= vram; });
     if (candidates.length === 0) {
@@ -452,10 +452,11 @@ var recModelMeta = [
     var meta = kvModelMeta[best.size] || kvModelMeta[8];
     var reserve = 2;
     var avail = Math.max(0, vram - meta.weights - reserve);
-    var maxCtx = meta.kvPer1k > 0 ? Math.floor((avail * 1024) / meta.kvPer1k) / 1000 : 0;
-    var ok = maxCtx >= contextK;
+    var maxTokens = meta.kvPer1k > 0 ? Math.floor((avail * 1024) / meta.kvPer1k) : 0;
+    var ok = maxTokens >= contextTokens;
+    var fmt = function(n){ return n >= 1000 ? (n/1000).toFixed(0) + 'K' : String(n); };
     resultEl.style.display = 'block';
-    resultEl.innerHTML = '<div style="font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--text);margin-bottom:8px">' + best.name + '</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">Рекомендуется для вашей задачи и VRAM ' + vram + ' ГБ. Контекст: до ~' + maxCtx.toFixed(0) + 'K токенов. ' + (ok ? 'Подходит под желаемые ' + contextK + 'K.' : 'Желаемые ' + contextK + 'K могут быть на пределе — рассмотрите больший VRAM или меньшую модель.') + '</p>';
+    resultEl.innerHTML = '<div style="font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--text);margin-bottom:8px">' + best.name + '</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">Рекомендуется для вашей задачи и VRAM ' + vram + ' ГБ. Контекст: до ~' + fmt(maxTokens) + ' токенов. ' + (ok ? 'Подходит под желаемые ' + contextTokens.toLocaleString() + ' токенов.' : 'Желаемые ' + contextTokens.toLocaleString() + ' токенов могут быть на пределе — рассмотрите больший VRAM или меньшую модель.') + '</p>';
   });
 })();
 // ═══ ARCHITECTURE NODE DETAIL DATA ═══
