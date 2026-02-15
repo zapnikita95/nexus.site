@@ -13,6 +13,30 @@
 <meta property="og:description" content="Архитектура ИИ на вашем периметре: агенты, LLM, векторная БД, интеграции.">
 <meta property="og:locale" content="ru_RU">
 <link rel="stylesheet" href="styles.css">
+<style>
+/* Presets table: collapse extra rows */
+.presets-table tbody tr.presets-more{display:none}
+.presets-table.expanded tbody tr.presets-more{display:table-row}
+.presets-toggle{display:block;margin:16px auto 0;padding:10px 24px;font-size:13px;font-weight:600;color:var(--accent);background:transparent;border:1px solid var(--accent);border-radius:8px;cursor:pointer;transition:all .3s}
+.presets-toggle:hover{background:rgba(129,140,248,0.08);color:var(--text)}
+/* Compliance diagram (same as agents.html) */
+.agent-diagram{background:linear-gradient(165deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid var(--border);border-radius:12px;padding:40px 48px;position:relative;overflow:visible}
+.agent-diagram::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(129,140,248,0.03) 1px,transparent 0);background-size:20px 20px;pointer-events:none;border-radius:12px}
+.agent-svg{width:100%;height:auto;display:block}
+.agent-svg .node-rect{fill:var(--bg);stroke:var(--border);stroke-width:1;rx:8;transition:all .3s;cursor:pointer}
+.agent-svg .agent-node:hover .node-rect{stroke:var(--accent);filter:drop-shadow(0 0 20px rgba(129,140,248,0.2))}
+.agent-svg .node-rect.accent{stroke:var(--accent);fill:rgba(129,140,248,0.06)}
+.agent-svg .node-text,.agent-svg .node-desc{fill:var(--text);font-family:Inter,system-ui,sans-serif;pointer-events:none}
+.agent-svg .node-text{font-size:12px;font-weight:800}
+.agent-svg .node-desc{fill:var(--text3);font-size:10px}
+.agent-svg .arrow-main,.agent-svg .arrow-cycle{pointer-events:none}
+.agent-svg .arrow-main{stroke:var(--accent);stroke-width:2;fill:none;opacity:0.5}
+.agent-svg .arrow-cycle{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 4;fill:none;opacity:0.4}
+.diagram-svg-wrap{position:relative;z-index:1}
+.agent-cycle{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;text-align:center;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border)}
+.agent-svg .agent-node{cursor:pointer}
+.agent-svg .agent-node a{pointer-events:none}
+</style>
 </head>
 <body>
 
@@ -94,20 +118,28 @@
 <section id="presets" style="padding:0 0 120px">
   <div class="s-pad">
     <div class="s-label rv">Пресеты</div>
-    <h2 class="s-title rv">Что такое пресеты</h2>
+    <h2 class="s-title rv">Готовые шаблоны работы</h2>
     <p class="s-sub rv" style="max-width:720px;margin-bottom:24px">Пресет — готовый сценарий под вашу задачу: проверка документов, поддержка клиентов, согласования. Меняется поведение агентов и режимы (голосование, дебаты), схема графа остаётся той же. Выбираете пресет в дашборде или через API.</p>
     <div class="content-wrap" style="overflow-x:auto">
-      <table class="comp-table rv" style="margin-top:0">
-        <thead><tr><th>Пресет</th><th>Для чего</th><th>Где применяется</th></tr></thead>
+      <table class="comp-table rv presets-table" style="margin-top:0" id="presetsTable">
+        <thead><tr><th>Пресет</th><th>Модель</th><th>Для чего</th><th>Где применяется</th></tr></thead>
         <tbody>
-          <tr><td>Аудит</td><td>Голосование нескольких агентов по уровню риска</td><td>Проверка документов перед ревизией</td></tr>
-          <tr><td>Юр. превью</td><td>То же + жёсткие критерии</td><td>Юридическая проверка договоров</td></tr>
-          <tr><td>Быстрая эскалация жалоб</td><td>Два варианта ответа, Judge выбирает лучший</td><td>Поддержка, негативные обращения</td></tr>
-          <tr><td>Служба поддержки</td><td>Эмпатичный и формальный ответ, выбор по контексту</td><td>Обращения в CRM, тикеты</td></tr>
-          <tr><td>Акцент на аналитику</td><td>Голосование по тональности и метрикам</td><td>Анализ обращений, отчёты</td></tr>
-          <tr><td>Жёсткое согласование</td><td>Голосование по решению «одобрить/отклонить»</td><td>Согласования договоров, закупок</td></tr>
+          <tr><td>Аудит перед ревизией</td><td>Комплаенс</td><td>Голосование + дебаты, жёсткие критерии</td><td>Проверка документов перед ревизией</td></tr>
+          <tr><td>Стандартная проверка</td><td>Комплаенс</td><td>Голосование + дебаты</td><td>Повседневная проверка договоров и накладных</td></tr>
+          <tr><td>Быстрая проверка</td><td>Комплаенс</td><td>Лёгкий режим</td><td>Экспресс-контроль без глубокого анализа</td></tr>
+          <tr><td>Мягкая с рекомендациями</td><td>Комплаенс</td><td>Мягкие критерии</td><td>Консультативный режим, рекомендации</td></tr>
+          <tr><td>Юр. превью</td><td>Комплаенс</td><td>Жёсткие критерии, голосование + дебаты</td><td>Юридическая проверка договоров</td></tr>
+          <tr class="presets-more"><td>Служба поддержки</td><td>Обращения</td><td>Эмпатия, дебаты</td><td>Обращения в CRM, тикеты, поддержка</td></tr>
+          <tr class="presets-more"><td>Нейтральные ответы</td><td>Обращения</td><td>Сбалансированный тон</td><td>Формальная переписка, FAQ</td></tr>
+          <tr class="presets-more"><td>Быстрая эскалация</td><td>Обращения</td><td>Дебаты + голосование по эскалации</td><td>Негативные обращения, жалобы</td></tr>
+          <tr class="presets-more"><td>Отработка возражений</td><td>Обращения</td><td>Цель — отработка возражений, дебаты</td><td>Продажи, возражения клиентов</td></tr>
+          <tr class="presets-more"><td>Продающий ответ</td><td>Обращения</td><td>Цель — продажи, дебаты</td><td>Исходящие ответы, коммерческие предложения</td></tr>
+          <tr class="presets-more"><td>Жёсткое согласование</td><td>Операционная</td><td>Голосование + дебаты</td><td>Согласования договоров, закупок</td></tr>
+          <tr class="presets-more"><td>Рутинные операции</td><td>Операционная</td><td>Дебаты</td><td>Типовые заявки, маршрутизация</td></tr>
+          <tr class="presets-more"><td>Срочные задачи</td><td>Операционная</td><td>Быстрый поток</td><td>Срочные согласования, эскалации</td></tr>
         </tbody>
       </table>
+      <button type="button" class="presets-toggle rv" id="presetsToggle" aria-expanded="false">Показать все пресеты</button>
     </div>
   </div>
 </section>
@@ -198,22 +230,25 @@
     </div>
   </div>
 
-  <!-- Main workflow diagram -->
+  <!-- Main workflow diagram (SVG as on agents.html) -->
   <div class="arch-section-inner" style="max-width:1360px;margin:0 auto;padding:0 56px">
-    <div class="workflow-box rv-scale">
+    <div class="agent-diagram rv-scale">
       <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Пример: Граф комплаенса (циклический)</span></div>
-      <div class="workflow-steps">
-        <div class="workflow-step"><h5>Extractor</h5><p>Извлечение</p></div>
-        <div class="workflow-arrow">&rarr;</div>
-        <div class="workflow-step"><h5>Checker</h5><p>Проверка</p></div>
-        <div class="workflow-arrow">&rarr;</div>
-        <div class="workflow-step"><h5>Risk</h5><p>Оценка</p></div>
-        <div class="workflow-arrow">&rarr;</div>
-        <div class="workflow-step" style="border-color:var(--accent)"><h5>Critic</h5><p>Верификация</p></div>
-        <div class="workflow-arrow">&rarr;</div>
-        <div class="workflow-step"><h5>Finalize</h5><p>Результат</p></div>
-      </div>
-      <div style="text-align:center;margin-top:16px;font-size:11px;color:var(--text3)">Агент роли Critic может вернуть задачу к агенту роли Extractor (цикл до 3 итераций)</div>
+      <a href="agents.html#compliance" class="diagram-svg-wrap" style="display:block;text-decoration:none;color:inherit">
+        <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
+          <path class="arrow-cycle" d="M 515 40 Q 290 -20 65 40" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.4"/>
+          <g class="agent-node" data-role="Extractor"><rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/><text class="node-text" x="65" y="68" text-anchor="middle">Extractor</text><text class="node-desc" x="65" y="88" text-anchor="middle">Извлечение данных</text></g>
+          <path class="arrow-main" d="M 125 75 L 155 75"/>
+          <g class="agent-node" data-role="Checker"><rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/><text class="node-text" x="215" y="68" text-anchor="middle">Checker</text><text class="node-desc" x="215" y="88" text-anchor="middle">Нормативы</text></g>
+          <path class="arrow-main" d="M 275 75 L 305 75"/>
+          <g class="agent-node" data-role="Risk"><rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/><text class="node-text" x="365" y="68" text-anchor="middle">Risk</text><text class="node-desc" x="365" y="88" text-anchor="middle">Оценка штрафов</text></g>
+          <path class="arrow-main" d="M 425 75 L 455 75"/>
+          <g class="agent-node accent" data-role="Critic"><rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/><text class="node-text" x="515" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="515" y="88" text-anchor="middle">Верификация</text></g>
+          <path class="arrow-main" d="M 575 75 L 605 75"/>
+          <g class="agent-node" data-role="Action"><rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/><text class="node-text" x="660" y="68" text-anchor="middle">Action</text><text class="node-desc" x="660" y="88" text-anchor="middle">OK / Блок</text></g>
+        </svg>
+      </a>
+      <div class="agent-cycle">Critic может вернуть задачу на Extractor (цикл до 3 итераций)</div>
     </div>
     <p style="text-align:center;margin-top:24px"><a href="agents.html" class="btn-accent" style="display:inline-block;padding:10px 20px;font-size:13px;text-decoration:none">Подробнее о схемах работы агентов</a></p>
   </div>
@@ -242,6 +277,17 @@
 
 <script>
 document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
+(function(){
+  var btn = document.getElementById('presetsToggle');
+  var table = document.getElementById('presetsTable');
+  if (btn && table) {
+    btn.addEventListener('click', function(){
+      var expanded = table.classList.toggle('expanded');
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      btn.textContent = expanded ? 'Свернуть' : 'Показать все пресеты';
+    });
+  }
+})();
 // ═══ ARCHITECTURE NODE DETAIL DATA ═══
 const nodeData = {
   documents: {
@@ -345,11 +391,11 @@ const nodeData = {
   },
   marking: {
     title: 'Маркировка (Честный Знак)',
-    desc: 'Проверка кодов маркировки через API Честного Знака. Автоматическая блокировка при нарушениях.',
+    desc: 'Проверка документов на соответствие требованиям маркировки. Поддержка кодов маркировки в извлечении и в регламентах; при необходимости — интеграция с API Честного Знака.',
     items: [
       { title: 'Валидация', text: 'Проверка наличия, срока годности, соответствия документу. Пакетная верификация.' },
       { title: 'Автоблокировка', text: 'При отсутствии или некорректной маркировке — блокировка документа, уведомление.' },
-      { title: 'Штрафы', text: '10-20к за единицу без маркировки (с марта 2026 — автоштрафы через онлайн-кассы).' }
+      { title: 'Снижение штрафов', text: 'Снижение риска штрафов 10–20 тыс. ₽ за единицу без маркировки; с марта 2026 — автоштрафы через онлайн-кассы. Ранняя проверка и блокировка помогают избежать санкций.' }
     ],
     tags: ['Честный Знак', 'DataMatrix', 'GS1', 'Маркировка']
   },
