@@ -35,6 +35,11 @@
 .diagram-svg-wrap{position:relative;z-index:1}
 .agent-cycle{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;text-align:center;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border)}
 .agent-svg .agent-node{cursor:pointer}
+/* Калькуляторы: десктоп — два рядом, мобилка — друг за другом */
+.kv-calc-row{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+@media (max-width:767px){.kv-calc-row{grid-template-columns:1fr}}
+.kv-calc-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:32px}
+.kv-calc-title{font-size:15px;font-weight:700;color:var(--text);margin:0 0 20px;letter-spacing:-0.01em}
 </style>
 </head>
 <body>
@@ -86,7 +91,7 @@
       </div>
       <div class="a-div"></div>
       <div class="a-row">
-        <div class="an" data-node="llm"><div class="an-t">LLM</div><div class="an-s">Qwen 2.5 / Llama 3.2</div></div>
+        <div class="an" data-node="llm"><div class="an-t">LLM</div><div class="an-s">Qwen3 / Qwen2.5 / Llama 3.2</div></div>
         <div class="an" data-node="vectordb"><div class="an-t">Vector DB</div><div class="an-s">Qdrant / PgVector</div></div>
         <div class="an" data-node="inference"><div class="an-t">Inference</div><div class="an-s">Ollama / vLLM</div></div>
         <div class="an" data-node="api"><div class="an-t">API</div><div class="an-s">FastAPI</div></div>
@@ -120,19 +125,21 @@
   <div class="s-pad">
     <div class="s-label rv">Модели LLM</div>
     <h2 class="s-title rv">Языковые модели, которые мы используем</h2>
-    <p class="s-sub rv" style="max-width:720px;margin-bottom:24px">Администратор заказчика выбирает модель под своё железо и задачи. Рекомендуемая — Qwen3 8B.</p>
+    <p class="s-sub rv" style="max-width:720px;margin-bottom:24px">Модель всегда подбирается под партнёра: железо, задача, бюджет. Рекомендуемая — Qwen3 8B.</p>
     <div class="content-wrap" style="overflow-x:auto">
       <table class="comp-table rv" style="margin-top:0">
         <thead><tr><th>Модель</th><th>VRAM</th><th>Назначение</th></tr></thead>
         <tbody>
           <tr><td><strong>Qwen3 8B</strong></td><td>5–9 GB</td><td>Рекомендуемая для prod</td></tr>
-          <tr><td><strong>Qwen2.5 14B</strong></td><td>10–12 GB</td><td>Тяжёлые задачи, reasoning</td></tr>
+          <tr><td><strong>Qwen3 14B</strong></td><td>9–12 GB</td><td>Верификатор, reasoning</td></tr>
+          <tr><td><strong>Qwen3 32B</strong></td><td>18–22 GB</td><td>Комплаенс, документы, Critic</td></tr>
+          <tr><td><strong>Qwen3 72B</strong></td><td>45–52 GB</td><td>Премиум, флагман</td></tr>
+          <tr><td><strong>Qwen3-Coder 7B</strong></td><td>4–6 GB</td><td>Код, SQL, 1С</td></tr>
+          <tr><td><strong>Qwen2.5-VL 7B</strong></td><td>5–7 GB</td><td>Vision: печати, сканы (лучше llava)</td></tr>
           <tr><td><strong>Qwen2.5 7B</strong></td><td>4–6 GB</td><td>M1 8GB, слабое железо</td></tr>
-          <tr><td><strong>Qwen2.5 32B</strong></td><td>20–22 GB</td><td>Critic, верификация</td></tr>
-          <tr><td><strong>Qwen2.5-Coder 14B</strong></td><td>10–12 GB</td><td>Код, SQL, 1С</td></tr>
-          <tr><td><strong>Llama 3.2 3B</strong></td><td>2–4 GB</td><td>Лёгкие задачи</td></tr>
-          <tr><td><strong>Mistral Nemo 12B</strong></td><td>8–10 GB</td><td>Apache 2.0</td></tr>
-          <tr><td><strong>llava 7B</strong></td><td>4–6 GB</td><td>Vision: печати, скриншоты</td></tr>
+          <tr><td><strong>Phi-4 mini 3.8B</strong></td><td>3–4 GB</td><td>Сверхбыстрый, эскалация</td></tr>
+          <tr><td><strong>Gemma-2 27B</strong></td><td>16–20 GB</td><td>Альтернатива без китайских (Apache 2.0)</td></tr>
+          <tr><td><strong>Mistral Nemo 12B</strong></td><td>8–10 GB</td><td>Apache 2.0, быстрые задачи</td></tr>
         </tbody>
       </table>
     </div>
@@ -257,7 +264,7 @@
   </div>
 
   <!-- Main workflow diagram (SVG as on agents.html) -->
-  <div class="arch-section-inner" style="max-width:1360px;margin:0 auto;padding:0 56px;margin-top:56px">
+  <div class="arch-section-inner" style="max-width:1360px;margin:0 auto;padding:0 56px">
     <div class="agent-diagram rv-scale">
       <div style="text-align:center;margin-bottom:24px"><span style="font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent)">Пример: Граф комплаенса (циклический)</span></div>
       <a href="agents.html#compliance" class="diagram-svg-wrap" style="display:block;text-decoration:none;color:inherit">
@@ -280,36 +287,71 @@
   </div>
 </section>
 
-<!-- Калькулятор KV-cache / контекстного окна -->
+<!-- Калькуляторы: контекст и подбор модели -->
 <section id="kv-calculator" style="padding:80px 0 120px;background:var(--surface)">
   <div class="s-pad">
-    <div class="s-label rv">Калькулятор</div>
-    <h2 class="s-title rv">Контекстное окно и KV-cache под ваше железо</h2>
-    <p class="s-sub rv" style="max-width:640px;margin-bottom:32px">Оценка доступного контекста в зависимости от VRAM, модели и объёма RAG. Упрощённая формула для планирования пилота.</p>
+    <div class="s-label rv">Калькуляторы</div>
+    <h2 class="s-title rv">Контекстное окно и подбор модели под партнёра</h2>
+    <p class="s-sub rv" style="max-width:720px;margin-bottom:32px">Оценка контекста по мощностям и рекомендация модели по задаче, VRAM и желаемому окну. Модель всегда подбирается под партнёра.</p>
   </div>
-  <div class="content-wrap" style="max-width:720px">
-    <div class="rv" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:32px">
-      <div style="display:grid;gap:20px;margin-bottom:24px">
-        <label style="display:grid;gap:6px">
-          <span style="font-size:13px;font-weight:700;color:var(--text)">VRAM, ГБ</span>
-          <input type="number" id="kv-vram" min="8" max="256" value="24" step="1" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
-        </label>
-        <label style="display:grid;gap:6px">
-          <span style="font-size:13px;font-weight:700;color:var(--text)">Модель (размер)</span>
-          <select id="kv-model" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
-            <option value="7">Qwen 2.5 / Llama 3.2 — 7B</option>
-            <option value="14">Qwen 2.5 / Llama — 14B</option>
-            <option value="32">Qwen 2.5 — 32B</option>
-            <option value="72">Qwen 2.5 / Llama — 72B</option>
-          </select>
-        </label>
-        <label style="display:grid;gap:6px">
-          <span style="font-size:13px;font-weight:700;color:var(--text)">RAG: объём базы знаний, тыс. документов (опционально)</span>
-          <input type="number" id="kv-rag" min="0" value="10" step="1" placeholder="0" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
-        </label>
+  <div class="content-wrap" style="max-width:1200px">
+    <div class="kv-calc-row">
+      <div class="kv-calc-card rv">
+        <h3 class="kv-calc-title">Расчёт контекстного окна от мощностей</h3>
+        <div style="display:grid;gap:20px;margin-bottom:24px">
+          <label style="display:grid;gap:6px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">VRAM, ГБ</span>
+            <input type="number" id="kv-vram" min="4" max="256" value="24" step="1" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+          </label>
+          <label style="display:grid;gap:6px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">Модель</span>
+            <select id="kv-model" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+              <option value="4">Phi-4 mini 3.8B</option>
+              <option value="7">Qwen2.5 7B</option>
+              <option value="7">Qwen3-Coder 7B</option>
+              <option value="7">Qwen2.5-VL 7B</option>
+              <option value="8">Qwen3 8B</option>
+              <option value="12">Mistral Nemo 12B</option>
+              <option value="14">Qwen3 14B</option>
+              <option value="27">Gemma-2 27B</option>
+              <option value="32">Qwen3 32B</option>
+              <option value="72">Qwen3 72B</option>
+            </select>
+          </label>
+          <label style="display:grid;gap:6px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">RAG: объём базы, тыс. док. (опц.)</span>
+            <input type="number" id="kv-rag" min="0" value="10" step="1" placeholder="0" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+          </label>
+        </div>
+        <button type="button" id="kv-calc-btn" class="btn-accent" style="padding:12px 24px;font-size:14px;border:none;cursor:pointer;border-radius:8px">Рассчитать</button>
+        <div id="kv-result" style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;color:var(--text2);line-height:1.8;display:none"></div>
       </div>
-      <button type="button" id="kv-calc-btn" class="btn-accent" style="padding:12px 24px;font-size:14px;border:none;cursor:pointer;border-radius:8px">Рассчитать</button>
-      <div id="kv-result" style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;color:var(--text2);line-height:1.8;display:none"></div>
+      <div class="kv-calc-card rv">
+        <h3 class="kv-calc-title">Рассчитать подходящую модель</h3>
+        <div style="display:grid;gap:20px;margin-bottom:24px">
+          <label style="display:grid;gap:6px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">VRAM, ГБ</span>
+            <input type="number" id="rec-vram" min="4" max="256" value="24" step="1" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+          </label>
+          <label style="display:grid;gap:6px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">Желаемое контекстное окно, K токенов</span>
+            <input type="number" id="rec-context" min="2" max="128" value="16" step="1" placeholder="8" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+          </label>
+          <label style="display:grid;gap:6px">
+            <span style="font-size:13px;font-weight:700;color:var(--text)">Задача</span>
+            <select id="rec-task" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
+              <option value="prod">Prod, комплаенс, документы</option>
+              <option value="reasoning">Верификатор, reasoning</option>
+              <option value="vision">Vision: печати, сканы</option>
+              <option value="code">Код, SQL, 1С</option>
+              <option value="light">Лёгкий / эскалация</option>
+              <option value="premium">Премиум, флагман</option>
+            </select>
+          </label>
+        </div>
+        <button type="button" id="rec-calc-btn" class="btn-accent" style="padding:12px 24px;font-size:14px;border:none;cursor:pointer;border-radius:8px">Рекомендовать модель</button>
+        <div id="rec-result" style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border);font-size:14px;color:var(--text2);line-height:1.8;display:none"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -349,7 +391,7 @@ document.getElementById('cpyear') && (document.getElementById('cpyear').textCont
   }
 })();
 // Калькулятор KV-cache: веса модели (ГБ), KV на 1K токенов (МБ)
-var kvModelMeta = { 7: { weights: 14, kvPer1k: 0.6 }, 8: { weights: 16, kvPer1k: 0.7 }, 14: { weights: 28, kvPer1k: 1.2 }, 32: { weights: 64, kvPer1k: 2.4 }, 72: { weights: 144, kvPer1k: 5 } };
+var kvModelMeta = { 4: { weights: 8, kvPer1k: 0.35 }, 7: { weights: 14, kvPer1k: 0.6 }, 8: { weights: 16, kvPer1k: 0.7 }, 12: { weights: 24, kvPer1k: 1 }, 14: { weights: 28, kvPer1k: 1.2 }, 27: { weights: 54, kvPer1k: 2 }, 32: { weights: 64, kvPer1k: 2.4 }, 72: { weights: 144, kvPer1k: 5 } };
 (function(){
   var vramEl = document.getElementById('kv-vram');
   var modelEl = document.getElementById('kv-model');
@@ -365,11 +407,55 @@ var kvModelMeta = { 7: { weights: 14, kvPer1k: 0.6 }, 8: { weights: 16, kvPer1k:
     var reserve = 2;
     var availableKV = Math.max(0, vram - meta.weights - reserve);
     var maxTokens = meta.kvPer1k > 0 ? Math.floor((availableKV * 1024) / meta.kvPer1k) : 0;
-    var tokenStr = maxTokens >= 1000 ? (maxTokens / 1000).toFixed(1) + 'K' : String(maxTokens);
     var ragNote = rag > 0 ? ' Учитывайте: при RAG с ' + rag + ' тыс. документов в контекст подмешивается выборка чанков; рекомендуем окно не меньше 8–16K токенов для стабильного поиска.' : '';
     var warn = availableKV <= 0 ? ' Недостаточно VRAM для выбранной модели на этом GPU. Рассмотрите меньшую модель или увеличение VRAM.' : '';
     resultEl.style.display = 'block';
-    resultEl.innerHTML = '<div style="font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em">до ' + tokenStr + ' токенов</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">(при fp16, один запрос).' + ragNote + warn + '</p>';
+    resultEl.innerHTML = '<div style="font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em">до ' + (maxTokens >= 1000 ? (maxTokens / 1000).toFixed(1) + 'K' : maxTokens) + ' токенов</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">(при fp16, один запрос).' + ragNote + warn + '</p>';
+  });
+})();
+// Калькулятор подбора модели: VRAM + желаемое окно + задача
+var recModelMeta = [
+  { name: 'Phi-4 mini 3.8B', vram: 4, size: 4, tasks: ['light'] },
+  { name: 'Qwen2.5 7B', vram: 6, size: 7, tasks: ['light'] },
+  { name: 'Qwen3 8B', vram: 9, size: 8, tasks: ['prod'] },
+  { name: 'Mistral Nemo 12B', vram: 12, size: 12, tasks: ['prod', 'light'] },
+  { name: 'Qwen3 14B', vram: 14, size: 14, tasks: ['prod', 'reasoning'] },
+  { name: 'Qwen3-Coder 7B', vram: 8, size: 7, tasks: ['code'] },
+  { name: 'Qwen2.5-VL 7B', vram: 10, size: 7, tasks: ['vision'] },
+  { name: 'Gemma-2 27B', vram: 28, size: 27, tasks: ['reasoning', 'prod'] },
+  { name: 'Qwen3 32B', vram: 36, size: 32, tasks: ['reasoning', 'premium'] },
+  { name: 'Qwen3 72B', vram: 80, size: 72, tasks: ['premium'] }
+];
+(function(){
+  var vramEl = document.getElementById('rec-vram');
+  var contextEl = document.getElementById('rec-context');
+  var taskEl = document.getElementById('rec-task');
+  var btn = document.getElementById('rec-calc-btn');
+  var resultEl = document.getElementById('rec-result');
+  if (!btn || !resultEl) return;
+  btn.addEventListener('click', function(){
+    var vram = parseInt(vramEl.value, 10) || 24;
+    var contextK = parseInt(contextEl.value, 10) || 16;
+    var task = (taskEl && taskEl.value) || 'prod';
+    var candidates = recModelMeta.filter(function(m){ return m.vram <= vram; });
+    if (candidates.length === 0) {
+      resultEl.style.display = 'block';
+      resultEl.innerHTML = '<p style="font-size:13px;color:var(--text2)">Недостаточно VRAM. Минимум 4 ГБ.</p>';
+      return;
+    }
+    var best = null;
+    for (var i = 0; i < candidates.length; i++) {
+      var m = candidates[i];
+      if (m.tasks.indexOf(task) >= 0) { best = m; break; }
+    }
+    if (!best) best = candidates[candidates.length - 1];
+    var meta = kvModelMeta[best.size] || kvModelMeta[8];
+    var reserve = 2;
+    var avail = Math.max(0, vram - meta.weights - reserve);
+    var maxCtx = meta.kvPer1k > 0 ? Math.floor((avail * 1024) / meta.kvPer1k) / 1000 : 0;
+    var ok = maxCtx >= contextK;
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = '<div style="font-size:clamp(24px,3vw,36px);font-weight:800;color:var(--text);margin-bottom:8px">' + best.name + '</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">Рекомендуется для вашей задачи и VRAM ' + vram + ' ГБ. Контекст: до ~' + maxCtx.toFixed(0) + 'K токенов. ' + (ok ? 'Подходит под желаемые ' + contextK + 'K.' : 'Желаемые ' + contextK + 'K могут быть на пределе — рассмотрите больший VRAM или меньшую модель.') + '</p>';
   });
 })();
 // ═══ ARCHITECTURE NODE DETAIL DATA ═══
