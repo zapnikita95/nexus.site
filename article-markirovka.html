@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ИИ для маркировки «Честный знак»: распознавание и встраивание в процессы — Нексус-Тех</title>
+<meta name="description" content="Как ИИ повышает распознавание DataMatrix на мягкой упаковке. Маркировка Честный знак 2025–2026, ТС ПИоТ, производство и ритейл. Внедрение on-premise.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="canonical" href="https://нексус-тех.рф/article-markirovka.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://нексус-тех.рф/article-markirovka.html">
+<meta property="og:title" content="ИИ для маркировки «Честный знак»: распознавание и встраивание в процессы — Нексус-Тех">
+<meta property="og:description" content="Нейросети и распознавание кодов маркировки на мягкой упаковке. 2025–2026, производство, кассы. On-premise.">
+<meta property="og:locale" content="ru_RU">
+<link rel="stylesheet" href="styles.css">
+<style>.article-body h2{font-size:28px;font-weight:800;margin:24px 0 16px;color:var(--text)}.article-body .article-meta{font-size:13px;color:var(--text3);margin-bottom:24px}.article-body p{font-size:15px;color:var(--text2);line-height:1.9;margin-bottom:20px}.article-body h3{font-size:20px;font-weight:700;margin:28px 0 12px;color:var(--text)}.article-back{display:inline-block;font-size:14px;color:var(--text3);text-decoration:none;margin-bottom:20px;transition:color .2s}.article-back:hover{color:var(--accent)}</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех"></a>
+    <ul class="nav-links">
+      <li><a href="solutions.html">Решения</a></li>
+      <li><a href="security.html">Безопасность</a></li>
+      <li><a href="technology.html">Технологии</a></li>
+      <li><a href="agents.html">Модели агентов</a></li>
+      <li><a href="articles.html">Статьи</a></li>
+      <li><a href="partnership.html">Партнёрство</a></li>
+    </ul>
+    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="solutions.html">Решения</a><a href="security.html">Безопасность</a><a href="technology.html">Технологии</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a><a href="partnership.html">Партнёрство</a><a href="order.html" class="nav-cta">Заказать тест</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
+  <div class="s-pad" style="position:relative;z-index:1">
+    <a href="articles.html" class="article-back rv">← Все статьи</a>
+    <h1 class="s-title rv">ИИ для маркировки «Честный знак»: распознавание и встраивание в процессы</h1>
+    <div class="article-meta rv">Маркировка, Честный знак, DataMatrix, компьютерное зрение, 2025–2026</div>
+  </div>
+</section>
+
+<section style="padding:0 0 80px">
+  <div class="content-wrap">
+    <div class="article-body rv">
+      <p>Система маркировки <strong>«Честный знак»</strong> расширяется: с 2025 года обязательная маркировка затронула строительные материалы (цемент, сухие смеси с октября 2025; прочие стройматериалы в индивидуальной упаковке — с мая 2026), с декабря 2025 — сладости и кондитерские изделия (печенье, вафли, конфеты, затем хлебобулочные, шоколад). Планируется маркировка растворимых и завариваемых напитков. На кассах с 2026 года внедряются <strong>модули ТС ПИоТ</strong> — технические средства получения информации о товаре: они проверяют корректность распознавания кодов и передают данные в систему. В таких условиях надёжное считывание DataMatrix становится критичным и на производстве, и в ритейле. Разбираемся, где классические алгоритмы дают сбой, как искусственный интеллект помогает повысить процент распознавания и как встроить такое решение в ваши процессы.</p>
+      <p>Подробнее про автоматическую проверку документов по 152-ФЗ и маркировке — в материале <a href="article-152-fz.html" style="color:var(--accent);text-decoration:underline">«Автоматическая проверка документов по 152-ФЗ и Честный Знак»</a>. Здесь фокус — именно на <strong>распознавании кодов маркировки</strong> на сложных поверхностях и интеграции с производственными и торговыми контурами.</p>
+
+      <h3>Почему код «Честный знак» не читается с первого раза</h3>
+      <p>DataMatrix изначально проектировался для нанесения на твёрдые поверхности: металл, бирки, корпуса. Алгоритм распознавания опирается на L-образную границу кода, ровную сетку модулей и однозначное преобразование в битовую матрицу. На <strong>мягкой упаковке</strong> (плёнка, БОПП, творог, мороженое, сырки) код деформируется: смятия, складки, поворот под углом к камере. Плюс блики на глянцевой плёнке. В итоге классический декодер «видит» что-то похожее на DataMatrix, но не может построить сетку и прочитать данные — растёт процент отбраковки, ручного пересканирования и затрат на операторов.</p>
+
+      <h3>Как ИИ помогает распознавать маркировку</h3>
+      <p>Нейросеть не заменяет декодер DataMatrix «в лоб»: изменение одного символа в коде сильно меняет расположение точек, и предсказывать битовую матрицу напрямую для ИИ непродуктивно. Другой подход — использовать ИИ как <strong>подготовительный этап</strong>: нейросеть класса семантической сегментации выделяет границы кода на искажённом изображении. По этому контуру затем выполняется геометрическое выравнивание (полиномиальные преобразования, «разворот» четырёхугольника в квадрат). Выровненное изображение подаётся в классический алгоритм чтения DataMatrix — и процент успешного распознавания заметно растёт даже на сильно деформированной упаковке.</p>
+      <p>Такие решения уже применяются на конвейерах: камеры машинного зрения, подобранная подсветка (в том числе туннельная для устранения бликов), синхронизация с энкодером конвейера. Нейросеть дообучается на ваших данных — снимках с производства, что повышает устойчивость к конкретным типам упаковки и дефектам печати. Результат — снижение доли ручного сканирования и отбраковки при сохранении скорости обработки.</p>
+
+      <h3>Встраивание в процессы: производство и ритейл</h3>
+      <p><strong>На производстве:</strong> участок групповой упаковки (например, короб с несколькими единицами) — типичное место внедрения. Камеры над конвейером, фотодатчик или энкодер для синхронизации кадров, отбраковщик для нераспознанных единиц. Данные по считанным кодам передаются в учётную систему и в <strong>«Честный знак»</strong> для агрегации и отчётности. Развёртывание возможно на промышленном ПК в вашем контуре; модели и видео не обязаны уходить в облако — это важно для конфиденциальности и соответствия отраслевым требованиям. О том, как мы строим решения на вашем периметре, см. <a href="technology.html" style="color:var(--accent);text-decoration:underline">Архитектура</a> и <a href="security.html" style="color:var(--accent);text-decoration:underline">Безопасность</a>.</p>
+      <p><strong>В ритейле:</strong> с 2026 года кассы оснащаются модулями ТС ПИоТ: проверка кода при продаже, передача в ЦРПТ, блокировка продажи запрещённых товаров. Надёжное распознавание кодов на мягкой упаковке напрямую влияет на скорость обслуживания и количество повторных попыток сканирования — те же подходы с предобработкой изображения нейросетью применимы и к сканерам на кассе, если есть доступ к аппаратной части и интеграция с ПО.</p>
+
+      <h3>Что учесть при внедрении</h3>
+      <p>Ключевые моменты: качество подсветки и устранение бликов, достаточный объём размеченных данных для дообучения, интеграция с вашей WMS/1С и API «Честный знак». Развёртывание в периметре заказчика (on-premise) исключает передачу снимков и кодов во внешние облака — это совпадает с требованиями к обработке персональных данных и коммерческой тайне. Решение по комплаенсу документов и маркировке в одном контуре описано в разделе <a href="solutions.html#compliance" style="color:var(--accent);text-decoration:underline">Решения: комплаенс</a>. Условия пилота и внедрения (сроки 1–2 месяца, привязка к KPI и оплата за результат) — на странице <a href="partnership.html" style="color:var(--accent);text-decoration:underline">Партнёрство</a>. Если нужно обсудить пилот по распознаванию маркировки под ваше производство или ритейл — оставьте заявку в <a href="order.html" style="color:var(--accent);text-decoration:underline">Контактах</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-geo"><div class="cta-geo-tri"></div><div class="cta-geo-circ"></div></div>
+  <h2 class="rv">Готовы к пилоту?</h2>
+  <p class="rv">Запустите мультиагентный ИИ внутри вашего периметра за 1–2 месяца.</p>
+  <a href="order.html" class="btn-accent rv">Заказать тест</a>
+</section>
+
+<footer>
+  <div class="ft-grid">
+    <div>
+      <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех" loading="lazy"></a>
+      <div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div>
+    </div>
+    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
+    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
+    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a></div>
+  </div>
+  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> Нексус-Тех</span><span><a href="privacy.html">Политика конфиденциальности</a></span></div>
+</footer>
+
+<script>
+document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
+document.getElementById('navBurger')?.addEventListener('click', () => document.getElementById('navMobile').classList.toggle('open'));
+document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => document.getElementById('navMobile').classList.remove('open')));
+const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

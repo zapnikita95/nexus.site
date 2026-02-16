@@ -7,6 +7,10 @@
   <url><loc>https://нексус-тех.рф/technology.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://нексус-тех.рф/agents.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://нексус-тех.рф/articles.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://нексус-тех.рф/article-152-fz.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://нексус-тех.рф/article-rag.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://нексус-тех.рф/article-pilot.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://нексус-тех.рф/article-markirovka.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://нексус-тех.рф/order.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://нексус-тех.рф/partnership.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://нексус-тех.рф/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
