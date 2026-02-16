@@ -72,6 +72,7 @@ footer .logo img{height:64px;opacity:0.95;max-width:200px}
 .btn-accent:hover{background:var(--accent2);box-shadow:0 0 50px rgba(129,140,248,0.2);transform:translateY(-2px)}
 .btn-outline{color:var(--text2);padding:16px 44px;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:1px solid var(--border);border-radius:4px;transition:all .3s;display:inline-block}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+.arch-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:48px;text-align:center}
 
 /* ── REVEAL ── */
 .rv{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.16,1,0.3,1)}
@@ -360,6 +361,8 @@ footer a.logo{color:#1d1d1f}
   .arch-box--home .an{min-width:auto;padding:12px 14px;flex:1 1 calc(50% - 6px)}
   .arch-box--home .an-t{font-size:11px}
   .arch-box--home .an-s{font-size:10px}
+  .arch-actions{gap:16px;margin-top:32px;padding:0 8px}
+  .arch-actions .btn-outline{margin:0}
   .arch-section-inner{padding-left:16px !important;padding-right:16px !important}
   .arch-section-inner .arch-box{padding:24px 16px}
   .arch-section-inner .a-row{flex-wrap:wrap;gap:8px;margin-bottom:10px}
