@@ -134,7 +134,9 @@
           <tr><td><strong>Qwen3 14B</strong></td><td>9–12 GB</td><td>Верификатор, reasoning</td></tr>
           <tr><td><strong>Qwen3 32B</strong></td><td>18–22 GB</td><td>Комплаенс, документы, Critic</td></tr>
           <tr><td><strong>Qwen3 72B</strong></td><td>45–52 GB</td><td>Премиум, флагман</td></tr>
-          <tr><td><strong>Qwen3-Coder 7B</strong></td><td>4–6 GB</td><td>Код, SQL, 1С</td></tr>
+          <tr><td><strong>Qwen3-Coder 7B</strong></td><td>4–6 GB</td><td>Код, SQL, 1С (лёгкий уровень)</td></tr>
+          <tr><td><strong>Qwen2.5-Coder 32B</strong></td><td>20–22 GB</td><td>Код: максимум качества, рефакторинг</td></tr>
+          <tr><td><strong>DeepSeek-Coder 33B</strong></td><td>20–22 GB</td><td>Код: флагман (Ollama: deepseek-coder:33b)</td></tr>
           <tr><td><strong>Qwen2.5-VL 7B</strong></td><td>5–7 GB</td><td>Vision: печати, сканы (лучше llava)</td></tr>
           <tr><td><strong>Qwen2.5 7B</strong></td><td>4–6 GB</td><td>M1 8GB, слабое железо</td></tr>
           <tr><td><strong>Phi-4 mini 3.8B</strong></td><td>3–4 GB</td><td>Сверхбыстрый, эскалация</td></tr>
@@ -315,6 +317,8 @@
               <option value="14">Qwen3 14B</option>
               <option value="27">Gemma-2 27B</option>
               <option value="32">Qwen3 32B</option>
+              <option value="32">Qwen2.5-Coder 32B</option>
+              <option value="33">DeepSeek-Coder 33B</option>
               <option value="72">Qwen3 72B</option>
             </select>
           </label>
@@ -353,6 +357,7 @@
               <option value="approval">Жёсткое согласование</option>
               <option value="routine">Рутинные операции</option>
               <option value="urgent">Срочные задачи</option>
+              <option value="code">Код, рефакторинг</option>
             </select>
           </label>
         </div>
@@ -398,7 +403,7 @@ document.getElementById('cpyear') && (document.getElementById('cpyear').textCont
   }
 })();
 // Калькулятор KV-cache: веса модели (ГБ), KV на 1K токенов (МБ)
-var kvModelMeta = { 4: { weights: 8, kvPer1k: 0.35 }, 7: { weights: 14, kvPer1k: 0.6 }, 8: { weights: 16, kvPer1k: 0.7 }, 12: { weights: 24, kvPer1k: 1 }, 14: { weights: 28, kvPer1k: 1.2 }, 27: { weights: 54, kvPer1k: 2 }, 32: { weights: 64, kvPer1k: 2.4 }, 72: { weights: 144, kvPer1k: 5 } };
+var kvModelMeta = { 4: { weights: 8, kvPer1k: 0.35 }, 7: { weights: 14, kvPer1k: 0.6 }, 8: { weights: 16, kvPer1k: 0.7 }, 12: { weights: 24, kvPer1k: 1 }, 14: { weights: 28, kvPer1k: 1.2 }, 27: { weights: 54, kvPer1k: 2 }, 32: { weights: 64, kvPer1k: 2.4 }, 33: { weights: 66, kvPer1k: 2.5 }, 72: { weights: 144, kvPer1k: 5 } };
 (function(){
   var vramEl = document.getElementById('kv-vram');
   var modelEl = document.getElementById('kv-model');
@@ -429,6 +434,8 @@ var recModelMeta = [
   { name: 'Qwen3 14B', vram: 14, size: 14, tasks: ['audit', 'standard', 'legal', 'support', 'escalation', 'approval', 'objections', 'sales', 'routine', 'urgent'] },
   { name: 'Gemma-2 27B', vram: 28, size: 27, tasks: ['audit', 'standard', 'legal', 'escalation', 'approval'] },
   { name: 'Qwen3 32B', vram: 36, size: 32, tasks: ['audit', 'standard', 'legal', 'escalation', 'approval'] },
+  { name: 'Qwen2.5-Coder 32B', vram: 24, size: 32, tasks: ['code'] },
+  { name: 'DeepSeek-Coder 33B', vram: 24, size: 33, tasks: ['code'] },
   { name: 'Qwen3 72B', vram: 80, size: 72, tasks: ['audit', 'legal', 'approval'] }
 ];
 (function(){
