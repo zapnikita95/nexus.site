@@ -14,11 +14,13 @@
 <meta property="og:locale" content="ru_RU">
 <link rel="stylesheet" href="styles.css">
 <style>
-.article-card{display:block;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:28px 32px;text-decoration:none;color:inherit;transition:all .3s}
+.article-card{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:28px 32px;text-decoration:none;color:inherit;transition:all .3s;min-height:280px}
 .article-card:hover{border-color:var(--accent);box-shadow:0 0 24px rgba(129,140,248,0.08)}
+.article-card:hover .article-read-more{color:var(--accent2)}
 .article-card h3{font-size:20px;font-weight:800;margin:0 0 12px;color:var(--text)}
 .article-card .article-meta{font-size:12px;color:var(--text3);margin-bottom:12px}
-.article-card p{font-size:14px;color:var(--text2);line-height:1.75;margin:0}
+.article-card p{font-size:14px;color:var(--text2);line-height:1.75;margin:0;flex:1}
+.article-read-more{margin-top:auto;padding-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;margin-left:auto}
 .article-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
 </style>
 </head>
@@ -65,26 +67,43 @@
         <div class="article-meta">Комплаенс · 152-ФЗ</div>
         <h3>Автоматическая проверка документов по 152-ФЗ и Честный Знак</h3>
         <p>Почему ручная проверка договоров и накладных не масштабируется, как мультиагентный ИИ снижает риски штрафов и что важно при выборе решения on-premise.</p>
+        <span class="article-read-more">Читать дальше →</span>
       </a>
       <a href="article-rag.html" class="article-card">
         <div class="article-meta">RAG · База знаний</div>
         <h3>RAG on-premise: база знаний в вашем периметре</h3>
         <p>Как хранить регламенты и прецеденты внутри инфраструктуры, подмешивать контекст в LLM и не отправлять документы в облако.</p>
+        <span class="article-read-more">Читать дальше →</span>
       </a>
       <a href="article-pilot.html" class="article-card">
         <div class="article-meta">Внедрение</div>
         <h3>Внедрение мультиагентного ИИ за 1–2 месяца: что реально</h3>
         <p>От пилота до продакшена: развёртывание на ваших серверах, интеграция с 1С и ЭДО, обучение команды и привязка к KPI.</p>
+        <span class="article-read-more">Читать дальше →</span>
       </a>
       <a href="article-markirovka.html" class="article-card">
         <div class="article-meta">Комплаенс · Маркировка</div>
         <h3>ИИ для маркировки «Честный знак»: распознавание и встраивание в процессы</h3>
         <p>Почему DataMatrix на мягкой упаковке не читается классикой, как нейросети помогают выровнять код и снизить отбраковку, что меняется в 2025–2026 и как встроить решение on-premise.</p>
+        <span class="article-read-more">Читать дальше →</span>
       </a>
       <a href="article-regulyatorika-ai.html" class="article-card">
         <div class="article-meta">Безопасность · Регуляторика</div>
         <h3>Регуляторика безопасности ИИ в РФ: 2025–2026, ФСТЭК</h3>
         <p>Указ №490, приказ ФСТЭК №117, методика оценки защищённости, БДУ по угрозам ИИ. Что учесть при внедрении LLM и агентов on-premise.</p>
+        <span class="article-read-more">Читать дальше →</span>
+      </a>
+      <a href="article-prompt-injection.html" class="article-card">
+        <div class="article-meta">Безопасность · Защита ИИ</div>
+        <h3>Защита языковых моделей от внедрения вредных инструкций</h3>
+        <p>Что такое внедрение в запрос (prompt injection), как оно ведёт к утечкам, и какие меры работают в enterprise: валидация, две модели, изоляция. Чек-лист и связь с БДУ угроз ИИ.</p>
+        <span class="article-read-more">Читать дальше →</span>
+      </a>
+      <a href="article-data-leaks.html" class="article-card">
+        <div class="article-meta">Безопасность · Конфиденциальность</div>
+        <h3>Предотвращение утечек данных в системах на базе ИИ</h3>
+        <p>Маскировка и анонимизация данных, контроль ответов, мониторинг аномалий. Таблица угроз и мер. Интеграция с 152-ФЗ и кейсы для юристов и финансов.</p>
+        <span class="article-read-more">Читать дальше →</span>
       </a>
     </div>
   </div>
