@@ -16,4 +16,5 @@
   <url><loc>https://нексус-тех.рф/order.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://нексус-тех.рф/partnership.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://нексус-тех.рф/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://нексус-тех.рф/requisites.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
 </urlset>

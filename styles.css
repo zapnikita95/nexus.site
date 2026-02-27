@@ -346,7 +346,7 @@ footer a.logo{color:#1d1d1f}
   .ft-grid{grid-template-columns:1fr}
   footer .ft-grid{padding:40px 16px 24px}
   .ft-bottom{font-size:10px;gap:12px;padding:0 20px;justify-content:flex-start;flex-wrap:wrap}
-  .ft-bottom span{white-space:nowrap}
+  .ft-bottom span{white-space:normal}
   .comp-table{font-size:11px}
   .comp-table th,.comp-table td{padding:12px 10px}
   .int-row{grid-template-columns:repeat(3,1fr)}
