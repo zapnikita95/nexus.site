@@ -22,7 +22,10 @@
 .req-table tr:last-child td{border-bottom:none}
 .req-table .mono{font-variant-numeric:tabular-nums;letter-spacing:0.02em}
 .req-note{font-size:13px;color:var(--text2);margin-top:24px;line-height:1.7}
-@media(max-width:960px){.req-body{padding:0 16px 60px}.req-table th{width:140px;font-size:13px}.req-table td{font-size:13px}}
+.req-list{list-style:none;padding:0;margin:12px 0 0;font-size:14px;color:var(--text2);line-height:1.75}
+.req-list li{margin-bottom:10px;padding-left:0}
+.req-list strong{color:var(--text);font-variant-numeric:tabular-nums}
+@media(max-width:960px){.req-body{padding:0 16px 60px}.req-table th{width:140px;font-size:13px}.req-table td{font-size:13px}.req-list{font-size:13px}}
 </style>
 </head>
 <body>
@@ -97,6 +100,45 @@
   </div>
 
   <div class="req-block">
+    <h2>Основной вид деятельности (ОКВЭД)</h2>
+    <p class="req-note" style="margin-bottom:12px">По Общероссийскому классификатору ОК 029-2014 (КДЕС Ред. 2), сведения из ЕГРЮЛ.</p>
+    <table class="req-table">
+      <tr>
+        <th>Основной</th>
+        <td class="mono">62.01</td>
+      </tr>
+      <tr>
+        <th>Наименование</th>
+        <td>Разработка компьютерного программного обеспечения</td>
+      </tr>
+    </table>
+    <p class="req-note" style="margin-top:16px">Дополнительные коды: 62.02 (консультации и работы в области компьютерных технологий), 62.02.1 (планирование и проектирование компьютерных систем), 62.03 (управление компьютерным оборудованием), 62.09 (прочая деятельность, связанная с вычислительной техникой и ИТ), 63.11 (обработка данных, размещение информации), 63.11.1 (создание и использование баз данных и информационных ресурсов), 72.19 (научные исследования и разработки в области естественных и технических наук прочие).</p>
+  </div>
+
+  <div class="req-block">
+    <h2>Виды деятельности по Приказу Минцифры России</h2>
+    <p class="req-note">В соответствии с <a href="https://www.consultant.ru/document/cons_doc_LAW_454762/18ef481ce034a1ad0b3743b19a519522382af1c4/" target="_blank" rel="noopener" style="color:var(--accent)">Приказом Минцифры России от 11.05.2023 № 449</a> «Об утверждении перечня видов деятельности в области информационных технологий» (перечень видов деятельности в области ИТ) организации ООО «Нексус-Тех» соответствуют в частности следующие коды:</p>
+    <ul class="req-list">
+      <li><strong>1.01</strong> — проектирование, разработка, адаптация, внедрение, сопровождение и оказание услуг в отношении программ для ЭВМ и баз данных</li>
+      <li><strong>1.06</strong> — проектирование и оказание услуг в отношении ИТ-инфраструктуры, центров обработки данных, облачной (виртуальной) инфраструктуры</li>
+      <li><strong>3.01</strong> — создание и ведение баз данных и информационных ресурсов, формирование, администрирование и предоставление данных</li>
+      <li><strong>8.01</strong> — оценка потребностей, сбор технических требований, подготовка и реализация проектов автоматизации и цифровизации процессов</li>
+      <li><strong>10.01</strong> — создание, обучение и поддержка нейросетей; услуги по распознаванию изображений, текстов, речи и их преобразованию</li>
+    </ul>
+    <p class="req-note" style="margin-top:12px">Полный перечень видов деятельности по приказу Минцифры — на <a href="https://www.consultant.ru/document/cons_doc_LAW_454762/18ef481ce034a1ad0b3743b19a519522382af1c4/" target="_blank" rel="noopener" style="color:var(--accent)">КонсультантПлюс</a>.</p>
+  </div>
+
+  <div class="req-block">
+    <h2>Исключительные права на программное обеспечение</h2>
+    <p class="req-note">Используемое в проектах программное обеспечение (в т.ч. открытые LLM, фреймворки, СУБД) применяется на основании соответствующих лицензий; лицензии и условия использования учитываются в рамках каждого проекта.</p>
+  </div>
+
+  <div class="req-block">
+    <h2>Технологический стек</h2>
+    <p class="req-note">Используемые языки программирования, фреймворки и ПО описаны на странице <a href="technology.html" style="color:var(--accent)">Технологии и архитектура</a>: Python, LangGraph, FastAPI, LLM (Qwen 2.5, Llama 3.2), векторные БД (Qdrant, PgVector), инференс (Ollama, vLLM), интеграции с 1С, Bitrix24, ЭДО, маркировка Честный Знак, мониторинг (Prometheus, Grafana) и др.</p>
+  </div>
+
+  <div class="req-block">
     <h2>Банковские реквизиты</h2>
     <p class="req-note">Расчётный счёт, банк, БИК и корреспондентский счёт указываются в договоре и в счёте на оплату. Для получения реквизитов напишите нам через <a href="order.html" style="color:var(--accent)">форму заявки</a> или запросите у менеджера при заключении договора.</p>
   </div>
@@ -106,7 +148,7 @@
 
 <footer>
   <div class="ft-grid">
-    <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — реквизиты" loading="lazy"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div></div>
+    <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — реквизиты" loading="lazy"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div><div class="ft-contact"><a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a><br><a href="tel:+79776134508">+7 (977) 613-45-08</a></div></div>
     <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
     <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
     <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a><a href="requisites.html">Реквизиты</a></div>
