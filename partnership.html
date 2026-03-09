@@ -195,9 +195,10 @@ footer{padding:3rem 2rem 2rem;border-top:var(--line);background:var(--bg)}
   .t-wtitle{font-size:.65rem;flex:1 1 100%;order:2;margin-left:0;margin-top:2px}
   .t-wprogress{order:3;margin-left:0}
   .terminal-body{padding:1rem;min-height:280px;max-height:70vh}
-  .term-prow{flex-wrap:wrap;gap:4px 8px;align-items:baseline}
-  .term-pinput,.term-pselect{max-width:100%;min-width:0;flex:1 1 100%}
-  .term-phint{width:100%;margin-left:0;margin-top:4px;font-size:.65rem}
+  .term-prow{flex-wrap:wrap;flex-direction:row;gap:4px 8px;align-items:baseline}
+  .term-prow .term-phint{order:1;width:100%;margin-left:0;margin-top:0;margin-bottom:6px;font-size:.65rem}
+  .term-prow .term-pinput,.term-prow .term-pselect{order:2;width:100%;max-width:100%;min-width:0;box-sizing:border-box;overflow-x:auto}
+  .term-pinput,.term-pselect{flex:1 1 100%}
   .term-hist-line-p{flex-wrap:wrap;gap:2px 6px}
   .term-hist-lbl-p{min-width:0}
 }

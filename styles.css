@@ -278,6 +278,7 @@ footer .logo img{height:64px;opacity:0.95;max-width:200px}
 
 /* ── DETAIL SECTION (inner pages) ── */
 .detail-section{padding:120px 0}
+.s-inner{max-width:1360px;margin:0 auto;padding:0 56px}
 .detail-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1360px;margin:0 auto;padding:0 56px}
 .detail-split--center{align-items:center}
 .detail-split .detail-content h3{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:16px}
@@ -352,8 +353,9 @@ footer a.logo{color:#1d1d1f}
   .ft-bottom span{white-space:normal}
   .comp-table{font-size:11px}
   .comp-table th,.comp-table td{padding:12px 10px}
+  .s-inner{padding:0 16px}
   .int-row{grid-template-columns:repeat(3,1fr)}
-  .detail-split{padding:0 16px;gap:48px}
+  .detail-split{padding:0;gap:48px}
   .workflow-steps{flex-direction:column}
   .workflow-arrow{transform:rotate(90deg)}
   .monet-timeline{padding-left:24px}
