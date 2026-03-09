@@ -3,158 +3,834 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Статьи: комплаенс 152-ФЗ, маркировка Честный знак, RAG, внедрение ИИ — Нексус-Тех</title>
-<meta name="description" content="Статьи о мультиагентном ИИ on-premise: проверка документов 152-ФЗ, маркировка «Честный знак» и распознавание DataMatrix, RAG, внедрение за 1–2 месяца. Экспертиза Нексус-Тех.">
+<title>Статьи | Нексус-Тех — мультиагентный ИИ on-premise</title>
+<meta name="description" content="Практические материалы о внедрении мультиагентных ИИ-систем: гайды по комплаенс-автоматизации, разборы архитектур, кейсы on-premise.">
 <link rel="icon" href="favicon.png" type="image/png">
-<link rel="canonical" href="https://нексус-тех.рф/articles.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://нексус-тех.рф/articles.html">
-<meta property="og:title" content="Статьи: комплаенс, RAG, внедрение ИИ — Нексус-Тех">
-<meta property="og:description" content="Экспертные материалы о мультиагентном ИИ на вашем сервере.">
-<meta property="og:locale" content="ru_RU">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-.article-card{display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:28px 32px;text-decoration:none;color:inherit;transition:all .3s;min-height:280px}
-.article-card:hover{border-color:var(--accent);box-shadow:0 0 24px rgba(129,140,248,0.08)}
-.article-card:hover .article-read-more{color:var(--accent2)}
-.article-card h3{font-size:20px;font-weight:800;margin:0 0 12px;color:var(--text)}
-.article-card .article-meta{font-size:12px;color:var(--text3);margin-bottom:12px}
-.article-card p{font-size:14px;color:var(--text2);line-height:1.75;margin:0;flex:1}
-.article-read-more{margin-top:auto;padding-top:16px;font-size:13px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:6px;margin-left:auto}
-.article-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{
+  --bg:#0b0f1a;
+  --surface:#10152a;
+  --surface2:#161c35;
+  --text:#e2e4ea;
+  --text2:#8890a4;
+  --text3:#525a72;
+  --accent:#818cf8;
+  --accent2:#a5b4fc;
+  --ok:#4ade80;
+  --warn:#fbbf24;
+  --line:1px solid rgba(129,140,248,0.15);
+  scroll-behavior:smooth;
+}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(11,15,26,0.95);backdrop-filter:blur(10px);border-bottom:var(--line);padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:72px}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:.88rem;transition:color .3s;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
+.nav-links a:hover{color:var(--accent)}
+.nav-active{color:var(--accent)!important}
+.nav-cta-terminal{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--accent)!important;padding:12px 24px;display:inline-flex;align-items:center;gap:6px;border-left:2px solid transparent;transition:all .2s}
+.nav-cta-terminal:hover{border-left-color:var(--accent);background:rgba(129,140,248,.05)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* HERO */
+.hero{margin-top:72px;padding:5rem 2rem 4rem;position:relative;overflow:hidden;border-bottom:var(--line);background:var(--surface)}
+.hero-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.25rem}
+.hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;line-height:1.15;margin-bottom:1rem}
+.hero p{color:var(--text2);font-size:1rem;max-width:560px;line-height:1.75}
+.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(129,140,248,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(129,140,248,.04) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
+
+/* FILTER BAR */
+.filter-bar{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 0;display:flex;gap:.75rem;flex-wrap:wrap}
+.filter-btn{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.45rem 1rem;border:1px solid rgba(129,140,248,.2);background:transparent;color:var(--text3);cursor:pointer;transition:all .2s;border-radius:3px}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(129,140,248,.08)}
+
+/* ARTICLES GRID */
+.articles-section{max-width:1200px;margin:0 auto;padding:2.5rem 2rem 6rem}
+.articles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+
+.art-card{background:var(--surface);border:1px solid rgba(129,140,248,.15);border-radius:8px;padding:28px 24px;display:flex;flex-direction:column;gap:1rem;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+.art-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);opacity:0;transition:opacity .3s}
+.art-card:hover{border-color:rgba(129,140,248,.4);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.art-card:hover::before{opacity:1}
+
+.art-meta{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.art-tag{font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem;border-radius:3px;background:rgba(129,140,248,.1);color:var(--accent);border:1px solid rgba(129,140,248,.2)}
+.art-tag-case{background:rgba(74,222,128,.07);color:var(--ok);border-color:rgba(74,222,128,.2)}
+.art-tag-guide{background:rgba(129,140,248,.1);color:var(--accent);border-color:rgba(129,140,248,.2)}
+.art-tag-review{background:rgba(251,191,36,.07);color:var(--warn);border-color:rgba(251,191,36,.2)}
+.art-date{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text3)}
+.art-read{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text3);margin-left:auto}
+
+.art-card h3{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;line-height:1.35;color:var(--text)}
+.art-card p{font-size:.875rem;color:var(--text2);line-height:1.75;flex:1}
+
+.art-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem;padding-top:1rem;border-top:var(--line)}
+.art-author{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text3)}
+.art-arrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .3s}
+.art-card:hover .art-arrow{opacity:1}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.rv.visible{opacity:1;transform:none}
+
+/* CTA */
+.cta-section{padding:5rem 2rem;background:var(--surface);border-top:var(--line)}
+.cta-inner{max-width:760px;margin:0 auto}
+.cta-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
+.cta-terminal{background:var(--bg);border:1px solid rgba(129,140,248,.25);border-radius:8px;overflow:hidden;margin-bottom:2rem}
+.cta-titlebar{background:var(--surface2);border-bottom:var(--line);padding:.75rem 1rem;display:flex;align-items:center;gap:.5rem}
+.cta-dot{width:10px;height:10px;border-radius:50%}
+.cta-dot-r{background:rgba(255,80,80,.45)}
+.cta-dot-y{background:rgba(255,200,0,.45)}
+.cta-dot-g{background:rgba(80,200,100,.45)}
+.cta-titlebar-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text3);margin-left:.5rem;letter-spacing:.08em}
+.cta-body{padding:1.5rem 2rem}
+.cta-line{font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:2;color:var(--text2);opacity:0}
+.cta-line.cl-accent{color:var(--accent)}
+.cta-line.cl-ok{color:var(--ok)}
+.cta-line.cl-dim{color:var(--text3)}
+.cta-line.vis{animation:fadeIn .25s forwards}
+@keyframes fadeIn{to{opacity:1}}
+.cta-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem}
+.cta-sub{color:var(--text2);font-size:.95rem;line-height:1.75;margin-bottom:2rem}
+.cta-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#0b0f1a;font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:700;padding:.85rem 2rem;text-decoration:none;transition:all .2s;letter-spacing:.04em}
+.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-secondary{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:.85rem 2rem;text-decoration:none;border:1px solid rgba(129,140,248,.3);transition:all .2s}
+.btn-secondary:hover{border-color:var(--accent);background:rgba(129,140,248,.05)}
+
+/* CTA TERMINAL FORM */
+.terminal-window-a{border:1px solid rgba(129,140,248,.25);background:var(--bg);overflow:hidden;border-radius:4px;margin-top:2rem}
+.terminal-titlebar-a{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2);border-bottom:var(--line)}
+.ta-dots{display:flex;gap:6px}
+.ta-dot{width:10px;height:10px;border-radius:50%}
+.ta-dot-r{background:#f87171;opacity:.7}
+.ta-dot-y{background:#fbbf24;opacity:.7}
+.ta-dot-g{background:#4ade80;opacity:.7}
+.ta-wtitle{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text3);margin-left:8px;letter-spacing:.06em}
+.ta-wprogress{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text2)}
+.ta-wprogress span{color:var(--accent)}
+.terminal-body-a{padding:1.5rem 1.5rem 2rem;min-height:320px;overflow-y:auto;max-height:560px}
+.boot-la{font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-bottom:3px;opacity:0;animation:fadeInA .2s forwards}
+@keyframes fadeInA{to{opacity:1}}
+.boot-la.cl-accent{color:var(--accent)}
+.boot-la.cl-dim{color:var(--text3)}
+.boot-la.cl-ok{color:var(--ok)}
+.term-hist-a{margin-bottom:2px}
+.term-hist-line-a{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;color:var(--text3);font-family:'JetBrains Mono',monospace;font-size:.82rem;opacity:.7;cursor:pointer;transition:opacity .15s;border-left:2px solid transparent;padding-left:4px}
+.term-hist-line-a:hover{opacity:1;border-left-color:var(--accent)}
+.term-hist-lbl-a{min-width:160px;flex-shrink:0;color:var(--text3)}
+.term-hist-val-a{color:var(--text2)}
+.term-hist-ok-a{color:var(--ok);margin-left:6px}
+.term-hist-edit-a{font-size:.7rem;color:var(--text3);margin-left:6px;opacity:0;transition:opacity .15s}
+.term-hist-line-a:hover .term-hist-edit-a{opacity:1}
+.term-current-a{margin-top:8px}
+.term-arow{display:flex;align-items:center;flex-wrap:nowrap;gap:0;font-family:'JetBrains Mono',monospace}
+.term-abadge{color:var(--text3);font-size:.75rem;margin-right:8px;white-space:nowrap;min-width:30px}
+.term-aprompt{color:var(--text3);margin-right:4px}
+.term-alabel{color:var(--accent2);margin-right:6px;white-space:nowrap;font-size:.82rem}
+.term-ahint{color:var(--text3);font-size:.7rem;margin-left:10px;white-space:nowrap}
+.term-ainput{background:none;border:none;border-bottom:1px solid var(--accent);outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.88rem;min-width:180px;max-width:300px;padding:2px 0;caret-color:var(--accent)}
+.term-ainput:focus{border-bottom-color:var(--accent2)}
+.term-aselect{background:var(--surface2);border:1px solid var(--accent);outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.82rem;padding:4px 8px;cursor:pointer;min-width:220px}
+.term-aselect option{background:var(--surface2)}
+.term-aerr{color:#f87171;font-size:.75rem;margin-top:6px;padding-left:38px;display:none;font-family:'JetBrains Mono',monospace}
+.term-aerr.visible{display:block}
+.consent-row-a{display:flex;align-items:center;gap:10px;margin-top:1.5rem;padding:12px 0;border-top:var(--line);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.consent-row-a input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer}
+.consent-row-a label{color:var(--text2);cursor:pointer}
+.submit-btn-a{display:block;width:100%;margin-top:1rem;padding:13px 2rem;background:none;border:1px solid var(--accent);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-align:center}
+.submit-btn-a:hover:not(:disabled){background:rgba(129,140,248,.1);color:var(--accent2);border-color:var(--accent2)}
+.submit-btn-a:disabled{opacity:.35;cursor:not-allowed;border-color:var(--text3);color:var(--text3)}
+.success-box-a{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok);color:var(--ok);font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;line-height:1.7;display:none}
+.success-box-a.visible{display:block}
+
+/* FOOTER */
+footer{padding:3rem 2rem 2rem;border-top:var(--line);background:var(--bg)}
+.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--text);text-transform:uppercase;margin-bottom:.4rem}
+.footer-brand-sub{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text3);line-height:1.5}
+.footer-contact{margin-top:1rem}
+.footer-contact a{font-family:'JetBrains Mono',monospace;display:block;font-size:.72rem;color:var(--text2);text-decoration:none;margin-bottom:.3rem;transition:color .3s}
+.footer-contact a:hover{color:var(--accent)}
+.footer-col h4{font-family:'JetBrains Mono',monospace;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li a{font-family:'JetBrains Mono',monospace;display:block;font-size:.72rem;color:var(--text2);text-decoration:none;margin-bottom:.5rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copyright{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text3)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text3);text-decoration:none;transition:color .3s}
+.footer-bottom-links a:hover{color:var(--accent)}
+
+@media(max-width:960px){
+  .articles-grid{grid-template-columns:1fr 1fr}
+  .footer-content{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .articles-grid{grid-template-columns:1fr}
+  .footer-content{grid-template-columns:1fr}
+  .cta-actions{flex-direction:column}
+}
+
+/* === CANONICAL NAV (override) === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)!important;letter-spacing:0.04em;transition:all 0.2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08);color:var(--accent2)!important;border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:1px solid var(--border);border-radius:4px;cursor:pointer;color:var(--text)}
+.nav-burger span{display:block;width:20px;height:2px;background:currentColor}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}.nav-open .nav-links{display:flex!important;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(11,15,26,0.98);border-bottom:1px solid var(--border);padding:1rem;gap:0.75rem;align-items:flex-start}.nav-burger{display:flex!important}.nav-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav-open .nav-burger span:nth-child(2){opacity:0}.nav-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}}
+/* === CANONICAL FOOTER (override) === */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:0.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem;align-items:center;margin-top:0}
+.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-contact a:hover{color:var(--accent)}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+
+/* FOOTER GLOW ENHANCEMENT */
+footer {
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(129,140,248,0.4) 50%, transparent 100%);
+}
+.footer-brand { margin-bottom: 0.25rem; }
+
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — статьи о мультиагентном ИИ on-premise"></a>
-    <ul class="nav-links">
-      <li><a href="solutions.html">Решения</a></li>
-      <li><a href="security.html">Безопасность</a></li>
-      <li><a href="technology.html">Технологии</a></li>
-      <li><a href="agents.html">Модели агентов</a></li>
-      <li><a href="articles.html" class="active">Статьи</a></li>
-      <li><a href="partnership.html">Партнёрство</a></li>
-    </ul>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
-    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
-  </div>
-  <div class="nav-mobile" id="navMobile">
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <button type="button" class="nav-burger" id="nav-burger" aria-label="Меню" style="display:none"><span></span><span></span><span></span></button>
+  <div class="nav-links">
     <a href="solutions.html">Решения</a>
     <a href="security.html">Безопасность</a>
     <a href="technology.html">Технологии</a>
     <a href="agents.html">Модели агентов</a>
     <a href="articles.html">Статьи</a>
     <a href="partnership.html">Партнёрство</a>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
   </div>
 </nav>
 
-<section class="page-hero">
-  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
-  <div class="s-pad" style="position:relative;z-index:1">
-    <div class="s-label rv">Блог</div>
-    <h1 class="s-title rv">Статьи и материалы</h1>
-    <div class="s-sub rv">Комплаенс 152-ФЗ, RAG на своём сервере, внедрение мультиагентного ИИ за 1–2 месяца.</div>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag rv">[LOG] БАЗА ЗНАНИЙ</div>
+    <h1 class="rv">Статьи и материалы</h1>
+    <p class="rv">Практические гайды, разборы архитектур и кейсы по внедрению мультиагентного ИИ в производственные процессы.</p>
   </div>
 </section>
 
-<section style="padding:0 0 80px">
-  <div class="content-wrap">
-    <div class="article-grid rv">
-      <a href="article-chestnyj-znak-upd.html" class="article-card">
-        <div class="article-meta">Честный Знак · УПД</div>
-        <h3>Честный Знак: типичный пайплайн и где нужен ИИ</h3>
-        <p>Как устроен пайплайн работы с маркировкой: от кодов до УПД. Где главная боль компаний, куда встраивается мультиагентный ИИ и почему он не заменяет камеры на конвейере.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-chestnyj-znak-compliance.html" class="article-card">
-        <div class="article-meta">Честный Знак · Комплаенс</div>
-        <h3>Комплаенс Честного Знака: штрафы 2026, риски УПД и автоматизация</h3>
-        <p>Штрафы за нарушения маркировки в 2026, типичные ошибки УПД/УКЭ. Что уже автоматизировано, что остаётся вручную и как мультиагентный ИИ закрывает комплаенс on-premise.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-data-leaks.html" class="article-card">
-        <div class="article-meta">Безопасность · Конфиденциальность</div>
-        <h3>Предотвращение утечек данных в системах на базе ИИ</h3>
-        <p>Маскировка и анонимизация данных, контроль ответов, мониторинг аномалий. Таблица угроз и мер. Интеграция с 152-ФЗ и кейсы для юристов и финансов.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-prompt-injection.html" class="article-card">
-        <div class="article-meta">Безопасность · Защита ИИ</div>
-        <h3>Защита языковых моделей от внедрения вредных инструкций</h3>
-        <p>Что такое внедрение в запрос (prompt injection), как оно ведёт к утечкам, и какие меры работают в enterprise: валидация, две модели, изоляция. Чек-лист и связь с БДУ угроз ИИ.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-regulyatorika-ai.html" class="article-card">
-        <div class="article-meta">Безопасность · Регуляторика</div>
-        <h3>Регуляторика безопасности ИИ в РФ: 2025–2026, ФСТЭК</h3>
-        <p>Указ №490, приказ ФСТЭК №117, методика оценки защищённости, БДУ по угрозам ИИ. Что учесть при внедрении LLM и агентов on-premise.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-markirovka.html" class="article-card">
-        <div class="article-meta">Комплаенс · Маркировка</div>
-        <h3>ИИ для маркировки «Честный знак»: распознавание и встраивание в процессы</h3>
-        <p>Почему DataMatrix на мягкой упаковке не читается классикой, как нейросети помогают выровнять код и снизить отбраковку, что меняется в 2025–2026 и как встроить решение on-premise.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-pilot.html" class="article-card">
-        <div class="article-meta">Внедрение</div>
-        <h3>Внедрение мультиагентного ИИ за 1–2 месяца: что реально</h3>
-        <p>От пилота до продакшена: развёртывание на ваших серверах, интеграция с 1С и ЭДО, обучение команды и привязка к KPI.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-rag.html" class="article-card">
-        <div class="article-meta">RAG · База знаний</div>
-        <h3>RAG on-premise: база знаний в вашем периметре</h3>
-        <p>Как хранить регламенты и прецеденты внутри инфраструктуры, подмешивать контекст в LLM и не отправлять документы в облако.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
-      <a href="article-152-fz.html" class="article-card">
-        <div class="article-meta">Комплаенс · 152-ФЗ</div>
-        <h3>Автоматическая проверка документов по 152-ФЗ и Честный Знак</h3>
-        <p>Почему ручная проверка договоров и накладных не масштабируется, как мультиагентный ИИ снижает риски штрафов и что важно при выборе решения on-premise.</p>
-        <span class="article-read-more">Читать дальше →</span>
-      </a>
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">Все материалы</button>
+  <button class="filter-btn" data-filter="guide">Гайды</button>
+  <button class="filter-btn" data-filter="review">Разборы</button>
+  <button class="filter-btn" data-filter="case">Кейсы</button>
+</div>
+
+<div class="articles-section">
+    <div class="articles-grid">
+
+    <article class="art-card rv" data-type="guide">
+      <div class="art-meta">
+        <span class="art-tag art-tag-guide">[ГАЙД]</span>
+        <span class="art-date">2026-01-15</span>
+        <span class="art-read">8 мин</span>
+      </div>
+      <h3><a href="article-pilot.html" style="color:inherit;text-decoration:none">Внедрение мультиагентного ИИ за 1–2 месяца: что реально</a></h3>
+      <p>Что входит в пилот on-premise: развёртывание на серверах, интеграция с 1С и ЭДО, настройка агентов. Оплата за результат, KPI и реальные сроки.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-pilot.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="review">
+      <div class="art-meta">
+        <span class="art-tag art-tag-review">[РАЗБОР]</span>
+        <span class="art-date">2025-12-20</span>
+        <span class="art-read">11 мин</span>
+      </div>
+      <h3><a href="article-regulyatorika-ai.html" style="color:inherit;text-decoration:none">Регуляторика безопасности ИИ в РФ: с чем вступаем в 2026 год</a></h3>
+      <p>Указ №490, приказ ФСТЭК №117, методика оценки защищённости, БДУ угроз ИИ. Что нужно enterprise при внедрении LLM и агентов on-premise.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-regulyatorika-ai.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="review">
+      <div class="art-meta">
+        <span class="art-tag art-tag-review">[РАЗБОР]</span>
+        <span class="art-date">2025-11-28</span>
+        <span class="art-read">9 мин</span>
+      </div>
+      <h3><a href="article-chestnyj-znak-compliance.html" style="color:inherit;text-decoration:none">Комплаенс Честного Знака: штрафы, риски УПД и автоматизация</a></h3>
+      <p>Штрафы за нарушения маркировки в 2026, типичные ошибки УПД/УКЭ, что уже автоматизировано. Как мультиагентный ИИ закрывает комплаенс on-premise.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-chestnyj-znak-compliance.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="guide">
+      <div class="art-meta">
+        <span class="art-tag art-tag-guide">[ГАЙД]</span>
+        <span class="art-date">2025-10-14</span>
+        <span class="art-read">10 мин</span>
+      </div>
+      <h3><a href="article-rag.html" style="color:inherit;text-decoration:none">RAG on-premise: база знаний в вашем периметре</a></h3>
+      <p>Как построить RAG на своём сервере: векторная БД, эмбеддинги, контекст для LLM. Регламенты и корпоративная база знаний без отправки документов в облако.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-rag.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="guide">
+      <div class="art-meta">
+        <span class="art-tag art-tag-guide">[ГАЙД]</span>
+        <span class="art-date">2025-09-05</span>
+        <span class="art-read">12 мин</span>
+      </div>
+      <h3><a href="article-prompt-injection.html" style="color:inherit;text-decoration:none">Защита языковых моделей от внедрения вредных инструкций</a></h3>
+      <p>Что такое prompt injection, как оно ведёт к утечкам. Валидация ввода и вывода, паттерн двух моделей, изоляция. Чек-лист для enterprise.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-prompt-injection.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="guide">
+      <div class="art-meta">
+        <span class="art-tag art-tag-guide">[ГАЙД]</span>
+        <span class="art-date">2025-08-19</span>
+        <span class="art-read">9 мин</span>
+      </div>
+      <h3><a href="article-data-leaks.html" style="color:inherit;text-decoration:none">Предотвращение утечек данных в системах на базе ИИ</a></h3>
+      <p>Маскировка и анонимизация перед обработкой ИИ, мониторинг аномалий. Таблица угроз и мер. Интеграция с 152-ФЗ, кейсы для юристов и финансов.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-data-leaks.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="review">
+      <div class="art-meta">
+        <span class="art-tag art-tag-review">[РАЗБОР]</span>
+        <span class="art-date">2025-07-03</span>
+        <span class="art-read">8 мин</span>
+      </div>
+      <h3><a href="article-markirovka.html" style="color:inherit;text-decoration:none">ИИ для маркировки «Честный знак»: распознавание DataMatrix в процессах</a></h3>
+      <p>Где классические алгоритмы дают сбой, как ИИ повышает процент распознавания на мягкой упаковке. ТС ПИоТ, производство, ритейл — внедрение on-premise.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-markirovka.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="review">
+      <div class="art-meta">
+        <span class="art-tag art-tag-review">[РАЗБОР]</span>
+        <span class="art-date">2025-06-11</span>
+        <span class="art-read">7 мин</span>
+      </div>
+      <h3><a href="article-chestnyj-znak-upd.html" style="color:inherit;text-decoration:none">Честный Знак: типичный пайплайн и где нужен ИИ</a></h3>
+      <p>Как устроен пайплайн работы с Честным Знаком: от кодов до УПД. Где главная боль компаний и почему ИИ не заменяет камеры на конвейере.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-chestnyj-znak-upd.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+    <article class="art-card rv" data-type="review">
+      <div class="art-meta">
+        <span class="art-tag art-tag-review">[РАЗБОР]</span>
+        <span class="art-date">2025-05-22</span>
+        <span class="art-read">7 мин</span>
+      </div>
+      <h3><a href="article-152-fz.html" style="color:inherit;text-decoration:none">Автоматическая проверка документов по 152-ФЗ и Честный Знак</a></h3>
+      <p>Как мультиагентный ИИ on-premise проверяет договоры и накладные. Снижение штрафов, данные в периметре компании, внедрение за 1–2 месяца.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <a href="article-152-fz.html" class="art-arrow">→ читать</a>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<!-- CTA FORM -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-tag rv">[SYS] ЗАЯВКА</div>
+    <h2 class="cta-title rv">Заказать пилот</h2>
+    <p class="cta-sub rv" style="margin-bottom:0">Запустим мультиагентную систему на вашей инфраструктуре за 1–2 месяца. Без передачи данных в облако.</p>
+    <div class="terminal-window-a rv">
+      <div class="terminal-titlebar-a">
+        <div class="ta-dots">
+          <div class="ta-dot ta-dot-r"></div>
+          <div class="ta-dot ta-dot-y"></div>
+          <div class="ta-dot ta-dot-g"></div>
+        </div>
+        <span class="ta-wtitle">[НЕКСУС-ТЕХ] Заявка на тестирование</span>
+        <div class="ta-wprogress">поле <span id="a-prog-num">—</span><span style="color:var(--text3)">/7</span></div>
+      </div>
+      <div class="terminal-body-a" id="a-terminal-body">
+        <div id="a-boot"></div>
+        <div id="a-form-area" style="display:none">
+          <div class="term-hist-a" id="a-history"></div>
+          <div class="term-current-a" id="a-current"></div>
+          <div class="term-aerr" id="a-err-inline"></div>
+          <div id="a-consent-area" style="display:none">
+            <div class="consent-row-a">
+              <input type="checkbox" id="a-consent" onchange="aCheckConsent()">
+              <label for="a-consent">Согласен на обработку персональных данных</label>
+            </div>
+            <button class="submit-btn-a" id="a-submit-btn" disabled onclick="aSubmit()">[ ОТПРАВИТЬ ЗАЯВКУ ]</button>
+            <div class="success-box-a" id="a-success-box">
+              [OK] Заявка принята — свяжемся с вами в ближайшее время
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-geo"><div class="cta-geo-tri"></div><div class="cta-geo-circ"></div></div>
-  <h2 class="rv">Готовы к пилоту?</h2>
-  <p class="rv">Запустите мультиагентный ИИ внутри вашего периметра за 1–2 месяца.</p>
-  <a href="order.html" class="btn-accent rv">Заказать тест</a>
 </section>
 
 <footer>
-  <div class="ft-grid">
-    <div>
-      <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — мультиагентный ИИ on-premise" loading="lazy"></a>
-      <div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div>
-      <div class="ft-contact"><a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a><br><a href="tel:+79776134508">+7 (977) 613-45-08</a></div>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
     </div>
-    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
-    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
-    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a><a href="requisites.html">Реквизиты</a></div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#citizens">Обращения граждан</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="careers.html">Карьера</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> ООО «Нексус-Тех» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</span><span><a href="privacy.html">Политика конфиденциальности</a> · <a href="requisites.html">Реквизиты</a></span></div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
-document.getElementById('navBurger')?.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.toggle('open');
-});
-document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.remove('open');
-}));
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+(function(){ var n=document.getElementById('main-nav'),b=document.getElementById('nav-burger'); if(n&&b) b.addEventListener('click',function(){ n.classList.toggle('nav-open'); }); })();
+
+// Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// ARTICLES TERMINAL FORM
+const AT_TOTAL = 7;
+const AT_FIELDS = [
+  { id:'name',     label:'имя',                   placeholder:'Иван Иванов',      type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'company',  label:'компания',              placeholder:'ООО «Компания»',   type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'email',    label:'email',                 placeholder:'ivan@company.ru',  type:'text',   validate: v => (v.includes('@') && v.includes('.')) ? null : 'нужен @ и домен' },
+  { id:'phone',    label:'телефон',               placeholder:'+7 900 000 00 00', type:'text',   validate: v => v.replace(/\D/g,'').length >= 10 ? null : 'минимум 10 цифр' },
+  { id:'solution', label:'интересующее решение',  type:'select',
+    options:['Комплаенс-мониторинг','Обработка обращений','Автоматизация документов','Несколько решений','Другое'],
+    validate: v => v ? null : 'выберите из списка' },
+  { id:'turnover', label:'оборот компании в год', type:'select',
+    options:['до 500 млн ₽','500 млн — 5 млрд ₽','5 — 50 млрд ₽','более 50 млрд ₽','Не готов указывать'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'comment',  label:'комментарий',           placeholder:'нажмите Enter чтобы пропустить', type:'text', optional:true, validate: () => null },
+];
+let atStep = 0;
+const atAnswers = {};
+
+const AT_BOOT = [
+  { text:'> NEXUS-TECH CONTACT INITIATE', cls:'cl-accent', delay:0 },
+  { text:'> инициализация сессии...', cls:'cl-dim', delay:180 },
+  { text:'  ✓ API шлюз — ONLINE', cls:'cl-ok', delay:380 },
+  { text:'  ✓ шифрование — AES-256 ACTIVE', cls:'cl-ok', delay:560 },
+  { text:'  ✓ персональные данные — PROTECTED', cls:'cl-ok', delay:720 },
+  { text:'> форма заявки загружена. введите данные:', cls:'cl-accent', delay:960 },
+];
+
+function atRunBoot() {
+  const bootEl = document.getElementById('a-boot');
+  if (!bootEl) return;
+  let maxDelay = 0;
+  AT_BOOT.forEach(line => {
+    maxDelay = Math.max(maxDelay, line.delay);
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      bootEl.appendChild(d);
+      atScrollBottom();
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const sep = document.createElement('div');
+    sep.className = 'boot-la cl-dim';
+    sep.textContent = '\u2500'.repeat(44);
+    bootEl.appendChild(sep);
+    document.getElementById('a-form-area').style.display = '';
+    atUpdateProgress();
+    atRenderStep();
+    atScrollBottom();
+  }, maxDelay + 250);
+}
+
+function atUpdateProgress() {
+  const el = document.getElementById('a-prog-num');
+  if (el) el.textContent = atStep < AT_TOTAL ? (atStep + 1) : AT_TOTAL;
+}
+
+function atScrollBottom() {
+  const tb = document.getElementById('a-terminal-body');
+  if (tb) tb.scrollTop = tb.scrollHeight;
+}
+
+function atEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function atBuildHistLine(step, val) {
+  const f = AT_FIELDS[step];
+  return `<span style="color:var(--text3);font-size:.72rem;min-width:28px;font-family:'JetBrains Mono',monospace">${step+1}/7</span>` +
+    `<span style="color:var(--text3);margin:0 4px">&gt;</span>` +
+    `<span class="term-hist-lbl-a">${f.label}:</span>` +
+    `<span class="term-hist-val-a">${atEsc(val)}</span>` +
+    `<span class="term-hist-ok-a">✓</span>` +
+    `<span class="term-hist-edit-a">[ред.]</span>`;
+}
+
+function atRenderStep() {
+  const cur = document.getElementById('a-current');
+  const errEl = document.getElementById('a-err-inline');
+  cur.innerHTML = '';
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+  if (atStep >= 6) document.getElementById('a-consent-area').style.display = '';
+  if (atStep >= AT_FIELDS.length) return;
+  const f = AT_FIELDS[atStep];
+  const row = document.createElement('div');
+  row.className = 'term-arow';
+  const badge = document.createElement('span');
+  badge.className = 'term-abadge';
+  badge.textContent = (atStep+1) + '/' + AT_TOTAL;
+  row.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.className = 'term-aprompt';
+  prompt.textContent = '> ';
+  row.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.className = 'term-alabel';
+  lbl.textContent = f.label + ':';
+  row.appendChild(lbl);
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    sel.id = 'at-field-input';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (atAnswers[f.id] === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    row.appendChild(sel);
+    cur.appendChild(row);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) atConfirm(); });
+    sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) atConfirm(); } });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.id = 'at-field-input';
+    inp.placeholder = f.placeholder || '';
+    if (atAnswers[f.id]) inp.value = atAnswers[f.id];
+    row.appendChild(inp);
+    const hint = document.createElement('span');
+    hint.className = 'term-ahint';
+    hint.textContent = f.optional ? '[Enter — пропустить или ввести]' : '[Enter — подтвердить]';
+  // Show consent area immediately for optional fields
+  if (f.optional) {
+    var ca = document.getElementById('a-consent-area');
+    if (ca) ca.style.display = '';
+  }
+
+    row.appendChild(hint);
+    cur.appendChild(row);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); atConfirm(); } });
+    inp.addEventListener('input', () => { errEl.classList.remove('visible'); errEl.textContent = ''; });
+  }
+}
+
+function atConfirm() {
+  const f = AT_FIELDS[atStep];
+  const inp = document.getElementById('at-field-input');
+  const val = inp ? (inp.tagName === 'SELECT' ? inp.value : inp.value.trim()) : '';
+  const err = f.validate(val);
+  const errEl = document.getElementById('a-err-inline');
+  if (err && !f.optional) {
+    errEl.textContent = '[ERR] ' + err;
+    errEl.classList.add('visible');
+    if (inp && inp.tagName !== 'SELECT') inp.focus();
+    atScrollBottom();
+    return;
+  }
+  errEl.classList.remove('visible');
+  const displayVal = val || '(пропущено)';
+  const line = document.createElement('div');
+  line.className = 'term-hist-line-a';
+  line.dataset.step = atStep;
+  line.innerHTML = atBuildHistLine(atStep, displayVal);
+  const s = atStep;
+  line.addEventListener('click', () => atEditField(s));
+  document.getElementById('a-history').appendChild(line);
+  atAnswers[f.id] = val;
+  atStep++;
+  atUpdateProgress();
+  atScrollBottom();
+  atRenderStep();
+}
+
+function atEditField(step) {
+  const f = AT_FIELDS[step];
+  const histLine = document.querySelector('.term-hist-line-a[data-step="' + step + '"]');
+  if (!histLine) return;
+  const savedVal = atAnswers[f.id] || '';
+  histLine.style.opacity = '1';
+  histLine.style.borderLeftColor = 'var(--accent)';
+  histLine.innerHTML = '';
+  const badge = document.createElement('span');
+  badge.style.cssText = 'color:var(--text3);font-size:.72rem;min-width:28px;margin-right:8px;font-family:JetBrains Mono,monospace';
+  badge.textContent = (step+1) + '/7';
+  histLine.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.style.cssText = 'color:var(--text3);margin-right:4px;font-family:JetBrains Mono,monospace';
+  prompt.textContent = '> ';
+  histLine.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'color:var(--accent2);margin-right:6px;white-space:nowrap;font-size:.82rem;font-family:JetBrains Mono,monospace';
+  lbl.textContent = f.label + ':';
+  histLine.appendChild(lbl);
+  const save = (newVal) => {
+    const err = f.validate(newVal);
+    if (err && !f.optional) {
+      let errSpan = histLine.nextElementSibling;
+      if (!errSpan || !errSpan.classList.contains('at-hist-err')) {
+        errSpan = document.createElement('div');
+        errSpan.className = 'at-hist-err';
+        errSpan.style.cssText = 'color:#f87171;font-size:.7rem;padding-left:36px;margin-bottom:4px;font-family:JetBrains Mono,monospace';
+        histLine.parentNode.insertBefore(errSpan, histLine.nextSibling);
+      }
+      errSpan.textContent = '[ERR] ' + err;
+      return false;
+    }
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('at-hist-err')) errSpan.remove();
+    atAnswers[f.id] = newVal;
+    histLine.innerHTML = atBuildHistLine(step, newVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+    return true;
+  };
+  const cancel = () => {
+    histLine.innerHTML = atBuildHistLine(step, savedVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+  };
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (savedVal === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    histLine.appendChild(sel);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) save(sel.value); });
+    sel.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (sel.value) save(sel.value); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.value = savedVal;
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--text3);font-size:.7rem;margin-left:10px;font-family:JetBrains Mono,monospace';
+    hint.textContent = '[Enter — сохранить, Esc — отмена]';
+    histLine.appendChild(inp);
+    histLine.appendChild(hint);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); save(inp.value.trim()); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  }
+}
+
+function aCheckConsent() {
+  const cb = document.getElementById('a-consent');
+  document.getElementById('a-submit-btn').disabled = !cb.checked;
+}
+
+function aSubmit() {
+  const btn = document.getElementById('a-submit-btn');
+  btn.style.display = 'none';
+  const cr = btn.previousElementSibling;
+  if (cr) cr.style.display = 'none';
+  const body = document.getElementById('a-terminal-body');
+  const sep = document.createElement('div');
+  sep.className = 'boot-la cl-dim';
+  sep.style.marginTop = '12px';
+  sep.textContent = '\u2500'.repeat(44);
+  body.appendChild(sep);
+  const SEND = [
+    { text:'> ОТПРАВКА ЗАЯВКИ...', cls:'cl-accent', delay:0 },
+    { text:'  передача данных в CRM...', cls:'cl-dim', delay:300 },
+    { text:'  ✓ заявка зарегистрирована', cls:'cl-ok', delay:700 },
+    { text:'  ✓ уведомление менеджеру отправлено', cls:'cl-ok', delay:950 },
+    { text:'  ✓ подтверждение отправлено на email', cls:'cl-ok', delay:1150 },
+  ];
+  SEND.forEach(line => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const s = document.getElementById('a-success-box');
+    if (s) {
+      body.appendChild(s);
+      s.classList.add('visible');
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 1500);
+}
+
+// Start form when terminal window scrolls into view
+(function(){
+  let atStarted = false;
+  const termWin = document.querySelector('.terminal-window-a');
+  if (!termWin) return;
+  const atObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !atStarted) {
+      atStarted = true;
+      atRunBoot();
+    }
+  }, { threshold: 0.1 });
+  atObs.observe(termWin);
+})();
+
+// Filter buttons
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.art-card');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    cards.forEach(card => {
+      if (filter === 'all' || card.dataset.type === filter) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
 </script>
+<script>(function(){var el=document.getElementById("footer-year");if(el)el.textContent=new Date().getFullYear();})()</script>
 </body>
 </html>

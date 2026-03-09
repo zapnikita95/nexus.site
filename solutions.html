@@ -13,40 +13,257 @@
 <meta property="og:description" content="Проверка документов 152-ФЗ, маркировка, автоматизация согласований. ИИ на вашем сервере. Enterprise on-premise.">
 <meta property="og:locale" content="ru_RU">
 <link rel="stylesheet" href="styles.css">
+
+<style>
+
+/* === CANONICAL NAV === */
+nav.override-nav,nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.97);border-bottom:1px solid rgba(129,140,248,0.12);backdrop-filter:blur(8px)}
+.nav,.nav-inner{all:unset}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:#e8ecf8;text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:#94a3b8;letter-spacing:0.06em;transition:color 0.2s;text-decoration:none;text-transform:none}
+.nav-links a:hover{color:#e8ecf8}
+.nav-cta-terminal{display:inline-flex!important;align-items:center;gap:4px;padding:6px 14px;border:1px solid #818cf8!important;font-family:'JetBrains Mono',monospace;font-size:12px;color:#818cf8!important;letter-spacing:0.04em;transition:all 0.2s;cursor:pointer;text-decoration:none!important;background:transparent!important;border-radius:0!important}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08)!important;color:#a5b4fc!important;border-color:#a5b4fc!important}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:#818cf8;animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-mobile,.nav-cta:not(.nav-cta-terminal){display:none!important}
+.nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:1px solid rgba(129,140,248,0.2);border-radius:4px;cursor:pointer;color:#e8ecf8}
+.nav-burger span{display:block;width:20px;height:2px;background:currentColor}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}.nav-open .nav-links{display:flex!important;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(11,15,26,0.98);border-bottom:1px solid rgba(129,140,248,0.12);padding:1rem;gap:0.75rem;align-items:flex-start}.nav-burger{display:flex!important}.nav-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav-open .nav-burger span:nth-child(2){opacity:0}.nav-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}}
+/* === CANONICAL FOOTER === */
+footer{border-top:1px solid rgba(129,140,248,0.12)!important;padding:3rem 3rem 0!important;margin-top:4rem!important;background:#0b0f1a!important}
+.ft-grid,.ft-col,.ft-brand,.ft-contact,.ft-bottom{all:unset!important}
+.footer-content{display:grid!important;grid-template-columns:1fr 1fr 1fr 1fr!important;gap:2rem!important;padding-bottom:2.5rem!important;border-bottom:1px solid rgba(129,140,248,0.12)!important}
+.footer-logo-col{display:flex!important;flex-direction:column!important;gap:0.75rem!important}
+.footer-brand{font-family:'JetBrains Mono',monospace!important;font-size:13px!important;font-weight:700!important;letter-spacing:0.12em!important;color:#e8ecf8!important;text-transform:uppercase!important}
+.footer-brand-sub{font-size:11px!important;color:#525a72!important;line-height:1.5!important;max-width:180px!important}
+.footer-col h4{font-size:11px!important;color:#525a72!important;letter-spacing:0.12em!important;text-transform:uppercase!important;margin-bottom:0.75rem!important;font-weight:600!important}
+.footer-col ul{list-style:none!important;display:flex!important;flex-direction:column!important;gap:0.5rem!important;padding:0!important;margin:0!important}
+.footer-col ul li a{font-size:12px!important;color:#94a3b8!important;transition:color 0.2s!important;text-decoration:none!important}
+.footer-col ul li a:hover{color:#e8ecf8!important}
+.footer-bottom{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:wrap!important;gap:1rem!important;padding:1.5rem 0 2rem!important;font-size:11px!important}
+.footer-copyright{color:#525a72!important;letter-spacing:0.04em!important}
+.footer-bottom-links{display:flex!important;gap:1.5rem!important;align-items:center!important}
+.footer-bottom-links a,.footer-contact a{color:#525a72!important;transition:color 0.2s!important;text-decoration:none!important}
+.footer-bottom-links a:hover{color:#94a3b8!important}
+.footer-contact{display:flex!important;gap:1.5rem!important;align-items:center!important}
+.footer-contact a:hover{color:#818cf8!important}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr!important;gap:1.5rem!important}.footer-bottom{flex-direction:column!important;align-items:flex-start!important;gap:0.75rem!important}footer{padding:2rem 1rem 0!important}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr!important}}
+/* === CTA TERMINAL FORM (articles.html canonical) === */
+.cta-section{padding:5rem 2rem;background:var(--surface,#10152a);border-top:1px solid rgba(129,140,248,0.15)!important;text-align:left!important}
+.cta-inner{max-width:760px;margin:0 auto;text-align:left}
+.cta-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent,#818cf8);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
+.cta-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem;color:var(--text,#e2e4ea)}
+.cta-sub{color:var(--text2,#8890a4);font-size:.95rem;line-height:1.75;margin-bottom:2rem}
+.terminal-window-a{border:1px solid rgba(129,140,248,.25);background:var(--bg,#0b0f1a);overflow:hidden;border-radius:4px;margin-top:2rem}
+.terminal-titlebar-a{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2,#161c35);border-bottom:1px solid rgba(129,140,248,0.15)}
+.ta-dots{display:flex;gap:6px}
+.ta-dot{width:10px;height:10px;border-radius:50%}
+.ta-dot-r{background:#f87171;opacity:.7}
+.ta-dot-y{background:#fbbf24;opacity:.7}
+.ta-dot-g{background:#4ade80;opacity:.7}
+.ta-wtitle{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text3,#525a72);margin-left:8px;letter-spacing:.06em}
+.ta-wprogress{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text2,#8890a4)}
+.ta-wprogress span{color:var(--accent,#818cf8)}
+.terminal-body-a{padding:1.5rem 1.5rem 2rem;min-height:320px;overflow-y:auto;max-height:560px}
+.boot-la{font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-bottom:3px;opacity:0;animation:fadeInA .2s forwards}
+@keyframes fadeInA{to{opacity:1}}
+.boot-la.cl-accent{color:var(--accent,#818cf8)}
+.boot-la.cl-dim{color:var(--text3,#525a72)}
+.boot-la.cl-ok{color:var(--ok,#4ade80)}
+.term-hist-a{margin-bottom:2px}
+.term-hist-line-a{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;color:var(--text3,#525a72);font-family:'JetBrains Mono',monospace;font-size:.82rem;opacity:.7;cursor:pointer;transition:opacity .15s;border-left:2px solid transparent;padding-left:4px}
+.term-hist-line-a:hover{opacity:1;border-left-color:var(--accent,#818cf8)}
+.term-hist-lbl-a{min-width:160px;flex-shrink:0;color:var(--text3,#525a72)}
+.term-hist-val-a{color:var(--text2,#8890a4)}
+.term-hist-ok-a{color:var(--ok,#4ade80);margin-left:6px}
+.term-hist-edit-a{font-size:.7rem;color:var(--text3,#525a72);margin-left:6px;opacity:0;transition:opacity .15s}
+.term-hist-line-a:hover .term-hist-edit-a{opacity:1}
+.term-current-a{margin-top:8px}
+.term-arow{display:flex;align-items:center;flex-wrap:nowrap;gap:0;font-family:'JetBrains Mono',monospace}
+.term-abadge{color:var(--text3,#525a72);font-size:.75rem;margin-right:8px;white-space:nowrap;min-width:30px}
+.term-aprompt{color:var(--text3,#525a72);margin-right:4px}
+.term-alabel{color:var(--accent2,#a5b4fc);margin-right:6px;white-space:nowrap;font-size:.82rem}
+.term-ahint{color:var(--text3,#525a72);font-size:.7rem;margin-left:10px;white-space:nowrap}
+.term-ainput{background:none;border:none;border-bottom:1px solid var(--accent,#818cf8);outline:none;color:var(--text,#e2e4ea);font-family:'JetBrains Mono',monospace;font-size:.88rem;min-width:180px;max-width:300px;padding:2px 0;caret-color:var(--accent,#818cf8)}
+.term-ainput:focus{border-bottom-color:var(--accent2,#a5b4fc)}
+.term-aselect{background:var(--surface2,#161c35);border:1px solid var(--accent,#818cf8);outline:none;color:var(--text,#e2e4ea);font-family:'JetBrains Mono',monospace;font-size:.82rem;padding:4px 8px;cursor:pointer;min-width:220px}
+.term-aselect option{background:var(--surface2,#161c35)}
+.term-aerr{color:#f87171;font-size:.75rem;margin-top:6px;padding-left:38px;display:none;font-family:'JetBrains Mono',monospace}
+.term-aerr.visible{display:block}
+.consent-row-a{display:flex;align-items:center;gap:10px;margin-top:1.5rem;padding:12px 0;border-top:1px solid rgba(129,140,248,0.15);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.consent-row-a input{width:15px;height:15px;accent-color:var(--accent,#818cf8);cursor:pointer}
+.consent-row-a label{color:var(--text2,#8890a4);cursor:pointer}
+.submit-btn-a{display:block;width:100%;margin-top:1rem;padding:13px 2rem;background:none;border:1px solid var(--accent,#818cf8);color:var(--accent,#818cf8);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-align:center}
+.submit-btn-a:hover:not(:disabled){background:rgba(129,140,248,.1);color:var(--accent2,#a5b4fc);border-color:var(--accent2,#a5b4fc)}
+.submit-btn-a:disabled{opacity:.35;cursor:not-allowed;border-color:var(--text3,#525a72);color:var(--text3,#525a72)}
+.success-box-a{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok,#4ade80);color:var(--ok,#4ade80);font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;line-height:1.7;display:none}
+.success-box-a.visible{display:block}
+
+/* === REVEAL === */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rv.visible{opacity:1;transform:none}
+.rv-scale{opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease}
+.rv-scale.visible{opacity:1;transform:none}
+/* === BODY PADDING FOR FIXED NAV === */
+body{padding-top:60px!important}
+.page-hero,.hero{padding-top:60px!important}
+
+
+/* === HERO REDESIGN === */
+.page-hero {
+  position: relative;
+  min-height: 480px;
+  background: #0b0f1a;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(129,140,248,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11,15,26,0.96) 0%, rgba(11,15,26,0.92) 40%, rgba(11,15,26,0.5) 70%, rgba(11,15,26,0.1) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+.geo-bg { display: none !important; }
+.page-hero .s-pad {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 80px 2rem 80px 4rem !important;
+  margin-right: auto;
+  margin-left: 0;
+}
+.page-hero .s-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #818cf8;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.page-hero .s-label.visible { opacity: 1; transform: none; }
+.page-hero .s-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #e8ecf8;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+.page-hero .s-sub {
+  font-size: 15px;
+  color: #94a3b8;
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 2rem;
+}
+.page-hero-cta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.btn-accent {
+  display: inline-block;
+  padding: 12px 28px;
+  background: rgba(129,140,248,0.12);
+  border: 1px solid #818cf8;
+  color: #a5b4fc !important;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-decoration: none !important;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn-accent:hover {
+  background: rgba(129,140,248,0.22);
+  color: #e8ecf8 !important;
+  box-shadow: 0 0 24px rgba(129,140,248,0.2);
+}
+.btn-outline {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 1px solid rgba(129,140,248,0.3);
+  color: #94a3b8 !important;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-decoration: none !important;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: #818cf8; color: #a5b4fc !important; }
+@media(max-width:768px) {
+  .page-hero .s-pad {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 80px 2rem 80px 4rem !important;
+}
+  .page-hero .s-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+}
+
+
+/* FOOTER GLOW ENHANCEMENT */
+footer {
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(129,140,248,0.4) 50%, transparent 100%);
+}
+.footer-brand { margin-bottom: 0.25rem; }
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — мультиагентный ИИ on-premise, комплаенс и автоматизация"></a>
-    <ul class="nav-links">
-      <li><a href="solutions.html" class="active">Решения</a></li>
-      <li><a href="security.html">Безопасность</a></li>
-      <li><a href="technology.html">Технологии</a></li>
-      <li><a href="agents.html">Модели агентов</a></li>
-      <li><a href="articles.html">Статьи</a></li>
-      <li><a href="partnership.html">Партнёрство</a></li>
-    </ul>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
-    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
-  </div>
-  <div class="nav-mobile" id="navMobile">
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <button type="button" class="nav-burger" id="nav-burger" aria-label="Меню" style="display:none"><span></span><span></span><span></span></button>
+  <div class="nav-links">
     <a href="solutions.html">Решения</a>
     <a href="security.html">Безопасность</a>
     <a href="technology.html">Технологии</a>
     <a href="agents.html">Модели агентов</a>
     <a href="articles.html">Статьи</a>
     <a href="partnership.html">Партнёрство</a>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
   </div>
 </nav>
 
-<section class="page-hero">
-  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
-  <div class="s-pad" style="position:relative;z-index:1">
+<section class="page-hero" style="background-image:url('hero-solutions.svg')">
+  <div class="s-pad">
     <div class="s-label rv">Решения</div>
-    <h1 class="s-title rv">Решения для enterprise: комплаенс и автоматизация</h1>
-    <div class="s-sub rv">Решения под задачу: комплаенс, обработка обращений и автоматизация с измеримой окупаемостью на вашем периметре.</div>
+    <h1 class="s-title rv">Решения для enterprise:<br>комплаенс и автоматизация</h1>
+    <div class="s-sub rv">Проверка документов 152-ФЗ, обработка обращений и автоматизация согласований с измеримой окупаемостью — внутри вашего периметра.</div>
+    <div class="page-hero-cta rv">
+      <a href="order.html" class="btn-accent">Запустить пилот →</a>
+      <a href="agents.html" class="btn-outline">Модели агентов →</a>
+    </div>
   </div>
 </section>
 
@@ -173,37 +390,408 @@
   </div>
 </section>
 
-<!-- CTA -->
+
 <section class="cta-section">
-  <div class="cta-geo"><div class="cta-geo-tri"></div><div class="cta-geo-circ"></div></div>
-  <h2 class="rv">Готовы к пилоту?</h2>
-  <p class="rv">Выберите решение и запустите пилот за 1-2 месяца внутри вашего периметра.</p>
-  <a href="order.html" class="btn-accent rv">Заказать тест</a>
+  <div class="cta-inner">
+    <div class="cta-tag rv">[SYS] ЗАЯВКА</div>
+    <h2 class="cta-title rv">Заказать пилот</h2>
+    <p class="cta-sub rv" style="margin-bottom:0">Запустим мультиагентную систему на вашей инфраструктуре за 1–2 месяца. Без передачи данных в облако.</p>
+    <div class="terminal-window-a rv">
+      <div class="terminal-titlebar-a">
+        <div class="ta-dots">
+          <div class="ta-dot ta-dot-r"></div>
+          <div class="ta-dot ta-dot-y"></div>
+          <div class="ta-dot ta-dot-g"></div>
+        </div>
+        <span class="ta-wtitle">[НЕКСУС-ТЕХ] Заявка на тестирование</span>
+        <div class="ta-wprogress">поле <span id="a-prog-num">—</span><span style="color:var(--text3,#525a72)">/7</span></div>
+      </div>
+      <div class="terminal-body-a" id="a-terminal-body">
+        <div id="a-boot"></div>
+        <div id="a-form-area" style="display:none">
+          <div class="term-hist-a" id="a-history"></div>
+          <div class="term-current-a" id="a-current"></div>
+          <div class="term-aerr" id="a-err-inline"></div>
+          <div id="a-consent-area" style="display:none">
+            <div class="consent-row-a">
+              <input type="checkbox" id="a-consent" onchange="aCheckConsent()">
+              <label for="a-consent">Согласен на обработку персональных данных</label>
+            </div>
+            <button class="submit-btn-a" id="a-submit-btn" disabled onclick="aSubmit()">[ ОТПРАВИТЬ ЗАЯВКУ ]</button>
+            <div class="success-box-a" id="a-success-box">
+              [OK] Заявка принята — свяжемся с вами в ближайшее время
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+
 <footer>
-  <div class="ft-grid">
-    <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — мультиагентный ИИ on-premise, комплаенс и автоматизация" loading="lazy"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div><div class="ft-contact"><a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a><br><a href="tel:+79776134508">+7 (977) 613-45-08</a></div></div>
-    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
-    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
-    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a><a href="requisites.html">Реквизиты</a></div>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
+    </div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#citizens">Обращения граждан</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="careers.html">Карьера</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> ООО «Нексус-Тех» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</span><span><a href="privacy.html">Политика конфиденциальности</a> · <a href="requisites.html">Реквизиты</a></span></div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
-document.getElementById('navBurger')?.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.toggle('open');
-});
-document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.remove('open');
-}));
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+(function(){ var n=document.getElementById('main-nav'),b=document.getElementById('nav-burger'); if(n&&b) b.addEventListener('click',function(){ n.classList.toggle('nav-open'); }); })();
 
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
 </script>
+
+
+
+<script>
+// ── TERMINAL FORM (canonical: articles.html) ──────────────────────────────
+const AT_TOTAL = 7;
+const AT_FIELDS = [
+  { id:'name',     label:'имя',                   placeholder:'Иван Иванов',      type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'company',  label:'компания',              placeholder:'ООО «Компания»',   type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'email',    label:'email',                 placeholder:'ivan@company.ru',  type:'text',   validate: v => (v.includes('@') && v.includes('.')) ? null : 'нужен @ и домен' },
+  { id:'phone',    label:'телефон',               placeholder:'+7 900 000 00 00', type:'text',   validate: v => v.replace(/\D/g,'').length >= 10 ? null : 'минимум 10 цифр' },
+  { id:'solution', label:'интересующее решение',  type:'select',
+    options:['Комплаенс-мониторинг','Обработка обращений','Автоматизация документов','Несколько решений','Другое'],
+    validate: v => v ? null : 'выберите из списка' },
+  { id:'turnover', label:'оборот компании в год', type:'select',
+    options:['до 500 млн ₽','500 млн — 5 млрд ₽','5 — 50 млрд ₽','более 50 млрд ₽','Не готов указывать'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'comment',  label:'комментарий',           placeholder:'нажмите Enter чтобы пропустить', type:'text', optional:true, validate: () => null },
+];
+let atStep = 0;
+const atAnswers = {};
+const AT_BOOT = [
+  { text:'> NEXUS-TECH CONTACT INITIATE', cls:'cl-accent', delay:0 },
+  { text:'> инициализация сессии...', cls:'cl-dim', delay:180 },
+  { text:'  ✓ API шлюз — ONLINE', cls:'cl-ok', delay:380 },
+  { text:'  ✓ шифрование — AES-256 ACTIVE', cls:'cl-ok', delay:560 },
+  { text:'  ✓ персональные данные — PROTECTED', cls:'cl-ok', delay:720 },
+  { text:'> форма заявки загружена. введите данные:', cls:'cl-accent', delay:960 },
+];
+function atRunBoot() {
+  const bootEl = document.getElementById('a-boot');
+  if (!bootEl) return;
+  let maxDelay = 0;
+  AT_BOOT.forEach(line => {
+    maxDelay = Math.max(maxDelay, line.delay);
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      bootEl.appendChild(d);
+      atScrollBottom();
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const sep = document.createElement('div');
+    sep.className = 'boot-la cl-dim';
+    sep.textContent = '\u2500'.repeat(44);
+    bootEl.appendChild(sep);
+    document.getElementById('a-form-area').style.display = '';
+    atUpdateProgress();
+    atRenderStep();
+    atScrollBottom();
+  }, maxDelay + 250);
+}
+function atUpdateProgress() {
+  const el = document.getElementById('a-prog-num');
+  if (el) el.textContent = atStep < AT_TOTAL ? (atStep + 1) : AT_TOTAL;
+}
+function atScrollBottom() {
+  const tb = document.getElementById('a-terminal-body');
+  if (tb) tb.scrollTop = tb.scrollHeight;
+}
+function atEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function atBuildHistLine(step, val) {
+  const f = AT_FIELDS[step];
+  return `<span style="color:var(--text3,#525a72);font-size:.72rem;min-width:28px;font-family:'JetBrains Mono',monospace">${step+1}/7</span>` +
+    `<span style="color:var(--text3,#525a72);margin:0 4px">&gt;</span>` +
+    `<span class="term-hist-lbl-a">${f.label}:</span>` +
+    `<span class="term-hist-val-a">${atEsc(val)}</span>` +
+    `<span class="term-hist-ok-a">\u2713</span>` +
+    `<span class="term-hist-edit-a">[ред.]</span>`;
+}
+function atRenderStep() {
+  const cur = document.getElementById('a-current');
+  const errEl = document.getElementById('a-err-inline');
+  cur.innerHTML = '';
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+  if (atStep >= 6) document.getElementById('a-consent-area').style.display = '';
+  if (atStep >= AT_FIELDS.length) return;
+  const f = AT_FIELDS[atStep];
+  const row = document.createElement('div');
+  row.className = 'term-arow';
+  const badge = document.createElement('span');
+  badge.className = 'term-abadge';
+  badge.textContent = (atStep+1) + '/' + AT_TOTAL;
+  row.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.className = 'term-aprompt';
+  prompt.textContent = '> ';
+  row.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.className = 'term-alabel';
+  lbl.textContent = f.label + ':';
+  row.appendChild(lbl);
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    sel.id = 'at-field-input';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (atAnswers[f.id] === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    row.appendChild(sel);
+    cur.appendChild(row);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) atConfirm(); });
+    sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) atConfirm(); } });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.id = 'at-field-input';
+    inp.placeholder = f.placeholder || '';
+    if (atAnswers[f.id]) inp.value = atAnswers[f.id];
+    row.appendChild(inp);
+    const hint = document.createElement('span');
+    hint.className = 'term-ahint';
+    hint.textContent = f.optional ? '[Enter — пропустить или ввести]' : '[Enter — подтвердить]';
+    if (f.optional) {
+      var ca = document.getElementById('a-consent-area');
+      if (ca) ca.style.display = '';
+    }
+    row.appendChild(hint);
+    cur.appendChild(row);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); atConfirm(); } });
+    inp.addEventListener('input', () => { errEl.classList.remove('visible'); errEl.textContent = ''; });
+  }
+}
+function atConfirm() {
+  const f = AT_FIELDS[atStep];
+  const inp = document.getElementById('at-field-input');
+  const val = inp ? (inp.tagName === 'SELECT' ? inp.value : inp.value.trim()) : '';
+  const err = f.validate(val);
+  const errEl = document.getElementById('a-err-inline');
+  if (err && !f.optional) {
+    errEl.textContent = '[ERR] ' + err;
+    errEl.classList.add('visible');
+    if (inp && inp.tagName !== 'SELECT') inp.focus();
+    atScrollBottom();
+    return;
+  }
+  errEl.classList.remove('visible');
+  const displayVal = val || '(пропущено)';
+  const line = document.createElement('div');
+  line.className = 'term-hist-line-a';
+  line.dataset.step = atStep;
+  line.innerHTML = atBuildHistLine(atStep, displayVal);
+  const s = atStep;
+  line.addEventListener('click', () => atEditField(s));
+  document.getElementById('a-history').appendChild(line);
+  atAnswers[f.id] = val;
+  atStep++;
+  atUpdateProgress();
+  atScrollBottom();
+  atRenderStep();
+}
+function atEditField(step) {
+  const f = AT_FIELDS[step];
+  const histLine = document.querySelector('.term-hist-line-a[data-step="' + step + '"]');
+  if (!histLine) return;
+  const savedVal = atAnswers[f.id] || '';
+  histLine.style.opacity = '1';
+  histLine.style.borderLeftColor = 'var(--accent,#818cf8)';
+  histLine.innerHTML = '';
+  const badge = document.createElement('span');
+  badge.style.cssText = 'color:var(--text3,#525a72);font-size:.72rem;min-width:28px;margin-right:8px;font-family:JetBrains Mono,monospace';
+  badge.textContent = (step+1) + '/7';
+  histLine.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.style.cssText = 'color:var(--text3,#525a72);margin-right:4px;font-family:JetBrains Mono,monospace';
+  prompt.textContent = '> ';
+  histLine.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'color:var(--accent2,#a5b4fc);margin-right:6px;white-space:nowrap;font-size:.82rem;font-family:JetBrains Mono,monospace';
+  lbl.textContent = f.label + ':';
+  histLine.appendChild(lbl);
+  const save = (newVal) => {
+    const err = f.validate(newVal);
+    if (err && !f.optional) {
+      let errSpan = histLine.nextElementSibling;
+      if (!errSpan || !errSpan.classList.contains('at-hist-err')) {
+        errSpan = document.createElement('div');
+        errSpan.className = 'at-hist-err';
+        errSpan.style.cssText = 'color:#f87171;font-size:.7rem;padding-left:36px;margin-bottom:4px;font-family:JetBrains Mono,monospace';
+        histLine.parentNode.insertBefore(errSpan, histLine.nextSibling);
+      }
+      errSpan.textContent = '[ERR] ' + err;
+      return false;
+    }
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('at-hist-err')) errSpan.remove();
+    atAnswers[f.id] = newVal;
+    histLine.innerHTML = atBuildHistLine(step, newVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+    return true;
+  };
+  const cancel = () => {
+    histLine.innerHTML = atBuildHistLine(step, savedVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+  };
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (savedVal === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    histLine.appendChild(sel);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) save(sel.value); });
+    sel.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (sel.value) save(sel.value); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.value = savedVal;
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--text3,#525a72);font-size:.7rem;margin-left:10px;font-family:JetBrains Mono,monospace';
+    hint.textContent = '[Enter — сохранить, Esc — отмена]';
+    histLine.appendChild(inp);
+    histLine.appendChild(hint);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); save(inp.value.trim()); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  }
+}
+function aCheckConsent() {
+  const cb = document.getElementById('a-consent');
+  document.getElementById('a-submit-btn').disabled = !cb.checked;
+}
+function aSubmit() {
+  const btn = document.getElementById('a-submit-btn');
+  btn.style.display = 'none';
+  const cr = btn.previousElementSibling;
+  if (cr) cr.style.display = 'none';
+  const body = document.getElementById('a-terminal-body');
+  const sep = document.createElement('div');
+  sep.className = 'boot-la cl-dim';
+  sep.style.marginTop = '12px';
+  sep.textContent = '\u2500'.repeat(44);
+  body.appendChild(sep);
+  const SEND = [
+    { text:'> ОТПРАВКА ЗАЯВКИ...', cls:'cl-accent', delay:0 },
+    { text:'  передача данных в CRM...', cls:'cl-dim', delay:300 },
+    { text:'  ✓ заявка зарегистрирована', cls:'cl-ok', delay:700 },
+    { text:'  ✓ уведомление менеджеру отправлено', cls:'cl-ok', delay:950 },
+    { text:'  ✓ подтверждение отправлено на email', cls:'cl-ok', delay:1150 },
+  ];
+  SEND.forEach(line => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const s = document.getElementById('a-success-box');
+    if (s) {
+      body.appendChild(s);
+      s.classList.add('visible');
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 1500);
+}
+// Start form when terminal scrolls into view
+(function(){
+  let atStarted = false;
+  const termWin = document.querySelector('.terminal-window-a');
+  if (!termWin) return;
+  const atObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !atStarted) {
+      atStarted = true;
+      atRunBoot();
+    }
+  }, { threshold: 0.1 });
+  atObs.observe(termWin);
+})();
+</script>
+
 </body>
 </html>

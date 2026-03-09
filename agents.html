@@ -3,228 +3,443 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Модели агентов: мультиагентная система с компьютерным зрением — Нексус-Тех</title>
-<meta name="description" content="Модели агентов: Compliance (152-ФЗ), Feedback, Operations. Компьютерное зрение (проверка печатей, распознавание скриншотов). Голосование, дебаты. Мультиагентный ИИ on-premise.">
+<title>Модели агентов: мультиагентная система — Нексус-Тех</title>
+<meta name="description" content="Модели агентов: Compliance (152-ФЗ), Feedback, Operations. Компьютерное зрение (проверка печатей, скриншоты). Голосование, дебаты. Мультиагентный ИИ on-premise.">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="canonical" href="https://нексус-тех.рф/agents.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://нексус-тех.рф/agents.html">
-<meta property="og:title" content="Модели агентов: мультиагентная система — Нексус-Тех">
-<meta property="og:description" content="Compliance, Feedback, Operations. Компьютерное зрение (печати, скриншоты). Голосование и дебаты. Enterprise on-premise.">
-<meta property="og:locale" content="ru_RU">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Чем мультиагентный подход выгоднее одного универсального агента?","acceptedAnswer":{"@type":"Answer","text":"Один агент, который и извлекает данные, и проверяет нормы, и принимает решение, чаще даёт ошибочные выводы. Мы распределяем задачи по ролям; каждый этап перепроверяется следующим. В результате — меньше пропусков и ложных срабатываний, полная прослеживаемость. Для новых сценариев достаточно перенастроить цепочку."}},
-{"@type":"Question","name":"Какой срок внедрения мультиагентного ИИ?","acceptedAnswer":{"@type":"Answer","text":"Пилотный проект разворачивается за 1–2 месяца: установка на ваших серверах, подключение к ключевым системам (1С, CRM, ЭДО), обучение сотрудников. Далее — масштабирование под ваши процессы."}},
-{"@type":"Question","name":"Подходит ли платформа для проверки документов на 152-ФЗ и маркировку?","acceptedAnswer":{"@type":"Answer","text":"Да. Одно из основных решений — комплаенс: проверка договоров, актов, накладных на соответствие 152-ФЗ и маркировке «Честный знак». Обработка выполняется в вашем периметре."}},
-{"@type":"Question","name":"Как обеспечивается защита от подмены инструкций (prompt injection)?","acceptedAnswer":{"@type":"Answer","text":"Ввод пользователя не смешивается со служебными инструкциями агентов; по критичным решениям предусмотрен шаг с ответственным сотрудником. Защита соответствует приказу ФСТЭК России № 117. Обработка на ваших серверах, все действия фиксируются в логах."}},
-{"@type":"Question","name":"Где хранятся данные и как обеспечивается конфиденциальность?","acceptedAnswer":{"@type":"Answer","text":"Обработка в вашей инфраструктуре, документы за пределы компании не передаются. Публичные API не используются. Доступ к данным и логам только у ваших сотрудников. Соответствие 152-ФЗ закладывается на этапе проектирования."}},
-{"@type":"Question","name":"Почему в одних сценариях есть оркестратор, в других — нет?","acceptedAnswer":{"@type":"Answer","text":"Оркестратор используется там, где один запрос распадается на несколько подзадач или требуется маршрутизация. В сценариях проверки документов и обращений поток линейный; в согласованиях — без оркестратора схема была бы сложна в поддержке."}},
-{"@type":"Question","name":"Можно ли подключить платформу к нашим регламентам и базам знаний?","acceptedAnswer":{"@type":"Answer","text":"Да. Система работает с вашими нормативами через базу знаний (RAG), настраиваемую под компанию. Ответы и проверки опираются на внутренние правила компании."}},
-{"@type":"Question","name":"Как настраивается работа сценариев?","acceptedAnswer":{"@type":"Answer","text":"У администраторов есть тонкая настройка каждого агента через конфигурацию (веса: строгость, детализация и т.д.). Пресеты — заготовленные настройки под типовые сценарии с заданными весами по ролям."}},
-{"@type":"Question","name":"Нужно ли менять схему при смене сценария?","acceptedAnswer":{"@type":"Answer","text":"Схему обычно менять не требуется: пресеты под разные задачи, несколько вариантов настроек одной схемы. При необходимости схему можно дополнить (дебаты, голосование) и подключить дополнительные схемы — например, не только комплаенс, но и операционную."}},
-{"@type":"Question","name":"Поддерживает ли платформа компьютерное зрение для проверки печатей и скриншотов?","acceptedAnswer":{"@type":"Answer","text":"Да. Модуль Vision подключается к сценариям проверки и обращений. Анализирует изображения: печати и подписи на документах, скриншоты в обращениях. Включается в конфигурации или через API."}}
-]}
-</script>
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* Agent model diagram */
-.agent-diagram{background:linear-gradient(165deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid var(--border);border-radius:12px;padding:40px 48px;position:relative;overflow:visible}
-.agent-diagram::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(129,140,248,0.03) 1px,transparent 0);background-size:20px 20px;pointer-events:none;border-radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{
+  --bg:#0b0f1a;
+  --surface:#10152a;
+  --surface2:#161c35;
+  --text:#e2e4ea;
+  --text2:#8890a4;
+  --text3:#525a72;
+  --accent:#818cf8;
+  --accent2:#a5b4fc;
+  --ok:#4ade80;
+  --line:1px solid rgba(129,140,248,0.15);
+  scroll-behavior:smooth;
+}
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(11,15,26,0.95);backdrop-filter:blur(10px);border-bottom:var(--line);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:.15em;color:var(--accent);text-decoration:none;font-family:'JetBrains Mono',monospace}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:.88rem;transition:color .3s;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
+.nav-links a:hover{color:var(--accent)}
+.nav-active{color:var(--accent)!important}
+.nav-cta-terminal{border:1px solid var(--accent);border-radius:4px;padding:.6rem 1rem;background:transparent;display:flex;align-items:center;gap:.3rem;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--accent)!important;transition:all .3s}
+.nav-cta-terminal:hover{background:rgba(129,140,248,.1);box-shadow:0 0 20px rgba(129,140,248,.2)}
+.nav-cta-prompt{color:var(--accent)}
+.nav-cta-yn{color:var(--text3);font-size:.85rem}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:.3rem;animation:blink 1s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+/* HERO */
+.hero{margin-top:5rem;padding:5rem 2rem;min-height:55vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--surface);border-bottom:var(--line)}
+.hero-content{max-width:760px;position:relative;z-index:1}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero p{font-size:1.1rem;color:var(--text2);line-height:1.75;max-width:600px}
+.hero-svg{position:absolute;right:0;top:50%;transform:translateY(-50%);width:50%;height:100%;opacity:.5;pointer-events:none}
+
+/* SECTION COMMON */
+.s-wrap{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section{padding:6rem 0}
+.section-alt{background:var(--surface)}
+.s-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+.s-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;letter-spacing:-.03em;margin-bottom:2rem;line-height:1.2}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.rv.visible{opacity:1;transform:none}
+.rv-scale{opacity:0;transform:scale(.97);transition:opacity .7s,transform .7s}
+.rv-scale.visible{opacity:1;transform:none}
+
+/* MODEL LAYOUT */
+.model-section{padding:5rem 0}
+.model-section:nth-child(even){background:var(--surface)}
+.model-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.model-section:nth-child(even) .model-grid{direction:rtl}
+.model-section:nth-child(even) .model-grid>*{direction:ltr}
+.model-diagram-sticky{position:sticky;top:110px}
+
+/* AGENT DIAGRAM */
+.agent-diagram{background:linear-gradient(165deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid rgba(129,140,248,.18);border-radius:12px;padding:32px 28px;position:relative;overflow:visible}
+.agent-diagram::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(129,140,248,.03) 1px,transparent 0);background-size:20px 20px;pointer-events:none;border-radius:12px}
 .agent-svg{width:100%;height:auto;display:block}
-.agent-svg .node-rect{fill:var(--bg);stroke:var(--border);stroke-width:1;rx:8;transition:all .3s;cursor:pointer}
-.agent-svg .agent-node:hover .node-rect{stroke:var(--accent);filter:drop-shadow(0 0 20px rgba(129,140,248,0.2))}
-.agent-svg .node-rect.accent{stroke:var(--accent);fill:rgba(129,140,248,0.06)}
-.agent-svg .agent-node--highlight .node-rect,.agent-svg .agent-node.agent-node--highlight .node-rect{stroke:var(--accent);fill:rgba(129,140,248,0.08);filter:drop-shadow(0 0 16px rgba(129,140,248,0.25))}
-.agent-svg .node-text,.agent-svg .node-desc{fill:var(--text);font-family:Inter,system-ui,sans-serif;pointer-events:none}
-.agent-svg .node-text{font-size:12px;font-weight:800}
-.agent-svg .node-desc{fill:var(--text3);font-size:10px}
-.agent-svg .arrow-main,.agent-svg .arrow-cycle{pointer-events:none}
-.agent-svg .arrow-main{stroke:var(--accent);stroke-width:2;fill:none;opacity:0.5}
-.agent-svg .agent-flow-end{fill:var(--accent);stroke:var(--accent);stroke-width:1;opacity:0.6;pointer-events:none}
-.agent-svg .arrow-cycle{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 4;fill:none;opacity:0.4}
-.agent-flow{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;position:relative;z-index:1}
-.agent-node{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:20px 28px;min-width:140px;text-align:center;transition:all .4s}
-.agent-node:hover{border-color:var(--accent);box-shadow:0 0 32px rgba(129,140,248,0.08)}
-.agent-node.accent{border-color:var(--accent);background:rgba(129,140,248,0.04)}
-.agent-node .an-name{font-size:13px;font-weight:800;letter-spacing:-0.3px;margin-bottom:4px}
-.agent-node .an-desc{font-size:11px;color:var(--text3);line-height:1.5}
-.agent-arrow{width:24px;height:24px;display:flex;align-items:center;justify-content:center;color:var(--accent);opacity:0.4;flex-shrink:0}
-.agent-arrow svg{width:16px;height:16px}
-.agent-cycle{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;text-align:center;margin-top:20px;padding-top:20px;border-top:1px dashed var(--border)}
-.diagram-svg-wrap{position:relative;z-index:1}
-.model-section{padding:80px 0 100px}
-.model-section:nth-child(even) .model-content{flex-direction:row-reverse}
-.model-content{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.model-diagram-wrap{position:sticky;top:100px}
-.model-text h3{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:24px}
-.model-text .model-desc{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:32px}
-.role-rationale{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:20px}
-.role-rationale h4{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:0.5px}
-.role-rationale p{font-size:13px;color:var(--text2);line-height:1.75}
-.faq-list{display:flex;flex-direction:column;gap:12px;margin-top:40px}
-.faq-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .3s}
+.agent-svg .node-rect{fill:var(--bg);stroke:rgba(129,140,248,.25);stroke-width:1;transition:all .3s;cursor:pointer}
+.agent-svg .node-rect.accent{stroke:var(--accent);fill:rgba(129,140,248,.06)}
+.agent-svg .agent-node--hl .node-rect,.node-rect.hl{stroke:var(--accent)!important;fill:rgba(129,140,248,.1)!important;filter:drop-shadow(0 0 14px rgba(129,140,248,.28))}
+.agent-svg .node-text{fill:var(--text);font-family:'Manrope',Inter,sans-serif;font-size:12px;font-weight:800;pointer-events:none}
+.agent-svg .node-desc{fill:var(--text3);font-family:'Manrope',Inter,sans-serif;font-size:10px;pointer-events:none}
+.agent-svg .arrow-main{stroke:var(--accent);stroke-width:2;fill:none;opacity:.45;pointer-events:none}
+.agent-svg .arrow-cycle{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 4;fill:none;opacity:.45;pointer-events:none}
+.agent-svg .arrow-end{fill:var(--accent);opacity:.55}
+.cycle-note{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-top:16px;padding-top:16px;border-top:1px dashed rgba(129,140,248,.18);transition:color .3s}
+
+/* ROLE RATIONALE */
+.role-rationale{background:var(--bg);border:1px solid rgba(129,140,248,.15);border-radius:8px;padding:20px 24px;margin-bottom:16px;transition:all .3s;cursor:default}
+.role-rationale h4{font-family:'JetBrains Mono',monospace;font-size:.75rem;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:.5px}
+.role-rationale p{font-size:.88rem;color:var(--text2);line-height:1.75}
+.role-rationale.hl{border-color:var(--accent);background:rgba(129,140,248,.05);box-shadow:0 0 24px rgba(129,140,248,.07)}
+.model-desc{font-size:1rem;color:var(--text2);line-height:1.85;margin-bottom:2rem}
+
+/* VD BLOCKS (Voting / Debate / Vision) */
+.vd-blocks{display:flex;flex-direction:column;gap:2.5rem}
+.vd-block{background:var(--bg);border:1px solid rgba(129,140,248,.18);border-radius:12px;padding:28px 32px}
+.vd-title{font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:700;color:var(--accent);margin:0 0 20px;letter-spacing:.5px;text-transform:uppercase}
+.vd-row{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:2rem;align-items:start}
+.vd-blocks .agent-diagram{padding:20px 16px}
+.vd-desc p{font-size:.9rem;color:var(--text2);line-height:1.8;margin:0}
+.vd-desc code{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);background:rgba(129,140,248,.08);padding:2px 6px;border-radius:3px}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;margin-top:2.5rem}
+.faq-item{background:var(--bg);border:1px solid rgba(129,140,248,.15);border-radius:8px;overflow:hidden;transition:border-color .3s}
 .faq-item.open{border-color:var(--accent)}
-.faq-q{font-size:15px;font-weight:700;color:var(--text);padding:20px 36px 20px 20px;cursor:pointer;position:relative;margin:0;user-select:none}
-.faq-q::after{content:'';position:absolute;right:20px;top:50%;transform:translateY(-50%) rotate(0deg);width:10px;height:10px;border-right:2px solid var(--text3);border-bottom:2px solid var(--text3);transition:transform .3s}
+.faq-q{font-size:.95rem;font-weight:700;color:var(--text);padding:18px 40px 18px 20px;cursor:pointer;position:relative;margin:0;user-select:none}
+.faq-q::after{content:'';position:absolute;right:20px;top:50%;transform:translateY(-50%);width:9px;height:9px;border-right:2px solid var(--text3);border-bottom:2px solid var(--text3);transition:transform .3s}
 .faq-item.open .faq-q::after{transform:translateY(-30%) rotate(-135deg)}
-.faq-a{font-size:14px;color:var(--text2);line-height:1.8;padding:0 36px 20px 20px;max-height:0;overflow:hidden;transition:max-height .4s ease}
-.faq-item.open .faq-a{max-height:800px;padding-top:0;padding-bottom:24px}
-.role-rationale--highlight{border-color:var(--accent);background:rgba(129,140,248,0.04);box-shadow:0 0 24px rgba(129,140,248,0.06)}
-.agent-node--highlight{border-color:var(--accent);background:rgba(129,140,248,0.06);box-shadow:0 0 40px rgba(129,140,248,0.12)}
-/* Voting / Debate блоки: схема + описание рядом */
-.vd-blocks{display:flex;flex-direction:column;gap:40px}
-.vd-block{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:28px 32px}
-.vd-title{font-size:18px;font-weight:800;color:var(--accent);margin:0 0 20px;letter-spacing:0.5px}
-.vd-row{display:grid;grid-template-columns:minmax(0,380px) 1fr;gap:32px;align-items:start}
-.vd-diagram{flex-shrink:0;min-width:0}
-.vd-blocks .agent-diagram{padding:24px 20px}
-.vd-desc p{font-size:14px;color:var(--text2);line-height:1.8;margin:0}
+.faq-a{font-size:.88rem;color:var(--text2);line-height:1.8;padding:0 40px 0 20px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding-bottom .4s}
+.faq-item.open .faq-a{max-height:600px;padding-bottom:20px}
+
+/* CTA */
+.cta-section{background:var(--surface);border-top:var(--line);border-bottom:var(--line);padding:3rem 2rem;display:flex;justify-content:center;align-items:center}
+.cta-link{text-decoration:none;width:100%;max-width:640px}
+.cta-terminal{background:var(--surface2);border:1px solid var(--accent);border-radius:4px;padding:1.5rem;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--text);line-height:1.8;width:100%}
+.cta-line{opacity:0;animation:none}
+.cta-line.visible{opacity:1;animation:line-in .5s ease forwards}
+@keyframes line-in{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.cta-status{color:var(--ok)}
+.cta-action{color:var(--accent);font-weight:600}
+.cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:3px;animation:blink 1s infinite;vertical-align:middle}
+
+/* FOOTER */
+footer{padding:3rem 2rem 2rem;border-top:var(--line);background:var(--bg)}
+.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.footer-brand-sub{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3);line-height:1.5}
+.footer-contact{margin-top:1rem}
+.footer-contact a{font-family:'JetBrains Mono',monospace;display:block;font-size:.78rem;color:var(--text2);text-decoration:none;margin-bottom:.3rem;transition:color .3s}
+.footer-contact a:hover{color:var(--accent)}
+.footer-col h4{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li a{font-family:'JetBrains Mono',monospace;display:block;font-size:.78rem;color:var(--text2);text-decoration:none;margin-bottom:.5rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copyright{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3);text-decoration:none;transition:color .3s}
+.footer-bottom-links a:hover{color:var(--accent)}
+
+/* RESPONSIVE */
 @media(max-width:960px){
+  .model-grid{display:flex;flex-direction:column;gap:2rem}
+  .model-section:nth-child(even) .model-grid{direction:ltr}
+  .model-diagram-sticky{position:static}
   .vd-row{grid-template-columns:1fr}
-  .vd-diagram{order:1}
-  .vd-desc{order:2}
+  nav{padding:1rem 1.5rem}
+  .nav-links{gap:1.5rem}
+  .footer-content{grid-template-columns:1fr 1fr;gap:2rem}
 }
-@media(max-width:960px){
-  .model-content{display:flex;flex-direction:column;grid-template-columns:1fr}
-  .model-text{order:1}
-  .model-diagram-wrap{order:2;position:static}
-  .model-section:nth-child(even) .model-content{flex-direction:column}
-  .agent-flow{flex-direction:column;gap:12px}
-  .agent-arrow{transform:rotate(90deg)}
-  .agent-diagram{padding:24px 20px}
-  .agent-svg{min-height:140px}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hero{padding:3.5rem 1.5rem;min-height:auto}
+  .hero h1{font-size:1.8rem}
+  .hero-svg{display:none}
+  .footer-content{grid-template-columns:1fr}
 }
+
+/* === CANONICAL NAV (override) === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)!important;letter-spacing:0.04em;transition:all 0.2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08);color:var(--accent2)!important;border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:1px solid var(--border);border-radius:4px;cursor:pointer;color:var(--text)}
+.nav-burger span{display:block;width:20px;height:2px;background:currentColor}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}.nav-open .nav-links{display:flex!important;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(11,15,26,0.98);border-bottom:1px solid var(--border);padding:1rem;gap:0.75rem;align-items:flex-start}.nav-burger{display:flex!important}.nav-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav-open .nav-burger span:nth-child(2){opacity:0}.nav-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}}
+/* === CANONICAL FOOTER (override) === */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:0.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem;align-items:center;margin-top:0}
+.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-contact a:hover{color:var(--accent)}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+/* === footer-year JS fallback === */
+
+/* AGENTS HERO BACKGROUND */
+section.hero {
+  background-image: url('hero-agents.svg');
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  position: relative;
+}
+section.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(11,15,26,0.97) 0%, rgba(11,15,26,0.90) 45%, rgba(11,15,26,0.4) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+section.hero .hero-content, section.hero .hero-svg {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* FOOTER GLOW ENHANCEMENT */
+footer {
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(129,140,248,0.4) 50%, transparent 100%);
+}
+.footer-brand { margin-bottom: 0.25rem; }
+
+/* === CTA TERMINAL FORM (articles.html canonical) === */
+.cta-section{padding:5rem 2rem;background:var(--surface,#10152a);border-top:1px solid rgba(129,140,248,0.15)!important}
+.cta-inner{max-width:760px;margin:0 auto}
+.cta-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent,#818cf8);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
+.cta-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem;color:var(--text,#e2e4ea)}
+.cta-sub{color:var(--text2,#8890a4);font-size:.95rem;line-height:1.75;margin-bottom:2rem}
+.terminal-window-a{border:1px solid rgba(129,140,248,.25);background:var(--bg,#0b0f1a);overflow:hidden;border-radius:4px;margin-top:2rem}
+.terminal-titlebar-a{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2,#161c35);border-bottom:1px solid rgba(129,140,248,0.15)}
+.ta-dots{display:flex;gap:6px}
+.ta-dot{width:10px;height:10px;border-radius:50%}
+.ta-dot-r{background:#f87171;opacity:.7}
+.ta-dot-y{background:#fbbf24;opacity:.7}
+.ta-dot-g{background:#4ade80;opacity:.7}
+.ta-wtitle{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text3,#525a72);margin-left:8px;letter-spacing:.06em}
+.ta-wprogress{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text2,#8890a4)}
+.ta-wprogress span{color:var(--accent,#818cf8)}
+.terminal-body-a{padding:1.5rem 1.5rem 2rem;min-height:320px;overflow-y:auto;max-height:560px}
+.boot-la{font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-bottom:3px;opacity:0;animation:fadeInA .2s forwards}
+@keyframes fadeInA{to{opacity:1}}
+.boot-la.cl-accent{color:var(--accent,#818cf8)}
+.boot-la.cl-dim{color:var(--text3,#525a72)}
+.boot-la.cl-ok{color:var(--ok,#4ade80)}
+.term-hist-a{margin-bottom:2px}
+.term-hist-line-a{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;color:var(--text3,#525a72);font-family:'JetBrains Mono',monospace;font-size:.82rem;opacity:.7;cursor:pointer;transition:opacity .15s;border-left:2px solid transparent;padding-left:4px}
+.term-hist-line-a:hover{opacity:1;border-left-color:var(--accent,#818cf8)}
+.term-hist-lbl-a{min-width:160px;flex-shrink:0;color:var(--text3,#525a72)}
+.term-hist-val-a{color:var(--text2,#8890a4)}
+.term-hist-ok-a{color:var(--ok,#4ade80);margin-left:6px}
+.term-hist-edit-a{font-size:.7rem;color:var(--text3,#525a72);margin-left:6px;opacity:0;transition:opacity .15s}
+.term-hist-line-a:hover .term-hist-edit-a{opacity:1}
+.term-current-a{margin-top:8px}
+.term-arow{display:flex;align-items:center;flex-wrap:nowrap;gap:0;font-family:'JetBrains Mono',monospace}
+.term-abadge{color:var(--text3,#525a72);font-size:.75rem;margin-right:8px;white-space:nowrap;min-width:30px}
+.term-aprompt{color:var(--text3,#525a72);margin-right:4px}
+.term-alabel{color:var(--accent2,#a5b4fc);margin-right:6px;white-space:nowrap;font-size:.82rem}
+.term-ahint{color:var(--text3,#525a72);font-size:.7rem;margin-left:10px;white-space:nowrap}
+.term-ainput{background:none;border:none;border-bottom:1px solid var(--accent,#818cf8);outline:none;color:var(--text,#e2e4ea);font-family:'JetBrains Mono',monospace;font-size:.88rem;min-width:180px;max-width:300px;padding:2px 0;caret-color:var(--accent,#818cf8)}
+.term-ainput:focus{border-bottom-color:var(--accent2,#a5b4fc)}
+.term-aselect{background:var(--surface2,#161c35);border:1px solid var(--accent,#818cf8);outline:none;color:var(--text,#e2e4ea);font-family:'JetBrains Mono',monospace;font-size:.82rem;padding:4px 8px;cursor:pointer;min-width:220px}
+.term-aselect option{background:var(--surface2,#161c35)}
+.term-aerr{color:#f87171;font-size:.75rem;margin-top:6px;padding-left:38px;display:none;font-family:'JetBrains Mono',monospace}
+.term-aerr.visible{display:block}
+.consent-row-a{display:flex;align-items:center;gap:10px;margin-top:1.5rem;padding:12px 0;border-top:1px solid rgba(129,140,248,0.15);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.consent-row-a input{width:15px;height:15px;accent-color:var(--accent,#818cf8);cursor:pointer}
+.consent-row-a label{color:var(--text2,#8890a4);cursor:pointer}
+.submit-btn-a{display:block;width:100%;margin-top:1rem;padding:13px 2rem;background:none;border:1px solid var(--accent,#818cf8);color:var(--accent,#818cf8);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-align:center}
+.submit-btn-a:hover:not(:disabled){background:rgba(129,140,248,.1);color:var(--accent2,#a5b4fc);border-color:var(--accent2,#a5b4fc)}
+.submit-btn-a:disabled{opacity:.35;cursor:not-allowed;border-color:var(--text3,#525a72);color:var(--text3,#525a72)}
+.success-box-a{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok,#4ade80);color:var(--ok,#4ade80);font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;line-height:1.7;display:none}
+.success-box-a.visible{display:block}
+
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — модели агентов, Compliance и Operations"></a>
-    <ul class="nav-links">
-      <li><a href="solutions.html">Решения</a></li>
-      <li><a href="security.html">Безопасность</a></li>
-      <li><a href="technology.html">Технологии</a></li>
-      <li><a href="agents.html" class="active">Модели агентов</a></li>
-      <li><a href="articles.html">Статьи</a></li>
-      <li><a href="partnership.html">Партнёрство</a></li>
-    </ul>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
-    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
-  </div>
-  <div class="nav-mobile" id="navMobile">
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <button type="button" class="nav-burger" id="nav-burger" aria-label="Меню" style="display:none"><span></span><span></span><span></span></button>
+  <div class="nav-links">
     <a href="solutions.html">Решения</a>
     <a href="security.html">Безопасность</a>
     <a href="technology.html">Технологии</a>
     <a href="agents.html">Модели агентов</a>
     <a href="articles.html">Статьи</a>
     <a href="partnership.html">Партнёрство</a>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
   </div>
 </nav>
 
-<section class="page-hero">
-  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
-  <div class="s-pad" style="position:relative;z-index:1">
-    <div class="s-label rv">Модели агентов</div>
-    <h1 class="s-title rv">Модели агентов: мультиагентная система<br>для комплаенса и автоматизации</h1>
-    <div class="s-sub rv">Три бизнес-модели: Compliance — линейный поток, Feedback — анализ обращений, Operations — иерархия с оркестратором и декомпозицией задач.</div>
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-tag">[SYS] МОДЕЛИ АГЕНТОВ</div>
+    <h1>Мультиагентная система<br>для комплаенса и автоматизации</h1>
+    <p>Три бизнес-модели: Compliance — линейный поток, Feedback — анализ обращений, Operations — иерархия с оркестратором и декомпозицией задач.</p>
   </div>
 </section>
 
 <!-- COMPLIANCE -->
 <section id="compliance" class="model-section">
-  <div class="content-wrap">
+  <div class="s-wrap">
+    <div class="s-tag rv">Модель 1</div>
     <div class="s-title rv">Compliance — проверка документов.</div>
-    <div class="model-content">
-      <div class="model-diagram-wrap rv-scale">
+    <div class="model-grid">
+      <div class="model-diagram-sticky rv-scale">
         <div class="agent-diagram">
-          <div class="diagram-svg-wrap">
-            <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
-              <path class="arrow-cycle" d="M 515 40 Q 290 -20 65 40" stroke="var(--accent)" fill="none" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.5"/>
-              <g class="agent-node" data-role="Extractor" style="cursor:pointer"><rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/><text class="node-text" x="65" y="68" text-anchor="middle">Extractor</text><text class="node-desc" x="65" y="88" text-anchor="middle">Извлечение данных</text></g>
-              <path class="arrow-main" d="M 125 75 L 155 75"/>
-              <g class="agent-node" data-role="Checker" style="cursor:pointer"><rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/><text class="node-text" x="215" y="68" text-anchor="middle">Checker</text><text class="node-desc" x="215" y="88" text-anchor="middle">Нормативы</text></g>
-              <path class="arrow-main" d="M 275 75 L 305 75"/>
-              <g class="agent-node" data-role="Risk" style="cursor:pointer"><rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/><text class="node-text" x="365" y="68" text-anchor="middle">Risk</text><text class="node-desc" x="365" y="88" text-anchor="middle">Оценка штрафов</text></g>
-              <path class="arrow-main" d="M 425 75 L 455 75"/>
-              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/><text class="node-text" x="515" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="515" y="88" text-anchor="middle">Верификация</text></g>
-              <path class="arrow-main" d="M 575 75 L 605 75"/>
-              <g class="agent-node" data-role="Action" style="cursor:pointer"><rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/><text class="node-text" x="660" y="68" text-anchor="middle">Action</text><text class="node-desc" x="660" y="88" text-anchor="middle">OK / Блок</text></g>
-            </svg>
-          </div>
-          <div class="agent-cycle" data-default="Critic может вернуть задачу на Extractor (цикл до 3 итераций)">Critic может вернуть задачу на Extractor (цикл до 3 итераций)</div>
+          <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
+            <path class="arrow-cycle" d="M 515 40 Q 290 -20 65 40"/>
+            <g class="agent-node" data-role="Extractor" style="cursor:pointer">
+              <rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="65" y="68" text-anchor="middle">Extractor</text>
+              <text class="node-desc" x="65" y="88" text-anchor="middle">Извлечение данных</text>
+            </g>
+            <path class="arrow-main" d="M 125 75 L 155 75"/>
+            <g class="agent-node" data-role="Checker" style="cursor:pointer">
+              <rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="215" y="68" text-anchor="middle">Checker</text>
+              <text class="node-desc" x="215" y="88" text-anchor="middle">Нормативы</text>
+            </g>
+            <path class="arrow-main" d="M 275 75 L 305 75"/>
+            <g class="agent-node" data-role="Risk" style="cursor:pointer">
+              <rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="365" y="68" text-anchor="middle">Risk</text>
+              <text class="node-desc" x="365" y="88" text-anchor="middle">Оценка штрафов</text>
+            </g>
+            <path class="arrow-main" d="M 425 75 L 455 75"/>
+            <g class="agent-node" data-role="Critic" style="cursor:pointer">
+              <rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="515" y="68" text-anchor="middle">Critic</text>
+              <text class="node-desc" x="515" y="88" text-anchor="middle">Верификация</text>
+            </g>
+            <path class="arrow-main" d="M 575 75 L 605 75"/>
+            <g class="agent-node" data-role="Action" style="cursor:pointer">
+              <rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/>
+              <text class="node-text" x="660" y="68" text-anchor="middle">Action</text>
+              <text class="node-desc" x="660" y="88" text-anchor="middle">OK / Блок</text>
+            </g>
+          </svg>
+          <div class="cycle-note" id="cycle-compliance" data-default="Critic может вернуть задачу на Extractor (цикл до 3 итераций)">Critic может вернуть задачу на Extractor (цикл до 3 итераций)</div>
         </div>
       </div>
       <div class="model-text rv">
         <p class="model-desc">Документ проходит фиксированную последовательность: извлечение сущностей, проверка на соответствие нормам, оценка рисков, верификация и финальное решение. Каждый шаг не требует разбиения на подзадачи — поток жёстко определён.</p>
-
-        <div class="role-rationale" data-role="Extractor" data-cycle-text="Извлекает стороны договора, суммы, даты, коды маркировки, номера сертификатов.">
+        <div class="role-rationale" data-role="Extractor" data-cycle="Извлекает стороны договора, суммы, даты, коды маркировки, номера сертификатов." data-diagram="compliance">
           <h4>Extractor</h4>
           <p>Извлекает стороны договора, суммы, даты, коды маркировки, номера сертификатов. Отдельная роль — чтобы не смешивать OCR/парсинг с логикой проверки. Ошибка извлечения не должна влиять на интерпретацию норм.</p>
         </div>
-        <div class="role-rationale" data-role="Checker" data-cycle-text="Проверяет соответствие нормативам: 152-ФЗ, ФСТЭК, Честный Знак. Набор настраивается под клиента.">
+        <div class="role-rationale" data-role="Checker" data-cycle="Проверяет соответствие нормативам: 152-ФЗ, ФСТЭК, Честный Знак. Набор настраивается под клиента." data-diagram="compliance">
           <h4>Checker</h4>
           <p>Проверяет соответствие нормативам: 152-ФЗ, ФСТЭК (приказы 17/21/117), маркировка Честный Знак. Набор нормативов настраивается под клиента. Результат — структурированный список нарушений или подтверждение соответствия.</p>
         </div>
-        <div class="role-rationale" data-role="Risk" data-cycle-text="Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата.">
+        <div class="role-rationale" data-role="Risk" data-cycle="Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата." data-diagram="compliance">
           <h4>Risk</h4>
           <p>Оценивает финансовые последствия: штрафы за единицу без маркировки, за партию без сертификата. Отдельная роль — оценка риска требует иной prompt-логики, чем проверка формальных требований.</p>
         </div>
-        <div class="role-rationale" data-role="Critic" data-cycle-text="Верифицирует результат. Может вернуть задачу на Extractor. Цикл до 3 итераций.">
+        <div class="role-rationale" data-role="Critic" data-cycle="Верифицирует результат. Может вернуть задачу на Extractor. Цикл до 3 итераций." data-diagram="compliance">
           <h4>Critic</h4>
           <p>Верифицирует результат перед финальным действием. Может вернуть задачу на Extractor при недостаточной полноте извлечения. Цикл до 3 итераций снижает долю ложных срабатываний и пропусков.</p>
         </div>
-
-</div>
+        <div class="role-rationale" data-role="Action" data-cycle="Финальное решение: принять или заблокировать документ." data-diagram="compliance">
+          <h4>Action</h4>
+          <p>Фиксирует финальное решение: принять документ или заблокировать с указанием нарушений. Результат передаётся в вашу систему (1С, ЭДО, ЛК).</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FEEDBACK -->
-<section id="feedback" class="model-section">
-  <div class="content-wrap">
+<section id="feedback" class="model-section section-alt">
+  <div class="s-wrap">
+    <div class="s-tag rv">Модель 2</div>
     <div class="s-title rv">Feedback — анализ обращений.</div>
-    <div class="model-content">
-      <div class="model-diagram-wrap rv-scale">
+    <div class="model-grid">
+      <div class="model-diagram-sticky rv-scale">
         <div class="agent-diagram">
-          <div class="diagram-svg-wrap">
-            <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
-              <g class="agent-node" data-role="Analyzer" style="cursor:pointer"><rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/><text class="node-text" x="65" y="68" text-anchor="middle">Analyzer</text><text class="node-desc" x="65" y="88" text-anchor="middle">Тональность, темы</text></g>
-              <path class="arrow-main" d="M 125 75 L 155 75"/>
-              <g class="agent-node" data-role="Researcher" style="cursor:pointer"><rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/><text class="node-text" x="215" y="68" text-anchor="middle">Researcher</text><text class="node-desc" x="215" y="88" text-anchor="middle">RAG, контекст</text></g>
-              <path class="arrow-main" d="M 275 75 L 305 75"/>
-              <g class="agent-node" data-role="Responder" style="cursor:pointer"><rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/><text class="node-text" x="365" y="68" text-anchor="middle">Responder</text><text class="node-desc" x="365" y="88" text-anchor="middle">Генерация ответа</text></g>
-              <path class="arrow-main" d="M 425 75 L 455 75"/>
-              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/><text class="node-text" x="515" y="68" text-anchor="middle">Critic</text><text class="node-desc" x="515" y="88" text-anchor="middle">Проверка</text></g>
-              <path class="arrow-main" d="M 575 75 L 605 75"/>
-              <g class="agent-node" data-role="Escalation" style="cursor:pointer"><rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/><text class="node-text" x="660" y="68" text-anchor="middle">Escalation</text><text class="node-desc" x="660" y="88" text-anchor="middle">Эскалация</text></g>
-            </svg>
-          </div>
-          <div class="agent-cycle" data-default="Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости">Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости</div>
+          <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
+            <g class="agent-node" data-role="Analyzer" style="cursor:pointer">
+              <rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="65" y="68" text-anchor="middle">Analyzer</text>
+              <text class="node-desc" x="65" y="88" text-anchor="middle">Тональность, темы</text>
+            </g>
+            <path class="arrow-main" d="M 125 75 L 155 75"/>
+            <g class="agent-node" data-role="Researcher" style="cursor:pointer">
+              <rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="215" y="68" text-anchor="middle">Researcher</text>
+              <text class="node-desc" x="215" y="88" text-anchor="middle">RAG, контекст</text>
+            </g>
+            <path class="arrow-main" d="M 275 75 L 305 75"/>
+            <g class="agent-node" data-role="Responder" style="cursor:pointer">
+              <rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="365" y="68" text-anchor="middle">Responder</text>
+              <text class="node-desc" x="365" y="88" text-anchor="middle">Генерация ответа</text>
+            </g>
+            <path class="arrow-main" d="M 425 75 L 455 75"/>
+            <g class="agent-node" data-role="Critic" style="cursor:pointer">
+              <rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/>
+              <text class="node-text" x="515" y="68" text-anchor="middle">Critic</text>
+              <text class="node-desc" x="515" y="88" text-anchor="middle">Проверка</text>
+            </g>
+            <path class="arrow-main" d="M 575 75 L 605 75"/>
+            <g class="agent-node" data-role="Escalation" style="cursor:pointer">
+              <rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/>
+              <text class="node-text" x="660" y="68" text-anchor="middle">Escalation</text>
+              <text class="node-desc" x="660" y="88" text-anchor="middle">Эскалация</text>
+            </g>
+          </svg>
+          <div class="cycle-note" id="cycle-feedback" data-default="Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости">Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости</div>
         </div>
       </div>
       <div class="model-text rv">
         <p class="model-desc">Обращение клиента проходит цепочку: анализ тональности и тем, поиск в базе знаний (RAG), генерация ответа, проверка качества и решение об эскалации. Поток жёстко определён, без оркестратора.</p>
-
-        <div class="role-rationale" data-role="Analyzer" data-cycle-text="Анализирует тональность, темы и срочность обращения.">
+        <div class="role-rationale" data-role="Analyzer" data-cycle="Анализирует тональность, темы и срочность обращения." data-diagram="feedback">
           <h4>Analyzer</h4>
           <p>Определяет тональность (негатив, нейтрал, позитив), выделяет темы и срочность. Результат используется Responder и Escalation. Отдельная роль — не смешивать анализ с генерацией ответа.</p>
         </div>
-        <div class="role-rationale" data-role="Researcher" data-cycle-text="Поиск в RAG по теме обращения.">
+        <div class="role-rationale" data-role="Researcher" data-cycle="Поиск в RAG по теме обращения." data-diagram="feedback">
           <h4>Researcher</h4>
           <p>Ищет в базе знаний релевантный контекст: регламенты, прецеденты, FAQ. Ответ привязывается к вашим правилам и документам, а не только к общей модели.</p>
         </div>
-        <div class="role-rationale" data-role="Responder" data-cycle-text="Генерирует ответ клиенту с учётом тона и контекста.">
+        <div class="role-rationale" data-role="Responder" data-cycle="Генерирует ответ клиенту с учётом тона и контекста." data-diagram="feedback">
           <h4>Responder</h4>
           <p>Генерирует ответ клиенту на основе анализа и контекста из RAG. Настраивается по тону (эмпатия, формальность) и целям пресета.</p>
         </div>
-        <div class="role-rationale" data-role="Critic" data-cycle-text="Проверяет качество ответа, может отправить на доработку.">
+        <div class="role-rationale" data-role="Critic" data-cycle="Проверяет качество ответа, может отправить на доработку." data-diagram="feedback">
           <h4>Critic</h4>
           <p>Проверяет ответ на соответствие регламенту и тону. Может вернуть на доработку. Снижает риск некорректных или грубых ответов.</p>
         </div>
-        <div class="role-rationale" data-role="Escalation" data-cycle-text="Решает, нужна ли эскалация человеку.">
+        <div class="role-rationale" data-role="Escalation" data-cycle="Решает, нужна ли эскалация человеку." data-diagram="feedback">
           <h4>Escalation</h4>
           <p>Определяет, нужно ли передать обращение человеку (жалоба, негатив, сложный кейс). Флаг эскалации передаётся в CRM или тикет-систему.</p>
         </div>
@@ -235,132 +450,143 @@
 
 <!-- OPERATIONS -->
 <section id="operations" class="model-section">
-  <div class="content-wrap">
+  <div class="s-wrap">
+    <div class="s-tag rv">Модель 3</div>
     <div class="s-title rv">Operations — согласования и процессы.</div>
-    <div class="model-content">
-      <div class="model-diagram-wrap rv-scale">
+    <div class="model-grid">
+      <div class="model-diagram-sticky rv-scale">
         <div class="agent-diagram">
-          <div class="diagram-svg-wrap">
-            <svg class="agent-svg" viewBox="0 0 720 200" preserveAspectRatio="xMidYMid meet">
-              <g class="agent-node accent" data-role="Orchestrator" style="cursor:pointer"><rect class="node-rect accent" x="260" y="5" width="200" height="55" rx="8"/><text class="node-text" x="360" y="35" text-anchor="middle">Orchestrator</text><text class="node-desc" x="360" y="50" text-anchor="middle">Декомпозиция, маршрутизация</text></g>
-              <path class="arrow-main" d="M 360 60 L 65 105"/>
-              <path class="arrow-main" d="M 360 60 L 215 105"/>
-              <path class="arrow-main" d="M 360 60 L 365 105"/>
-              <path class="arrow-main" d="M 360 60 L 515 105"/>
-              <path class="arrow-main" d="M 125 135 L 155 135"/>
-              <path class="arrow-main" d="M 275 135 L 305 135"/>
-              <path class="arrow-main" d="M 425 135 L 455 135"/>
-              <path class="arrow-main" d="M 575 135 L 605 135"/>
-              <path class="arrow-main" d="M 605 135 L 658 135"/>
-              <circle class="agent-flow-end" cx="670" cy="135" r="8"/>
-              <g class="agent-node" data-role="Resolver" style="cursor:pointer"><rect class="node-rect" x="10" y="105" width="110" height="70" rx="8"/><text class="node-text" x="65" y="133" text-anchor="middle">Resolver</text><text class="node-desc" x="65" y="153" text-anchor="middle">Согласующие</text></g>
-              <g class="agent-node accent" data-role="Critic" style="cursor:pointer"><rect class="node-rect accent" x="160" y="105" width="110" height="70" rx="8"/><text class="node-text" x="215" y="133" text-anchor="middle">Critic</text><text class="node-desc" x="215" y="153" text-anchor="middle">HITL</text></g>
-              <g class="agent-node" data-role="Executor" style="cursor:pointer"><rect class="node-rect" x="310" y="105" width="110" height="70" rx="8"/><text class="node-text" x="365" y="133" text-anchor="middle">Executor</text><text class="node-desc" x="365" y="153" text-anchor="middle">ERP</text></g>
-              <g class="agent-node" data-role="Notify" style="cursor:pointer"><rect class="node-rect" x="460" y="105" width="110" height="70" rx="8"/><text class="node-text" x="515" y="133" text-anchor="middle">Notify</text><text class="node-desc" x="515" y="153" text-anchor="middle">Уведомления</text></g>
-            </svg>
-          </div>
-          <div class="agent-cycle" data-default="Orchestrator классифицирует тип запроса и выбирает маршрут">Orchestrator классифицирует тип запроса и выбирает маршрут</div>
+          <svg class="agent-svg" viewBox="0 0 720 200" preserveAspectRatio="xMidYMid meet">
+            <g class="agent-node" data-role="Orchestrator" style="cursor:pointer">
+              <rect class="node-rect accent" x="260" y="5" width="200" height="55" rx="8"/>
+              <text class="node-text" x="360" y="35" text-anchor="middle">Orchestrator</text>
+              <text class="node-desc" x="360" y="50" text-anchor="middle">Декомпозиция, маршрутизация</text>
+            </g>
+            <path class="arrow-main" d="M 360 60 L 65 105"/>
+            <path class="arrow-main" d="M 360 60 L 215 105"/>
+            <path class="arrow-main" d="M 360 60 L 365 105"/>
+            <path class="arrow-main" d="M 360 60 L 515 105"/>
+            <g class="agent-node" data-role="Resolver" style="cursor:pointer">
+              <rect class="node-rect" x="10" y="105" width="110" height="70" rx="8"/>
+              <text class="node-text" x="65" y="133" text-anchor="middle">Resolver</text>
+              <text class="node-desc" x="65" y="153" text-anchor="middle">Согласующие</text>
+            </g>
+            <g class="agent-node" data-role="Critic" style="cursor:pointer">
+              <rect class="node-rect accent" x="160" y="105" width="110" height="70" rx="8"/>
+              <text class="node-text" x="215" y="133" text-anchor="middle">Critic</text>
+              <text class="node-desc" x="215" y="153" text-anchor="middle">HITL</text>
+            </g>
+            <g class="agent-node" data-role="Executor" style="cursor:pointer">
+              <rect class="node-rect" x="310" y="105" width="110" height="70" rx="8"/>
+              <text class="node-text" x="365" y="133" text-anchor="middle">Executor</text>
+              <text class="node-desc" x="365" y="153" text-anchor="middle">ERP</text>
+            </g>
+            <g class="agent-node" data-role="Notify" style="cursor:pointer">
+              <rect class="node-rect" x="460" y="105" width="110" height="70" rx="8"/>
+              <text class="node-text" x="515" y="133" text-anchor="middle">Notify</text>
+              <text class="node-desc" x="515" y="153" text-anchor="middle">Уведомления</text>
+            </g>
+          </svg>
+          <div class="cycle-note" id="cycle-operations" data-default="Orchestrator классифицирует тип запроса и выбирает маршрут">Orchestrator классифицирует тип запроса и выбирает маршрут</div>
         </div>
       </div>
       <div class="model-text rv">
         <p class="model-desc">Операционные процессы требуют декомпозиции: запрос на согласование договора, закупки или отпуска — разные типы с разными цепочками. Оркестратор определяет маршрут и подзадачи.</p>
-
-<div class="role-rationale" data-role="Orchestrator" data-cycle-text="Классифицирует тип запроса, декомпозирует на подзадачи, выбирает цепочку согласующих.">
+        <div class="role-rationale" data-role="Orchestrator" data-cycle="Классифицирует тип запроса, декомпозирует на подзадачи, выбирает цепочку согласующих." data-diagram="operations">
           <h4>Orchestrator</h4>
           <p>Классифицирует тип запроса (договор, закупка, отпуск, IT-запрос), декомпозирует на подзадачи и выбирает цепочку согласующих. Маршрутизация зависит от суммы, срочности и регламентов. Модель 70B для сложных решений.</p>
         </div>
-        <div class="role-rationale" data-role="Resolver" data-cycle-text="Назначает согласующих по оргструктуре. Учитывает делегирование, отпуска.">
+        <div class="role-rationale" data-role="Resolver" data-cycle="Назначает согласующих по оргструктуре. Учитывает делегирование, отпуска." data-diagram="operations">
           <h4>Resolver</h4>
           <p>Назначает конкретных согласующих по оргструктуре (LDAP/AD). Учитывает делегирование, отпуска, нагрузку. Формирует цепочку: юрист, финдир, ГД — в зависимости от типа и порога.</p>
         </div>
-        <div class="role-rationale" data-role="Critic" data-cycle-text="Пауза для решения человека. Продолжение с любой точки графа.">
+        <div class="role-rationale" data-role="Critic" data-cycle="Пауза для решения человека. Продолжение с любой точки графа." data-diagram="operations">
           <h4>Critic</h4>
           <p>Пауза для решения человека. Может вернуть задачу к агенту роли Resolver при изменении маршрута или делегировании. Продолжение с любой точки графа.</p>
         </div>
-        <div class="role-rationale" data-role="Executor" data-cycle-text="Выполняет действие после одобрения: задача в 1С, Bitrix24, ЭДО.">
+        <div class="role-rationale" data-role="Executor" data-cycle="Выполняет действие после одобрения: задача в 1С, Bitrix24, ЭДО." data-diagram="operations">
           <h4>Executor</h4>
           <p>Выполняет действие после одобрения: создание задачи в 1С, Bitrix24, отправка в ЭДО. Не принимает решений — только исполнение по результату Human-in-the-Loop.</p>
         </div>
-        <div class="role-rationale" data-role="Notify" data-cycle-text="Уведомления по Email, Telegram, CRM.">
+        <div class="role-rationale" data-role="Notify" data-cycle="Уведомления по Email, Telegram, CRM." data-diagram="operations">
           <h4>Notify</h4>
           <p>Отправка уведомлений согласующим и инициатору. Интеграция с Email, Telegram, Bitrix24.</p>
         </div>
-
-</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Дебаты и голосование -->
-<section id="voting-debate" class="model-section" style="background:var(--surface)">
-  <div class="content-wrap">
-    <div class="s-label rv">Надстройки</div>
+<!-- VOTING / DEBATE / VISION -->
+<section id="voting-debate" class="section section-alt">
+  <div class="s-wrap">
+    <div class="s-tag rv">Надстройки</div>
     <div class="s-title rv">Дебаты и голосование.</div>
-    <div class="s-sub rv" style="max-width:720px;margin-bottom:40px">В трёх моделях — Compliance, Обращения (Feedback), Operations — доступны опциональные режимы без смены основной схемы. Включаются в пресетах и задаются в дашборде или API флагами use_voting и use_debate.</div>
-
+    <p class="model-desc rv" style="max-width:700px;margin-bottom:3rem">В трёх моделях — Compliance, Feedback, Operations — доступны опциональные режимы без смены основной схемы. Включаются в пресетах и задаются в дашборде или API флагами <code style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);background:rgba(129,140,248,.1);padding:2px 6px;border-radius:3px">use_voting</code> и <code style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);background:rgba(129,140,248,.1);padding:2px 6px;border-radius:3px">use_debate</code>.</p>
     <div class="vd-blocks">
-      <!-- Блок 1: Голосование — схема и описание рядом -->
+      <!-- VOTING -->
       <div class="vd-block rv">
-        <h4 class="vd-title">Голосование (Voting)</h4>
+        <div class="vd-title">Голосование (Voting)</div>
         <div class="vd-row">
-          <div class="agent-diagram vd-diagram">
-            <div class="diagram-svg-wrap">
-              <svg class="agent-svg" viewBox="0 0 380 165" preserveAspectRatio="xMidYMid meet">
-                <g class="agent-node" style="cursor:pointer"><title>Агент 1 — Независимо выдвигает свой вариант (уровень риска, одобрить/отклонить и т.д.); итог определяется по большинству.</title><rect class="node-rect" x="20" y="15" width="75" height="48" rx="8"/><text class="node-text" x="57" y="38" text-anchor="middle">Агент 1</text><text class="node-desc" x="57" y="50" text-anchor="middle">Роль</text></g>
-                <g class="agent-node" style="cursor:pointer"><title>Агент 2 — Независимо выдвигает свой вариант (уровень риска, одобрить/отклонить и т.д.); итог определяется по большинству.</title><rect class="node-rect" x="105" y="15" width="75" height="48" rx="8"/><text class="node-text" x="142" y="38" text-anchor="middle">Агент 2</text><text class="node-desc" x="142" y="50" text-anchor="middle">Роль</text></g>
-                <g class="agent-node" style="cursor:pointer"><title>Агент 3 — Независимо выдвигает свой вариант (уровень риска, одобрить/отклонить и т.д.); итог определяется по большинству.</title><rect class="node-rect" x="190" y="15" width="75" height="48" rx="8"/><text class="node-text" x="227" y="38" text-anchor="middle">Агент 3</text><text class="node-desc" x="227" y="50" text-anchor="middle">Роль</text></g>
-                <g class="agent-node" style="cursor:pointer"><title>Агент 4 — Независимо выдвигает свой вариант (уровень риска, одобрить/отклонить и т.д.); итог определяется по большинству.</title><rect class="node-rect" x="275" y="15" width="75" height="48" rx="8"/><text class="node-text" x="312" y="38" text-anchor="middle">Агент 4</text><text class="node-desc" x="312" y="50" text-anchor="middle">Роль</text></g>
-                <path class="arrow-main" d="M 57 63 L 57 82"/><path class="arrow-main" d="M 142 63 L 142 82"/><path class="arrow-main" d="M 227 63 L 227 82"/><path class="arrow-main" d="M 312 63 L 312 82"/>
-                <path class="arrow-main" d="M 57 82 L 192 82"/><path class="arrow-main" d="M 142 82 L 192 82"/><path class="arrow-main" d="M 227 82 L 192 82"/><path class="arrow-main" d="M 312 82 L 192 82"/><path class="arrow-main" d="M 192 82 L 192 95"/>
-                <g class="agent-node accent" style="cursor:pointer"><title>Majority — Итог по большинству голосов агентов одной роли.</title><rect class="node-rect accent" x="131" y="95" width="122" height="48" rx="8"/><text class="node-text" x="192" y="117" text-anchor="middle">Majority</text><text class="node-desc" x="192" y="130" text-anchor="middle">Итог по большинству</text></g>
-              </svg>
-            </div>
+          <div class="agent-diagram">
+            <svg class="agent-svg" viewBox="0 0 380 165" preserveAspectRatio="xMidYMid meet">
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="20" y="15" width="75" height="48" rx="8"/><text class="node-text" x="57" y="38" text-anchor="middle">Агент 1</text><text class="node-desc" x="57" y="50" text-anchor="middle">Роль</text></g>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="105" y="15" width="75" height="48" rx="8"/><text class="node-text" x="142" y="38" text-anchor="middle">Агент 2</text><text class="node-desc" x="142" y="50" text-anchor="middle">Роль</text></g>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="190" y="15" width="75" height="48" rx="8"/><text class="node-text" x="227" y="38" text-anchor="middle">Агент 3</text><text class="node-desc" x="227" y="50" text-anchor="middle">Роль</text></g>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="275" y="15" width="75" height="48" rx="8"/><text class="node-text" x="312" y="38" text-anchor="middle">Агент 4</text><text class="node-desc" x="312" y="50" text-anchor="middle">Роль</text></g>
+              <path class="arrow-main" d="M 57 63 L 57 82"/>
+              <path class="arrow-main" d="M 142 63 L 142 82"/>
+              <path class="arrow-main" d="M 227 63 L 227 82"/>
+              <path class="arrow-main" d="M 312 63 L 312 82"/>
+              <path class="arrow-main" d="M 57 82 L 192 82"/>
+              <path class="arrow-main" d="M 142 82 L 192 82"/>
+              <path class="arrow-main" d="M 227 82 L 192 82"/>
+              <path class="arrow-main" d="M 312 82 L 192 82"/>
+              <path class="arrow-main" d="M 192 82 L 192 95"/>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect accent" x="131" y="95" width="122" height="48" rx="8"/><text class="node-text" x="192" y="117" text-anchor="middle">Majority</text><text class="node-desc" x="192" y="130" text-anchor="middle">Итог по большинству</text></g>
+            </svg>
           </div>
           <div class="vd-desc">
-            <p>Несколько агентов одной роли (например, 4 Risk или 4 Critic) независимо дают ответ; итог определяется по большинству — уровень риска, одобрить/отклонить, тональность обращения, нужна ли эскалация. Снижает влияние случайной ошибки одного агента. В логах и диалоге отображаются реплики вида «Risk Assessor (голосование)», «Critic (голосование)».</p>
+            <p>Несколько агентов одной роли (например, 4 Risk или 4 Critic) независимо дают ответ; итог определяется по большинству — уровень риска, одобрить/отклонить, тональность обращения, нужна ли эскалация. Снижает влияние случайной ошибки одного агента. В логах отображаются реплики вида «Risk Assessor (голосование)», «Critic (голосование)».</p>
           </div>
         </div>
       </div>
-
-      <!-- Блок 2: Дебаты — схема (Judge влезает) и описание рядом -->
+      <!-- DEBATE -->
       <div class="vd-block rv">
-        <h4 class="vd-title">Дебаты (Debate)</h4>
+        <div class="vd-title">Дебаты (Debate)</div>
         <div class="vd-row">
-          <div class="agent-diagram vd-diagram">
-            <div class="diagram-svg-wrap">
-              <svg class="agent-svg" viewBox="0 0 320 165" preserveAspectRatio="xMidYMid meet">
-                <g class="agent-node" style="cursor:pointer"><title>Агент A — Выдвигает первый вариант для сравнения; Judge выбирает лучший по аргументам.</title><rect class="node-rect" x="25" y="15" width="90" height="50" rx="8"/><text class="node-text" x="70" y="38" text-anchor="middle">Агент A</text><text class="node-desc" x="70" y="52" text-anchor="middle">Вариант 1</text></g>
-                <g class="agent-node" style="cursor:pointer"><title>Агент B — Выдвигает второй вариант для сравнения; Judge выбирает лучший по аргументам.</title><rect class="node-rect" x="205" y="15" width="90" height="50" rx="8"/><text class="node-text" x="250" y="38" text-anchor="middle">Агент B</text><text class="node-desc" x="250" y="52" text-anchor="middle">Вариант 2</text></g>
-                <path class="arrow-main" d="M 70 65 L 70 88"/><path class="arrow-main" d="M 250 65 L 250 88"/>
-                <path class="arrow-main" d="M 70 88 L 145 115"/><path class="arrow-main" d="M 250 88 L 175 115"/>
-                <g class="agent-node accent" style="cursor:pointer"><title>Judge — Выбирает лучший вариант по аргументам двух агентов.</title><rect class="node-rect accent" x="95" y="115" width="130" height="48" rx="8"/><text class="node-text" x="160" y="137" text-anchor="middle">Judge</text><text class="node-desc" x="160" y="150" text-anchor="middle">Выбор по аргументам</text></g>
-              </svg>
-            </div>
+          <div class="agent-diagram">
+            <svg class="agent-svg" viewBox="0 0 320 165" preserveAspectRatio="xMidYMid meet">
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="25" y="15" width="90" height="50" rx="8"/><text class="node-text" x="70" y="38" text-anchor="middle">Агент A</text><text class="node-desc" x="70" y="52" text-anchor="middle">Вариант 1</text></g>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="205" y="15" width="90" height="50" rx="8"/><text class="node-text" x="250" y="38" text-anchor="middle">Агент B</text><text class="node-desc" x="250" y="52" text-anchor="middle">Вариант 2</text></g>
+              <path class="arrow-main" d="M 70 65 L 70 88"/>
+              <path class="arrow-main" d="M 250 65 L 250 88"/>
+              <path class="arrow-main" d="M 70 88 L 145 115"/>
+              <path class="arrow-main" d="M 250 88 L 175 115"/>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect accent" x="95" y="115" width="130" height="48" rx="8"/><text class="node-text" x="160" y="137" text-anchor="middle">Judge</text><text class="node-desc" x="160" y="150" text-anchor="middle">Выбор по аргументам</text></g>
+            </svg>
           </div>
           <div class="vd-desc">
-            <p>Два агента дают разные варианты (например, «одобрить» vs «отклонить» или два варианта ответа клиенту), затем узел Judge выбирает лучший по аргументам. Используется там, где важно сравнить обоснования, а не усреднить. В диалоге видны «Critic (дебаты)», «Judge» и т.д. Точная схема отображается в дашборде в разделе «Диалог агентов».</p>
+            <p>Два агента дают разные варианты (например, «одобрить» vs «отклонить» или два варианта ответа клиенту), затем узел Judge выбирает лучший по аргументам. Используется там, где важно сравнить обоснования, а не усреднить. В диалоге видны «Critic (дебаты)», «Judge» и т.д. Схема отображается в дашборде в разделе «Диалог агентов».</p>
           </div>
         </div>
       </div>
-
-      <!-- Блок 3: Компьютерное зрение -->
-      <div class="vd-block rv visible">
-        <h4 class="vd-title">Компьютерное зрение (Vision)</h4>
+      <!-- VISION -->
+      <div class="vd-block rv">
+        <div class="vd-title">Компьютерное зрение (Vision)</div>
         <div class="vd-row">
-          <div class="agent-diagram vd-diagram">
-            <div class="diagram-svg-wrap">
-              <svg class="agent-svg" viewBox="0 0 320 130" preserveAspectRatio="xMidYMid meet">
-                <g class="agent-node" style="cursor:pointer"><title>Изображения документа (PDF-страницы, скриншоты)</title><rect class="node-rect" x="25" y="15" width="120" height="45" rx="8"/><text class="node-text" x="85" y="35" text-anchor="middle">Изображения</text><text class="node-desc" x="85" y="48" text-anchor="middle">PDF, скриншоты</text></g>
-                <path class="arrow-main" d="M 145 37 L 175 37"/>
-                <g class="agent-node accent" style="cursor:pointer"><title>Vision Checker — анализ печатей, подписей, визуальных элементов через llava</title><rect class="node-rect accent" x="180" y="15" width="115" height="45" rx="8"/><text class="node-text" x="237" y="35" text-anchor="middle">Vision</text><text class="node-desc" x="237" y="48" text-anchor="middle">Печати, подписи</text></g>
-                <path class="arrow-main" d="M 237 60 L 237 78"/>
-                <g class="agent-node" style="cursor:pointer"><title>Результат передаётся в Checker / Critic</title><rect class="node-rect" x="95" y="78" width="130" height="40" rx="8"/><text class="node-text" x="160" y="98" text-anchor="middle">Checker / Critic</text><text class="node-desc" x="160" y="110" text-anchor="middle">Контекст для проверок</text></g>
-                <path class="arrow-main" d="M 237 78 L 160 78"/>
-              </svg>
-            </div>
+          <div class="agent-diagram">
+            <svg class="agent-svg" viewBox="0 0 320 130" preserveAspectRatio="xMidYMid meet">
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="25" y="15" width="120" height="45" rx="8"/><text class="node-text" x="85" y="35" text-anchor="middle">Изображения</text><text class="node-desc" x="85" y="48" text-anchor="middle">PDF, скриншоты</text></g>
+              <path class="arrow-main" d="M 145 37 L 175 37"/>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect accent" x="180" y="15" width="115" height="45" rx="8"/><text class="node-text" x="237" y="35" text-anchor="middle">Vision</text><text class="node-desc" x="237" y="48" text-anchor="middle">Печати, подписи</text></g>
+              <path class="arrow-main" d="M 237 60 L 237 78"/>
+              <path class="arrow-main" d="M 237 78 L 160 78"/>
+              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="95" y="78" width="130" height="40" rx="8"/><text class="node-text" x="160" y="98" text-anchor="middle">Checker / Critic</text><text class="node-desc" x="160" y="110" text-anchor="middle">Контекст для проверок</text></g>
+            </svg>
           </div>
           <div class="vd-desc">
-            <p>Модуль компьютерного зрения встраивается в любую схему агентов, где это применимо. Vision-модель (llava) анализирует изображения: проверяет наличие печатей и подписей на документах, распознаёт скриншоты ошибок в обращениях клиентов, классифицирует фотографии товаров. Результат передаётся следующим агентам как дополнительный контекст. Включается флагом <code>use_vision</code> в конфиге или API. Примеры: Compliance — проверка печатей на договорах; Feedback — анализ скриншотов в обращении.</p>
+            <p>Модуль компьютерного зрения встраивается в любую схему агентов. Vision-модель (llava) анализирует изображения: проверяет наличие печатей и подписей на документах, распознаёт скриншоты ошибок в обращениях, классифицирует фотографии товаров. Включается флагом <code>use_vision</code> в конфиге или API. Примеры: Compliance — проверка печатей на договорах; Feedback — анализ скриншотов в обращении.</p>
           </div>
         </div>
       </div>
@@ -369,12 +595,10 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" style="padding:80px 0 120px;background:var(--surface)">
-  <div class="content-wrap">
-    <div class="s-label rv">FAQ</div>
+<section id="faq" class="section">
+  <div class="s-wrap">
+    <div class="s-tag rv">FAQ</div>
     <div class="s-title rv">Частые вопросы.</div>
-  </div>
-  <div class="content-wrap">
     <div class="faq-list rv">
       <div class="faq-item open">
         <h4 class="faq-q">Чем мультиагентный подход выгоднее одного универсального агента?</h4>
@@ -394,59 +618,128 @@
       </div>
       <div class="faq-item">
         <h4 class="faq-q">Где хранятся данные и как обеспечивается конфиденциальность?</h4>
-        <p class="faq-a">Обработка выполняется в вашей инфраструктуре: модели на ваших серверах или в вашем облаке, документы и обращения за пределы компании не передаются. Публичные API не используются. Доступ к данным и логам есть только у ваших сотрудников. Соответствие 152-ФЗ и отраслевым требованиям закладывается на этапе проектирования и настройки проверок.</p>
+        <p class="faq-a">Обработка выполняется в вашей инфраструктуре: модели на ваших серверах или в вашем облаке, документы и обращения за пределы компании не передаются. Публичные API не используются. Доступ к данным и логам есть только у ваших сотрудников. Соответствие 152-ФЗ и отраслевым требованиям закладывается на этапе проектирования.</p>
       </div>
       <div class="faq-item">
         <h4 class="faq-q">Почему в одних сценариях есть оркестратор, в других — нет?</h4>
-        <p class="faq-a">Оркестратор используется там, где один запрос распадается на несколько подзадач, требуется маршрутизация по типу запроса или параллельное выполнение. В сценариях проверки документов и обработки обращений поток линейный, с одной контрольной точкой — роли фиксированы, документ или обращение проходят единый путь. В сценариях согласований один запрос порождает несколько подзадач, маршрут зависит от суммы и типа операции — без оркестратора схема была бы сложна в поддержке.</p>
+        <p class="faq-a">Оркестратор используется там, где один запрос распадается на несколько подзадач, требуется маршрутизация по типу запроса или параллельное выполнение. В сценариях проверки документов и обработки обращений поток линейный — роли фиксированы, документ проходит единый путь. В сценариях согласований один запрос порождает несколько подзадач, маршрут зависит от суммы и типа операции — без оркестратора схема была бы сложна в поддержке.</p>
       </div>
       <div class="faq-item">
         <h4 class="faq-q">Можно ли подключить платформу к нашим регламентам и базам знаний?</h4>
-        <p class="faq-a">Да. Система работает с вашими нормативами, регламентами и прецедентами через базу знаний (RAG), которая настраивается под вашу компанию. Обращения к ней выполняют выделенные модули. Ответы и проверки опираются на внутренние правила компании, а не на общие данные модели. Готовые пресеты можно менять под сценарий без изменения архитектуры сценария.</p>
+        <p class="faq-a">Да. Система работает с вашими нормативами, регламентами и прецедентами через базу знаний (RAG), которая настраивается под вашу компанию. Обращения к ней выполняют выделенные модули. Ответы и проверки опираются на внутренние правила компании, а не на общие данные модели. Готовые пресеты можно менять под сценарий без изменения архитектуры.</p>
       </div>
       <div class="faq-item">
         <h4 class="faq-q">Как настраивается работа сценариев?</h4>
-        <p class="faq-a">У администраторов есть возможность тонкой настройки каждого из агентов в схеме через конфигурацию с помощью весов (строгость, детализация ответов и т.д.) для лучшего соответствия задачам. Отдельно предусмотрены пресеты — заготовленные настройки под типовые сценарии, в которых для ролей в схеме уже заданы нужные веса.</p>
+        <p class="faq-a">У администраторов есть возможность тонкой настройки каждого из агентов в схеме через конфигурацию с помощью весов (строгость, детализация ответов и т.д.) для лучшего соответствия задачам. Отдельно предусмотрены пресеты — заготовленные настройки под типовые сценарии, в которых для ролей уже заданы нужные веса.</p>
       </div>
       <div class="faq-item">
         <h4 class="faq-q">Нужно ли менять схему при смене сценария?</h4>
-        <p class="faq-a">Саму схему обычно менять не требуется: можно использовать пресеты под разные задачи и команды, сохранять несколько вариантов настроек одной схемы и применять одну и ту же команду агентов в разных сценариях. При необходимости действующую схему можно дополнить (модуль дебатов или голосования), а также подключить дополнительные схемы — например, не только комплаенс, но и схему для операционной деятельности.</p>
+        <p class="faq-a">Саму схему обычно менять не требуется: можно использовать пресеты под разные задачи, сохранять несколько вариантов настроек одной схемы и применять одну и ту же команду агентов в разных сценариях. При необходимости схему можно дополнить (дебаты или голосование), а также подключить дополнительные схемы — например, не только комплаенс, но и схему для операционной деятельности.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-q">Поддерживает ли платформа компьютерное зрение для проверки печатей и скриншотов?</h4>
+        <p class="faq-a">Да. Модуль Vision подключается к сценариям проверки и обращений. Анализирует изображения: печати и подписи на документах, скриншоты в обращениях клиентов. Включается в конфигурации или через API.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
+
 <section class="cta-section">
-  <div class="cta-geo"><div class="cta-geo-tri"></div><div class="cta-geo-circ"></div></div>
-  <h2 class="rv">Готовы к пилоту?</h2>
-  <p class="rv">Выберите модель и разверните граф агентов внутри вашего периметра.</p>
-  <a href="order.html" class="btn-accent rv">Заказать тест</a>
+  <div class="cta-inner">
+    <div class="cta-tag rv">[SYS] ЗАЯВКА</div>
+    <h2 class="cta-title rv">Заказать пилот</h2>
+    <p class="cta-sub rv" style="margin-bottom:0">Запустим мультиагентную систему на вашей инфраструктуре за 1–2 месяца. Без передачи данных в облако.</p>
+    <div class="terminal-window-a rv">
+      <div class="terminal-titlebar-a">
+        <div class="ta-dots">
+          <div class="ta-dot ta-dot-r"></div>
+          <div class="ta-dot ta-dot-y"></div>
+          <div class="ta-dot ta-dot-g"></div>
+        </div>
+        <span class="ta-wtitle">[НЕКСУС-ТЕХ] Заявка на тестирование</span>
+        <div class="ta-wprogress">поле <span id="a-prog-num">—</span><span style="color:var(--text3,#525a72)">/7</span></div>
+      </div>
+      <div class="terminal-body-a" id="a-terminal-body">
+        <div id="a-boot"></div>
+        <div id="a-form-area" style="display:none">
+          <div class="term-hist-a" id="a-history"></div>
+          <div class="term-current-a" id="a-current"></div>
+          <div class="term-aerr" id="a-err-inline"></div>
+          <div id="a-consent-area" style="display:none">
+            <div class="consent-row-a">
+              <input type="checkbox" id="a-consent" onchange="aCheckConsent()">
+              <label for="a-consent">Согласен на обработку персональных данных</label>
+            </div>
+            <button class="submit-btn-a" id="a-submit-btn" disabled onclick="aSubmit()">[ ОТПРАВИТЬ ЗАЯВКУ ]</button>
+            <div class="success-box-a" id="a-success-box">
+              [OK] Заявка принята — свяжемся с вами в ближайшее время
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+
 <footer>
-  <div class="ft-grid">
-    <div>
-      <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — модели агентов, Compliance и Operations" loading="lazy"></a>
-      <div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div>
-      <div class="ft-contact"><a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a><br><a href="tel:+79776134508">+7 (977) 613-45-08</a></div>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
     </div>
-    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="technology.html#kv-calculator">Калькулятор контекста</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
-    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
-    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a><a href="requisites.html">Реквизиты</a></div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#citizens">Обращения граждан</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="careers.html">Карьера</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> ООО «Нексус-Тех» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</span><span><a href="privacy.html">Политика конфиденциальности</a> · <a href="requisites.html">Реквизиты</a></span></div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
-document.getElementById('navBurger')?.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.toggle('open');
-});
-document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.remove('open');
-}));
+// Dynamic year
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+(function(){ var n=document.getElementById('main-nav'),b=document.getElementById('nav-burger'); if(n&&b) b.addEventListener('click',function(){ n.classList.toggle('nav-open'); }); })();
 
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
 // FAQ accordion
 document.querySelectorAll('.faq-q').forEach(q => {
   q.addEventListener('click', () => {
@@ -457,43 +750,367 @@ document.querySelectorAll('.faq-q').forEach(q => {
   });
 });
 
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
+// Interactive hover: agent-node <-> role-rationale + cycle note update
+(function() {
+  // Map each model section
+  const sections = [
+    { svgId: null, sectionSelector: '#compliance', cycleId: 'cycle-compliance' },
+    { svgId: null, sectionSelector: '#feedback', cycleId: 'cycle-feedback' },
+    { svgId: null, sectionSelector: '#operations', cycleId: 'cycle-operations' }
+  ];
 
-// Hover: agent-node <-> role-rationale, agent-cycle
-document.querySelectorAll('.model-content').forEach(mc => {
-  const diagram = mc.querySelector('.agent-diagram');
-  const cycleEl = diagram?.querySelector('.agent-cycle');
-  const nodes = diagram?.querySelectorAll('g[data-role]') || [];
-  const blocks = mc.querySelectorAll('.role-rationale[data-role]') || [];
-  if (!cycleEl) return;
-  const defaultText = cycleEl.dataset.default || cycleEl.textContent;
+  sections.forEach(({ sectionSelector, cycleId }) => {
+    const section = document.querySelector(sectionSelector);
+    if (!section) return;
+    const cycleEl = document.getElementById(cycleId);
+    const defaultText = cycleEl ? cycleEl.dataset.default : '';
 
-  nodes.forEach(node => {
-    const role = node.getAttribute('data-role');
-    if (!role) return;
-    const block = mc.querySelector(`.role-rationale[data-role="${role}"]`);
-    node.addEventListener('mouseenter', () => { if (block) block.classList.add('role-rationale--highlight'); });
-    node.addEventListener('mouseleave', () => { if (block) block.classList.remove('role-rationale--highlight'); });
-  });
+    // SVG nodes in this section
+    const svgNodes = section.querySelectorAll('g[data-role]');
+    // Role blocks in this section
+    const blocks = section.querySelectorAll('.role-rationale[data-role]');
 
-  blocks.forEach(block => {
-    const role = block.dataset.role;
-    const cycleText = block.dataset.cycleText;
-    const node = diagram?.querySelector(`[data-role="${role}"]`);
-    block.addEventListener('mouseenter', () => {
-      const rect = node?.querySelector('.node-rect');
-      if (rect) rect.classList.add('agent-node--highlight');
-      if (cycleText) cycleEl.textContent = cycleText;
+    // Node hover -> highlight block + update cycle
+    svgNodes.forEach(node => {
+      const role = node.getAttribute('data-role');
+      const block = section.querySelector(`.role-rationale[data-role="${role}"]`);
+      node.addEventListener('mouseenter', () => {
+        blocks.forEach(b => b.classList.remove('hl'));
+        if (block) {
+          block.classList.add('hl');
+          if (cycleEl && block.dataset.cycle) cycleEl.textContent = block.dataset.cycle;
+          block.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+      node.addEventListener('mouseleave', () => {
+        if (block) block.classList.remove('hl');
+        if (cycleEl) cycleEl.textContent = defaultText;
+      });
     });
-    block.addEventListener('mouseleave', () => {
-      diagram?.querySelectorAll('.node-rect.agent-node--highlight').forEach(r => r.classList.remove('agent-node--highlight'));
-      cycleEl.textContent = defaultText;
+
+    // Block hover -> highlight SVG node rect
+    blocks.forEach(block => {
+      const role = block.dataset.role;
+      const cycleText = block.dataset.cycle;
+      const svgNode = section.querySelector(`g[data-role="${role}"]`);
+      block.addEventListener('mouseenter', () => {
+        svgNodes.forEach(n => n.querySelector('.node-rect')?.classList.remove('hl'));
+        if (svgNode) svgNode.querySelector('.node-rect')?.classList.add('hl');
+        if (cycleEl && cycleText) cycleEl.textContent = cycleText;
+      });
+      block.addEventListener('mouseleave', () => {
+        if (svgNode) svgNode.querySelector('.node-rect')?.classList.remove('hl');
+        if (cycleEl) cycleEl.textContent = defaultText;
+      });
     });
   });
-});
+})();
 </script>
+
+<script>
+// ── TERMINAL FORM (canonical: articles.html) ──────────────────────────────
+const AT_TOTAL = 7;
+const AT_FIELDS = [
+  { id:'name',     label:'имя',                   placeholder:'Иван Иванов',      type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'company',  label:'компания',              placeholder:'ООО «Компания»',   type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'email',    label:'email',                 placeholder:'ivan@company.ru',  type:'text',   validate: v => (v.includes('@') && v.includes('.')) ? null : 'нужен @ и домен' },
+  { id:'phone',    label:'телефон',               placeholder:'+7 900 000 00 00', type:'text',   validate: v => v.replace(/\D/g,'').length >= 10 ? null : 'минимум 10 цифр' },
+  { id:'solution', label:'интересующее решение',  type:'select',
+    options:['Комплаенс-мониторинг','Обработка обращений','Автоматизация документов','Несколько решений','Другое'],
+    validate: v => v ? null : 'выберите из списка' },
+  { id:'turnover', label:'оборот компании в год', type:'select',
+    options:['до 500 млн ₽','500 млн — 5 млрд ₽','5 — 50 млрд ₽','более 50 млрд ₽','Не готов указывать'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'comment',  label:'комментарий',           placeholder:'нажмите Enter чтобы пропустить', type:'text', optional:true, validate: () => null },
+];
+let atStep = 0;
+const atAnswers = {};
+const AT_BOOT = [
+  { text:'> NEXUS-TECH CONTACT INITIATE', cls:'cl-accent', delay:0 },
+  { text:'> инициализация сессии...', cls:'cl-dim', delay:180 },
+  { text:'  ✓ API шлюз — ONLINE', cls:'cl-ok', delay:380 },
+  { text:'  ✓ шифрование — AES-256 ACTIVE', cls:'cl-ok', delay:560 },
+  { text:'  ✓ персональные данные — PROTECTED', cls:'cl-ok', delay:720 },
+  { text:'> форма заявки загружена. введите данные:', cls:'cl-accent', delay:960 },
+];
+function atRunBoot() {
+  const bootEl = document.getElementById('a-boot');
+  if (!bootEl) return;
+  let maxDelay = 0;
+  AT_BOOT.forEach(line => {
+    maxDelay = Math.max(maxDelay, line.delay);
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      bootEl.appendChild(d);
+      atScrollBottom();
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const sep = document.createElement('div');
+    sep.className = 'boot-la cl-dim';
+    sep.textContent = '\u2500'.repeat(44);
+    bootEl.appendChild(sep);
+    document.getElementById('a-form-area').style.display = '';
+    atUpdateProgress();
+    atRenderStep();
+    atScrollBottom();
+  }, maxDelay + 250);
+}
+function atUpdateProgress() {
+  const el = document.getElementById('a-prog-num');
+  if (el) el.textContent = atStep < AT_TOTAL ? (atStep + 1) : AT_TOTAL;
+}
+function atScrollBottom() {
+  const tb = document.getElementById('a-terminal-body');
+  if (tb) tb.scrollTop = tb.scrollHeight;
+}
+function atEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function atBuildHistLine(step, val) {
+  const f = AT_FIELDS[step];
+  return `<span style="color:var(--text3,#525a72);font-size:.72rem;min-width:28px;font-family:'JetBrains Mono',monospace">${step+1}/7</span>` +
+    `<span style="color:var(--text3,#525a72);margin:0 4px">&gt;</span>` +
+    `<span class="term-hist-lbl-a">${f.label}:</span>` +
+    `<span class="term-hist-val-a">${atEsc(val)}</span>` +
+    `<span class="term-hist-ok-a">\u2713</span>` +
+    `<span class="term-hist-edit-a">[ред.]</span>`;
+}
+function atRenderStep() {
+  const cur = document.getElementById('a-current');
+  const errEl = document.getElementById('a-err-inline');
+  cur.innerHTML = '';
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+  if (atStep >= 6) document.getElementById('a-consent-area').style.display = '';
+  if (atStep >= AT_FIELDS.length) return;
+  const f = AT_FIELDS[atStep];
+  const row = document.createElement('div');
+  row.className = 'term-arow';
+  const badge = document.createElement('span');
+  badge.className = 'term-abadge';
+  badge.textContent = (atStep+1) + '/' + AT_TOTAL;
+  row.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.className = 'term-aprompt';
+  prompt.textContent = '> ';
+  row.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.className = 'term-alabel';
+  lbl.textContent = f.label + ':';
+  row.appendChild(lbl);
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    sel.id = 'at-field-input';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (atAnswers[f.id] === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    row.appendChild(sel);
+    cur.appendChild(row);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) atConfirm(); });
+    sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) atConfirm(); } });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.id = 'at-field-input';
+    inp.placeholder = f.placeholder || '';
+    if (atAnswers[f.id]) inp.value = atAnswers[f.id];
+    row.appendChild(inp);
+    const hint = document.createElement('span');
+    hint.className = 'term-ahint';
+    hint.textContent = f.optional ? '[Enter — пропустить или ввести]' : '[Enter — подтвердить]';
+    if (f.optional) {
+      var ca = document.getElementById('a-consent-area');
+      if (ca) ca.style.display = '';
+    }
+    row.appendChild(hint);
+    cur.appendChild(row);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); atConfirm(); } });
+    inp.addEventListener('input', () => { errEl.classList.remove('visible'); errEl.textContent = ''; });
+  }
+}
+function atConfirm() {
+  const f = AT_FIELDS[atStep];
+  const inp = document.getElementById('at-field-input');
+  const val = inp ? (inp.tagName === 'SELECT' ? inp.value : inp.value.trim()) : '';
+  const err = f.validate(val);
+  const errEl = document.getElementById('a-err-inline');
+  if (err && !f.optional) {
+    errEl.textContent = '[ERR] ' + err;
+    errEl.classList.add('visible');
+    if (inp && inp.tagName !== 'SELECT') inp.focus();
+    atScrollBottom();
+    return;
+  }
+  errEl.classList.remove('visible');
+  const displayVal = val || '(пропущено)';
+  const line = document.createElement('div');
+  line.className = 'term-hist-line-a';
+  line.dataset.step = atStep;
+  line.innerHTML = atBuildHistLine(atStep, displayVal);
+  const s = atStep;
+  line.addEventListener('click', () => atEditField(s));
+  document.getElementById('a-history').appendChild(line);
+  atAnswers[f.id] = val;
+  atStep++;
+  atUpdateProgress();
+  atScrollBottom();
+  atRenderStep();
+}
+function atEditField(step) {
+  const f = AT_FIELDS[step];
+  const histLine = document.querySelector('.term-hist-line-a[data-step="' + step + '"]');
+  if (!histLine) return;
+  const savedVal = atAnswers[f.id] || '';
+  histLine.style.opacity = '1';
+  histLine.style.borderLeftColor = 'var(--accent,#818cf8)';
+  histLine.innerHTML = '';
+  const badge = document.createElement('span');
+  badge.style.cssText = 'color:var(--text3,#525a72);font-size:.72rem;min-width:28px;margin-right:8px;font-family:JetBrains Mono,monospace';
+  badge.textContent = (step+1) + '/7';
+  histLine.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.style.cssText = 'color:var(--text3,#525a72);margin-right:4px;font-family:JetBrains Mono,monospace';
+  prompt.textContent = '> ';
+  histLine.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'color:var(--accent2,#a5b4fc);margin-right:6px;white-space:nowrap;font-size:.82rem;font-family:JetBrains Mono,monospace';
+  lbl.textContent = f.label + ':';
+  histLine.appendChild(lbl);
+  const save = (newVal) => {
+    const err = f.validate(newVal);
+    if (err && !f.optional) {
+      let errSpan = histLine.nextElementSibling;
+      if (!errSpan || !errSpan.classList.contains('at-hist-err')) {
+        errSpan = document.createElement('div');
+        errSpan.className = 'at-hist-err';
+        errSpan.style.cssText = 'color:#f87171;font-size:.7rem;padding-left:36px;margin-bottom:4px;font-family:JetBrains Mono,monospace';
+        histLine.parentNode.insertBefore(errSpan, histLine.nextSibling);
+      }
+      errSpan.textContent = '[ERR] ' + err;
+      return false;
+    }
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('at-hist-err')) errSpan.remove();
+    atAnswers[f.id] = newVal;
+    histLine.innerHTML = atBuildHistLine(step, newVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+    return true;
+  };
+  const cancel = () => {
+    histLine.innerHTML = atBuildHistLine(step, savedVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+  };
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (savedVal === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    histLine.appendChild(sel);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) save(sel.value); });
+    sel.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (sel.value) save(sel.value); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.value = savedVal;
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--text3,#525a72);font-size:.7rem;margin-left:10px;font-family:JetBrains Mono,monospace';
+    hint.textContent = '[Enter — сохранить, Esc — отмена]';
+    histLine.appendChild(inp);
+    histLine.appendChild(hint);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); save(inp.value.trim()); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  }
+}
+function aCheckConsent() {
+  const cb = document.getElementById('a-consent');
+  document.getElementById('a-submit-btn').disabled = !cb.checked;
+}
+function aSubmit() {
+  const btn = document.getElementById('a-submit-btn');
+  btn.style.display = 'none';
+  const cr = btn.previousElementSibling;
+  if (cr) cr.style.display = 'none';
+  const body = document.getElementById('a-terminal-body');
+  const sep = document.createElement('div');
+  sep.className = 'boot-la cl-dim';
+  sep.style.marginTop = '12px';
+  sep.textContent = '\u2500'.repeat(44);
+  body.appendChild(sep);
+  const SEND = [
+    { text:'> ОТПРАВКА ЗАЯВКИ...', cls:'cl-accent', delay:0 },
+    { text:'  передача данных в CRM...', cls:'cl-dim', delay:300 },
+    { text:'  ✓ заявка зарегистрирована', cls:'cl-ok', delay:700 },
+    { text:'  ✓ уведомление менеджеру отправлено', cls:'cl-ok', delay:950 },
+    { text:'  ✓ подтверждение отправлено на email', cls:'cl-ok', delay:1150 },
+  ];
+  SEND.forEach(line => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const s = document.getElementById('a-success-box');
+    if (s) {
+      body.appendChild(s);
+      s.classList.add('visible');
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 1500);
+}
+// Start form when terminal scrolls into view
+(function(){
+  let atStarted = false;
+  const termWin = document.querySelector('.terminal-window-a');
+  if (!termWin) return;
+  const atObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !atStarted) {
+      atStarted = true;
+      atRunBoot();
+    }
+  }, { threshold: 0.1 });
+  atObs.observe(termWin);
+})();
+</script>
+
 </body>
 </html>

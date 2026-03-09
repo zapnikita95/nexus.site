@@ -3,182 +3,647 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Заказать пилот мультиагентного ИИ on-premise — Нексус-Тех</title>
-<meta name="description" content="Заявка на пилот: мультиагентный ИИ on-premise на вашем сервере за 1–2 месяца. Комплаенс 152-ФЗ, автоматизация согласований. Оставьте контакты — перезвоним.">
-<link rel="icon" href="favicon.png" type="image/png">
-<link rel="canonical" href="https://нексус-тех.рф/order.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://нексус-тех.рф/order.html">
-<meta property="og:title" content="Заказать пилот мультиагентного ИИ — Нексус-Тех">
-<meta property="og:description" content="Тест платформы на вашем периметре. Связь в течение рабочего дня.">
-<meta property="og:locale" content="ru_RU">
-<link rel="stylesheet" href="styles.css">
+<title>Нексус-Тех / Заявка на тест</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0f1a;--surface:#10152a;--surface2:#161c35;
+  --accent:#818cf8;--accent2:#a5b4fc;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#525a72;
+  --ok:#4ade80;--err:#f87171;--warn:#fbbf24;
+  --border:#1e2a45;--border2:#2a3a5c;
+}
+html,body{min-height:100%;background:var(--bg);color:var(--text);font-family:'JetBrains Mono',monospace;font-size:14px;line-height:1.6}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent2)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:0.04em;transition:all 0.2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08);color:var(--accent2);border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:900px;margin:0 auto;padding:100px 2rem 4rem}
+.page-header{margin-bottom:2.5rem}
+.page-tag{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem}
+.page-title{font-family:'Manrope',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;color:var(--text);line-height:1.2;margin-bottom:0.5rem}
+.page-sub{font-size:13px;color:var(--text2);max-width:560px}
+
+/* TERMINAL WINDOW */
+.terminal-window{border:1px solid var(--border2);background:var(--surface);overflow:hidden}
+.terminal-titlebar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2);border-bottom:1px solid var(--border)}
+.t-dots{display:flex;gap:6px}
+.t-dot{width:10px;height:10px;border-radius:50%}
+.t-dot.r{background:#f87171;opacity:0.7}
+.t-dot.y{background:#fbbf24;opacity:0.7}
+.t-dot.g{background:#4ade80;opacity:0.7}
+.t-title{font-size:12px;color:var(--text3);margin-left:8px;letter-spacing:0.06em}
+.t-progress{margin-left:auto;font-size:12px;color:var(--text2)}
+.t-progress span{color:var(--accent)}
+.terminal-body{padding:1.5rem 1.5rem 2rem;min-height:420px;overflow-y:auto;max-height:640px}
+
+/* BOOT SEQUENCE */
+.boot-line{font-size:13px;margin-bottom:3px;opacity:0;animation:fadeIn 0.2s forwards}
+@keyframes fadeIn{to{opacity:1}}
+.boot-line.cl-accent{color:var(--accent)}
+.boot-line.cl-dim{color:var(--text3)}
+.boot-line.cl-ok{color:var(--ok)}
+
+/* SEQUENTIAL FORM */
+.term-history{}
+.term-history-line{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;color:var(--text3);font-size:13px;opacity:0.7;cursor:pointer;transition:opacity 0.15s,border-left-color 0.15s;border-left:2px solid transparent;padding-left:4px}
+.term-history-line:hover{opacity:1;border-left-color:var(--accent)}
+.term-history-line .t-lbl{min-width:180px;flex-shrink:0;color:var(--text3)}
+.term-history-line .t-val{color:var(--text2)}
+.term-history-line .t-ok{color:var(--ok);margin-left:6px}
+.term-history-line .t-edit-badge{font-size:10px;color:var(--text3);margin-left:6px;opacity:0;transition:opacity 0.15s}
+.term-history-line:hover .t-edit-badge{opacity:1}
+.term-current{margin-top:8px}
+.term-prompt-row{display:flex;align-items:center;flex-wrap:nowrap;gap:0}
+.term-step-badge{color:var(--text3);font-size:12px;margin-right:8px;white-space:nowrap;user-select:none;min-width:32px}
+.term-prompt{color:var(--text3);margin-right:4px;user-select:none}
+.term-label{color:var(--accent2);margin-right:6px;white-space:nowrap}
+.term-hint{color:var(--text3);font-size:11px;margin-left:10px;white-space:nowrap}
+.term-input-a{background:none;border:none;border-bottom:1px solid var(--accent);outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:14px;min-width:200px;max-width:340px;padding:2px 0;caret-color:var(--accent)}
+.term-input-a:focus{border-bottom-color:var(--accent2)}
+.term-select-a{background:var(--surface2);border:1px solid var(--accent);outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:13px;padding:4px 8px;cursor:pointer;min-width:240px}
+.term-select-a option{background:var(--surface2)}
+.term-err-inline{color:var(--err);font-size:12px;margin-top:6px;padding-left:40px;display:none}
+.term-err-inline.visible{display:block}
+
+/* CONSENT + SUBMIT */
+.consent-row{display:flex;align-items:center;gap:10px;margin-top:1.5rem;padding:12px 0;border-top:1px solid var(--border)}
+.consent-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--accent);cursor:pointer}
+.consent-row label{font-size:12px;color:var(--text2);cursor:pointer;user-select:none}
+.submit-btn{display:block;width:100%;margin-top:1.2rem;padding:14px 2rem;background:none;border:1px solid var(--accent);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:0.08em;cursor:pointer;transition:all 0.2s;text-align:center}
+.submit-btn:hover:not(:disabled){background:rgba(129,140,248,0.1);color:var(--accent2);border-color:var(--accent2)}
+.submit-btn:disabled{opacity:0.35;cursor:not-allowed;border-color:var(--text3);color:var(--text3)}
+.back-link{display:inline-block;margin-top:1rem;font-size:12px;color:var(--text3);transition:color 0.2s}
+.back-link:hover{color:var(--text2)}
+.success-box{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok);color:var(--ok);font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:0.04em;line-height:1.7;display:none}
+.success-box.visible{display:block}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:0.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem}
+.footer-contact a{color:var(--text3);transition:color 0.2s}
+.footer-contact a:hover{color:var(--accent)}
+
+@media(max-width:768px){
+  nav{padding:0 1rem}
+  .nav-links{display:none}
+  .page-wrap{padding:80px 1rem 3rem}
+  .footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}
+  footer{padding:2rem 1rem 0}
+}
+@media(max-width:480px){
+  .footer-content{grid-template-columns:1fr}
+}
+
+/* === CANONICAL NAV (override) === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)!important;letter-spacing:0.04em;transition:all 0.2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08);color:var(--accent2)!important;border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:1px solid var(--border);border-radius:4px;cursor:pointer;color:var(--text)}
+.nav-burger span{display:block;width:20px;height:2px;background:currentColor}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}.nav-open .nav-links{display:flex!important;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(11,15,26,0.98);border-bottom:1px solid var(--border);padding:1rem;gap:0.75rem;align-items:flex-start}.nav-burger{display:flex!important}.nav-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav-open .nav-burger span:nth-child(2){opacity:0}.nav-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}}
+/* === CANONICAL FOOTER (override) === */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:0.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem;align-items:center;margin-top:0}
+.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-contact a:hover{color:var(--accent)}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+/* === footer-year JS fallback === */
+
+/* FOOTER GLOW ENHANCEMENT */
+footer {
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(129,140,248,0.4) 50%, transparent 100%);
+}
+.footer-brand { margin-bottom: 0.25rem; }
+
+</style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — заявка на пилот мультиагентного ИИ"></a>
-    <ul class="nav-links">
-      <li><a href="solutions.html">Решения</a></li>
-      <li><a href="security.html">Безопасность</a></li>
-      <li><a href="technology.html">Технологии</a></li>
-      <li><a href="agents.html">Модели агентов</a></li>
-      <li><a href="articles.html">Статьи</a></li>
-      <li><a href="partnership.html">Партнёрство</a></li>
-    </ul>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
-    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
-  </div>
-  <div class="nav-mobile" id="navMobile">
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <button type="button" class="nav-burger" id="nav-burger" aria-label="Меню" style="display:none"><span></span><span></span><span></span></button>
+  <div class="nav-links">
     <a href="solutions.html">Решения</a>
     <a href="security.html">Безопасность</a>
     <a href="technology.html">Технологии</a>
     <a href="agents.html">Модели агентов</a>
     <a href="articles.html">Статьи</a>
     <a href="partnership.html">Партнёрство</a>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
   </div>
 </nav>
 
-<section class="page-hero">
-  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
-  <div class="s-pad" style="position:relative;z-index:1">
-    <div class="s-label rv">Пилотный проект</div>
-    <h1 class="s-title rv">Заказать пилот мультиагентного ИИ</h1>
-    <div class="s-sub rv">Оставьте заявку — специалисты свяжутся с вами в ближайшее время.</div>
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="page-tag">[ORDER] / nexus-tech.ru</div>
+    <h1 class="page-title">Заявка на пилотный тест</h1>
+    <p class="page-sub">Запустим мультиагентную систему на вашей инфраструктуре. Пилот — 4 недели.</p>
   </div>
-</section>
 
-<section style="padding:0 0 160px">
-  <div class="s-pad">
-    <div class="form-section">
-      <form id="orderForm" class="form-grid">
-        <div class="form-group">
-          <label class="form-label">Имя</label>
-          <input type="text" class="form-input" placeholder="Иван Петров" required>
+  <div class="terminal-window">
+    <div class="terminal-titlebar">
+      <div class="t-dots">
+        <div class="t-dot r"></div>
+        <div class="t-dot y"></div>
+        <div class="t-dot g"></div>
+      </div>
+      <span class="t-title">[НЕКСУС-ТЕХ] Заявка на тестирование</span>
+      <div class="t-progress">поле <span id="a-prog-num">—</span><span style="color:var(--text3)">/7</span></div>
+    </div>
+    <div class="terminal-body" id="a-terminal-body">
+      <div id="a-boot"></div>
+      <div id="a-form-area" style="display:none">
+        <div class="term-history" id="a-history"></div>
+        <div class="term-current" id="a-current"></div>
+        <div class="term-err-inline" id="a-err-inline"></div>
+        <div id="a-consent-area" style="display:none">
+          <div class="consent-row">
+            <input type="checkbox" id="a-consent" onchange="aCheckConsent()">
+            <label for="a-consent">Согласен на обработку персональных данных</label>
+          </div>
+          <button class="submit-btn" id="a-submit-btn" disabled onclick="aSubmit()">[ ОТПРАВИТЬ ЗАЯВКУ ]</button>
+          <div class="success-box" id="a-success-box">
+            [OK] Заявка принята, свяжемся с вами в ближайшее время
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Должность</label>
-          <input type="text" class="form-input" placeholder="CTO / Руководитель ИТ">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-input" placeholder="ivan@company.ru" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Телефон</label>
-          <input type="tel" class="form-input" placeholder="+7 (___) ___-__-__">
-        </div>
-        <div class="form-group form-full">
-          <label class="form-label">Компания</label>
-          <input type="text" class="form-input" placeholder="Название компании" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Оборот компании</label>
-          <select class="form-select" required>
-            <option value="" disabled selected>Выберите диапазон</option>
-            <option>500 млн — 1 млрд</option>
-            <option>1 — 5 млрд</option>
-            <option>5 — 20 млрд</option>
-            <option>20+ млрд</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Интересующее решение</label>
-          <select class="form-select">
-            <option value="" disabled selected>Выберите решение</option>
-            <option>Комплаенс-документы</option>
-            <option>Автоматизация процессов</option>
-            <option>Несколько решений</option>
-            <option>Пока не определился</option>
-          </select>
-        </div>
-        <div class="form-group form-full">
-          <label class="form-label">Опишите задачу или вопрос</label>
-          <textarea class="form-textarea" placeholder="Расскажите о текущих процессах, объёмах документов, используемых системах..."></textarea>
-        </div>
-        <div class="form-group form-full">
-          <label class="form-checkbox">
-            <input type="checkbox" name="consent" required>
-            <span>Я даю согласие на <a href="privacy.html" target="_blank" rel="noopener">обработку персональных данных</a> в соответствии с политикой конфиденциальности.</span>
-          </label>
-        </div>
-        <div class="form-group form-full form-submit">
-          <button type="submit" class="btn-accent" style="width:100%;text-align:center;padding:18px 44px">Отправить заявку</button>
-        </div>
-        <div class="form-note form-full">Мы не передаём ваши данные третьим лицам. Специалисты свяжутся с вами в ближайшее время.</div>
-      </form>
-
-      <!-- Success state -->
-      <div id="formSuccess" style="display:none;text-align:center;padding:80px 0">
-        <div style="width:64px;height:64px;margin:0 auto 24px;border:2px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <h3 style="font-size:28px;font-weight:800;margin-bottom:12px">Заявка отправлена</h3>
-        <p style="font-size:15px;color:var(--text2);line-height:1.8;max-width:400px;margin:0 auto">Специалисты свяжутся с вами в ближайшее время для обсуждения пилотного проекта.</p>
       </div>
     </div>
   </div>
-</section>
-
-<!-- WHAT HAPPENS NEXT -->
-<section style="padding:0 0 120px">
-  <div class="s-pad">
-    <div class="s-label rv">Что дальше</div>
-    <div class="s-title rv" style="font-size:clamp(28px,3.5vw,44px)">Процесс запуска пилота</div>
-  </div>
-  <div class="feat-grid" style="max-width:1360px;margin:48px auto 0;padding:0 56px">
-    <div class="feat-card rv">
-      <div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div>
-      <h4>1. Звонок</h4>
-      <p>Обсуждаем задачу, текущие процессы и ожидаемый результат. 30-45 минут.</p>
-    </div>
-    <div class="feat-card rv">
-      <div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-      <h4>2. Пилот</h4>
-      <p>Развёртываем MVP в вашем контуре. 1С, ЭДО, интеграция с ключевыми системами. 1-2 месяца.</p>
-    </div>
-    <div class="feat-card rv">
-      <div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <h4>3. Отчёт по окупаемости</h4>
-      <p>Измеряем реальный эффект: экономия, скорость, качество. Решение о масштабировании — на основе данных.</p>
-    </div>
-  </div>
-</section>
+  <a href="index.html" class="back-link">← вернуться на главную</a>
+</div>
 
 <footer>
-  <div class="ft-grid">
-    <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — заявка на пилот мультиагентного ИИ" loading="lazy"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div><div class="ft-contact"><a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a><br><a href="tel:+79776134508">+7 (977) 613-45-08</a></div></div>
-    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
-    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
-    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a><a href="requisites.html">Реквизиты</a></div>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
+    </div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#citizens">Обращения граждан</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="careers.html">Карьера</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> ООО «Нексус-Тех» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</span><span><a href="privacy.html">Политика конфиденциальности</a> · <a href="requisites.html">Реквизиты</a></span></div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
-// Mobile menu
-document.getElementById('navBurger')?.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.toggle('open');
-});
-document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.remove('open');
-}));
+const A_TOTAL = 7;
+const A_FIELDS = [
+  { id:'name',     label:'имя',                       placeholder:'Иван Иванов', type:'text',
+    validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'company',  label:'компания',                  placeholder:'ООО «Компания»', type:'text',
+    validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'email',    label:'email',                     placeholder:'ivan@company.ru', type:'text',
+    validate: v => (v.includes('@') && v.includes('.')) ? null : 'нужен @ и домен' },
+  { id:'phone',    label:'телефон',                   placeholder:'+7 900 000 00 00', type:'text',
+    validate: v => v.replace(/\D/g,'').length >= 10 ? null : 'минимум 10 цифр' },
+  { id:'solution', label:'интересующее решение',     type:'select',
+    options:['Комплаенс-мониторинг','Обращения граждан','Автоматизация документов','Несколько решений','Другое'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'turnover', label:'оборот компании в год',    type:'select',
+    options:['до 500 млн ₽','500 млн — 5 млрд ₽','5 — 50 млрд ₽','более 50 млрд ₽','Не готов указывать'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'comment',  label:'комментарий',               placeholder:'нажмите Enter чтобы пропустить', type:'text',
+    optional:true, validate: () => null },
+];
 
-// Form submit
-document.getElementById('orderForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  this.style.display = 'none';
-  document.getElementById('formSuccess').style.display = 'block';
-});
+let aStep = 0;
+const aAnswers = {};
 
-// Reveal
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
+const BOOT_SEQUENCE = [
+  { text:'> NEXUS-TECH CONTACT INITIATE', cls:'cl-accent', delay:0 },
+  { text:'> инициализация сессии...', cls:'cl-dim', delay:180 },
+  { text:'  ✓ API шлюз — ONLINE', cls:'cl-ok', delay:380 },
+  { text:'  ✓ CRM адаптер — READY', cls:'cl-ok', delay:540 },
+  { text:'  ✓ шифрование — AES-256 ACTIVE', cls:'cl-ok', delay:700 },
+  { text:'  ✓ персональные данные — PROTECTED', cls:'cl-ok', delay:860 },
+  { text:'> форма заявки загружена. введите данные:', cls:'cl-accent', delay:1100 },
+];
+
+function runBoot() {
+  const bootEl = document.getElementById('a-boot');
+  let maxDelay = 0;
+  BOOT_SEQUENCE.forEach(line => {
+    maxDelay = Math.max(maxDelay, line.delay);
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-line ' + line.cls;
+      d.textContent = line.text;
+      bootEl.appendChild(d);
+      aScrollBottom();
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const sep = document.createElement('div');
+    sep.className = 'boot-line cl-dim';
+    sep.textContent = '\u2500'.repeat(48);
+    bootEl.appendChild(sep);
+    document.getElementById('a-form-area').style.display = '';
+    aUpdateProgress();
+    aRenderStep();
+    aScrollBottom();
+  }, maxDelay + 250);
+}
+
+function aUpdateProgress() {
+  const el = document.getElementById('a-prog-num');
+  if (el) el.textContent = aStep < A_TOTAL ? (aStep + 1) : A_TOTAL;
+}
+
+function aScrollBottom() {
+  const tb = document.getElementById('a-terminal-body');
+  if (tb) tb.scrollTop = tb.scrollHeight;
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildHistLineHTML(step, val) {
+  const f = A_FIELDS[step];
+  const sn = step + 1;
+  return `<span class="term-step-badge" style="color:var(--text3);font-size:11px">${sn}/7</span>` +
+    `<span style="color:var(--text3);margin:0 4px">></span>` +
+    `<span class="t-lbl">${f.label}:</span>` +
+    `<span class="t-val">${escapeHtml(val)}</span>` +
+    `<span class="t-ok">\u2713</span>` +
+    `<span class="t-edit-badge">[ред.]</span>`;
+}
+
+// Edit ONLY the clicked field, keep all other fields intact
+function aEditField(step) {
+  const f = A_FIELDS[step];
+  const histLine = document.querySelector('[data-step="' + step + '"]');
+  if (!histLine) return;
+
+  const savedVal = aAnswers[f.id] || '';
+  // Make the line active
+  histLine.style.opacity = '1';
+  histLine.style.borderLeftColor = 'var(--accent)';
+  histLine.style.cursor = 'default';
+  histLine.innerHTML = '';
+
+  const badge = document.createElement('span');
+  badge.style.cssText = 'color:var(--text3);font-size:11px;margin-right:8px;min-width:32px';
+  badge.textContent = (step+1) + '/7';
+  histLine.appendChild(badge);
+
+  const prompt = document.createElement('span');
+  prompt.style.cssText = 'color:var(--text3);margin-right:4px';
+  prompt.textContent = '> ';
+  histLine.appendChild(prompt);
+
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'color:var(--accent2);margin-right:6px;white-space:nowrap';
+  lbl.textContent = f.label + ':';
+  histLine.appendChild(lbl);
+
+  const saveAndRestore = (newVal) => {
+    const err = f.validate(newVal);
+    if (err && !f.optional) {
+      // Show inline error below the line
+      let errSpan = histLine.nextElementSibling;
+      if (!errSpan || !errSpan.classList.contains('hist-err')) {
+        errSpan = document.createElement('div');
+        errSpan.className = 'hist-err';
+        errSpan.style.cssText = 'color:var(--err);font-size:11px;padding-left:40px;margin-bottom:4px';
+        histLine.parentNode.insertBefore(errSpan, histLine.nextSibling);
+      }
+      errSpan.textContent = '[ERR] ' + err;
+      return false;
+    }
+    // Remove any error
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('hist-err')) errSpan.remove();
+    aAnswers[f.id] = newVal;
+    const displayVal = newVal || '(пропущено)';
+    histLine.innerHTML = buildHistLineHTML(step, displayVal);
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.style.cursor = 'pointer';
+    histLine.addEventListener('click', () => aEditField(step));
+    // Scroll back to current input if we were past this step
+    if (aStep > step) {
+      const curEl = document.getElementById('a-field-input');
+      if (curEl) curEl.focus();
+    }
+    return true;
+  };
+
+  const cancelEdit = () => {
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('hist-err')) errSpan.remove();
+    histLine.innerHTML = buildHistLineHTML(step, savedVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.style.cursor = 'pointer';
+    histLine.addEventListener('click', () => aEditField(step));
+    const curEl = document.getElementById('a-field-input');
+    if (curEl) curEl.focus();
+  };
+
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-select-a';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (savedVal === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    histLine.appendChild(sel);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) saveAndRestore(sel.value); });
+    sel.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (sel.value) saveAndRestore(sel.value); }
+      if (e.key === 'Escape') { e.preventDefault(); cancelEdit(); }
+    });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-input-a';
+    inp.value = savedVal;
+    const hint = document.createElement('span');
+    hint.className = 'term-hint';
+    hint.textContent = '[Enter — сохранить, Esc — отмена]';
+    histLine.appendChild(inp);
+    histLine.appendChild(hint);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); saveAndRestore(inp.value.trim()); }
+      if (e.key === 'Escape') { e.preventDefault(); cancelEdit(); }
+    });
+    inp.addEventListener('input', () => {
+      const errSpan = histLine.nextElementSibling;
+      if (errSpan && errSpan.classList.contains('hist-err')) errSpan.textContent = '';
+    });
+  }
+}
+
+function aRenderStep() {
+  const current = document.getElementById('a-current');
+  const errEl = document.getElementById('a-err-inline');
+  current.innerHTML = '';
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+
+  if (aStep >= A_FIELDS.length) {
+    document.getElementById('a-consent-area').style.display = '';
+    return;
+  }
+
+  const f = A_FIELDS[aStep];
+  const stepNum = aStep + 1;
+  const row = document.createElement('div');
+  row.className = 'term-prompt-row';
+
+  const badge = document.createElement('span');
+  badge.className = 'term-step-badge';
+  badge.textContent = stepNum + '/' + A_TOTAL;
+  row.appendChild(badge);
+
+  const prompt = document.createElement('span');
+  prompt.className = 'term-prompt';
+  prompt.textContent = '> ';
+  row.appendChild(prompt);
+
+  const lbl = document.createElement('span');
+  lbl.className = 'term-label';
+  lbl.textContent = f.label + ':';
+  row.appendChild(lbl);
+
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-select-a';
+    sel.id = 'a-field-input';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (aAnswers[f.id] === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    row.appendChild(sel);
+    current.appendChild(row);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) aConfirm(); });
+    sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) aConfirm(); } });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-input-a';
+    inp.id = 'a-field-input';
+    inp.placeholder = f.placeholder || '';
+    if (aAnswers[f.id]) inp.value = aAnswers[f.id];
+    row.appendChild(inp);
+    const hint = document.createElement('span');
+    hint.className = 'term-hint';
+    hint.textContent = f.optional ? '[Enter — пропустить или ввести]' : '[Enter — подтвердить]';
+  // Show consent area immediately for optional fields
+  if (f.optional) {
+    var ca = document.getElementById('a-consent-area');
+    if (ca) ca.style.display = '';
+  }
+
+    row.appendChild(hint);
+    current.appendChild(row);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); aConfirm(); } });
+    inp.addEventListener('input', () => {
+      errEl.classList.remove('visible');
+      errEl.textContent = '';
+    });
+  }
+}
+
+function aConfirm() {
+  const f = A_FIELDS[aStep];
+  const inp = document.getElementById('a-field-input');
+  const val = inp ? (inp.tagName === 'SELECT' ? inp.value : inp.value.trim()) : '';
+  const err = f.validate(val);
+  const errEl = document.getElementById('a-err-inline');
+
+  if (err && !f.optional) {
+    errEl.textContent = '[ERR] ' + err;
+    errEl.classList.add('visible');
+    if (inp && inp.tagName !== 'SELECT') inp.focus();
+    aScrollBottom();
+    return;
+  }
+
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+
+  const displayVal = val || '(пропущено)';
+  const line = document.createElement('div');
+  line.className = 'term-history-line';
+  line.dataset.step = aStep;
+  line.innerHTML = buildHistLineHTML(aStep, displayVal);
+  const s = aStep;
+  line.addEventListener('click', () => aEditField(s));
+  document.getElementById('a-history').appendChild(line);
+
+  aAnswers[f.id] = val;
+  aStep++;
+  aUpdateProgress();
+  aScrollBottom();
+  aRenderStep();
+}
+
+function aCheckConsent() {
+  const cb = document.getElementById('a-consent');
+  document.getElementById('a-submit-btn').disabled = !cb.checked;
+}
+
+function aSubmit() {
+  const btn = document.getElementById('a-submit-btn');
+  btn.style.display = 'none';
+  const consentRow = btn.previousElementSibling;
+  if (consentRow) consentRow.style.display = 'none';
+
+  const body = document.getElementById('a-terminal-body');
+  const sep = document.createElement('div');
+  sep.className = 'boot-line cl-dim';
+  sep.style.marginTop = '12px';
+  sep.textContent = '\u2500'.repeat(48);
+  body.appendChild(sep);
+
+  const SEND_LINES = [
+    { text:'> ОТПРАВКА ЗАЯВКИ...', cls:'cl-accent', delay:0 },
+    { text:'  передача данных в CRM...', cls:'cl-dim', delay:300 },
+    { text:'  \u2713 заявка зарегистрирована', cls:'cl-ok', delay:700 },
+    { text:'  \u2713 уведомление менеджеру отправлено', cls:'cl-ok', delay:950 },
+    { text:'  \u2713 подтверждение на email', cls:'cl-ok', delay:1150 },
+  ];
+
+  SEND_LINES.forEach(line => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-line ' + line.cls;
+      d.textContent = line.text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }, line.delay);
+  });
+
+  setTimeout(() => {
+    const successBox = document.getElementById('a-success-box');
+    if (successBox) {
+      body.appendChild(successBox);
+      successBox.classList.add('visible');
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 1600);
+}
+
+runBoot();
+
+// Dynamic year
+const fyEl = document.getElementById('footer-year');
+if (fyEl) fyEl.textContent = new Date().getFullYear();
+(function(){ var n=document.getElementById('main-nav'),b=document.getElementById('nav-burger'); if(n&&b) b.addEventListener('click',function(){ n.classList.toggle('nav-open'); }); })();
 </script>
 </body>
 </html>

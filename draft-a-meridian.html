@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Нексус-Тех — мультиагентная ИИ-платформа on-premise для русских предприятий. Автономные команды агентов на вашем сервере.">
+    <title>Нексус-Тех | Мультиагентная ИИ-платформа On-Premise</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #0b0f1a;
+            --surface: #10152a;
+            --surface2: #161c35;
+            --text: #e2e4ea;
+            --text2: #8890a4;
+            --text3: #525a72;
+            --accent: #818cf8;
+            --accent2: #a5b4fc;
+            --pad: 48px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+
+        body {
+            background-color: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 48px;
+            background: rgba(11, 15, 26, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(129, 140, 248, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            height: 36px;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 48px;
+            list-style: none;
+            flex: 1;
+            margin-left: 64px;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 0;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent2);
+            transform: translateX(0);
+        }
+
+        .btn-primary svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(4px);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(129, 140, 248, 0.1);
+        }
+
+        .burger {
+            display: none;
+            width: 36px;
+            height: 36px;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .burger span {
+            width: 100%;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s ease;
+            border-radius: 1px;
+        }
+
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translateY(14px);
+        }
+
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-14px);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 72px;
+            overflow: hidden;
+            background: var(--bg);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(to right, var(--bg) 0%, rgba(11, 15, 26, 0.8) 40%, transparent 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+            padding: 0 var(--pad);
+        }
+
+        .hero-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 1px;
+            margin-bottom: 32px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: clamp(56px, 7vw, 100px);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text2);
+            margin-bottom: 48px;
+            max-width: 540px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .btn-large {
+            padding: 18px 44px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        #heroCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .canvas-overlay {
+            display: none;
+        }
+
+        .hero-labels {
+            display: none;
+        }
+
+                .hero-label {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(129, 140, 248, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        /* METRICS SECTION */
+        .metrics {
+            background: var(--surface);
+            padding: 72px 48px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 48px;
+            border-top: 1px solid rgba(129, 140, 248, 0.1);
+            border-bottom: 1px solid rgba(129, 140, 248, 0.1);
+        }
+
+        .metric {
+            border-left: 3px solid var(--accent);
+            padding-left: 24px;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 72px;
+            font-weight: 600;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .metric-label {
+            font-size: 16px;
+            color: var(--text);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* SOLUTIONS SECTION */
+        .solutions {
+            padding: 96px 48px;
+            background: var(--bg);
+        }
+
+        .section-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 72px;
+            color: var(--text);
+        }
+
+        .solution-band {
+            display: grid;
+            grid-template-columns: 120px 1fr 300px;
+            gap: 48px;
+            align-items: center;
+            padding: 48px;
+            margin-bottom: 48px;
+            background: var(--surface2);
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+            border-radius: 0;
+        }
+
+        .solution-band:hover {
+            transform: translateX(8px);
+            border-left-color: var(--accent);
+            background: rgba(129, 140, 248, 0.05);
+        }
+
+        .solution-number {
+            font-size: 120px;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .solution-content h3 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .solution-content p {
+            font-size: 16px;
+            color: var(--text2);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .solution-stats {
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 600;
+            flex-wrap: wrap;
+        }
+
+        .solution-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .solution-visual {
+            width: 240px;
+            height: 180px;
+            background: rgba(129, 140, 248, 0.08);
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .solution-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .solution-link:hover {
+            transform: translateX(4px);
+        }
+
+        /* SECURITY SECTION */
+        .security {
+            padding: 96px 48px;
+            background: var(--bg);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 96px;
+            align-items: center;
+        }
+
+        .security-left {
+            max-width: 520px;
+        }
+
+        .security-left h2 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .security-left p {
+            font-size: 16px;
+            color: var(--text2);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .security-visual {
+            width: 300px;
+            height: 300px;
+            margin: 32px 0;
+        }
+
+        .security-features {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .security-feature {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .security-feature-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent);
+            white-space: nowrap;
+            padding-top: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .security-feature-text {
+            flex: 1;
+        }
+
+        .security-feature-text strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .security-feature-text span {
+            color: var(--text2);
+            font-size: 14px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* TECHNOLOGIES SECTION */
+        .technologies {
+            padding: 96px 48px;
+            background: var(--surface);
+        }
+
+        .tech-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 48px;
+        }
+
+        .tech-layer {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .tech-layer-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+
+        .tech-items {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .tech-badge {
+            padding: 12px 24px;
+            background: var(--surface2);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: 0;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .tech-badge:hover,
+        .tech-badge.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tech-badge-primary {
+            padding: 14px 32px;
+            background: rgba(129, 140, 248, 0.15);
+            font-size: 15px;
+        }
+
+        /* CTA SECTION */
+        .cta {
+            padding: 96px 48px;
+            background: var(--surface);
+            position: relative;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 96px;
+            align-items: center;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(129, 140, 248, 0.08) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .cta h2 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--text);
+            line-height: 1.2;
+        }
+
+        .cta p {
+            font-size: 18px;
+            color: var(--text2);
+            margin-bottom: 48px;
+            line-height: 1.6;
+            max-width: 480px;
+        }
+
+        .cta-terminal {
+            position: relative;
+            z-index: 10;
+            background: rgba(16, 21, 42, 0.8);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            padding: 32px;
+            border-radius: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+        }
+
+        .cta-terminal-line {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .cta-terminal-label {
+            color: var(--accent);
+            font-weight: 700;
+            min-width: 100px;
+        }
+
+        .cta-terminal-value {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .counter {
+            color: var(--accent2);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--surface);
+            border-top: 1px solid rgba(129, 140, 248, 0.1);
+            padding: 64px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 64px;
+        }
+
+        footer a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent);
+        }
+
+        .footer-logo {
+            height: 36px;
+            margin-bottom: 24px;
+        }
+
+        .footer-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .footer-section h3 {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text3);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-copyright {
+            grid-column: 1 / -1;
+            padding-top: 32px;
+            border-top: 1px solid rgba(129, 140, 248, 0.1);
+            text-align: center;
+            color: var(--text3);
+            font-size: 12px;
+        }
+
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.21, 0.45, 0.32, 0.71);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 24px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: rgba(16, 21, 42, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 24px;
+                gap: 16px;
+                border-bottom: 1px solid rgba(129, 140, 248, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .burger {
+                display: flex;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .hero {
+                margin-top: 72px;
+                min-height: 100dvh;
+            }
+
+            .hero-content {
+                width: 100%;
+                padding: 32px 24px;
+                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: clamp(32px, 6vw, 56px);
+            }
+
+            #heroCanvas {
+                display: none;
+            }
+
+            .canvas-overlay {
+                display: none;
+            }
+
+            .hero-labels {
+                display: none;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr;
+                padding: 48px 24px;
+                gap: 32px;
+            }
+
+            .solutions {
+                padding: 48px 24px;
+            }
+
+            .section-title {
+                font-size: 36px;
+                margin-bottom: 48px;
+            }
+
+            .solution-band {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding: 24px;
+                margin-bottom: 24px;
+            }
+
+            .solution-number {
+                font-size: 72px;
+            }
+
+            .solution-content h3 {
+                font-size: 20px;
+            }
+
+            .solution-visual {
+                width: 100%;
+                max-width: 240px;
+            }
+
+            .security {
+                grid-template-columns: 1fr;
+                padding: 48px 24px;
+                gap: 48px;
+            }
+
+            .security-left h2 {
+                font-size: 32px;
+            }
+
+            .technologies {
+                padding: 48px 24px;
+            }
+
+            .cta {
+                grid-template-columns: 1fr;
+                padding: 48px 24px;
+                gap: 48px;
+            }
+
+            .cta h2 {
+                font-size: 36px;
+            }
+
+            footer {
+                grid-template-columns: 1fr;
+                padding: 48px 24px;
+                gap: 32px;
+            }
+        }
+
+        /* PARALLAX */
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+        }
+    
+/* === CANONICAL NAV (override) === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)!important;letter-spacing:0.04em;transition:all 0.2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08);color:var(--accent2)!important;border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}}
+/* === CANONICAL FOOTER (override) === */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:0.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem}
+.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-contact a:hover{color:var(--accent)}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+/* === footer-year JS fallback === */
+</style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <div class="nav-links">
+    <a href="solutions.html">Решения</a>
+    <a href="security.html">Безопасность</a>
+    <a href="technology.html">Технологии</a>
+    <a href="agents.html">Модели агентов</a>
+    <a href="articles.html">Статьи</a>
+    <a href="partnership.html">Партнёрство</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
+  </div>
+</nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero parallax-container">
+        <canvas id="heroCanvas"></canvas>
+        <div class="canvas-overlay"></div>
+        <div class="hero-labels" id="heroLabels"></div>
+        <div class="hero-content reveal">
+            <span class="hero-tag">[SYS] · ИИ-ПЛАТФОРМА · NEXUS:PROTOCOL // STATUS: OPERATIONAL // SECURITY: ACTIVE</span>
+            <h1>Автономные команды ИИ-агентов на вашем сервере</h1>
+            <p>Мультиагентный ИИ on-premise для комплаенса, обработки обращений и автоматизации. Данные не покидают вашу инфраструктуру.</p>
+            <div class="hero-buttons">
+                <a href="order.html" class="btn btn-primary btn-large">
+                    Запустить пилот
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 8h12M8 4l4 4-4 4"/>
+                    </svg>
+                </a>
+                <a href="technology.html" class="btn btn-secondary btn-large">
+                    Архитектура
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M2 8h12M8 4l4 4-4 4"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS SECTION -->
+    <section class="metrics reveal">
+        <div class="metric">
+            <div class="metric-value">100%</div>
+            <div class="metric-label">В вашем периметре</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">152-ФЗ</div>
+            <div class="metric-label">Полное соответствие</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">1–2</div>
+            <div class="metric-label">Месяца внедрение</div>
+        </div>
+        <div class="metric">
+            <div class="metric-value">0</div>
+            <div class="metric-label">Данных во вне</div>
+        </div>
+    </section>
+
+    <!-- SOLUTIONS SECTION -->
+    <section class="solutions" id="solutions">
+        <span class="section-tag">[SYS] РЕШЕНИЯ</span>
+        <h2 class="section-title">Решения</h2>
+
+        <div class="solution-band reveal">
+            <div class="solution-number">01</div>
+            <div class="solution-content">
+                <h3>Комплаенс-документы</h3>
+                <p>Автоматическая проверка документов на соответствие требованиям. Агент анализирует текст, выявляет нарушения и составляет отчёты для компlianceе-команды.</p>
+                <div class="solution-stats">
+                    <div class="solution-stat">~5 мин на документ</div>
+                    <div class="solution-stat">−90% нарушений</div>
+                </div>
+            </div>
+            <div class="solution-visual">
+                <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Document scanning animation -->
+                    <rect x="30" y="20" width="180" height="140" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="2"/>
+                    <line x1="35" y1="50" x2="205" y2="50" stroke="rgba(129,140,248,0.2)" stroke-width="1"/>
+                    <line x1="35" y1="75" x2="205" y2="75" stroke="rgba(129,140,248,0.2)" stroke-width="1"/>
+                    <line x1="35" y1="100" x2="205" y2="100" stroke="rgba(129,140,248,0.2)" stroke-width="1"/>
+                    <line x1="35" y1="125" x2="205" y2="125" stroke="rgba(129,140,248,0.2)" stroke-width="1"/>
+                    <line x1="50" y1="30" x2="50" y2="150" stroke="rgba(129,140,248,0.6)" stroke-width="3" opacity="0.8">
+                        <animate attributeName="y1" values="30;150;30" dur="2s" repeatCount="indefinite"/>
+                        <animate attributeName="y2" values="150;30;150" dur="2s" repeatCount="indefinite"/>
+                    </line>
+                </svg>
+            </div>
+        </div>
+
+        <div class="solution-band reveal">
+            <div class="solution-number">02</div>
+            <div class="solution-content">
+                <h3>Обращения</h3>
+                <p>Интеллектуальная обработка входящих обращений клиентов. RAG-система подбирает релевантные решения, агент формирует ответ. Полная история в базе знаний.</p>
+                <div class="solution-stats">
+                    <div class="solution-stat">&lt;2ч ответ</div>
+                    <div class="solution-stat">RAG база знаний</div>
+                </div>
+            </div>
+            <div class="solution-visual">
+                <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Waveform pulse animation -->
+                    <defs>
+                        <path id="wave" d="M0,90 Q10,70 20,90 T40,90 T60,90 T80,90 T100,90 T120,90 T140,90 T160,90 T180,90 T200,90 T220,90 T240,90"/>
+                    </defs>
+                    <use href="#wave" stroke="rgba(129,140,248,0.3)" stroke-width="1" fill="none"/>
+                    <use href="#wave" stroke="rgba(129,140,248,0.7)" stroke-width="2" fill="none">
+                        <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+                    </use>
+                    <circle cx="120" cy="90" r="4" fill="rgba(129,140,248,0.8)"/>
+                </svg>
+            </div>
+        </div>
+
+        <div class="solution-band reveal">
+            <div class="solution-number">03</div>
+            <div class="solution-content">
+                <h3>Автоматизация</h3>
+                <p>Оркестрация многоагентных рабочих процессов. Каждый агент отвечает за свой блок логики: проверка, утверждение, документирование. Результат — в ваше хранилище.</p>
+                <div class="solution-stats">
+                    <div class="solution-stat">1–2 дня вместо 2 недель</div>
+                    <div class="solution-stat">0 потерянных</div>
+                </div>
+            </div>
+            <div class="solution-visual">
+                <svg viewBox="0 0 240 180" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Flow diagram animation -->
+                    <rect x="20" y="30" width="50" height="40" fill="none" stroke="rgba(129,140,248,0.4)" stroke-width="1.5"/>
+                    <rect x="95" y="30" width="50" height="40" fill="none" stroke="rgba(129,140,248,0.4)" stroke-width="1.5"/>
+                    <rect x="170" y="30" width="50" height="40" fill="none" stroke="rgba(129,140,248,0.4)" stroke-width="1.5"/>
+                    <rect x="20" y="110" width="50" height="40" fill="none" stroke="rgba(129,140,248,0.4)" stroke-width="1.5"/>
+                    <line x1="70" y1="50" x2="95" y2="50" stroke="rgba(129,140,248,0.3)" stroke-width="1.5"/>
+                    <line x1="145" y1="50" x2="170" y2="50" stroke="rgba(129,140,248,0.3)" stroke-width="1.5"/>
+                    <line x1="195" y1="70" x2="195" y2="90" stroke="rgba(129,140,248,0.3)" stroke-width="1.5"/>
+                    <line x1="195" y1="90" x2="70" y2="90" stroke="rgba(129,140,248,0.3)" stroke-width="1.5"/>
+                    <line x1="70" y1="90" x2="70" y2="110" stroke="rgba(129,140,248,0.3)" stroke-width="1.5"/>
+                    <!-- Animated arrow -->
+                    <polygon points="75,45 72,48 78,48" fill="rgba(129,140,248,0.8)">
+                        <animate attributeName="points" values="75,45 72,48 78,48; 150,45 147,48 153,48; 150,45 147,48 153,48; 75,45 72,48 78,48" dur="3s" repeatCount="indefinite"/>
+                    </polygon>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY SECTION -->
+    <section class="security" id="security">
+        <div class="security-left reveal">
+            <h2>Данные не покидают ваш периметр</h2>
+            <p>Полностью on-premise архитектура. Все вычисления происходят на вашем сервере. API интеграции работают через вашу инфраструктуру. Никаких облаков, только ваш контроль.</p>
+            
+            <svg class="security-visual" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Outer ring - Integrations -->
+                <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(129,140,248,0.15)" stroke-width="1" stroke-dasharray="5,5">
+                    <animateTransform attributeName="transform" type="rotate" values="0 150 150; 360 150 150" dur="30s" repeatCount="indefinite"/>
+                </circle>
+                <!-- Middle ring - Agents -->
+                <circle cx="150" cy="150" r="85" fill="none" stroke="rgba(129,140,248,0.25)" stroke-width="1"/>
+                <!-- Center node -->
+                <circle cx="150" cy="150" r="20" fill="rgba(129,140,248,0.4)" stroke="rgba(129,140,248,0.8)" stroke-width="2"/>
+                <text x="150" y="156" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="600" fill="rgba(226,228,234,0.8)">ORCH</text>
+                
+                <!-- Outer nodes (integrations) -->
+                <circle cx="150" cy="30" r="8" fill="rgba(129,140,248,0.6)"/>
+                <circle cx="260" cy="80" r="8" fill="rgba(129,140,248,0.6)"/>
+                <circle cx="280" cy="150" r="8" fill="rgba(129,140,248,0.6)"/>
+                <circle cx="260" cy="220" r="8" fill="rgba(129,140,248,0.6)"/>
+                <circle cx="150" cy="270" r="8" fill="rgba(129,140,248,0.6)"/>
+                <circle cx="40" cy="220" r="8" fill="rgba(129,140,248,0.6)"/>
+                <circle cx="20" cy="150" r="8" fill="rgba(129,140,248,0.6)"/>
+                <circle cx="40" cy="80" r="8" fill="rgba(129,140,248,0.6)"/>
+                
+                <!-- Connection lines -->
+                <line x1="150" y1="30" x2="150" y2="130" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+                <line x1="260" y1="80" x2="200" y2="115" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+                <line x1="280" y1="150" x2="170" y2="150" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+                <line x1="260" y1="220" x2="200" y2="185" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+                <line x1="150" y1="270" x2="150" y2="170" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+                <line x1="40" y1="220" x2="100" y2="185" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+                <line x1="20" y1="150" x2="130" y2="150" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+                <line x1="40" y1="80" x2="100" y2="115" stroke="rgba(129,140,248,0.4)" stroke-width="1"/>
+            </svg>
+
+            <a href="security.html" class="btn btn-primary btn-large" style="margin-top: 32px;">
+                Подробнее о безопасности
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 8h12M8 4l4 4-4 4"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="security-features">
+            <div class="security-feature reveal">
+                <div class="security-feature-tag">[SYS] ШИФРОВАНИЕ</div>
+                <div class="security-feature-text">
+                    <strong>AES-256 + TLS 1.3</strong>
+                    <span>Все данные в пути и в покое защищены военным стандартом шифрования</span>
+                </div>
+            </div>
+
+            <div class="security-feature reveal">
+                <div class="security-feature-tag">[SYS] ЗАЩИТА ИИ</div>
+                <div class="security-feature-text">
+                    <strong>Prompt Injection Guard</strong>
+                    <span>Защита от атак на модели через вредоносные запросы. Валидация всех input'ов</span>
+                </div>
+            </div>
+
+            <div class="security-feature reveal">
+                <div class="security-feature-tag">[SYS] ДОСТУП</div>
+                <div class="security-feature-text">
+                    <strong>RBAC + LDAP/AD</strong>
+                    <span>Интеграция с вашей системой управления доступом. Детальные права для каждого агента</span>
+                </div>
+            </div>
+
+            <div class="security-feature reveal">
+                <div class="security-feature-tag">[SYS] РЕГУЛЯЦИЯ</div>
+                <div class="security-feature-text">
+                    <strong>152-ФЗ + ФСТЭК</strong>
+                    <span>Полная готовность к аудитам ФСБ и регуляторов. Все логи и аудит-trail сохраняются</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGIES SECTION -->
+    <section class="technologies" id="technologies">
+        <span class="section-tag">[SYS] ТЕХНОЛОГИИ</span>
+        <h2 class="section-title">Технологический стек</h2>
+
+        <div class="tech-grid">
+            <div class="tech-layer reveal">
+                <div class="tech-layer-label">ОРКЕСТРАЦИЯ</div>
+                <div class="tech-items">
+                    <div class="tech-badge tech-badge-primary active">LangGraph</div>
+                </div>
+            </div>
+
+            <div class="tech-layer reveal">
+                <div class="tech-layer-label">МОДЕЛИ</div>
+                <div class="tech-items">
+                    <div class="tech-badge tech-badge-primary">Qwen 2.5</div>
+                    <div class="tech-badge">Llama 3.2</div>
+                    <div class="tech-badge">GigaChat</div>
+                    <div class="tech-badge">Ollama</div>
+                    <div class="tech-badge">vLLM</div>
+                </div>
+            </div>
+
+            <div class="tech-layer reveal">
+                <div class="tech-layer-label">ДАННЫЕ</div>
+                <div class="tech-items">
+                    <div class="tech-badge tech-badge-primary">Qdrant</div>
+                    <div class="tech-badge">PgVector</div>
+                    <div class="tech-badge">FastAPI</div>
+                </div>
+            </div>
+
+            <div class="tech-layer reveal">
+                <div class="tech-layer-label">ИНТЕГРАЦИИ</div>
+                <div class="tech-items">
+                    <div class="tech-badge tech-badge-primary">1С ERP</div>
+                    <div class="tech-badge">Bitrix24 CRM</div>
+                    <div class="tech-badge">Диадок ЭДО</div>
+                    <div class="tech-badge">Честный Знак</div>
+                </div>
+            </div>
+
+            <div class="tech-layer reveal">
+                <div class="tech-layer-label">МОНИТОРИНГ</div>
+                <div class="tech-items">
+                    <div class="tech-badge tech-badge-primary">Prometheus</div>
+                    <div class="tech-badge">Grafana</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta" id="cta">
+        <div class="cta-content reveal">
+            <h2>Готовы к пилоту?</h2>
+            <p>Запустите AI-систему внутри вашего защищённого периметра. Результат через несколько недель.</p>
+            <a href="order.html" class="btn btn-primary btn-large">
+                Заказать тест
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 8h12M8 4l4 4-4 4"/>
+                </svg>
+            </a>
+        </div>
+
+        <div class="cta-terminal reveal">
+            <div class="cta-terminal-line">
+                <span class="cta-terminal-label">[READY]</span>
+                <span class="cta-terminal-value">Deploy: OK</span>
+            </div>
+            <div class="cta-terminal-line">
+                <span class="cta-terminal-label">[AGENTS]</span>
+                <span class="cta-terminal-value">Active: <span class="counter">12</span></span>
+            </div>
+            <div class="cta-terminal-line">
+                <span class="cta-terminal-label">[COMPLIANCE]</span>
+                <span class="cta-terminal-value">Score: <span class="counter">98.7%</span></span>
+            </div>
+            <div class="cta-terminal-line">
+                <span class="cta-terminal-label">[UPTIME]</span>
+                <span class="cta-terminal-value"><span class="counter">365</span>d 99.99%</span>
+            </div>
+            <div class="cta-terminal-line">
+                <span class="cta-terminal-label">[LATENCY]</span>
+                <span class="cta-terminal-value"><span class="counter">127ms</span></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
+    </div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#citizens">Обращения граждан</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="careers.html">Карьера</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
+</footer>
+
+    <script>
+        // Burger menu toggle
+        const burgerMenu = document.getElementById('burgerMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        burgerMenu.addEventListener('click', () => {
+            burgerMenu.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerMenu.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // HERO CANVAS - Neural Network Visualization
+        function initializeHeroCanvas() {
+            const canvas = document.getElementById('heroCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const dpr = window.devicePixelRatio || 1;
+            
+            // Set canvas size
+            function resizeCanvas() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = window.innerWidth * dpr;
+                canvas.height = window.innerHeight * dpr;
+                ctx.scale(dpr, dpr);
+            }
+            
+            resizeCanvas();
+            
+            // Seeded random for consistent node positions
+            function seededRandom(seed) {
+                const x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+            
+            // Generate nodes
+            const nodeCount = 70;
+            const nodes = [];
+            
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: seededRandom(i * 12.9898) * window.innerWidth,
+                    y: seededRandom(i * 78.233) * window.innerHeight,
+                    vx: (seededRandom(i * 45.164) - 0.5) * 0.3,
+                    vy: (seededRandom(i * 94.673) - 0.5) * 0.3,
+                    pulse: seededRandom(i * 23.456) * Math.PI * 2,
+                    pulseSpeed: 0.01 + seededRandom(i * 67.890) * 0.02,
+                    id: i
+                });
+            }
+            
+            // Data packets
+            const packets = [];
+            const connectionDistance = 150;
+            
+            function createPacketsForConnection(node1, node2) {
+                packets.push({
+                    fromNode: node1.id,
+                    toNode: node2.id,
+                    progress: Math.random(),
+                    speed: 0.002 + Math.random() * 0.003
+                });
+            }
+            
+            // Create initial connections and packets
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < Math.min(i + 4, nodes.length); j++) {
+                    const dx = nodes[j].x - nodes[i].x;
+                    const dy = nodes[j].y - nodes[i].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < connectionDistance && Math.random() < 0.6) {
+                        if (Math.random() < 0.5) {
+                            createPacketsForConnection(nodes[i], nodes[j]);
+                        }
+                    }
+                }
+            }
+            
+            let animationId;
+            
+            function drawNetwork() {
+                // Clear canvas with slight trail effect
+                ctx.fillStyle = 'rgba(11, 15, 26, 0.05)';
+                ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+                
+                // Update nodes
+                for (let node of nodes) {
+                    node.pulse += node.pulseSpeed;
+                    node.x += node.vx;
+                    node.y += node.vy;
+                    
+                    // Bounce off edges
+                    if (node.x < 0 || node.x > window.innerWidth) node.vx *= -1;
+                    if (node.y < 0 || node.y > window.innerHeight) node.vy *= -1;
+                    
+                    // Keep in bounds
+                    node.x = Math.max(0, Math.min(window.innerWidth, node.x));
+                    node.y = Math.max(0, Math.min(window.innerHeight, node.y));
+                }
+                
+                // Draw connections and update/draw packets
+                const drawnConnections = new Set();
+                
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < Math.min(i + 6, nodes.length); j++) {
+                        const node1 = nodes[i];
+                        const node2 = nodes[j];
+                        const dx = node2.x - node1.x;
+                        const dy = node2.y - node1.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < connectionDistance) {
+                            const connectionKey = i + ',' + j;
+                            
+                            // Draw connection line
+                            if (!drawnConnections.has(connectionKey)) {
+                                const alpha = 1 - (dist / connectionDistance);
+                                ctx.strokeStyle = `rgba(129, 140, 248, ${alpha * 0.3})`;
+                                ctx.lineWidth = 1.5;
+                                ctx.beginPath();
+                                ctx.moveTo(node1.x, node1.y);
+                                ctx.lineTo(node2.x, node2.y);
+                                ctx.stroke();
+                                
+                                drawnConnections.add(connectionKey);
+                                
+                                // Create packet occasionally
+                                if (Math.random() < 0.002) {
+                                    createPacketsForConnection(node1, node2);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                // Update and draw packets
+                for (let i = packets.length - 1; i >= 0; i--) {
+                    const packet = packets[i];
+                    packet.progress += packet.speed;
+                    
+                    if (packet.progress >= 1) {
+                        packets.splice(i, 1);
+                        continue;
+                    }
+                    
+                    const fromNode = nodes[packet.fromNode];
+                    const toNode = nodes[packet.toNode];
+                    
+                    const x = fromNode.x + (toNode.x - fromNode.x) * packet.progress;
+                    const y = fromNode.y + (toNode.y - fromNode.y) * packet.progress;
+                    
+                    // Draw packet glow
+                    const gradient = ctx.createRadialGradient(x, y, 0, x, y, 8);
+                    gradient.addColorStop(0, 'rgba(165, 180, 252, 0.8)');
+                    gradient.addColorStop(1, 'rgba(129, 140, 248, 0.2)');
+                    
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 8, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = '#a5b4fc';
+                    ctx.beginPath();
+                    ctx.arc(x, y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                // Draw nodes with pulsing glow
+                for (let node of nodes) {
+                    const pulseAmount = Math.sin(node.pulse) * 0.3 + 0.7;
+                    const glowRadius = 6 * pulseAmount;
+                    
+                    // Glow
+                    const glowGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, glowRadius + 8);
+                    glowGradient.addColorStop(0, `rgba(129, 140, 248, ${0.4 * pulseAmount})`);
+                    glowGradient.addColorStop(1, 'rgba(129, 140, 248, 0)');
+                    
+                    ctx.fillStyle = glowGradient;
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, glowRadius + 8, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Core
+                    ctx.fillStyle = '#a5b4fc';
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, 4 * pulseAmount, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                
+                animationId = requestAnimationFrame(drawNetwork);
+            }
+            
+            drawNetwork();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+            });
+        }
+        
+        initializeHeroCanvas();
+
+                // Scroll parallax effect
+        window.addEventListener('scroll', () => {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const rect = hero.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    const offset = window.scrollY * 0.3;
+                    if (canvas) {
+                        canvas.style.transform = `translateY(${offset}px)`;
+                    }
+                }
+            }
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // Tech badge interactivity
+        const techBadges = document.querySelectorAll('.tech-badge');
+        techBadges.forEach(badge => {
+            badge.addEventListener('click', () => {
+                // Remove active class from siblings
+                badge.parentElement.querySelectorAll('.tech-badge').forEach(b => {
+                    b.classList.remove('active');
+                });
+                badge.classList.add('active');
+            });
+        });
+
+        // Counter animation for CTA terminal
+        function animateCounter(element, target, duration = 2000) {
+            let current = 0;
+            const start = Date.now();
+
+            function update() {
+                const progress = Math.min((Date.now() - start) / duration, 1);
+                current = Math.floor(progress * target);
+                element.textContent = current;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            update();
+        }
+
+        // Animate counters when CTA section is visible
+        const ctaTerminal = document.querySelector('.cta-terminal');
+        if (ctaTerminal) {
+            const ctaObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counters = document.querySelectorAll('.counter');
+                        counters.forEach(counter => {
+                            const text = counter.textContent;
+                            let target = parseInt(text);
+                            if (text.includes('d')) target = 365;
+                            if (text.includes('ms')) target = 127;
+                            if (text.includes('%')) target = 98.7;
+                            
+                            if (!isNaN(target)) {
+                                animateCounter(counter, target);
+                            }
+                        });
+                        ctaObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            ctaObserver.observe(ctaTerminal);
+        }
+    </script>
+
+// footer year
+(function(){var el=document.getElementById('footer-year');if(el)el.textContent=new Date().getFullYear();})();
+
+</body>
+</html>

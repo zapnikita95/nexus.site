@@ -4,226 +4,858 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Партнёрство и условия внедрения мультиагентного ИИ — Нексус-Тех</title>
-<meta name="description" content="Внедрение мультиагентного ИИ on-premise: условия по договору — фикс + SLA или фикс + бонус за результат. Пилот за 1–2 месяца. Кейсы и этапы.">
+<meta name="description" content="Внедрение мультиагентного ИИ on-premise: условия по договору — фикс + SLA или фикс + бонус за результат. Пилот за 1–2 месяца.">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="canonical" href="https://нексус-тех.рф/partnership.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://нексус-тех.рф/partnership.html">
-<meta property="og:title" content="Партнёрство: внедрение мультиагентного ИИ on-premise — Нексус-Тех">
-<meta property="og:description" content="Условия по договору: фикс + SLA или фикс + бонус за результат. Пилот за 1–2 месяца.">
-<meta property="og:locale" content="ru_RU">
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Service","name":"Внедрение мультиагентного ИИ on-premise","provider":{"@type":"Organization","name":"Нексус-Тех"},"description":"Пилот за 1–2 месяца. Условия по договору: фикс + SLA или фикс + бонус за результат. Комплаенс, обработка обращений, автоматизация согласований.","areaServed":"RU"}
-</script>
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-.monet-hero .monet-timeline h3.s-title,
-.monet-hero .monet-values h3.s-title {
-  letter-spacing: 0.02em;
-  word-spacing: 0.08em;
+*{margin:0;padding:0;box-sizing:border-box}
+html{
+  --bg:#0b0f1a;
+  --surface:#10152a;
+  --surface2:#161c35;
+  --text:#e2e4ea;
+  --text2:#8890a4;
+  --text3:#525a72;
+  --accent:#818cf8;
+  --accent2:#a5b4fc;
+  --ok:#4ade80;
+  --line:1px solid rgba(129,140,248,0.15);
+  scroll-behavior:smooth;
 }
+body{background:var(--bg);color:var(--text);font-family:'Manrope',sans-serif;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(11,15,26,0.95);backdrop-filter:blur(10px);border-bottom:var(--line);padding:1.5rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:.15em;color:var(--accent);text-decoration:none;font-family:'JetBrains Mono',monospace}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{text-decoration:none;color:var(--text2);font-size:.88rem;transition:color .3s;font-family:'JetBrains Mono',monospace;letter-spacing:.03em}
+.nav-links a:hover{color:var(--accent)}
+.nav-active{color:var(--accent)!important}
+.nav-cta-terminal{border:1px solid var(--accent);border-radius:4px;padding:.6rem 1rem;background:transparent;display:flex;align-items:center;gap:.3rem;white-space:nowrap;font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--accent)!important;transition:all .3s}
+.nav-cta-terminal:hover{background:rgba(129,140,248,.1);box-shadow:0 0 20px rgba(129,140,248,.2)}
+.nav-cta-prompt{color:var(--accent)}
+.nav-cta-yn{color:var(--text3);font-size:.85rem}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);margin-left:.3rem;animation:blink 1s infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
+
+/* HERO */
+.hero{margin-top:5rem;padding:5rem 2rem;min-height:55vh;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--surface);border-bottom:var(--line)}
+.hero-content{max-width:700px;position:relative;z-index:1}
+.hero-tag{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-size:clamp(2rem,4vw,3rem);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:1.5rem}
+.hero p{font-size:1.05rem;color:var(--text2);line-height:1.75;max-width:560px}
+.hero-hex{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:42%;max-width:460px;pointer-events:none}
+
+/* SECTION */
+.s-wrap{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section{padding:5rem 0}
+.section-alt{background:var(--surface)}
+.s-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+.s-title{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;letter-spacing:-.03em;margin-bottom:1.5rem;line-height:1.2}
+.s-sub{font-size:1rem;color:var(--text2);line-height:1.75;max-width:680px;margin-bottom:2.5rem}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.rv.visible{opacity:1;transform:none}
+
+/* PHASES */
+.phases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.phase-card{background:var(--surface2);border:1px solid rgba(129,140,248,.18);border-radius:8px;padding:28px 24px;position:relative}
+.phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),transparent);border-radius:8px 8px 0 0}
+.phase-num{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+.phase-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;letter-spacing:-.01em}
+.phase-card p{font-size:.88rem;color:var(--text2);line-height:1.75}
+
+/* CONTRACT CARDS (clickable) */
+.contract-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem}
+.contract-card{background:var(--bg);border:1px solid rgba(129,140,248,.2);border-radius:8px;padding:28px 24px;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+.contract-card:hover,.contract-card.expanded{border-color:var(--accent);background:rgba(129,140,248,.04)}
+.contract-card::after{content:'[+]';position:absolute;top:20px;right:20px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text3);transition:color .3s}
+.contract-card.expanded::after{content:'[-]';color:var(--accent)}
+.contract-card h3{font-size:1.05rem;font-weight:700;margin-bottom:.75rem}
+.contract-card .contract-short{font-size:.9rem;color:var(--text2);line-height:1.7}
+.contract-card .contract-detail{font-size:.85rem;color:var(--text2);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s ease,padding-top .4s}
+.contract-card.expanded .contract-detail{max-height:300px;padding-top:.75rem}
+.contract-tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem}
+
+/* PRINCIPLES */
+.principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.principle-card{background:var(--bg);border:1px solid rgba(129,140,248,.15);border-radius:8px;padding:24px;transition:border-color .3s}
+.principle-card:hover{border-color:var(--accent)}
+.principle-icon{width:36px;height:36px;margin-bottom:1rem;color:var(--accent);opacity:.7}
+.principle-card h4{font-size:1rem;font-weight:700;margin-bottom:.6rem}
+.principle-card p{font-size:.88rem;color:var(--text2);line-height:1.7}
+
+/* CASES */
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.case-card{background:var(--bg);border:1px solid rgba(129,140,248,.15);border-radius:8px;padding:24px;transition:border-color .3s;display:flex;flex-direction:column}
+.case-card:hover{border-color:var(--accent)}
+.case-badge{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;padding:.25rem .6rem;background:rgba(129,140,248,.08);border-radius:3px;display:inline-block}
+.case-card h4{font-size:1rem;font-weight:700;margin-bottom:.6rem;letter-spacing:-.01em;min-height:3rem}
+.case-card p{font-size:.85rem;color:var(--text2);line-height:1.75}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.comp-table th,.comp-table td{padding:.75rem 1rem;text-align:left;border-bottom:var(--line)}
+.comp-table thead th{font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text3)}
+.comp-table thead th.us{color:var(--accent)}
+.comp-table td.us{color:var(--ok);font-weight:600}
+.comp-table td.lo{color:var(--text3)}
+.comp-table tr:hover td{background:rgba(129,140,248,.03)}
+.ck{color:var(--ok)}
+
+/* FOOTER */
+footer{padding:3rem 2rem 2rem;border-top:var(--line);background:var(--bg)}
+.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
+.footer-brand-sub{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3);line-height:1.5}
+.footer-contact{margin-top:1rem}
+.footer-contact a{font-family:'JetBrains Mono',monospace;display:block;font-size:.78rem;color:var(--text2);text-decoration:none;margin-bottom:.3rem;transition:color .3s}
+.footer-contact a:hover{color:var(--accent)}
+.footer-col h4{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:1rem}
+.footer-col ul{list-style:none}
+.footer-col ul li a{font-family:'JetBrains Mono',monospace;display:block;font-size:.78rem;color:var(--text2);text-decoration:none;margin-bottom:.5rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--accent)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-copyright{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3);text-decoration:none;transition:color .3s}
+.footer-bottom-links a:hover{color:var(--accent)}
+@media(max-width:960px){
+  .phases-grid,.principles-grid,.cases-grid{grid-template-columns:1fr 1fr}
+  .contract-grid{grid-template-columns:1fr}
+  .footer-content{grid-template-columns:1fr 1fr;gap:2rem}
+  .hero-hex{display:none}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hero{padding:3.5rem 1.5rem;min-height:auto}
+  .hero h1{font-size:1.8rem}
+  .phases-grid,.principles-grid,.cases-grid{grid-template-columns:1fr}
+  .footer-content{grid-template-columns:1fr}
+}
+
+/* CTA TERMINAL FORM */
+.cta-section{padding:5rem 2rem;background:var(--surface);border-top:var(--line)}
+.cta-wrap{max-width:760px;margin:0 auto}
+.cta-header{margin-bottom:2rem}
+.cta-tag-f{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem}
+.cta-title-f{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:.6rem}
+.cta-sub-f{font-size:.95rem;color:var(--text2);line-height:1.75}
+.terminal-window{border:1px solid rgba(129,140,248,.25);background:var(--bg);overflow:hidden;border-radius:4px}
+.terminal-titlebar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2);border-bottom:var(--line)}
+.t-dots{display:flex;gap:6px}
+.t-dot{width:10px;height:10px;border-radius:50%}
+.t-dot-r{background:#f87171;opacity:.7}
+.t-dot-y{background:#fbbf24;opacity:.7}
+.t-dot-g{background:#4ade80;opacity:.7}
+.t-wtitle{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text3);margin-left:8px;letter-spacing:.06em}
+.t-wprogress{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text2)}
+.t-wprogress span{color:var(--accent)}
+.terminal-body{padding:1.5rem 1.5rem 2rem;min-height:320px;overflow-y:auto;max-height:560px}
+.boot-lp{font-family:'JetBrains Mono',monospace;font-size:.82rem;margin-bottom:3px;opacity:0;animation:fadeInP .2s forwards}
+@keyframes fadeInP{to{opacity:1}}
+.boot-lp.cl-accent{color:var(--accent)}
+.boot-lp.cl-dim{color:var(--text3)}
+.boot-lp.cl-ok{color:var(--ok)}
+.term-hist-p{margin-bottom:2px}
+.term-hist-line-p{display:flex;align-items:baseline;gap:4px;margin-bottom:4px;color:var(--text3);font-family:'JetBrains Mono',monospace;font-size:.82rem;opacity:.7;cursor:pointer;transition:opacity .15s;border-left:2px solid transparent;padding-left:4px}
+.term-hist-line-p:hover{opacity:1;border-left-color:var(--accent)}
+.term-hist-lbl-p{min-width:160px;flex-shrink:0;color:var(--text3)}
+.term-hist-val-p{color:var(--text2)}
+.term-hist-ok-p{color:var(--ok);margin-left:6px}
+.term-hist-edit-p{font-size:.7rem;color:var(--text3);margin-left:6px;opacity:0;transition:opacity .15s}
+.term-hist-line-p:hover .term-hist-edit-p{opacity:1}
+.term-current-p{margin-top:8px}
+.term-prow{display:flex;align-items:center;flex-wrap:nowrap;gap:0;font-family:'JetBrains Mono',monospace}
+.term-pbadge{color:var(--text3);font-size:.75rem;margin-right:8px;white-space:nowrap;min-width:30px}
+.term-pprompt{color:var(--text3);margin-right:4px}
+.term-plabel{color:var(--accent2);margin-right:6px;white-space:nowrap;font-size:.82rem}
+.term-phint{color:var(--text3);font-size:.7rem;margin-left:10px;white-space:nowrap}
+.term-pinput{background:none;border:none;border-bottom:1px solid var(--accent);outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.88rem;min-width:180px;max-width:300px;padding:2px 0;caret-color:var(--accent)}
+.term-pinput:focus{border-bottom-color:var(--accent2)}
+.term-pselect{background:var(--surface2);border:1px solid var(--accent);outline:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.82rem;padding:4px 8px;cursor:pointer;min-width:220px}
+.term-pselect option{background:var(--surface2)}
+.term-perr{color:#f87171;font-size:.75rem;margin-top:6px;padding-left:38px;display:none;font-family:'JetBrains Mono',monospace}
+.term-perr.visible{display:block}
+.consent-row-f{display:flex;align-items:center;gap:10px;margin-top:1.5rem;padding:12px 0;border-top:var(--line);font-family:'JetBrains Mono',monospace;font-size:.8rem}
+.consent-row-f input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer}
+.consent-row-f label{color:var(--text2);cursor:pointer}
+.submit-btn-f{display:block;width:100%;margin-top:1rem;padding:13px 2rem;background:none;border:1px solid var(--accent);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-align:center}
+.submit-btn-f:hover:not(:disabled){background:rgba(129,140,248,.1);color:var(--accent2);border-color:var(--accent2)}
+.submit-btn-f:disabled{opacity:.35;cursor:not-allowed;border-color:var(--text3);color:var(--text3)}
+.success-box-f{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok);color:var(--ok);font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;line-height:1.7;display:none}
+.success-box-f.visible{display:block}
+
+/* === CANONICAL NAV (override) === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)!important;letter-spacing:0.04em;transition:all 0.2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08);color:var(--accent2)!important;border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:1px solid var(--border);border-radius:4px;cursor:pointer;color:var(--text)}
+.nav-burger span{display:block;width:20px;height:2px;background:currentColor}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}.nav-open .nav-links{display:flex!important;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(11,15,26,0.98);border-bottom:1px solid var(--border);padding:1rem;gap:0.75rem;align-items:flex-start}.nav-burger{display:flex!important}.nav-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav-open .nav-burger span:nth-child(2){opacity:0}.nav-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}}
+/* === CANONICAL FOOTER (override) === */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:0.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem}
+.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-contact a:hover{color:var(--accent)}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+/* === footer-year JS fallback === */
+
+/* FOOTER GLOW ENHANCEMENT */
+footer {
+  position: relative;
+}
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(129,140,248,0.4) 50%, transparent 100%);
+}
+.footer-brand { margin-bottom: 0.25rem; }
+
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — партнёрство, ИИ on-premise за результат"></a>
-    <ul class="nav-links">
-      <li><a href="solutions.html">Решения</a></li>
-      <li><a href="security.html">Безопасность</a></li>
-      <li><a href="technology.html">Технологии</a></li>
-      <li><a href="agents.html">Модели агентов</a></li>
-      <li><a href="articles.html">Статьи</a></li>
-      <li><a href="partnership.html" class="active">Партнёрство</a></li>
-    </ul>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
-    <button class="nav-burger" aria-label="Меню" id="navBurger"><span></span><span></span><span></span></button>
-  </div>
-  <div class="nav-mobile" id="navMobile">
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <button type="button" class="nav-burger" id="nav-burger" aria-label="Меню" style="display:none"><span></span><span></span><span></span></button>
+  <div class="nav-links">
     <a href="solutions.html">Решения</a>
     <a href="security.html">Безопасность</a>
     <a href="technology.html">Технологии</a>
     <a href="agents.html">Модели агентов</a>
     <a href="articles.html">Статьи</a>
     <a href="partnership.html">Партнёрство</a>
-    <a href="order.html" class="nav-cta">Заказать тест</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
   </div>
 </nav>
 
-<section class="page-hero">
-  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
-  <div class="s-pad" style="position:relative;z-index:1">
-    <div class="s-label rv">Модель работы</div>
-    <h1 class="s-title rv">Внедрение мультиагентного ИИ:<br>условия по договору</h1>
-    <div class="s-sub rv">Условия по договору: фикс + SLA или фикс + бонус за результат. Пилот за 1–2 месяца.</div>
+<section class="hero">
+  <!-- Rotating symmetrical hexagon -->
+  <svg class="hero-hex" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="hglow"><feGaussianBlur stdDeviation="3" result="cb"/><feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+    <g transform="translate(200,200)" filter="url(#hglow)" opacity="0.55">
+      <!-- Outer hex -->
+      <polygon points="0,-160 138.6,-80 138.6,80 0,160 -138.6,80 -138.6,-80"
+               fill="none" stroke="#818cf8" stroke-width="1.5"
+               style="transform-box:fill-box;transform-origin:center;animation:hexspin 18s linear infinite"/>
+      <!-- Mid hex -->
+      <polygon points="0,-110 95.3,-55 95.3,55 0,110 -95.3,55 -95.3,-55"
+               fill="none" stroke="#a5b4fc" stroke-width="1"
+               style="transform-box:fill-box;transform-origin:center;animation:hexspin 18s linear infinite reverse"/>
+      <!-- Inner hex -->
+      <polygon points="0,-65 56.3,-32.5 56.3,32.5 0,65 -56.3,32.5 -56.3,-32.5"
+               fill="rgba(129,140,248,0.06)" stroke="#818cf8" stroke-width="1.5"
+               style="transform-box:fill-box;transform-origin:center;animation:hexspin 18s linear infinite"/>
+      <!-- Center dot -->
+      <circle cx="0" cy="0" r="6" fill="#818cf8" opacity="0.7"/>
+      <!-- Diagonal connectors -->
+      <line x1="0" y1="-160" x2="0" y2="160" stroke="#818cf8" stroke-width="0.5" opacity="0.25"/>
+      <line x1="-138.6" y1="-80" x2="138.6" y2="80" stroke="#818cf8" stroke-width="0.5" opacity="0.25"/>
+      <line x1="-138.6" y1="80" x2="138.6" y2="-80" stroke="#818cf8" stroke-width="0.5" opacity="0.25"/>
+      <!-- Corner dots -->
+      <circle cx="0" cy="-160" r="3" fill="#a5b4fc" opacity="0.6"/>
+      <circle cx="138.6" cy="-80" r="3" fill="#a5b4fc" opacity="0.6"/>
+      <circle cx="138.6" cy="80" r="3" fill="#a5b4fc" opacity="0.6"/>
+      <circle cx="0" cy="160" r="3" fill="#a5b4fc" opacity="0.6"/>
+      <circle cx="-138.6" cy="80" r="3" fill="#a5b4fc" opacity="0.6"/>
+      <circle cx="-138.6" cy="-80" r="3" fill="#a5b4fc" opacity="0.6"/>
+    </g>
+    <style>
+      @keyframes hexspin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    </style>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-tag">[SYS] ПАРТНЁРСТВО</div>
+    <h1>Внедрение мультиагентного ИИ:<br>условия по договору</h1>
+    <p>Условия оплаты по договору: фикс + SLA или фикс + бонус за результат. Пилот за 1–2 месяца.</p>
   </div>
 </section>
 
-<!-- УСЛОВИЯ ПО ДОГОВОРУ -->
-<section style="padding:0 0 80px">
-  <div class="content-wrap">
-    <div class="pricing-hero rv">
-      <div class="pricing-hero-inner">
-        <h2 class="s-title" style="font-size:clamp(24px,3vw,36px);margin-bottom:20px">Условия оплаты по договору</h2>
-        <p class="s-sub" style="max-width:720px;margin-bottom:0">Условия оплаты по договору: фикс + SLA или фикс + бонус за результат.</p>
+<!-- FROM PILOT TO SCALE -->
+<section class="section">
+  <div class="s-wrap">
+    <div class="s-tag rv">Этапы</div>
+    <div class="s-title rv">От пилота до масштаба</div>
+    <div class="phases-grid">
+      <div class="phase-card rv">
+        <div class="phase-num">Фаза 1</div>
+        <h3>Пилотный проект</h3>
+        <p>Развёртывание MVP в вашем контуре за 1–2 месяца. Интеграция с ключевыми системами, обучение команды. Итоговый отчёт по окупаемости с реальными метриками и рекомендациями по масштабированию.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PARTNERSHIP MODEL -->
-<section style="padding:0 0 120px">
-  <div class="content-wrap">
-    <div class="monet-hero">
-      <div class="monet-timeline">
-        <div class="s-label rv">Этапы</div>
-        <h3 class="s-title rv" style="font-size:clamp(22px,2.5vw,32px);margin-bottom:32px">От пилота до масштаба</h3>
-        <div class="mt-step rv">
-          <div class="mt-tag">Фаза 1</div>
-          <h4>Пилотный проект</h4>
-          <p>Развёртывание MVP в вашем контуре за 1–2 месяца. Интеграция с ключевыми системами, обучение команды. Итоговый отчёт по окупаемости с реальными метриками и рекомендациями по масштабированию.</p>
-        </div>
-        <div class="mt-step rv">
-          <div class="mt-tag">Фаза 2</div>
-          <h4>Полное внедрение</h4>
-          <p>Масштабирование на целевые процессы. Подключение 1С, CRM, ЭДО, внутренних API. Настройка агентов под ваши регламенты и сценарии.</p>
-        </div>
-        <div class="mt-step rv">
-          <div class="mt-tag">Фаза 3</div>
-          <h4>Поддержка и развитие</h4>
-          <p>Оптимизация моделей, мониторинг эффективности, обновления. Масштабирование под рост бизнеса и новые задачи.</p>
-        </div>
+      <div class="phase-card rv">
+        <div class="phase-num">Фаза 2</div>
+        <h3>Полное внедрение</h3>
+        <p>Масштабирование на целевые процессы. Подключение 1С, CRM, ЭДО, внутренних API. Настройка агентов под ваши регламенты и сценарии.</p>
       </div>
-      <div class="monet-values">
-        <div class="s-label rv">Принципы</div>
-        <h3 class="s-title rv" style="font-size:clamp(22px,2.5vw,32px);margin-bottom:24px">Почему так работаем</h3>
-        <div class="mv-card rv">
-          <div class="mv-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-          <h5>Прозрачные условия в договоре</h5>
-          <p>Фикс + SLA или фикс + бонус за результат.</p>
-        </div>
-        <div class="mv-card rv">
-          <div class="mv-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-          <h5>Низкий порог входа</h5>
-          <p>Пилот за 1–2 месяца. Масштабирование — по согласованию после успешного внедрения.</p>
-        </div>
-        <div class="mv-card rv">
-          <div class="mv-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-          <h5>Три модели использования</h5>
-          <p>Соответствие (проверка документов 152-ФЗ, маркировка), Обращения (обработка обращений клиентов), Операционная (согласования, маршрутизация). Объём и SLA — в договоре.</p>
-        </div>
+      <div class="phase-card rv">
+        <div class="phase-num">Фаза 3</div>
+        <h3>Поддержка и развитие</h3>
+        <p>Оптимизация моделей, мониторинг эффективности, обновления. Масштабирование под рост бизнеса и новые задачи.</p>
       </div>
-    </div>
-
-    <!-- ФОРМАТЫ ПО ДОГОВОРУ -->
-    <div class="s-pad" style="margin-top:64px">
-      <div class="s-label rv">Форматы</div>
-      <h3 class="s-title rv" style="font-size:clamp(20px,2.5vw,28px)">Два варианта в договоре</h3>
-      <p class="s-sub rv" style="max-width:640px;margin-bottom:32px">При подписании договора Заказчик выбирает один из вариантов.</p>
-    </div>
-    <div class="monet-models-row">
-      <div class="mmr-item rv">
-        <div class="mmr-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <h5>Фикс + SLA</h5>
-        <p>Ежемесячная фиксированная плата за право использования сервиса и услуги внедрения, настройки, поддержки и обучения. Объём услуг определяется Соглашением об уровне обслуживания (SLA). Оплата не позднее 10-го числа каждого месяца.</p>
-      </div>
-      <div class="mmr-item rv">
-        <div class="mmr-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12l2 2 4-4"/></svg></div>
-        <h5>Фикс + бонус за результат</h5>
-        <p>Та же ежемесячная фиксированная плата плюс фиксированный бонус при достижении согласованного результата (например, отсутствие штрафов по заданному направлению в расчётном периоде). Условие выплаты бонуса и сумма прописываются в договоре.</p>
-      </div>
-    </div>
-
-    <div class="s-pad" style="margin-top:48px">
-      <div class="s-label rv">Надстройки</div>
-      <h3 class="s-title rv" style="font-size:clamp(20px,2.5vw,28px)">Voting и Debate</h3>
-      <p class="s-sub rv" style="max-width:680px">Надстройки для повышения точности: голосование нескольких агентов и дебаты (два варианта ответа + выбор лучшего). Включаются в пресетах под вашу задачу — <a href="technology.html#presets">таблица пресетов на странице «Технологии»</a>. Стоимость надстроек учитывается в фиксированной части или в расчёте под ваш проект. Оценить контекстное окно под ваше железо: <a href="technology.html#kv-calculator">калькулятор KV-cache</a>.</p>
     </div>
   </div>
 </section>
 
-<!-- КЕЙСЫ (вымышленные, без названий) -->
-<section style="padding:80px 0 120px;background:var(--surface)">
-  <div class="s-pad">
-    <div class="s-label rv">Кейсы</div>
-    <h2 class="s-title rv">Примеры применения</h2>
-    <div class="s-sub rv" style="max-width:560px">Типовые сценарии внедрения без привязки к конкретным компаниям.</div>
+<!-- CONTRACT FORMATS (clickable) -->
+<section class="section section-alt">
+  <div class="s-wrap">
+    <div class="s-tag rv">Форматы</div>
+    <div class="s-title rv">Два варианта в договоре</div>
+    <p class="s-sub rv">При подписании договора Заказчик выбирает один из вариантов.</p>
+    <div class="contract-grid">
+      <div class="contract-card rv" tabindex="0">
+        <div class="contract-tag">Вариант 1</div>
+        <h3>Фикс + SLA</h3>
+        <div class="contract-short">Ежемесячная фиксированная плата за право использования сервиса и услуги внедрения, настройки, поддержки и обучения.</div>
+        <div class="contract-detail">Объём услуг определяется Соглашением об уровне обслуживания (SLA). Оплата не позднее 10-го числа каждого месяца. Подходит для компаний с предсказуемым потоком задач и чёткими требованиями к доступности системы.</div>
+      </div>
+      <div class="contract-card rv" tabindex="0">
+        <div class="contract-tag">Вариант 2</div>
+        <h3>Фикс + бонус за результат</h3>
+        <div class="contract-short">Та же ежемесячная фиксированная плата плюс фиксированный бонус при достижении согласованного результата.</div>
+        <div class="contract-detail">Например, отсутствие штрафов по заданному направлению в расчётном периоде. Условие выплаты бонуса и сумма прописываются в договоре. Подходит, когда важна привязка к конкретному бизнес-результату.</div>
+      </div>
+    </div>
   </div>
-  <div class="content-wrap">
+</section>
+
+<!-- PRINCIPLES -->
+<section class="section">
+  <div class="s-wrap">
+    <div class="s-tag rv">Принципы</div>
+    <div class="s-title rv">Почему так работаем</div>
+    <div class="principles-grid">
+      <div class="principle-card rv">
+        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <h4>Прозрачные условия в договоре</h4>
+        <p>Фикс + SLA или фикс + бонус за результат. Никаких скрытых платежей и неожиданных формул расчёта.</p>
+      </div>
+      <div class="principle-card rv">
+        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <h4>Низкий порог входа</h4>
+        <p>Пилот за 1–2 месяца. Масштабирование — по согласованию после успешного внедрения. Без долгих тендеров.</p>
+      </div>
+      <div class="principle-card rv">
+        <svg class="principle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <h4>Три модели использования</h4>
+        <p>Комплаенс, Обращения, Операционная. Объём и SLA — в договоре. Надстройки (Voting, Debate) — по потребности.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section section-alt">
+  <div class="s-wrap">
+    <div class="s-tag rv">Кейсы</div>
+    <div class="s-title rv">Примеры применения</div>
+    <p class="s-sub rv">Типовые сценарии внедрения без привязки к конкретным компаниям.</p>
     <div class="cases-grid">
       <div class="case-card rv">
-        <div class="case-tag">Комплаенс</div>
+        <span class="case-badge">Комплаенс</span>
         <h4>Проверка документов в производственной компании</h4>
-        <p>Клиент — производственное предприятие с большим объёмом договоров и накладных. Развернули пилот проверки на соответствие 152-ФЗ и маркировке. За два месяца подключили выгрузки из 1С и ЭДО, обучили команду. Итог: сокращение времени первичной проверки документа, снижение доли ручных проверок. Условия по договору — фиксированная плата и SLA или вариант с бонусом за результат.</p>
+        <p>Развернули пилот проверки на соответствие 152-ФЗ и маркировке. За два месяца подключили выгрузки из 1С и ЭДО, обучили команду. Итог: сокращение времени первичной проверки, снижение доли ручных проверок.</p>
       </div>
       <div class="case-card rv">
-        <div class="case-tag">Обращения</div>
+        <span class="case-badge">Обращения</span>
         <h4>Обработка обращений в ритейле</h4>
-        <p>Заказчик — сеть с тысячами обращений в месяц (жалобы, вопросы по заказам, возвраты). Внедрили сценарий анализа тональности и генерации ответов с опорой на базу знаний (регламенты, FAQ). Сократилось время первичного ответа и доля эскалаций. Условия — по договору (фиксированная плата и выбранный вариант оплаты).</p>
+        <p>Заказчик — сеть с тысячами обращений в месяц (жалобы, вопросы по заказам, возвраты). Внедрили сценарий анализа тональности и генерации ответов с опорой на базу знаний. Сократилось время первичного ответа.</p>
       </div>
       <div class="case-card rv">
-        <div class="case-tag">Операционная</div>
+        <span class="case-badge">Операционная</span>
         <h4>Согласования в финансовом секторе</h4>
-        <p>Организация с жёсткими регламентами согласования заявок и договоров. Запустили операционную схему: оркестратор классифицирует тип запроса, назначаются согласующие, интеграция с внутренней системой учёта. Срок согласования сократился, прозрачность этапов выросла. Условия по договору — фиксированная плата и SLA или вариант с бонусом за результат.</p>
+        <p>Оркестратор классифицирует тип запроса, назначаются согласующие, интеграция с внутренней системой учёта. Срок согласования сократился, прозрачность этапов выросла.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPARISON -->
-<section style="padding:80px 0 120px">
-  <div class="s-pad">
-    <div class="s-label rv">Сравнение</div>
-    <h2 class="s-title rv">Почему Нексус-Тех</h2>
-    <div class="s-sub rv">Быстрое внедрение. Независимость от экосистем. Результат с первого месяца.</div>
-  </div>
-  <div class="content-wrap" style="overflow-x:auto">
-    <table class="comp-table rv">
-      <thead><tr><th>Критерий</th><th class="us">Нексус-Тех</th><th>Just AI</th><th>Сбер</th><th>Яндекс</th><th>MWS GPT (МТС)</th></tr></thead>
-      <tbody>
-        <tr><td>On-Premise</td><td class="us"><span class="ck">100%</span></td><td>Да</td><td class="lo">Cloud.ru</td><td class="lo">Нет</td><td>Да (гибрид)</td></tr>
-        <tr><td>Multi-Agent</td><td class="us"><span class="ck">Полноценный</span></td><td>Да</td><td class="lo">Частично</td><td class="lo">Частично</td><td class="lo">Конструктор агентов</td></tr>
-        <tr><td>Специализация</td><td class="us"><span class="ck">Глубокая</span></td><td>Широкая</td><td>Широкая</td><td>Широкая</td><td>Широкая</td></tr>
-        <tr><td>Срок внедрения</td><td class="us"><span class="ck">1-2 мес</span></td><td>3-6 мес</td><td>6+ мес</td><td>2-3 мес</td><td>от 1 мес</td></tr>
-        <tr><td>Привязка к экосистеме</td><td class="us"><span class="ck">Нет</span></td><td>Нет</td><td class="lo">Экосистема</td><td class="lo">Облако</td><td class="lo">Облако МТС</td></tr>
-        <tr><td>Порог входа</td><td class="us"><span class="ck">Низкий</span></td><td>Средний</td><td class="lo">Высокий</td><td>Токены</td><td>Токены</td></tr>
-      </tbody>
-    </table>
+<!-- COMPARISON TABLE -->
+<section class="section">
+  <div class="s-wrap">
+    <div class="s-tag rv">Сравнение</div>
+    <div class="s-title rv">Почему Нексус-Тех</div>
+    <p class="s-sub rv">Быстрое внедрение. Независимость от экосистем. Результат с первого месяца.</p>
+    <div style="overflow-x:auto" class="rv">
+      <table class="comp-table">
+        <thead>
+          <tr><th>Критерий</th><th class="us">Нексус-Тех</th><th>Just AI</th><th>Сбер</th><th>Яндекс</th><th>MWS GPT (МТС)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>On-Premise</td><td class="us"><span class="ck">100%</span></td><td>Да</td><td class="lo">Cloud.ru</td><td class="lo">Нет</td><td>Да (гибрид)</td></tr>
+          <tr><td>Multi-Agent</td><td class="us"><span class="ck">Полноценный</span></td><td>Да</td><td class="lo">Частично</td><td class="lo">Частично</td><td class="lo">Конструктор агентов</td></tr>
+          <tr><td>Специализация</td><td class="us"><span class="ck">Глубокая</span></td><td>Широкая</td><td>Широкая</td><td>Широкая</td><td>Широкая</td></tr>
+          <tr><td>Срок внедрения</td><td class="us"><span class="ck">1–2 мес</span></td><td>3–6 мес</td><td>6+ мес</td><td>2–3 мес</td><td>от 1 мес</td></tr>
+          <tr><td>Привязка к экосистеме</td><td class="us"><span class="ck">Нет</span></td><td>Нет</td><td class="lo">Экосистема</td><td class="lo">Облако</td><td class="lo">Облако МТС</td></tr>
+          <tr><td>Порог входа</td><td class="us"><span class="ck">Низкий</span></td><td>Средний</td><td class="lo">Высокий</td><td>Токены</td><td>Токены</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA FORM -->
 <section class="cta-section">
-  <div class="cta-geo"><div class="cta-geo-tri"></div><div class="cta-geo-circ"></div></div>
-  <h2 class="rv">Готовы к пилоту?</h2>
-  <p class="rv">Обсудим модель партнёрства, проведём аудит и предложим условия под ваши показатели.</p>
-  <a href="order.html" class="btn-accent rv">Заказать тест</a>
+  <div class="cta-wrap">
+    <div class="cta-header rv">
+      <div class="cta-tag-f">[SYS] ЗАЯВКА НА ПАРТНЁРСТВО</div>
+      <h2 class="cta-title-f">Заказать пилот</h2>
+      <p class="cta-sub-f">Запустим мультиагентную систему на вашей инфраструктуре за 1–2 месяца.</p>
+    </div>
+    <div class="terminal-window rv">
+      <div class="terminal-titlebar">
+        <div class="t-dots">
+          <div class="t-dot t-dot-r"></div>
+          <div class="t-dot t-dot-y"></div>
+          <div class="t-dot t-dot-g"></div>
+        </div>
+        <span class="t-wtitle">[НЕКСУС-ТЕХ] Заявка на тестирование</span>
+        <div class="t-wprogress">поле <span id="p-prog-num">—</span><span style="color:var(--text3)">/7</span></div>
+      </div>
+      <div class="terminal-body" id="p-terminal-body">
+        <div id="p-boot"></div>
+        <div id="p-form-area" style="display:none">
+          <div class="term-hist-p" id="p-history"></div>
+          <div class="term-current-p" id="p-current"></div>
+          <div class="term-perr" id="p-err-inline"></div>
+          <div id="p-consent-area" style="display:none">
+            <div class="consent-row-f">
+              <input type="checkbox" id="p-consent" onchange="pCheckConsent()">
+              <label for="p-consent">Согласен на обработку персональных данных</label>
+            </div>
+            <button class="submit-btn-f" id="p-submit-btn" disabled onclick="pSubmit()">[ ОТПРАВИТЬ ЗАЯВКУ ]</button>
+            <div class="success-box-f" id="p-success-box">
+              [OK] Заявка принята — свяжемся с вами в ближайшее время
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <footer>
-  <div class="ft-grid">
-    <div><a href="index.html" class="logo"><img src="logo.png" alt="Нексус-Тех — партнёрство, ИИ on-premise за результат" loading="lazy"></a><div class="ft-brand">Мультиагентная AI-платформа<br>для enterprise. 100% on-premise.</div><div class="ft-contact"><a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a><br><a href="tel:+79776134508">+7 (977) 613-45-08</a></div></div>
-    <div class="ft-col"><h4>Платформа</h4><a href="index.html">Обзор</a><a href="security.html">Безопасность</a><a href="technology.html">Архитектура</a><a href="agents.html">Модели агентов</a><a href="articles.html">Статьи</a></div>
-    <div class="ft-col"><h4>Решения</h4><a href="solutions.html#compliance">Комплаенс</a><a href="solutions.html#feedback">Обращения</a><a href="solutions.html#automation">Автоматизация</a></div>
-    <div class="ft-col"><h4>Компания</h4><a href="order.html">Контакты</a><a href="partnership.html">Партнёрам</a><a href="requisites.html">Реквизиты</a></div>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
+    </div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#citizens">Обращения граждан</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="careers.html">Карьера</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="ft-bottom"><span>&copy; <span id="cpyear"></span> ООО «Нексус-Тех» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</span><span><a href="privacy.html">Политика конфиденциальности</a> · <a href="requisites.html">Реквизиты</a></span></div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
 </footer>
 
 <script>
-document.getElementById('cpyear') && (document.getElementById('cpyear').textContent = new Date().getFullYear());
-document.getElementById('navBurger')?.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.toggle('open');
-});
-document.querySelectorAll('.nav-mobile a').forEach(a => a.addEventListener('click', () => {
-  document.getElementById('navMobile').classList.remove('open');
-}));
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+(function(){ var n=document.getElementById('main-nav'),b=document.getElementById('nav-burger'); if(n&&b) b.addEventListener('click',function(){ n.classList.toggle('nav-open'); }); })();
 
+// Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+// PARTNERSHIP TERMINAL FORM
+const P_TOTAL = 7;
+const P_FIELDS = [
+  { id:'name',     label:'имя',                   placeholder:'Иван Иванов',      type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'company',  label:'компания',              placeholder:'ООО «Компания»',   type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'email',    label:'email',                 placeholder:'ivan@company.ru',  type:'text',   validate: v => (v.includes('@') && v.includes('.')) ? null : 'нужен @ и домен' },
+  { id:'phone',    label:'телефон',               placeholder:'+7 900 000 00 00', type:'text',   validate: v => v.replace(/\D/g,'').length >= 10 ? null : 'минимум 10 цифр' },
+  { id:'solution', label:'интересующее решение',  type:'select',
+    options:['Комплаенс-мониторинг','Обработка обращений','Автоматизация документов','Несколько решений','Другое'],
+    validate: v => v ? null : 'выберите из списка' },
+  { id:'turnover', label:'оборот компании в год',    type:'select',
+    options:['до 500 млн ₽','500 млн — 5 млрд ₽','5 — 50 млрд ₽','более 50 млрд ₽','Не готов указывать'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'comment',  label:'комментарий',           placeholder:'нажмите Enter чтобы пропустить', type:'text', optional:true, validate: () => null },
+];
+let pStep = 0;
+const pAnswers = {};
+
+const P_BOOT = [
+  { text:'> NEXUS-TECH CONTACT INITIATE', cls:'cl-accent', delay:0 },
+  { text:'> инициализация сессии...', cls:'cl-dim', delay:180 },
+  { text:'  ✓ API шлюз — ONLINE', cls:'cl-ok', delay:380 },
+  { text:'  ✓ шифрование — AES-256 ACTIVE', cls:'cl-ok', delay:560 },
+  { text:'  ✓ персональные данные — PROTECTED', cls:'cl-ok', delay:720 },
+  { text:'> форма заявки загружена. введите данные:', cls:'cl-accent', delay:960 },
+];
+
+function pRunBoot() {
+  const bootEl = document.getElementById('p-boot');
+  if (!bootEl) return;
+  let maxDelay = 0;
+  P_BOOT.forEach(line => {
+    maxDelay = Math.max(maxDelay, line.delay);
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-lp ' + line.cls;
+      d.textContent = line.text;
+      bootEl.appendChild(d);
+      pScrollBottom();
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const sep = document.createElement('div');
+    sep.className = 'boot-lp cl-dim';
+    sep.textContent = '\u2500'.repeat(44);
+    bootEl.appendChild(sep);
+    document.getElementById('p-form-area').style.display = '';
+    pUpdateProgress();
+    pRenderStep();
+    pScrollBottom();
+  }, maxDelay + 250);
+}
+
+function pUpdateProgress() {
+  const el = document.getElementById('p-prog-num');
+  if (el) el.textContent = pStep < P_TOTAL ? (pStep + 1) : P_TOTAL;
+}
+
+function pScrollBottom() {
+  const tb = document.getElementById('p-terminal-body');
+  if (tb) tb.scrollTop = tb.scrollHeight;
+}
+
+function pEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function pBuildHistLine(step, val) {
+  const f = P_FIELDS[step];
+  return `<span style="color:var(--text3);font-size:.72rem;min-width:28px;font-family:'JetBrains Mono',monospace">${step+1}/7</span>` +
+    `<span style="color:var(--text3);margin:0 4px">&gt;</span>` +
+    `<span class="term-hist-lbl-p">${f.label}:</span>` +
+    `<span class="term-hist-val-p">${pEsc(val)}</span>` +
+    `<span class="term-hist-ok-p">✓</span>` +
+    `<span class="term-hist-edit-p">[ред.]</span>`;
+}
+
+function pRenderStep() {
+  const cur = document.getElementById('p-current');
+  const errEl = document.getElementById('p-err-inline');
+  cur.innerHTML = '';
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+  if (pStep >= 6) {
+    document.getElementById('p-consent-area').style.display = '';
+  }
+  if (pStep >= P_FIELDS.length) {
+    return;
+  }
+  const f = P_FIELDS[pStep];
+  const row = document.createElement('div');
+  row.className = 'term-prow';
+  const badge = document.createElement('span');
+  badge.className = 'term-pbadge';
+  badge.textContent = (pStep+1) + '/' + P_TOTAL;
+  row.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.className = 'term-pprompt';
+  prompt.textContent = '> ';
+  row.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.className = 'term-plabel';
+  lbl.textContent = f.label + ':';
+  row.appendChild(lbl);
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-pselect';
+    sel.id = 'p-field-input';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (pAnswers[f.id] === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    row.appendChild(sel);
+    cur.appendChild(row);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) pConfirm(); });
+    sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) pConfirm(); } });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-pinput';
+    inp.id = 'p-field-input';
+    inp.placeholder = f.placeholder || '';
+    if (pAnswers[f.id]) inp.value = pAnswers[f.id];
+    row.appendChild(inp);
+    const hint = document.createElement('span');
+    hint.className = 'term-phint';
+    hint.textContent = f.optional ? '[Enter — пропустить или ввести]' : '[Enter — подтвердить]';
+  if (f.optional) {
+    var ca = document.getElementById('p-consent-area');
+    if (ca) ca.style.display = '';
+  }
+
+    row.appendChild(hint);
+    cur.appendChild(row);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); pConfirm(); } });
+    inp.addEventListener('input', () => { errEl.classList.remove('visible'); errEl.textContent = ''; });
+  }
+}
+
+function pConfirm() {
+  const f = P_FIELDS[pStep];
+  const inp = document.getElementById('p-field-input');
+  const val = inp ? (inp.tagName === 'SELECT' ? inp.value : inp.value.trim()) : '';
+  const err = f.validate(val);
+  const errEl = document.getElementById('p-err-inline');
+  if (err && !f.optional) {
+    errEl.textContent = '[ERR] ' + err;
+    errEl.classList.add('visible');
+    if (inp && inp.tagName !== 'SELECT') inp.focus();
+    pScrollBottom();
+    return;
+  }
+  errEl.classList.remove('visible');
+  const displayVal = val || '(пропущено)';
+  const line = document.createElement('div');
+  line.className = 'term-hist-line-p';
+  line.dataset.step = pStep;
+  line.innerHTML = pBuildHistLine(pStep, displayVal);
+  const s = pStep;
+  line.addEventListener('click', () => pEditField(s));
+  document.getElementById('p-history').appendChild(line);
+  pAnswers[f.id] = val;
+  pStep++;
+  pUpdateProgress();
+  pScrollBottom();
+  pRenderStep();
+}
+
+function pEditField(step) {
+  const f = P_FIELDS[step];
+  const histLine = document.querySelector('.term-hist-line-p[data-step="' + step + '"]');
+  if (!histLine) return;
+  const savedVal = pAnswers[f.id] || '';
+  histLine.style.opacity = '1';
+  histLine.style.borderLeftColor = 'var(--accent)';
+  histLine.innerHTML = '';
+  const badge = document.createElement('span');
+  badge.style.cssText = 'color:var(--text3);font-size:.72rem;min-width:28px;margin-right:8px;font-family:JetBrains Mono,monospace';
+  badge.textContent = (step+1) + '/7';
+  histLine.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.style.cssText = 'color:var(--text3);margin-right:4px;font-family:JetBrains Mono,monospace';
+  prompt.textContent = '> ';
+  histLine.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'color:var(--accent2);margin-right:6px;white-space:nowrap;font-size:.82rem;font-family:JetBrains Mono,monospace';
+  lbl.textContent = f.label + ':';
+  histLine.appendChild(lbl);
+  const save = (newVal) => {
+    const err = f.validate(newVal);
+    if (err && !f.optional) {
+      let errSpan = histLine.nextElementSibling;
+      if (!errSpan || !errSpan.classList.contains('p-hist-err')) {
+        errSpan = document.createElement('div');
+        errSpan.className = 'p-hist-err';
+        errSpan.style.cssText = 'color:#f87171;font-size:.7rem;padding-left:36px;margin-bottom:4px;font-family:JetBrains Mono,monospace';
+        histLine.parentNode.insertBefore(errSpan, histLine.nextSibling);
+      }
+      errSpan.textContent = '[ERR] ' + err;
+      return false;
+    }
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('p-hist-err')) errSpan.remove();
+    pAnswers[f.id] = newVal;
+    histLine.innerHTML = pBuildHistLine(step, newVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => pEditField(step));
+    const cur = document.getElementById('p-field-input');
+    if (cur) cur.focus();
+    return true;
+  };
+  const cancel = () => {
+    histLine.innerHTML = pBuildHistLine(step, savedVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => pEditField(step));
+    const cur = document.getElementById('p-field-input');
+    if (cur) cur.focus();
+  };
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-pselect';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (savedVal === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    histLine.appendChild(sel);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) save(sel.value); });
+    sel.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (sel.value) save(sel.value); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-pinput';
+    inp.value = savedVal;
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--text3);font-size:.7rem;margin-left:10px;font-family:JetBrains Mono,monospace';
+    hint.textContent = '[Enter — сохранить, Esc — отмена]';
+    histLine.appendChild(inp);
+    histLine.appendChild(hint);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); save(inp.value.trim()); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  }
+}
+
+function pCheckConsent() {
+  const cb = document.getElementById('p-consent');
+  document.getElementById('p-submit-btn').disabled = !cb.checked;
+}
+
+function pSubmit() {
+  const btn = document.getElementById('p-submit-btn');
+  btn.style.display = 'none';
+  const cr = btn.previousElementSibling;
+  if (cr) cr.style.display = 'none';
+  const body = document.getElementById('p-terminal-body');
+  const sep = document.createElement('div');
+  sep.className = 'boot-lp cl-dim';
+  sep.style.marginTop = '12px';
+  sep.textContent = '\u2500'.repeat(44);
+  body.appendChild(sep);
+  const SEND = [
+    { text:'> ОТПРАВКА ЗАЯВКИ...', cls:'cl-accent', delay:0 },
+    { text:'  передача данных в CRM...', cls:'cl-dim', delay:300 },
+    { text:'  ✓ заявка зарегистрирована', cls:'cl-ok', delay:700 },
+    { text:'  ✓ уведомление менеджеру отправлено', cls:'cl-ok', delay:950 },
+    { text:'  ✓ подтверждение отправлено на email', cls:'cl-ok', delay:1150 },
+  ];
+  SEND.forEach(line => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-lp ' + line.cls;
+      d.textContent = line.text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const s = document.getElementById('p-success-box');
+    if (s) {
+      body.appendChild(s);
+      s.classList.add('visible');
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 1500);
+}
+
+// Start form when terminal window scrolls into view
+(function(){
+  let pStarted = false;
+  const termWin = document.querySelector('.terminal-window');
+  if (!termWin) return;
+  const pObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !pStarted) {
+      pStarted = true;
+      pRunBoot();
+    }
+  }, { threshold: 0.1 });
+  pObs.observe(termWin);
+})();
+
+// Contract card click-to-expand
+document.querySelectorAll('.contract-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.contract-card').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) card.classList.add('expanded');
+  });
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
 </script>
 </body>
 </html>

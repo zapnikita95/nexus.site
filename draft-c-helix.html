@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus-Tech | Мультиагентная ИИ-платформа на вашем периметре</title>
+    <meta name="description" content="Автономные команды ИИ-агентов для комплаенса, обработки обращений и автоматизации на вашем сервере. 152-ФЗ соответствие, 0 данных во вне.">
+    <link rel="icon" href="favicon.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0b0f1a;
+            --surface: #10152a;
+            --surface2: #161c35;
+            --text: #e2e4ea;
+            --text2: #8890a4;
+            --text3: #525a72;
+            --accent: #818cf8;
+            --accent2: #a5b4fc;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            background-color: transparent;
+        }
+
+        nav.scrolled {
+            background-color: rgba(11, 15, 26, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            padding: 16px 40px;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-logo img {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-cta a {
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 100px;
+            background-color: var(--accent);
+            color: white;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .nav-cta a:hover {
+            padding: 10px 28px;
+            box-shadow: 0 8px 32px rgba(129, 140, 248, 0.3);
+        }
+
+        .burger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .burger-menu span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            height: 100dvh;
+            display: grid;
+            grid-template-columns: 55% 45%;
+            overflow: hidden;
+            position: relative;
+            gap: 0;
+        }
+
+        .hero-content {
+            background-color: var(--bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 60px 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tag {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-h1 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            color: var(--text);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero-desc {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--text2);
+            margin-bottom: 40px;
+            max-width: 500px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            padding: 16px 48px;
+            box-shadow: 0 12px 40px rgba(129, 140, 248, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1.5px solid var(--accent);
+            color: var(--accent);
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            padding: 16px 48px;
+            background-color: rgba(129, 140, 248, 0.1);
+            box-shadow: 0 8px 24px rgba(129, 140, 248, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-arrow {
+            width: 20px;
+            height: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .btn:hover .btn-arrow {
+            transform: translateX(4px);
+        }
+
+        /* HELIX VISUAL */
+        .hero-visual {
+            background-color: var(--surface);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .helix-container {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            filter: blur(0.5px);
+        }
+
+        .helix-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotateHelix 30s infinite linear;
+        }
+
+        @keyframes rotateHelix {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .helix-layer-1 {
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%,
+                rgba(129, 140, 248, 0.3) 15%,
+                rgba(165, 180, 252, 0.2) 30%,
+                transparent 45%,
+                transparent 55%,
+                rgba(129, 140, 248, 0.2) 70%,
+                rgba(165, 180, 252, 0.3) 85%,
+                transparent 100%
+            );
+            animation-duration: 20s;
+        }
+
+        .helix-layer-2 {
+            background: conic-gradient(
+                from 45deg,
+                transparent 0%,
+                rgba(165, 180, 252, 0.25) 20%,
+                rgba(129, 140, 248, 0.15) 40%,
+                transparent 60%,
+                transparent 70%,
+                rgba(129, 140, 248, 0.15) 85%,
+                transparent 100%
+            );
+            animation-duration: 25s;
+            animation-direction: reverse;
+        }
+
+        .helix-layer-3 {
+            background: conic-gradient(
+                from 90deg,
+                transparent 10%,
+                rgba(129, 140, 248, 0.2) 25%,
+                rgba(165, 180, 252, 0.1) 40%,
+                transparent 55%,
+                transparent 60%,
+                rgba(165, 180, 252, 0.1) 75%,
+                transparent 90%
+            );
+            animation-duration: 35s;
+        }
+
+        .helix-glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle at center,
+                rgba(129, 140, 248, 0.1) 0%,
+                transparent 70%
+            );
+            border-radius: 50%;
+        }
+
+        /* PARALLAX EFFECT */
+        .hero-visual {
+            will-change: transform;
+        }
+
+        /* METRICS SECTION */
+        .metrics {
+            background-color: var(--bg);
+            padding: 80px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metrics-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .metrics-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 40px;
+        }
+
+        .metrics-scroller {
+            display: flex;
+            gap: 80px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .metrics-item {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            min-width: 300px;
+        }
+
+        .metrics-number {
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .metrics-text {
+            font-size: 14px;
+            color: var(--text2);
+            font-weight: 500;
+        }
+
+        .metrics-ticker {
+            animation: scrollLeft 60s linear infinite;
+        }
+
+        @keyframes scrollLeft {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* SOLUTIONS SECTION */
+        .solutions {
+            background-color: var(--bg);
+            padding: 120px 40px;
+            position: relative;
+        }
+
+        .solutions-header {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+        }
+
+        .solutions-tag {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .solutions-h2 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .solutions-desc {
+            font-size: 16px;
+            color: var(--text2);
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+        }
+
+        .solutions-cards {
+            display: flex;
+            gap: 32px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            padding-bottom: 20px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--text3) transparent;
+        }
+
+        .solutions-cards::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .solutions-cards::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .solutions-cards::-webkit-scrollbar-thumb {
+            background: var(--text3);
+            border-radius: 10px;
+        }
+
+        .solution-card {
+            flex-shrink: 0;
+            min-width: 440px;
+            min-height: 480px;
+            background-color: var(--surface);
+            border-radius: 16px;
+            overflow: hidden;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            border: 1px solid rgba(129, 140, 248, 0.1);
+        }
+
+        .solution-card:hover {
+            border-color: rgba(129, 140, 248, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(129, 140, 248, 0.15);
+        }
+
+        .solution-header {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(135deg, rgba(129, 140, 248, 0.1), rgba(165, 180, 252, 0.05));
+        }
+
+        .solution-card:nth-child(1) .solution-header {
+            background: linear-gradient(135deg, var(--surface2) 0%, rgba(129, 140, 248, 0.1) 100%);
+        }
+
+        .solution-card:nth-child(2) .solution-header {
+            background: linear-gradient(135deg, var(--surface2) 0%, rgba(165, 180, 252, 0.08) 100%);
+        }
+
+        .solution-card:nth-child(3) .solution-header {
+            background: linear-gradient(135deg, var(--surface2) 0%, rgba(129, 140, 248, 0.08) 100%);
+        }
+
+        .solution-body {
+            padding: 32px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .solution-number {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text3);
+            margin-bottom: 12px;
+        }
+
+        .solution-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .solution-desc {
+            font-size: 15px;
+            color: var(--text2);
+            margin-bottom: 32px;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .solution-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(129, 140, 248, 0.1);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .stat-label {
+            color: var(--text3);
+        }
+
+        .stat-value {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* SECURITY SECTION */
+        .security {
+            background-color: var(--bg);
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        .security-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .security-header {
+            margin-bottom: 80px;
+        }
+
+        .security-tag {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            display: inline-block;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .security-h2 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .security-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .security-item {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(129, 140, 248, 0.1);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .security-item:last-child {
+            border-bottom: none;
+        }
+
+        .security-item:nth-child(even) {
+            grid-template-columns: 1fr 60px;
+        }
+
+        .security-item:nth-child(even) .security-icon {
+            order: 2;
+        }
+
+        .security-item:nth-child(even) .security-content {
+            order: 1;
+        }
+
+        .security-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--surface2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .security-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .security-content p {
+            font-size: 15px;
+            color: var(--text2);
+            line-height: 1.6;
+        }
+
+        /* CTA SECTION */
+        .cta {
+            height: 100dvh;
+            background-color: var(--bg);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            padding: 60px;
+        }
+
+        .cta-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                circle at 100% -20%,
+                rgba(129, 140, 248, 0.15) 0%,
+                rgba(129, 140, 248, 0.05) 30%,
+                transparent 70%
+            );
+            z-index: 1;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .cta-h2 {
+            font-size: 56px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .cta-desc {
+            font-size: 18px;
+            color: var(--text2);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+        }
+
+        .cta-button {
+            padding: 24px 64px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            display: inline-block;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--surface);
+            padding: 40px 60px;
+            border-top: 1px solid rgba(129, 140, 248, 0.1);
+            font-size: 13px;
+            color: var(--text3);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-info {
+            display: flex;
+            gap: 12px;
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-contact a {
+            color: var(--text2);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--accent);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 960px) {
+            .hero {
+                grid-template-columns: 1fr;
+                height: auto;
+                min-height: 100dvh;
+            }
+
+            .hero-content {
+                padding: 100px 32px 60px;
+            }
+
+            .hero-h1 {
+                font-size: 40px;
+            }
+
+            .hero-desc {
+                font-size: 16px;
+            }
+
+            .hero-visual {
+                min-height: 400px;
+                grid-column: 1;
+                grid-row: 1;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0.1;
+                pointer-events: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .burger-menu {
+                display: flex;
+            }
+
+            .solutions {
+                padding: 80px 24px;
+            }
+
+            .solutions-header {
+                margin-left: 0;
+            }
+
+            .solutions-h2 {
+                font-size: 36px;
+            }
+
+            .solution-card {
+                min-width: 100%;
+                min-height: auto;
+            }
+
+            .security {
+                padding: 80px 32px;
+            }
+
+            .security-container {
+                max-width: 100%;
+            }
+
+            .security-h2 {
+                font-size: 36px;
+            }
+
+            .security-item {
+                grid-template-columns: 1fr !important;
+                gap: 20px;
+                padding: 40px 0;
+            }
+
+            .security-item:nth-child(even) .security-icon {
+                order: 0;
+            }
+
+            .security-item:nth-child(even) .security-content {
+                order: 0;
+            }
+
+            .cta {
+                height: auto;
+                min-height: 100dvh;
+                justify-content: center;
+                padding: 60px 32px;
+            }
+
+            .cta-h2 {
+                font-size: 40px;
+            }
+
+            .cta-desc {
+                font-size: 16px;
+            }
+
+            .metrics {
+                padding: 60px 24px;
+            }
+
+            .metrics-number {
+                font-size: 40px;
+            }
+
+            footer {
+                padding: 32px 24px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+
+            .footer-contact {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 16px 20px;
+            }
+
+            .nav-logo {
+                font-size: 20px;
+            }
+
+            .hero-content {
+                padding: 80px 24px 60px;
+            }
+
+            .hero-h1 {
+                font-size: 32px;
+            }
+
+            .hero-desc {
+                font-size: 15px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .metrics-label {
+                margin-bottom: 24px;
+            }
+
+            .metrics-item {
+                min-width: 180px;
+            }
+
+            .metrics-number {
+                font-size: 32px;
+            }
+
+            .metrics-text {
+                font-size: 12px;
+            }
+
+            .solutions-header {
+                margin-bottom: 60px;
+            }
+
+            .solutions-h2 {
+                font-size: 28px;
+            }
+
+            .solutions-cards {
+                gap: 16px;
+            }
+
+            .solution-card {
+                min-width: calc(100vw - 64px);
+            }
+
+            .security-h2 {
+                font-size: 28px;
+            }
+
+            .security-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+
+            .security-content h3 {
+                font-size: 20px;
+            }
+
+            .security-content p {
+                font-size: 14px;
+            }
+
+            .cta-h2 {
+                font-size: 32px;
+            }
+
+            .cta-desc {
+                font-size: 15px;
+            }
+
+            .cta-button {
+                padding: 20px 48px;
+            }
+        }
+    
+/* === CANONICAL NAV (override) === */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--text)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)!important;letter-spacing:0.04em;transition:all 0.2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,0.08);color:var(--accent2)!important;border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}}
+/* === CANONICAL FOOTER (override) === */
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:0.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem}
+.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-contact a:hover{color:var(--accent)}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+/* === footer-year JS fallback === */
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <div class="nav-links">
+    <a href="solutions.html">Решения</a>
+    <a href="security.html">Безопасность</a>
+    <a href="technology.html">Технологии</a>
+    <a href="agents.html">Модели агентов</a>
+    <a href="articles.html">Статьи</a>
+    <a href="partnership.html">Партнёрство</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-tag">ИИ-платформа на вашем периметре</div>
+        <h1 class="hero-h1">Автономные команды ИИ-агентов на вашем сервере</h1>
+        <p class="hero-desc">Мультиагентный ИИ on-premise для комплаенса, обработки обращений и автоматизации. Данные не покидают вашу инфраструктуру.</p>
+        <div class="hero-buttons">
+            <a href="order.html" class="btn btn-primary">
+                Запустить пилот
+                <span class="btn-arrow">→</span>
+            </a>
+            <a href="technology.html" class="btn btn-outline">
+                Технологии
+                <span class="btn-arrow">→</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="helix-container">
+            <div class="helix-layer helix-layer-1"></div>
+            <div class="helix-layer helix-layer-2"></div>
+            <div class="helix-layer helix-layer-3"></div>
+            <div class="helix-glow"></div>
+        </div>
+    </div>
+</section>
+
+<!-- METRICS SECTION -->
+<section class="metrics">
+    <div class="metrics-container">
+        <div class="metrics-label">Ключевые показатели</div>
+        <div class="metrics-scroller">
+            <div class="metrics-ticker">
+                <div class="metrics-item">
+                    <div class="metrics-number">100%</div>
+                    <div class="metrics-text">В вашем периметре</div>
+                </div>
+                <div class="metrics-item">
+                    <div class="metrics-number">152-ФЗ</div>
+                    <div class="metrics-text">Полное соответствие</div>
+                </div>
+                <div class="metrics-item">
+                    <div class="metrics-number">1-2 мес</div>
+                    <div class="metrics-text">Внедрение</div>
+                </div>
+                <div class="metrics-item">
+                    <div class="metrics-number">0</div>
+                    <div class="metrics-text">Данных во вне</div>
+                </div>
+                <div class="metrics-item">
+                    <div class="metrics-number">100%</div>
+                    <div class="metrics-text">В вашем периметре</div>
+                </div>
+                <div class="metrics-item">
+                    <div class="metrics-number">152-ФЗ</div>
+                    <div class="metrics-text">Полное соответствие</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOLUTIONS SECTION -->
+<section class="solutions" id="solutions">
+    <div class="solutions-header">
+        <div class="solutions-tag">Решения</div>
+        <h2 class="solutions-h2">Три компонента платформы</h2>
+        <p class="solutions-desc">Каждое решение спроектировано для максимальной автоматизации, безопасности и скорости внедрения в вашу инфраструктуру.</p>
+    </div>
+
+    <div class="solutions-cards">
+        <div class="solution-card">
+            <div class="solution-header"></div>
+            <div class="solution-body">
+                <div class="solution-number">01</div>
+                <h3 class="solution-title">Комплаенс-документы</h3>
+                <p class="solution-desc">Автоматическая проверка договоров, актов и накладных на соответствие 152-ФЗ и маркировке Честный Знак.</p>
+                <div class="solution-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Время обработки</span>
+                        <span class="stat-value">~5 мин</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Снижение нарушений</span>
+                        <span class="stat-value">-90%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="solution-card">
+            <div class="solution-header"></div>
+            <div class="solution-body">
+                <div class="solution-number">02</div>
+                <h3 class="solution-title">Обращения</h3>
+                <p class="solution-desc">Обработка обращений из почты, CRM и тикет-систем с использованием RAG базы знаний вашей компании.</p>
+                <div class="solution-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Время ответа</span>
+                        <span class="stat-value">&lt;2ч</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Источник данных</span>
+                        <span class="stat-value">RAG база</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="solution-card">
+            <div class="solution-header"></div>
+            <div class="solution-body">
+                <div class="solution-number">03</div>
+                <h3 class="solution-title">Автоматизация</h3>
+                <p class="solution-desc">Маршрутизация заявок, согласования и трекинг процессов с полной прозрачностью и контролем.</p>
+                <div class="solution-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Ускорение процессов</span>
+                        <span class="stat-value">1-2 дня</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Потерянные заявки</span>
+                        <span class="stat-value">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECURITY SECTION -->
+<section class="security" id="security">
+    <div class="security-container">
+        <div class="security-header">
+            <div class="security-tag">Безопасность</div>
+            <h2 class="security-h2">Защита на каждом уровне</h2>
+        </div>
+
+        <div class="security-items">
+            <div class="security-item">
+                <div class="security-icon">🔐</div>
+                <div class="security-content">
+                    <h3>AES-256 + TLS 1.3</h3>
+                    <p>Военный уровень шифрования для всех данных в покое и в движении. Полная защита трафика между компонентами системы.</p>
+                </div>
+            </div>
+
+            <div class="security-item">
+                <div class="security-icon">🛡️</div>
+                <div class="security-content">
+                    <h3>Prompt Injection Guard</h3>
+                    <p>Специализированный модуль защиты от атак на промпты. Каждый запрос анализируется перед отправкой в модель ИИ.</p>
+                </div>
+            </div>
+
+            <div class="security-item">
+                <div class="security-icon">👥</div>
+                <div class="security-content">
+                    <h3>RBAC + LDAP/AD</h3>
+                    <p>Гибкое управление доступом с интеграцией в корпоративные директории. Ролевой контроль на уровне каждого документа.</p>
+                </div>
+            </div>
+
+            <div class="security-item">
+                <div class="security-icon">✓</div>
+                <div class="security-content">
+                    <h3>152-ФЗ + ФСТЭК</h3>
+                    <p>Полное соответствие российскому законодательству о защите персональных данных и требованиям центра кибербезопасности.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta">
+    <div class="cta-bg"></div>
+    <div class="cta-content">
+        <h2 class="cta-h2">Готовы к пилоту?</h2>
+        <p class="cta-desc">Запустите AI-систему внутри вашего защищённого периметра. За 1-2 месяца система интегрируется в вашу инфраструктуру и начнёт экономить часы работы каждый день.</p>
+        <a href="order.html" class="btn btn-primary cta-button">
+            Запустить пилот
+            <span class="btn-arrow">→</span>
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
+    </div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#citizens">Обращения граждан</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="careers.html">Карьера</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+    // Set copyright year
+    document.getElementById('year').textContent = `© ${new Date().getFullYear()}`;
+
+    // Navigation scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Scroll reveal animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    document.querySelectorAll('.security-tag, .security-h2, .solutions-tag, .solutions-h2, .solutions-desc, .cta-h2, .cta-desc').forEach((el) => {
+        observer.observe(el);
+    });
+
+    // Parallax effect for hero visual
+    window.addEventListener('scroll', () => {
+        const heroVisual = document.querySelector('.hero-visual');
+        if (heroVisual) {
+            const rect = heroVisual.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const offset = window.scrollY * 0.5;
+                heroVisual.style.transform = `translateY(${offset}px)`;
+            }
+        }
+    });
+
+    // Burger menu toggle
+    const burgerMenu = document.getElementById('burgerMenu');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (burgerMenu) {
+        burgerMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            burgerMenu.style.position = 'fixed';
+        });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (navLinks && navLinks.style.display === 'flex') {
+                        navLinks.style.display = 'none';
+                    }
+                }
+            }
+        });
+    });
+
+    // Observe security items with staggered animation
+    const securityItems = document.querySelectorAll('.security-item');
+    securityItems.forEach((item, index) => {
+        const securityObserverOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const securityObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.animation = `fadeInUp 0.8s ease ${index * 0.1}s forwards`;
+                        securityObserver.unobserve(entry.target);
+                    }, index * 100);
+                }
+            });
+        }, securityObserverOptions);
+
+        securityObserver.observe(item);
+    });
+
+    // Observe solution cards
+    const solutionCards = document.querySelectorAll('.solution-card');
+    solutionCards.forEach((card, index) => {
+        const cardObserverOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `fadeInUp 0.8s ease ${index * 0.15}s forwards`;
+                    cardObserver.unobserve(entry.target);
+                }
+            });
+        }, cardObserverOptions);
+
+        cardObserver.observe(card);
+    });
+</script>
+
+
+// footer year
+(function(){var el=document.getElementById('footer-year');if(el)el.textContent=new Date().getFullYear();})();
+
+</body>
+</html>
