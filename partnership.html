@@ -657,7 +657,6 @@ function pRenderStep() {
     });
     row.appendChild(sel);
     cur.appendChild(row);
-    sel.focus();
     sel.addEventListener('change', () => { if (sel.value) pConfirm(); });
     sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) pConfirm(); } });
   } else {
@@ -678,7 +677,6 @@ function pRenderStep() {
 
     row.appendChild(hint);
     cur.appendChild(row);
-    inp.focus();
     if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
     inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); pConfirm(); } });
     inp.addEventListener('input', () => { errEl.classList.remove('visible'); errEl.textContent = ''; });
