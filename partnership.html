@@ -187,6 +187,20 @@ footer{padding:3rem 2rem 2rem;border-top:var(--line);background:var(--bg)}
 .submit-btn-f:disabled{opacity:.35;cursor:not-allowed;border-color:var(--text3);color:var(--text3)}
 .success-box-f{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok);color:var(--ok);font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;line-height:1.7;display:none}
 .success-box-f.visible{display:block}
+@media(max-width:768px){
+  .cta-section{padding:2rem 1rem}
+  .cta-wrap{padding:0 0.5rem}
+  .cta-header{margin-bottom:1.25rem}
+  .terminal-titlebar{flex-wrap:wrap;padding:8px 10px;gap:6px}
+  .t-wtitle{font-size:.65rem;flex:1 1 100%;order:2;margin-left:0;margin-top:2px}
+  .t-wprogress{order:3;margin-left:0}
+  .terminal-body{padding:1rem;min-height:280px;max-height:70vh}
+  .term-prow{flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+  .term-pinput,.term-pselect{max-width:100%;min-width:0;flex:1 1 100%}
+  .term-phint{width:100%;margin-left:0;margin-top:4px;font-size:.65rem}
+  .term-hist-line-p{flex-wrap:wrap;gap:2px 6px}
+  .term-hist-lbl-p{min-width:0}
+}
 
 /* === CANONICAL NAV (override) === */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
