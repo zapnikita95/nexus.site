@@ -130,12 +130,23 @@
 }
 .btn-outline:hover { border-color: #818cf8; color: #a5b4fc !important; }
 @media(max-width:768px) {
+  .page-hero {
+    min-height: auto;
+    align-items: flex-start;
+    background-image: none !important;
+  }
+  .page-hero::before {
+    background: rgba(11,15,26,0.98);
+  }
   .page-hero .s-pad {
-  position: relative;
-  z-index: 2;
-  max-width: 560px;
-  padding: 80px 2rem 80px 4rem !important;
-}
+    position: relative;
+    z-index: 2;
+    max-width: none;
+    width: 100%;
+    padding: 1.5rem 1.25rem 2.5rem !important;
+    margin: 0;
+  }
+  .page-hero .s-sub { max-width: none; }
   .page-hero .s-title { font-size: clamp(1.6rem, 6vw, 2.4rem); }
 }
 
