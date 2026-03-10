@@ -142,19 +142,42 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
   </div>
 </section>
 
+<!-- CTA FORM -->
 <section class="cta-section">
-  <a href="order.html" class="cta-link">
-    <div class="cta-terminal">
-      <div class="cta-line">[SYS] ИНИЦИАЛИЗАЦИЯ ПИЛОТА</div>
-      <div class="cta-line"></div>
-      <div class="cta-line">&gt; ВЫБОР МОДЕЛИ АГЕНТОВ...        <span class="cta-status">[OK]</span></div>
-      <div class="cta-line">&gt; РАЗВЕРТЫВАНИЕ ГРАФА...          <span class="cta-status">[READY]</span></div>
-      <div class="cta-line">&gt; ПОДКЛЮЧЕНИЕ К ДАННЫМ...        <span class="cta-status">[SECURE]</span></div>
-      <div class="cta-line">&gt; НАСТРОЙКА ИНТЕГРАЦИЙ...        <span class="cta-status">[OK]</span></div>
-      <div class="cta-line"></div>
-      <div class="cta-line"><span style="color:var(--text3,#525a72)">&gt;</span> <span class="cta-action">Заказать тест?</span><span style="color:var(--text3,#525a72);margin-left:8px">(Y/n)</span><span class="cta-cursor"></span></div>
+  <div class="cta-inner">
+    <div class="cta-tag rv">[SYS] ЗАЯВКА</div>
+    <h2 class="cta-title rv">Заказать пилот</h2>
+    <p class="cta-sub rv" style="margin-bottom:0">Запустим мультиагентную систему на вашей инфраструктуре за 1–2 месяца. Без передачи данных в облако.</p>
+    <div class="terminal-window-a rv">
+      <div class="terminal-titlebar-a">
+        <div class="ta-dots">
+          <div class="ta-dot ta-dot-r"></div>
+          <div class="ta-dot ta-dot-y"></div>
+          <div class="ta-dot ta-dot-g"></div>
+        </div>
+        <span class="ta-wtitle">[НЕКСУС-ТЕХ] Заявка на тестирование</span>
+        <div class="ta-wprogress">поле <span id="a-prog-num">—</span><span style="color:var(--text3)">/7</span></div>
+      </div>
+      <div class="terminal-body-a" id="a-terminal-body">
+        <div id="a-boot"></div>
+        <div id="a-form-area" style="display:none">
+          <div class="term-hist-a" id="a-history"></div>
+          <div class="term-current-a" id="a-current"></div>
+          <div class="term-aerr" id="a-err-inline"></div>
+          <div id="a-consent-area" style="display:none">
+            <div class="consent-row-a">
+              <input type="checkbox" id="a-consent" onchange="aCheckConsent()">
+              <label for="a-consent">Согласен на обработку персональных данных</label>
+            </div>
+            <button class="submit-btn-a" id="a-submit-btn" disabled onclick="aSubmit()">[ ОТПРАВИТЬ ЗАЯВКУ ]</button>
+            <div class="success-box-a" id="a-success-box">
+              [OK] Заявка принята — свяжемся с вами в ближайшее время
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </a>
+  </div>
 </section>
 
 <footer>
@@ -187,7 +210,7 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
         <li><a href="partnership.html">Партнёрство</a></li>
         <li><a href="articles.html">Статьи</a></li>
         <li><a href="index.html#contacts">Контакты</a></li>
-        <li><a href="careers.html">Карьера</a></li>
+        <li><a href="documents.html">Документы</a></li>
       </ul>
     </div>
   </div>
@@ -209,29 +232,304 @@ document.getElementById('footer-year').textContent = new Date().getFullYear();
 (function(){ var n=document.getElementById('main-nav'),b=document.getElementById('nav-burger'); if(n&&b) b.addEventListener('click',function(){ n.classList.toggle('nav-open'); }); })();
 var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.rv').forEach(el => obs.observe(el));
-</script>
 
-<script>
-// FOOTER_CTA_ANIM
-(function() {
-  var ct = document.querySelector('.cta-terminal');
-  if (!ct) return;
-  var lines = ct.querySelectorAll('.cta-line');
-  var ctaObs = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting) {
-      lines.forEach(function(l, i) { setTimeout(function() { l.classList.add('visible'); }, i * 220); });
-      ctaObs.disconnect();
+// CTA TERMINAL FORM
+const AT_TOTAL = 7;
+const AT_FIELDS = [
+  { id:'name',     label:'имя',                   placeholder:'Иван Иванов',      type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'company',  label:'компания',              placeholder:'ООО «Компания»',   type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'email',    label:'email',                 placeholder:'ivan@company.ru',  type:'text',   validate: v => (v.includes('@') && v.includes('.')) ? null : 'нужен @ и домен' },
+  { id:'phone',    label:'телефон',               placeholder:'+7 900 000 00 00', type:'text',   validate: v => v.replace(/\D/g,'').length >= 10 ? null : 'минимум 10 цифр' },
+  { id:'solution', label:'интересующее решение',  type:'select',
+    options:['Комплаенс-мониторинг','Обработка обращений','Автоматизация документов','Несколько решений','Другое'],
+    validate: v => v ? null : 'выберите из списка' },
+  { id:'turnover', label:'оборот компании в год', type:'select',
+    options:['до 500 млн ₽','500 млн — 5 млрд ₽','5 — 50 млрд ₽','более 50 млрд ₽','Не готов указывать'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'comment',  label:'комментарий',           placeholder:'нажмите Enter чтобы пропустить', type:'text', optional:true, validate: () => null },
+];
+let atStep = 0;
+const atAnswers = {};
+const AT_BOOT = [
+  { text:'> NEXUS-TECH CONTACT INITIATE', cls:'cl-accent', delay:0 },
+  { text:'> инициализация сессии...', cls:'cl-dim', delay:180 },
+  { text:'  ✓ API шлюз — ONLINE', cls:'cl-ok', delay:380 },
+  { text:'  ✓ шифрование — AES-256 ACTIVE', cls:'cl-ok', delay:560 },
+  { text:'  ✓ персональные данные — PROTECTED', cls:'cl-ok', delay:720 },
+  { text:'> форма заявки загружена. введите данные:', cls:'cl-accent', delay:960 },
+];
+function atRunBoot() {
+  const bootEl = document.getElementById('a-boot');
+  if (!bootEl) return;
+  let maxDelay = 0;
+  AT_BOOT.forEach(line => {
+    maxDelay = Math.max(maxDelay, line.delay);
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      bootEl.appendChild(d);
+      atScrollBottom();
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const sep = document.createElement('div');
+    sep.className = 'boot-la cl-dim';
+    sep.textContent = '\u2500'.repeat(44);
+    bootEl.appendChild(sep);
+    document.getElementById('a-form-area').style.display = '';
+    atUpdateProgress();
+    atRenderStep();
+    atScrollBottom();
+  }, maxDelay + 250);
+}
+function atUpdateProgress() {
+  const el = document.getElementById('a-prog-num');
+  if (el) el.textContent = atStep < AT_TOTAL ? (atStep + 1) : AT_TOTAL;
+}
+function atScrollBottom() {
+  const tb = document.getElementById('a-terminal-body');
+  if (tb) tb.scrollTop = tb.scrollHeight;
+}
+function atEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function atBuildHistLine(step, val) {
+  const f = AT_FIELDS[step];
+  return '<span style="color:var(--text3);font-size:.72rem;min-width:28px;font-family:\'JetBrains Mono\',monospace">' + (step+1) + '/7</span>' +
+    '<span style="color:var(--text3);margin:0 4px">&gt;</span>' +
+    '<span class="term-hist-lbl-a">' + f.label + ':</span>' +
+    '<span class="term-hist-val-a">' + atEsc(val) + '</span>' +
+    '<span class="term-hist-ok-a">✓</span>' +
+    '<span class="term-hist-edit-a">[ред.]</span>';
+}
+function atRenderStep() {
+  const cur = document.getElementById('a-current');
+  const errEl = document.getElementById('a-err-inline');
+  cur.innerHTML = '';
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+  if (atStep >= 6) document.getElementById('a-consent-area').style.display = '';
+  if (atStep >= AT_FIELDS.length) return;
+  const f = AT_FIELDS[atStep];
+  const row = document.createElement('div');
+  row.className = 'term-arow';
+  const badge = document.createElement('span');
+  badge.className = 'term-abadge';
+  badge.textContent = (atStep+1) + '/' + AT_TOTAL;
+  row.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.className = 'term-aprompt';
+  prompt.textContent = '> ';
+  row.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.className = 'term-alabel';
+  lbl.textContent = f.label + ':';
+  row.appendChild(lbl);
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    sel.id = 'at-field-input';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (atAnswers[f.id] === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    row.appendChild(sel);
+    cur.appendChild(row);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) atConfirm(); });
+    sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) atConfirm(); } });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.id = 'at-field-input';
+    inp.placeholder = f.placeholder || '';
+    if (atAnswers[f.id]) inp.value = atAnswers[f.id];
+    row.appendChild(inp);
+    const hint = document.createElement('span');
+    hint.className = 'term-ahint';
+    hint.textContent = f.optional ? '[Enter — пропустить или ввести]' : '[Enter — подтвердить]';
+    if (f.optional) { var ca = document.getElementById('a-consent-area'); if (ca) ca.style.display = ''; }
+    row.appendChild(hint);
+    cur.appendChild(row);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); atConfirm(); } });
+    inp.addEventListener('input', () => { errEl.classList.remove('visible'); errEl.textContent = ''; });
+  }
+}
+function atConfirm() {
+  const f = AT_FIELDS[atStep];
+  const inp = document.getElementById('at-field-input');
+  const val = inp ? (inp.tagName === 'SELECT' ? inp.value : inp.value.trim()) : '';
+  const err = f.validate(val);
+  const errEl = document.getElementById('a-err-inline');
+  if (err && !f.optional) {
+    errEl.textContent = '[ERR] ' + err;
+    errEl.classList.add('visible');
+    if (inp && inp.tagName !== 'SELECT') inp.focus();
+    atScrollBottom();
+    return;
+  }
+  errEl.classList.remove('visible');
+  const displayVal = val || '(пропущено)';
+  const line = document.createElement('div');
+  line.className = 'term-hist-line-a';
+  line.dataset.step = atStep;
+  line.innerHTML = atBuildHistLine(atStep, displayVal);
+  const s = atStep;
+  line.addEventListener('click', () => atEditField(s));
+  document.getElementById('a-history').appendChild(line);
+  atAnswers[f.id] = val;
+  atStep++;
+  atUpdateProgress();
+  atScrollBottom();
+  atRenderStep();
+}
+function atEditField(step) {
+  const f = AT_FIELDS[step];
+  const histLine = document.querySelector('.term-hist-line-a[data-step="' + step + '"]');
+  if (!histLine) return;
+  const savedVal = atAnswers[f.id] || '';
+  histLine.style.opacity = '1';
+  histLine.style.borderLeftColor = 'var(--accent)';
+  histLine.innerHTML = '';
+  const badge = document.createElement('span');
+  badge.style.cssText = 'color:var(--text3);font-size:.72rem;min-width:28px;margin-right:8px;font-family:JetBrains Mono,monospace';
+  badge.textContent = (step+1) + '/7';
+  histLine.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.style.cssText = 'color:var(--text3);margin-right:4px;font-family:JetBrains Mono,monospace';
+  prompt.textContent = '> ';
+  histLine.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'color:var(--accent2);margin-right:6px;white-space:nowrap;font-size:.82rem;font-family:JetBrains Mono,monospace';
+  lbl.textContent = f.label + ':';
+  histLine.appendChild(lbl);
+  const save = (newVal) => {
+    const err = f.validate(newVal);
+    if (err && !f.optional) {
+      let errSpan = histLine.nextElementSibling;
+      if (!errSpan || !errSpan.classList.contains('at-hist-err')) {
+        errSpan = document.createElement('div');
+        errSpan.className = 'at-hist-err';
+        errSpan.style.cssText = 'color:#f87171;font-size:.7rem;padding-left:36px;margin-bottom:4px;font-family:JetBrains Mono,monospace';
+        histLine.parentNode.insertBefore(errSpan, histLine.nextSibling);
+      }
+      errSpan.textContent = '[ERR] ' + err;
+      return false;
     }
-  }, { threshold: 0.3 });
-  ctaObs.observe(ct);
-})();
-
-
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('at-hist-err')) errSpan.remove();
+    atAnswers[f.id] = newVal;
+    histLine.innerHTML = atBuildHistLine(step, newVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+    return true;
+  };
+  const cancel = () => {
+    histLine.innerHTML = atBuildHistLine(step, savedVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+  };
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (savedVal === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    histLine.appendChild(sel);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) save(sel.value); });
+    sel.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (sel.value) save(sel.value); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.value = savedVal;
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--text3);font-size:.7rem;margin-left:10px;font-family:JetBrains Mono,monospace';
+    hint.textContent = '[Enter — сохранить, Esc — отмена]';
+    histLine.appendChild(inp);
+    histLine.appendChild(hint);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); save(inp.value.trim()); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  }
+}
+function aCheckConsent() {
+  const cb = document.getElementById('a-consent');
+  document.getElementById('a-submit-btn').disabled = !cb.checked;
+}
+function aSubmit() {
+  const btn = document.getElementById('a-submit-btn');
+  btn.style.display = 'none';
+  const cr = btn.previousElementSibling;
+  if (cr) cr.style.display = 'none';
+  const body = document.getElementById('a-terminal-body');
+  const sep = document.createElement('div');
+  sep.className = 'boot-la cl-dim';
+  sep.style.marginTop = '12px';
+  sep.textContent = '\u2500'.repeat(44);
+  body.appendChild(sep);
+  const SEND = [
+    { text:'> ОТПРАВКА ЗАЯВКИ...', cls:'cl-accent', delay:0 },
+    { text:'  передача данных в CRM...', cls:'cl-dim', delay:300 },
+    { text:'  ✓ заявка зарегистрирована', cls:'cl-ok', delay:700 },
+    { text:'  ✓ уведомление менеджеру отправлено', cls:'cl-ok', delay:950 },
+    { text:'  ✓ подтверждение отправлено на email', cls:'cl-ok', delay:1150 },
+  ];
+  SEND.forEach(line => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const s = document.getElementById('a-success-box');
+    if (s) {
+      body.appendChild(s);
+      s.classList.add('visible');
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 1500);
+}
 (function(){
-  var obs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-  document.querySelectorAll('.rv,.rv-scale').forEach(function(el){ obs.observe(el); });
+  let atStarted = false;
+  const termWin = document.querySelector('.terminal-window-a');
+  if (!termWin) return;
+  const atObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !atStarted) {
+      atStarted = true;
+      atRunBoot();
+    }
+  }, { threshold: 0.1 });
+  atObs.observe(termWin);
 })();
 
 </script>

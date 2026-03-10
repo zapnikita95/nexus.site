@@ -76,6 +76,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(11,15,26,0.95);b
 .art-author{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--text3)}
 .art-arrow{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);opacity:0;transition:opacity .3s}
 .art-card:hover .art-arrow{opacity:1}
+.art-card-link{display:block;text-decoration:none;color:inherit}
 
 /* REVEAL */
 .rv{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
@@ -272,131 +273,149 @@ footer::before {
 <div class="articles-section">
     <div class="articles-grid">
 
+    <a href="article-pilot.html" class="art-card-link">
     <article class="art-card rv" data-type="guide">
       <div class="art-meta">
         <span class="art-tag art-tag-guide">[ГАЙД]</span>
         <span class="art-date">2026-01-15</span>
         <span class="art-read">8 мин</span>
       </div>
-      <h3><a href="article-pilot.html" style="color:inherit;text-decoration:none">Внедрение мультиагентного ИИ за 1–2 месяца: что реально</a></h3>
+      <h3>Внедрение мультиагентного ИИ за 1–2 месяца: что реально</h3>
       <p>Что входит в пилот on-premise: развёртывание на серверах, интеграция с 1С и ЭДО, настройка агентов. Оплата за результат, KPI и реальные сроки.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-pilot.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-regulyatorika-ai.html" class="art-card-link">
     <article class="art-card rv" data-type="review">
       <div class="art-meta">
         <span class="art-tag art-tag-review">[РАЗБОР]</span>
         <span class="art-date">2025-12-20</span>
         <span class="art-read">11 мин</span>
       </div>
-      <h3><a href="article-regulyatorika-ai.html" style="color:inherit;text-decoration:none">Регуляторика безопасности ИИ в РФ: с чем вступаем в 2026 год</a></h3>
+      <h3>Регуляторика безопасности ИИ в РФ: с чем вступаем в 2026 год</h3>
       <p>Указ №490, приказ ФСТЭК №117, методика оценки защищённости, БДУ угроз ИИ. Что нужно enterprise при внедрении LLM и агентов on-premise.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-regulyatorika-ai.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-chestnyj-znak-compliance.html" class="art-card-link">
     <article class="art-card rv" data-type="review">
       <div class="art-meta">
         <span class="art-tag art-tag-review">[РАЗБОР]</span>
         <span class="art-date">2025-11-28</span>
         <span class="art-read">9 мин</span>
       </div>
-      <h3><a href="article-chestnyj-znak-compliance.html" style="color:inherit;text-decoration:none">Комплаенс Честного Знака: штрафы, риски УПД и автоматизация</a></h3>
+      <h3>Комплаенс Честного Знака: штрафы, риски УПД и автоматизация</h3>
       <p>Штрафы за нарушения маркировки в 2026, типичные ошибки УПД/УКЭ, что уже автоматизировано. Как мультиагентный ИИ закрывает комплаенс on-premise.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-chestnyj-znak-compliance.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-rag.html" class="art-card-link">
     <article class="art-card rv" data-type="guide">
       <div class="art-meta">
         <span class="art-tag art-tag-guide">[ГАЙД]</span>
         <span class="art-date">2025-10-14</span>
         <span class="art-read">10 мин</span>
       </div>
-      <h3><a href="article-rag.html" style="color:inherit;text-decoration:none">RAG on-premise: база знаний в вашем периметре</a></h3>
+      <h3>RAG on-premise: база знаний в вашем периметре</h3>
       <p>Как построить RAG на своём сервере: векторная БД, эмбеддинги, контекст для LLM. Регламенты и корпоративная база знаний без отправки документов в облако.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-rag.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-prompt-injection.html" class="art-card-link">
     <article class="art-card rv" data-type="guide">
       <div class="art-meta">
         <span class="art-tag art-tag-guide">[ГАЙД]</span>
         <span class="art-date">2025-09-05</span>
         <span class="art-read">12 мин</span>
       </div>
-      <h3><a href="article-prompt-injection.html" style="color:inherit;text-decoration:none">Защита языковых моделей от внедрения вредных инструкций</a></h3>
+      <h3>Защита языковых моделей от внедрения вредных инструкций</h3>
       <p>Что такое prompt injection, как оно ведёт к утечкам. Валидация ввода и вывода, паттерн двух моделей, изоляция. Чек-лист для enterprise.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-prompt-injection.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-data-leaks.html" class="art-card-link">
     <article class="art-card rv" data-type="guide">
       <div class="art-meta">
         <span class="art-tag art-tag-guide">[ГАЙД]</span>
         <span class="art-date">2025-08-19</span>
         <span class="art-read">9 мин</span>
       </div>
-      <h3><a href="article-data-leaks.html" style="color:inherit;text-decoration:none">Предотвращение утечек данных в системах на базе ИИ</a></h3>
+      <h3>Предотвращение утечек данных в системах на базе ИИ</h3>
       <p>Маскировка и анонимизация перед обработкой ИИ, мониторинг аномалий. Таблица угроз и мер. Интеграция с 152-ФЗ, кейсы для юристов и финансов.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-data-leaks.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-markirovka.html" class="art-card-link">
     <article class="art-card rv" data-type="review">
       <div class="art-meta">
         <span class="art-tag art-tag-review">[РАЗБОР]</span>
         <span class="art-date">2025-07-03</span>
         <span class="art-read">8 мин</span>
       </div>
-      <h3><a href="article-markirovka.html" style="color:inherit;text-decoration:none">ИИ для маркировки «Честный знак»: распознавание DataMatrix в процессах</a></h3>
+      <h3>ИИ для маркировки «Честный знак»: распознавание DataMatrix в процессах</h3>
       <p>Где классические алгоритмы дают сбой, как ИИ повышает процент распознавания на мягкой упаковке. ТС ПИоТ, производство, ритейл — внедрение on-premise.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-markirovka.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-chestnyj-znak-upd.html" class="art-card-link">
     <article class="art-card rv" data-type="review">
       <div class="art-meta">
         <span class="art-tag art-tag-review">[РАЗБОР]</span>
         <span class="art-date">2025-06-11</span>
         <span class="art-read">7 мин</span>
       </div>
-      <h3><a href="article-chestnyj-znak-upd.html" style="color:inherit;text-decoration:none">Честный Знак: типичный пайплайн и где нужен ИИ</a></h3>
+      <h3>Честный Знак: типичный пайплайн и где нужен ИИ</h3>
       <p>Как устроен пайплайн работы с Честным Знаком: от кодов до УПД. Где главная боль компаний и почему ИИ не заменяет камеры на конвейере.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-chestnyj-znak-upd.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
+    <a href="article-152-fz.html" class="art-card-link">
     <article class="art-card rv" data-type="review">
       <div class="art-meta">
         <span class="art-tag art-tag-review">[РАЗБОР]</span>
         <span class="art-date">2025-05-22</span>
         <span class="art-read">7 мин</span>
       </div>
-      <h3><a href="article-152-fz.html" style="color:inherit;text-decoration:none">Автоматическая проверка документов по 152-ФЗ и Честный Знак</a></h3>
+      <h3>Автоматическая проверка документов по 152-ФЗ и Честный Знак</h3>
       <p>Как мультиагентный ИИ on-premise проверяет договоры и накладные. Снижение штрафов, данные в периметре компании, внедрение за 1–2 месяца.</p>
       <div class="art-footer">
         <span class="art-author">// нексус-тех.рф</span>
-        <a href="article-152-fz.html" class="art-arrow">→ читать</a>
+        <span class="art-arrow">→ читать</span>
       </div>
     </article>
+    </a>
 
   </div>
 </div>
@@ -469,7 +488,7 @@ footer::before {
         <li><a href="partnership.html">Партнёрство</a></li>
         <li><a href="articles.html">Статьи</a></li>
         <li><a href="index.html#contacts">Контакты</a></li>
-        <li><a href="careers.html">Карьера</a></li>
+        <li><a href="documents.html">Документы</a></li>
       </ul>
     </div>
   </div>
