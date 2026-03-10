@@ -2,6 +2,16 @@
 
 Мультиагентная AI-платформа для enterprise. 100% on-premise.
 
+## Как лить на прод
+
+**Одна команда** из корня проекта (папка Мультиагент):
+```bash
+./nexus.site/deploy-to-prod.sh
+```
+Скрипт копирует `nexus.site/` в репо **zapnikita95/nexus.site**, пушит в main. Прод обновляется за 1–2 мин: https://xn----itbbsn0aajgy.xn--p1ai/
+
+---
+
 ## Сайт
 
 **Единственный источник** — эта папка `nexus.site`. Деплой: пуш в **origin (GitHub)**.
