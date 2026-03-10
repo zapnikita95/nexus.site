@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Новые модели Qwen: что вышло и какая для какой задачи — Нексус-Тех</title>
+<meta name="description" content="Qwen3 и Qwen2.5-1M: чем хороши, гибридный режим рассуждений, длинный контекст до 1M токенов. Какая модель под комплаенс, RAG, агентов. Ссылка на калькулятор контекстного окна.">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="canonical" href="https://нексус-тех.рф/article-qwen-models.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://нексус-тех.рф/article-qwen-models.html">
+<meta property="og:title" content="Новые модели Qwen: что вышло и какая для какой задачи — Нексус-Тех">
+<meta property="og:description" content="Qwen3 и Qwen2.5-1M: чем хороши, какая модель для какой задачи. Калькулятор контекстного окна.">
+<meta property="og:locale" content="ru_RU">
+<link rel="stylesheet" href="styles.css">
+<style>.article-body h2{font-size:28px;font-weight:800;margin:24px 0 16px;color:var(--text)}.article-body .article-meta{font-size:13px;color:var(--text3);margin-bottom:24px}.article-body p{font-size:15px;color:var(--text2);line-height:1.9;margin-bottom:20px}.article-body h3{font-size:20px;font-weight:700;margin:28px 0 12px;color:var(--text)}.article-back{display:inline-block;font-size:14px;color:var(--text3);text-decoration:none;margin-bottom:20px;transition:color .2s}.article-back:hover{color:var(--accent)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:60px;background:rgba(11,15,26,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;letter-spacing:.12em;color:var(--text);text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-size:12px;color:var(--text2);letter-spacing:0.06em;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta-terminal{display:inline-flex;align-items:center;gap:4px;padding:6px 14px;border:1px solid var(--accent);font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent)!important;letter-spacing:.04em;transition:all .2s;cursor:pointer}
+.nav-cta-terminal:hover{background:rgba(129,140,248,.08);color:var(--accent2)!important;border-color:var(--accent2)}
+.nav-cta-cursor{display:inline-block;width:2px;height:1em;background:var(--accent);animation:blink 1s step-end infinite;margin-left:1px;vertical-align:middle}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:1px solid rgba(129,140,248,.2);border-radius:4px;cursor:pointer;color:var(--text)}
+.nav-burger span{display:block;width:20px;height:2px;background:currentColor}
+@media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}.nav-open .nav-links{display:flex!important;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(11,15,26,0.98);border-bottom:1px solid var(--border);padding:1rem;gap:0.75rem;align-items:flex-start}.nav-burger{display:flex!important}.nav-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav-open .nav-burger span:nth-child(2){opacity:0}.nav-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}}
+footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
+.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
+.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--text);text-transform:uppercase}
+.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
+.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
+.footer-copyright{color:var(--text3);letter-spacing:.04em}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-bottom-links a:hover{color:var(--text2)}
+.footer-contact{display:flex;gap:1.5rem}
+.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
+.footer-contact a:hover{color:var(--accent)}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+.page-hero{position:relative;overflow:hidden}
+.geo-bg{position:absolute;inset:0;background:url('hero-article.svg') center/cover no-repeat;opacity:0.9;pointer-events:none}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a class="nav-logo" href="index.html">НЕКСУС-ТЕХ</a>
+  <button type="button" class="nav-burger" id="nav-burger" aria-label="Меню"><span></span><span></span><span></span></button>
+  <div class="nav-links">
+    <a href="solutions.html">Решения</a>
+    <a href="security.html">Безопасность</a>
+    <a href="technology.html">Технологии</a>
+    <a href="agents.html">Модели агентов</a>
+    <a href="articles.html">Статьи</a>
+    <a href="partnership.html">Партнёрство</a>
+    <a href="order.html" class="nav-cta-terminal">
+      <span style="color:var(--text3)">></span>
+      <span style="margin:0 3px">Заказать тест?</span>
+      <span style="color:var(--text3)">(Y/n)</span>
+      <span class="nav-cta-cursor"></span>
+    </a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="geo-bg"><div class="geo-circ"></div><div class="geo-rect"></div></div>
+  <div class="s-pad" style="position:relative;z-index:1">
+    <a href="articles.html" class="article-back rv">← Все статьи</a>
+    <h1 class="s-title rv">Новые модели Qwen: что вышло и какая для какой задачи</h1>
+    <div class="article-meta rv">[РАЗБОР] · Qwen3, Qwen2.5-1M, контекстное окно</div>
+  </div>
+</section>
+
+<section style="padding:0 0 80px">
+  <div class="content-wrap">
+    <div class="article-body rv">
+      <p>Несколько недель назад Alibaba Qwen анонсировала обновления линейки: флагманское семейство <strong>Qwen3</strong> и расширенные версии <strong>Qwen2.5-1M</strong> с контекстом до миллиона токенов. В этом разборе — что именно вышло, чем модели хороши и какую выбрать под типичные задачи: комплаенс, RAG, агенты, длинные документы.</p>
+
+      <h2>Что вышло</h2>
+      <p><strong>Qwen3</strong> — новое поколение dense- и MoE-моделей. Dense: 32B, 14B, 8B, 4B, 1.7B, 0.6B (контекст 128K, у младших 32K). MoE: Qwen3-30B-A3B (30B всего / 3B активных) и Qwen3-235B-A22B (235B / 22B активных). Все открытые веса, лицензия Apache 2.0. Главная фича — гибридный режим рассуждений: быстрый ответ без «думания» и режим thinking для сложных задач с пошаговым выводом. Даже Qwen3-4B по бенчмаркам приближается к Qwen2.5-72B-Instruct.</p>
+      <p><strong>Qwen2.5-1M</strong> — 7B и 14B Instruct с контекстом до <strong>1 млн токенов</strong>. Оптимизированный инференс (sparse attention и др.): на длинном контексте в разы быстрее наивного подхода, по длинным задачам обходят GPT-4o-mini. Подходят для RAG с большой базой документов и для анализа объёмных договоров, отчётов, регламентов.</p>
+
+      <h2>Чем хороши</h2>
+      <p>Qwen3 даёт выбор «скорость или глубина»: чат и простые запросы — без thinking, сложная логика и код — с thinking. Для on-premise это удобно: один и тот же стек можно настроить под сценарий. Qwen2.5-1M закрывает сценарии, где в контекст нужно класть десятки и сотни тысяч токенов: единый проход по длинному документу без жёсткой обрезки и без облака.</p>
+
+      <h2>Какая модель для какой задачи</h2>
+      <h3>Комплаенс и проверка документов</h3>
+      <p>Средние dense 8B–14B (Qwen3-8B/14B или Qwen2.5-7B/14B) — баланс качества и ресурсов. Режим thinking — для сложных правил и цепочек проверок. Если документы длинные (договоры, УПД пачками) — Qwen2.5-7B/14B-Instruct-1M позволяет держать в контексте целиком большой файл или несколько документов. Подробнее про автоматизацию проверок: <a href="article-152-fz.html" style="color:var(--accent);text-decoration:underline">152-ФЗ и Честный Знак</a>, <a href="article-chestnyj-znak-compliance.html" style="color:var(--accent);text-decoration:underline">комплаенс Честного Знака</a>.</p>
+      <h3>RAG и база знаний</h3>
+      <p>RAG обычно не требует миллиона токенов в одном запросе — важнее стабильный инференс и качество ответа по выбранным чанкам. Qwen3-4B/8B или Qwen2.5-7B хорошо стоят за Researcher/Writer в <a href="technology.html" style="color:var(--accent);text-decoration:underline">архитектуре агентов</a>. Если база знаний очень большая и нужен один длинный контекст — тогда Qwen2.5-1M. О том, как строить RAG в периметре: <a href="article-rag.html" style="color:var(--accent);text-decoration:underline">RAG on-premise</a>.</p>
+      <h3>Агенты и оркестрация</h3>
+      <p>Для оркестратора и критичных шагов (планирование, верификация) лучше 8B–32B с режимом thinking. Для массовых «рабочих» агентов (извлечение полей, классификация) достаточно 4B–7B без thinking. Схемы и роли: <a href="agents.html" style="color:var(--accent);text-decoration:underline">Модели агентов</a>.</p>
+      <h3>Ограничения по железу и контексту</h3>
+      <p>Размер контекста и объём KV-cache напрямую зависят от VRAM и размера модели. Чтобы прикинуть, какой контекст потянет ваша конфигурация (и сколько оставить под RAG), используйте наш калькулятор:</p>
+      <p><strong><a href="technology.html#kv-calculator" style="color:var(--accent);text-decoration:underline">→ Калькулятор контекстного окна и KV-cache</a></strong> — оценка по VRAM, модели и объёму базы знаний.</p>
+      <p>Решения под разные сценарии (комплаенс, обращения, автоматизация): <a href="solutions.html" style="color:var(--accent);text-decoration:underline">Решения</a>. Условия пилота и внедрения: <a href="partnership.html" style="color:var(--accent);text-decoration:underline">Партнёрство</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="cta-tag rv">[SYS] ЗАЯВКА</div>
+    <h2 class="cta-title rv">Заказать пилот</h2>
+    <p class="cta-sub rv" style="margin-bottom:0">Запустим мультиагентную систему на вашей инфраструктуре за 1–2 месяца. Без передачи данных в облако.</p>
+    <div class="terminal-window-a rv">
+      <div class="terminal-titlebar-a">
+        <div class="ta-dots">
+          <div class="ta-dot ta-dot-r"></div>
+          <div class="ta-dot ta-dot-y"></div>
+          <div class="ta-dot ta-dot-g"></div>
+        </div>
+        <span class="ta-wtitle">[НЕКСУС-ТЕХ] Заявка на тестирование</span>
+        <div class="ta-wprogress">поле <span id="a-prog-num">—</span><span style="color:var(--text3)">/7</span></div>
+      </div>
+      <div class="terminal-body-a" id="a-terminal-body">
+        <div id="a-boot"></div>
+        <div id="a-form-area" style="display:none">
+          <div class="term-hist-a" id="a-history"></div>
+          <div class="term-current-a" id="a-current"></div>
+          <div class="term-aerr" id="a-err-inline"></div>
+          <div id="a-consent-area" style="display:none">
+            <div class="consent-row-a">
+              <input type="checkbox" id="a-consent" onchange="aCheckConsent()">
+              <label for="a-consent">Согласен на обработку персональных данных</label>
+            </div>
+            <button class="submit-btn-a" id="a-submit-btn" disabled onclick="aSubmit()">[ ОТПРАВИТЬ ЗАЯВКУ ]</button>
+            <div class="success-box-a" id="a-success-box">
+              [OK] Заявка принята — свяжемся с вами в ближайшее время
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo-col">
+      <div class="footer-brand">НЕКСУС-ТЕХ</div>
+      <div class="footer-brand-sub">Мультиагентные системы на вашей инфраструктуре</div>
+    </div>
+    <div class="footer-col">
+      <h4>О платформе</h4>
+      <ul>
+        <li><a href="technology.html">Архитектура</a></li>
+        <li><a href="technology.html">Технологии</a></li>
+        <li><a href="agents.html">Модели агентов</a></li>
+        <li><a href="security.html">Безопасность</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Решения</h4>
+      <ul>
+        <li><a href="solutions.html">Все решения</a></li>
+        <li><a href="solutions.html#compliance">Комплаенс</a></li>
+        <li><a href="solutions.html#feedback">Обращения</a></li>
+        <li><a href="solutions.html#automation">Автоматизация</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Компания</h4>
+      <ul>
+        <li><a href="partnership.html">Партнёрство</a></li>
+        <li><a href="articles.html">Статьи</a></li>
+        <li><a href="index.html#contacts">Контакты</a></li>
+        <li><a href="documents.html">Документы</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copyright">© <span id="footer-year"></span> ООО «НЕКСУС-ТЕХ» · ИНН 5047323976 · КПП 504701001 · ОГРН 1265000012628</div>
+    <div class="footer-bottom-links">
+      <a href="privacy.html">Политика конфиденциальности</a>
+      <a href="requisites.html">Реквизиты</a>
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:mail@нексус-тех.рф">mail@нексус-тех.рф</a>
+      <a href="tel:+79776134508">+7 (977) 613-45-08</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+(function(){ var n=document.getElementById('main-nav'),b=document.getElementById('nav-burger'); if(n&&b) b.addEventListener('click',function(){ n.classList.toggle('nav-open'); }); })();
+var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+const AT_TOTAL = 7;
+const AT_FIELDS = [
+  { id:'name',     label:'имя',                   placeholder:'Иван Иванов',      type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'company',  label:'компания',              placeholder:'ООО «Компания»',   type:'text',   validate: v => v.trim().length >= 2 ? null : 'минимум 2 символа' },
+  { id:'email',    label:'email',                 placeholder:'ivan@company.ru',  type:'text',   validate: v => (v.includes('@') && v.includes('.')) ? null : 'нужен @ и домен' },
+  { id:'phone',    label:'телефон',               placeholder:'+7 900 000 00 00', type:'text',   validate: v => v.replace(/\D/g,'').length >= 10 ? null : 'минимум 10 цифр' },
+  { id:'solution', label:'интересующее решение',  type:'select',
+    options:['Комплаенс-мониторинг','Обработка обращений','Автоматизация документов','Несколько решений','Другое'],
+    validate: v => v ? null : 'выберите из списка' },
+  { id:'turnover', label:'оборот компании в год', type:'select',
+    options:['до 500 млн ₽','500 млн — 5 млрд ₽','5 — 50 млрд ₽','более 50 млрд ₽','Не готов указывать'],
+    validate: v => v ? null : 'выберите значение из списка' },
+  { id:'comment',  label:'комментарий',           placeholder:'нажмите Enter чтобы пропустить', type:'text', optional:true, validate: () => null },
+];
+let atStep = 0;
+const atAnswers = {};
+const AT_BOOT = [
+  { text:'> NEXUS-TECH CONTACT INITIATE', cls:'cl-accent', delay:0 },
+  { text:'> инициализация сессии...', cls:'cl-dim', delay:180 },
+  { text:'  ✓ API шлюз — ONLINE', cls:'cl-ok', delay:380 },
+  { text:'  ✓ шифрование — AES-256 ACTIVE', cls:'cl-ok', delay:560 },
+  { text:'  ✓ персональные данные — PROTECTED', cls:'cl-ok', delay:720 },
+  { text:'> форма заявки загружена. введите данные:', cls:'cl-accent', delay:960 },
+];
+function atRunBoot() {
+  const bootEl = document.getElementById('a-boot');
+  if (!bootEl) return;
+  let maxDelay = 0;
+  AT_BOOT.forEach(line => {
+    maxDelay = Math.max(maxDelay, line.delay);
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      bootEl.appendChild(d);
+      atScrollBottom();
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const sep = document.createElement('div');
+    sep.className = 'boot-la cl-dim';
+    sep.textContent = '\u2500'.repeat(44);
+    bootEl.appendChild(sep);
+    document.getElementById('a-form-area').style.display = '';
+    atUpdateProgress();
+    atRenderStep();
+    atScrollBottom();
+  }, maxDelay + 250);
+}
+function atUpdateProgress() {
+  const el = document.getElementById('a-prog-num');
+  if (el) el.textContent = atStep < AT_TOTAL ? (atStep + 1) : AT_TOTAL;
+}
+function atScrollBottom() {
+  const tb = document.getElementById('a-terminal-body');
+  if (tb) tb.scrollTop = tb.scrollHeight;
+}
+function atEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function atBuildHistLine(step, val) {
+  const f = AT_FIELDS[step];
+  return '<span style="color:var(--text3);font-size:.72rem;min-width:28px;font-family:\'JetBrains Mono\',monospace">' + (step+1) + '/7</span>' +
+    '<span style="color:var(--text3);margin:0 4px">&gt;</span>' +
+    '<span class="term-hist-lbl-a">' + f.label + ':</span>' +
+    '<span class="term-hist-val-a">' + atEsc(val) + '</span>' +
+    '<span class="term-hist-ok-a">✓</span>' +
+    '<span class="term-hist-edit-a">[ред.]</span>';
+}
+function atRenderStep() {
+  const cur = document.getElementById('a-current');
+  const errEl = document.getElementById('a-err-inline');
+  cur.innerHTML = '';
+  errEl.classList.remove('visible');
+  errEl.textContent = '';
+  if (atStep >= 6) document.getElementById('a-consent-area').style.display = '';
+  if (atStep >= AT_FIELDS.length) return;
+  const f = AT_FIELDS[atStep];
+  const row = document.createElement('div');
+  row.className = 'term-arow';
+  const badge = document.createElement('span');
+  badge.className = 'term-abadge';
+  badge.textContent = (atStep+1) + '/' + AT_TOTAL;
+  row.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.className = 'term-aprompt';
+  prompt.textContent = '> ';
+  row.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.className = 'term-alabel';
+  lbl.textContent = f.label + ':';
+  row.appendChild(lbl);
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    sel.id = 'at-field-input';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (atAnswers[f.id] === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    row.appendChild(sel);
+    cur.appendChild(row);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) atConfirm(); });
+    sel.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); if (sel.value) atConfirm(); } });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.id = 'at-field-input';
+    inp.placeholder = f.placeholder || '';
+    if (atAnswers[f.id]) inp.value = atAnswers[f.id];
+    row.appendChild(inp);
+    const hint = document.createElement('span');
+    hint.className = 'term-ahint';
+    hint.textContent = f.optional ? '[Enter — пропустить или ввести]' : '[Enter — подтвердить]';
+    if (f.optional) { var ca = document.getElementById('a-consent-area'); if (ca) ca.style.display = ''; }
+    row.appendChild(hint);
+    cur.appendChild(row);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); atConfirm(); } });
+    inp.addEventListener('input', () => { errEl.classList.remove('visible'); errEl.textContent = ''; });
+  }
+}
+function atConfirm() {
+  const f = AT_FIELDS[atStep];
+  const inp = document.getElementById('at-field-input');
+  const val = inp ? (inp.tagName === 'SELECT' ? inp.value : inp.value.trim()) : '';
+  const err = f.validate(val);
+  const errEl = document.getElementById('a-err-inline');
+  if (err && !f.optional) {
+    errEl.textContent = '[ERR] ' + err;
+    errEl.classList.add('visible');
+    if (inp && inp.tagName !== 'SELECT') inp.focus();
+    atScrollBottom();
+    return;
+  }
+  errEl.classList.remove('visible');
+  const displayVal = val || '(пропущено)';
+  const line = document.createElement('div');
+  line.className = 'term-hist-line-a';
+  line.dataset.step = atStep;
+  line.innerHTML = atBuildHistLine(atStep, displayVal);
+  const s = atStep;
+  line.addEventListener('click', () => atEditField(s));
+  document.getElementById('a-history').appendChild(line);
+  atAnswers[f.id] = val;
+  atStep++;
+  atUpdateProgress();
+  atScrollBottom();
+  atRenderStep();
+}
+function atEditField(step) {
+  const f = AT_FIELDS[step];
+  const histLine = document.querySelector('.term-hist-line-a[data-step="' + step + '"]');
+  if (!histLine) return;
+  const savedVal = atAnswers[f.id] || '';
+  histLine.style.opacity = '1';
+  histLine.style.borderLeftColor = 'var(--accent)';
+  histLine.innerHTML = '';
+  const badge = document.createElement('span');
+  badge.style.cssText = 'color:var(--text3);font-size:.72rem;min-width:28px;margin-right:8px;font-family:JetBrains Mono,monospace';
+  badge.textContent = (step+1) + '/7';
+  histLine.appendChild(badge);
+  const prompt = document.createElement('span');
+  prompt.style.cssText = 'color:var(--text3);margin-right:4px;font-family:JetBrains Mono,monospace';
+  prompt.textContent = '> ';
+  histLine.appendChild(prompt);
+  const lbl = document.createElement('span');
+  lbl.style.cssText = 'color:var(--accent2);margin-right:6px;white-space:nowrap;font-size:.82rem;font-family:JetBrains Mono,monospace';
+  lbl.textContent = f.label + ':';
+  histLine.appendChild(lbl);
+  const save = (newVal) => {
+    const err = f.validate(newVal);
+    if (err && !f.optional) {
+      let errSpan = histLine.nextElementSibling;
+      if (!errSpan || !errSpan.classList.contains('at-hist-err')) {
+        errSpan = document.createElement('div');
+        errSpan.className = 'at-hist-err';
+        errSpan.style.cssText = 'color:#f87171;font-size:.7rem;padding-left:36px;margin-bottom:4px;font-family:JetBrains Mono,monospace';
+        histLine.parentNode.insertBefore(errSpan, histLine.nextSibling);
+      }
+      errSpan.textContent = '[ERR] ' + err;
+      return false;
+    }
+    const errSpan = histLine.nextElementSibling;
+    if (errSpan && errSpan.classList.contains('at-hist-err')) errSpan.remove();
+    atAnswers[f.id] = newVal;
+    histLine.innerHTML = atBuildHistLine(step, newVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+    return true;
+  };
+  const cancel = () => {
+    histLine.innerHTML = atBuildHistLine(step, savedVal || '(пропущено)');
+    histLine.style.opacity = '0.7';
+    histLine.style.borderLeftColor = 'transparent';
+    histLine.addEventListener('click', () => atEditField(step));
+    const cur = document.getElementById('at-field-input');
+    if (cur) cur.focus();
+  };
+  if (f.type === 'select') {
+    const sel = document.createElement('select');
+    sel.className = 'term-aselect';
+    const def = document.createElement('option');
+    def.value = ''; def.textContent = '— выберите —';
+    sel.appendChild(def);
+    f.options.forEach(o => {
+      const op = document.createElement('option');
+      op.value = o; op.textContent = o;
+      if (savedVal === o) op.selected = true;
+      sel.appendChild(op);
+    });
+    histLine.appendChild(sel);
+    sel.focus();
+    sel.addEventListener('change', () => { if (sel.value) save(sel.value); });
+    sel.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); if (sel.value) save(sel.value); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  } else {
+    const inp = document.createElement('input');
+    inp.type = 'text';
+    inp.className = 'term-ainput';
+    inp.value = savedVal;
+    const hint = document.createElement('span');
+    hint.style.cssText = 'color:var(--text3);font-size:.7rem;margin-left:10px;font-family:JetBrains Mono,monospace';
+    hint.textContent = '[Enter — сохранить, Esc — отмена]';
+    histLine.appendChild(inp);
+    histLine.appendChild(hint);
+    inp.focus();
+    if (inp.value) { const l = inp.value.length; inp.setSelectionRange(l, l); }
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') { e.preventDefault(); save(inp.value.trim()); }
+      if (e.key === 'Escape') { e.preventDefault(); cancel(); }
+    });
+  }
+}
+function aCheckConsent() {
+  const cb = document.getElementById('a-consent');
+  document.getElementById('a-submit-btn').disabled = !cb.checked;
+}
+function aSubmit() {
+  const btn = document.getElementById('a-submit-btn');
+  btn.style.display = 'none';
+  const cr = btn.previousElementSibling;
+  if (cr) cr.style.display = 'none';
+  const body = document.getElementById('a-terminal-body');
+  const sep = document.createElement('div');
+  sep.className = 'boot-la cl-dim';
+  sep.style.marginTop = '12px';
+  sep.textContent = '\u2500'.repeat(44);
+  body.appendChild(sep);
+  const SEND = [
+    { text:'> ОТПРАВКА ЗАЯВКИ...', cls:'cl-accent', delay:0 },
+    { text:'  передача данных в CRM...', cls:'cl-dim', delay:300 },
+    { text:'  ✓ заявка зарегистрирована', cls:'cl-ok', delay:700 },
+    { text:'  ✓ уведомление менеджеру отправлено', cls:'cl-ok', delay:950 },
+    { text:'  ✓ подтверждение отправлено на email', cls:'cl-ok', delay:1150 },
+  ];
+  SEND.forEach(line => {
+    setTimeout(() => {
+      const d = document.createElement('div');
+      d.className = 'boot-la ' + line.cls;
+      d.textContent = line.text;
+      body.appendChild(d);
+      body.scrollTop = body.scrollHeight;
+    }, line.delay);
+  });
+  setTimeout(() => {
+    const s = document.getElementById('a-success-box');
+    if (s) {
+      body.appendChild(s);
+      s.classList.add('visible');
+      body.scrollTop = body.scrollHeight;
+    }
+  }, 1500);
+}
+(function(){
+  let atStarted = false;
+  const termWin = document.querySelector('.terminal-window-a');
+  if (!termWin) return;
+  const atObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !atStarted) {
+      atStarted = true;
+      atRunBoot();
+    }
+  }, { threshold: 0.1 });
+  atObs.observe(termWin);
+})();
+</script>
+</body>
+</html>

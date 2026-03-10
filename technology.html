@@ -257,6 +257,33 @@ footer{border-top:1px solid rgba(129,140,248,0.12)!important;padding:3rem 3rem 0
 .success-box-a{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok,#4ade80);color:var(--ok,#4ade80);font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;line-height:1.7;display:none}
 .success-box-a.visible{display:block}
 
+/* CTA form — на мобильных БЕЗ горизонтальной прокрутки */
+@media(max-width:768px){
+  .cta-section{overflow-x:clip!important;padding-left:16px!important;padding-right:16px!important}
+  .cta-inner{overflow-x:clip;min-width:0;max-width:100%}
+  .terminal-window-a{overflow-x:clip!important;max-width:100%!important}
+  .terminal-body-a{overflow-x:clip!important;overflow-y:auto;max-width:100%!important;padding:1rem 12px!important}
+  .term-arow{flex-direction:column!important;align-items:stretch!important;gap:6px!important;max-width:100%!important;overflow:hidden!important}
+  .term-arow .term-ainput,.term-arow .term-aselect{min-width:0!important;max-width:100%!important;width:100%!important}
+  .term-ainput,.term-aselect{min-width:0!important;max-width:100%!important;width:100%!important}
+}
+.cta-section{overflow-x:hidden!important}
+.cta-inner{min-width:0}
+.terminal-window-a{max-width:100%!important;box-sizing:border-box!important}
+.terminal-titlebar-a{flex-wrap:wrap!important;min-width:0!important}
+.ta-wtitle{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.terminal-body-a{overflow-x:hidden!important;max-width:100%!important;box-sizing:border-box!important}
+.term-hist-line-a{flex-wrap:wrap!important;min-width:0!important}
+.term-hist-lbl-a{min-width:0!important;flex:0 1 auto!important}
+.term-hist-val-a{word-break:break-word!important;min-width:0!important}
+.term-arow{flex-wrap:wrap!important;min-width:0!important;gap:4px 0!important}
+.term-ahint{white-space:normal!important;flex-basis:100%!important;margin-left:0!important}
+.term-ainput,.term-aselect{min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+.term-arow .term-ainput,.term-arow .term-aselect{flex:1 1 120px!important;min-width:0!important}
+.term-aerr{word-break:break-word!important;padding-left:0!important}
+.success-box-a{word-break:break-word!important}
+.boot-la{word-break:break-word!important}
+
 /* === REVEAL === */
 .rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .rv.visible{opacity:1;transform:none}
@@ -400,7 +427,7 @@ body{padding-top:60px!important}
       </table>
       <button type="button" class="presets-toggle rv" id="presetsToggle" aria-expanded="false">Показать все пресеты</button>
     </div>
-    <p class="rv" style="margin-top:24px"><a href="#kv-calculator" style="color:var(--accent);text-decoration:underline;font-size:14px">Оцените контекстное окно под ваше железо → Калькулятор KV-cache</a></p>
+    <p class="rv" style="margin-top:24px"><a href="#kv-calculator" style="color:var(--accent);text-decoration:underline;font-size:14px">Оцените контекстное окно под ваше железо → Калькулятор KV-cache</a> · <a href="article-qwen-models.html" style="color:var(--accent);text-decoration:underline;font-size:14px">Разбор новых моделей Qwen</a></p>
   </div>
 </section>
 
@@ -519,7 +546,7 @@ body{padding-top:60px!important}
   <div class="s-pad">
     <div class="s-label rv">Калькулятор</div>
     <h2 class="s-title rv">Контекстное окно и KV-cache под ваше железо</h2>
-    <p class="s-sub rv" style="max-width:640px;margin-bottom:32px">Оценка доступного контекста в зависимости от VRAM, модели и объёма RAG. Упрощённая формула для планирования пилота.</p>
+    <p class="s-sub rv" style="max-width:640px;margin-bottom:32px">Оценка доступного контекста в зависимости от VRAM, модели и объёма RAG. Упрощённая формула для планирования пилота. Подбор моделей по задачам — в <a href="article-qwen-models.html" style="color:var(--accent);text-decoration:underline">разборе новых Qwen</a>.</p>
   </div>
   <div class="content-wrap" style="max-width:720px">
     <div class="rv" style="background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:32px">

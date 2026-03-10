@@ -278,6 +278,33 @@ footer::before {
 .success-box-a{margin-top:1.5rem;padding:1.25rem 1.75rem;border:2px solid var(--ok,#4ade80);color:var(--ok,#4ade80);font-family:'JetBrains Mono',monospace;font-size:.95rem;letter-spacing:.04em;line-height:1.7;display:none}
 .success-box-a.visible{display:block}
 
+/* CTA form — на мобильных БЕЗ горизонтальной прокрутки */
+@media(max-width:768px){
+  .cta-section{overflow-x:clip!important;padding-left:16px!important;padding-right:16px!important}
+  .cta-inner{overflow-x:clip;min-width:0;max-width:100%}
+  .terminal-window-a{overflow-x:clip!important;max-width:100%!important}
+  .terminal-body-a{overflow-x:clip!important;overflow-y:auto;max-width:100%!important;padding:1rem 12px!important}
+  .term-arow{flex-direction:column!important;align-items:stretch!important;gap:6px!important;max-width:100%!important;overflow:hidden!important}
+  .term-arow .term-ainput,.term-arow .term-aselect{min-width:0!important;max-width:100%!important;width:100%!important}
+  .term-ainput,.term-aselect{min-width:0!important;max-width:100%!important;width:100%!important}
+}
+.cta-section{overflow-x:hidden!important}
+.cta-inner{min-width:0}
+.terminal-window-a{max-width:100%!important;box-sizing:border-box!important}
+.terminal-titlebar-a{flex-wrap:wrap!important;min-width:0!important}
+.ta-wtitle{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.terminal-body-a{overflow-x:hidden!important;max-width:100%!important;box-sizing:border-box!important}
+.term-hist-line-a{flex-wrap:wrap!important;min-width:0!important}
+.term-hist-lbl-a{min-width:0!important;flex:0 1 auto!important}
+.term-hist-val-a{word-break:break-word!important;min-width:0!important}
+.term-arow{flex-wrap:wrap!important;min-width:0!important;gap:4px 0!important}
+.term-ahint{white-space:normal!important;flex-basis:100%!important;margin-left:0!important}
+.term-ainput,.term-aselect{min-width:0!important;width:100%!important;max-width:100%!important;box-sizing:border-box!important}
+.term-arow .term-ainput,.term-arow .term-aselect{flex:1 1 120px!important;min-width:0!important}
+.term-aerr{word-break:break-word!important;padding-left:0!important}
+.success-box-a{word-break:break-word!important}
+.boot-la{word-break:break-word!important}
+
 </style>
 </head>
 <body>

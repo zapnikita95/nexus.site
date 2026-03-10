@@ -4,31 +4,26 @@
 
 ## Сайт
 
-Статический лендинг. Открыть `index.html` локально или деплой на GitHub Pages.
+**Единственный источник** — эта папка `nexus.site`. Деплой: пуш в **origin (GitHub)**.
 
-### GitHub Pages
+### Откуда пушится прод (xn----itbbsn0aajgy.xn--p1ai)
 
-Сайт выкладывается в репо **zapnikita95/nexus.site**. Эта папка в .gitignore основного проекта — рабочая копия.
+Прод отдаётся из репо **zapnikita95/nexus.site**: Deploy from a branch → main → / (root). Домен: нексус-тех.рф.
 
-**Релиз в прод:** скопировать содержимое этой папки в клон репо и запушить:
-
-```bash
-cd /path/to/workspace
-git clone https://github.com/zapnikita95/nexus.site.git _np
-cp -r nexus.site/* _np/
-cd _np && git add -A && git status
-git commit -m "описание изменений" && git push origin main
-rm -rf ../_np
-```
-
-1. Создай репозиторий на GitHub (например `nexus.site` для ENT, или используй корневой репо проекта)
-2. Включи Pages: Settings → Pages → Source: main branch, / (root)
-3. Добавь remote и запушь:
+Разработка ведётся здесь, в **zapnikita95/nexus-tech**, в папке `nexus.site/`. Чтобы обновить прод, нужно скопировать содержимое этой папки в репо **nexus.site** и запушить:
 
 ```bash
-git remote add origin https://github.com/ТВОЙ_USERNAME/nexus.site.git
-git push -u origin main
+# один раз: клонировать репо прода (если ещё нет)
+git clone https://github.com/zapnikita95/nexus.site.git _deploy
+cd _deploy
+
+# при каждом обновлении: скопировать контент из nexus-tech и запушить
+cp -r /path/to/nexus-tech/nexus.site/* .
+git add -A && git status
+git commit -m "обновление: статьи, даты, правки" && git push origin main
+cd .. && rm -rf _deploy   # опционально
 ```
 
-Сайт ENT: `site-drafts/site/` (оставить только ENT on-prem).  
-Сайт SMB: `site-drafts/site-smb/` — отдельно для WB/Ozon/Telegram (малый и средний бизнес).
+После пуша в **nexus.site** GitHub Pages подхватит изменения за 1–2 минуты.
+
+**Скрипт из репо:** из корня проекта выполни `./nexus.site/deploy-to-prod.sh` — скрипт клонирует/обновляет репо nexus.site, копирует туда содержимое `nexus.site/`, коммитит и пушит. Нужны права на запись в zapnikita95/nexus.site.
