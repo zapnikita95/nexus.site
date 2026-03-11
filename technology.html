@@ -700,11 +700,11 @@ var kvModelMeta = {
   7: { weights: 14, kvPer1k: 0.6 },
   9: { weights: 18, kvPer1k: 0.5 },
   14: { weights: 28, kvPer1k: 1.2 },
-  14_1m: { weights: 28, kvPer1k: 1.2, maxContext: 1000000 },
+  '14_1m': { weights: 28, kvPer1k: 1.2, maxContext: 1000000 },
   32: { weights: 64, kvPer1k: 2.4 },
   35: { weights: 70, kvPer1k: 2.2 },
   72: { weights: 144, kvPer1k: 5 },
-  235_22: { weights: 48, kvPer1k: 2.2 }
+  '235_22': { weights: 48, kvPer1k: 2.2 }
 };
 (function(){
   var vramEl = document.getElementById('kv-vram');
@@ -909,11 +909,15 @@ document.querySelectorAll('.an[data-node]').forEach(node => {
 
 detailClose.addEventListener('click', closeDetail);
 
-// Mobile menu
+// Mobile menu + reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.rv, .rv-scale').forEach(el => obs.observe(el));
+// Подстраховка: если observer не сработал (например из-за ошибки выше), показать контент через 1.5 с
+setTimeout(function(){
+  document.querySelectorAll('.rv:not(.visible), .rv-scale:not(.visible)').forEach(function(el){ el.classList.add('visible'); });
+}, 1500);
 </script>
 
 
