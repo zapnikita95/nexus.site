@@ -296,11 +296,15 @@ body{padding-top:60px!important;position:relative}
 .page-hero,.hero{padding-top:60px!important}
 
 /* === TECH SPINE: page-wide diamond rail (labels on LEFT, larger) === */
-.tech-spine{position:absolute;right:32px;top:580px;bottom:auto;height:min(2200px,calc(100vh * 2.2));width:380px;pointer-events:none;z-index:0;display:block}
-/* sections after the spine region visually cover any diamonds that would bleed into them */
+.tech-spine{position:absolute;right:32px;top:580px;bottom:auto;height:min(1500px,160vh);width:380px;pointer-events:none;z-index:0;display:block}
+/* sections that should never be crossed by the spine — covered via stacking context + solid bg */
+#agent-roles,
+#interaction-patterns,
 #kv-calculator,
 section.cta-section,
 footer{position:relative;z-index:2}
+#agent-roles,
+#interaction-patterns{background:var(--bg,#0b0f1a)}
 #kv-calculator{background:var(--surface)}
 section.cta-section{background:var(--surface,#10152a)}
 .tech-spine::before{content:'';position:absolute;right:84px;top:0;bottom:0;width:1px;background:repeating-linear-gradient(to bottom,rgba(129,140,248,0.32) 0 6px,transparent 6px 14px)}
@@ -330,14 +334,15 @@ section.cta-section{background:var(--surface,#10152a)}
 .s-pad > .content-wrap[style*="max-width:900"],
 .s-pad > .content-wrap[style*="max-width:720"]{margin-left:0 !important}
 
-/* === Push content left on wide screens to clear the tech-spine ===
-   KV calc / CTA / footer are z-index-covered, so no need to reserve space there */
+/* === Push content left on wide screens ONLY where the spine is visible ===
+   Sections from #agent-roles down (6 ролей, 7 паттернов, KV calc, CTA, footer) are
+   z-index-covered and should stay centred */
 @media (min-width: 1440px){
-  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator) > .s-pad,
-  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator) > .arch-section-inner,
-  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator) > .feat-grid,
-  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator) > .content-wrap,
-  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator) > div[style*="max-width:1360"]{
+  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator):not(#agent-roles):not(#interaction-patterns) > .s-pad,
+  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator):not(#agent-roles):not(#interaction-patterns) > .arch-section-inner,
+  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator):not(#agent-roles):not(#interaction-patterns) > .feat-grid,
+  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator):not(#agent-roles):not(#interaction-patterns) > .content-wrap,
+  body > section:not(.page-hero):not(.cta-section):not(#kv-calculator):not(#agent-roles):not(#interaction-patterns) > div[style*="max-width:1360"]{
     margin-right: 420px !important;
     margin-left: auto !important;
   }
@@ -560,7 +565,7 @@ section.cta-section{background:var(--surface,#10152a)}
 </section>
 
 <!-- AGENT ROLES -->
-<section style="padding:0 0 120px">
+<section id="agent-roles" style="padding:0 0 120px">
   <div class="s-pad">
     <div class="s-label rv">Команда агентов</div>
     <div class="s-title rv">6 специализированных ролей.</div>
@@ -601,7 +606,7 @@ section.cta-section{background:var(--surface,#10152a)}
 </section>
 
 <!-- INTERACTION PATTERNS -->
-<section style="padding:0 0 120px">
+<section id="interaction-patterns" style="padding:0 0 120px">
   <div class="s-pad">
     <div class="s-label rv">Паттерны</div>
     <div class="s-title rv">7 моделей взаимодействия.</div>
@@ -906,6 +911,26 @@ var kvModelMeta = {
     resultEl.style.display = 'block';
     resultEl.innerHTML = '<div style="font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em">до ' + tokenStr + ' токенов</div><p style="font-size:13px;color:var(--text2);line-height:1.7;margin:0">(при fp16, один запрос).' + ragNote + warn + oneMNote + '</p>' + streamsHtml;
   });
+})();
+// Dynamically size the tech-spine so its diamonds always end just above #agent-roles
+(function(){
+  var spine = document.querySelector('.tech-spine');
+  var anchor = document.getElementById('agent-roles');
+  if (!spine || !anchor) return;
+  var SPINE_TOP = 580;
+  var GAP = 80;
+  var MIN_H = 800;
+  function update(){
+    if (window.innerWidth < 1440) { spine.style.height = ''; return; }
+    var anchorTop = anchor.getBoundingClientRect().top + window.scrollY;
+    var h = Math.max(MIN_H, anchorTop - SPINE_TOP - GAP);
+    spine.style.height = h + 'px';
+  }
+  update();
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+  if (document.readyState !== 'loading') setTimeout(update, 200);
+  else document.addEventListener('DOMContentLoaded', function(){ setTimeout(update, 200); });
 })();
 // ═══ ARCHITECTURE NODE DETAIL DATA ═══
 const nodeData = {
