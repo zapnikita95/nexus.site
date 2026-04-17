@@ -434,72 +434,135 @@ footer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(
         </div>
         <div class="security-content">
             <div class="security-left">
-                <svg width="300" height="300" viewBox="0 0 300 300" class="security-perimeter">
+                <svg width="320" height="320" viewBox="0 0 300 300" class="security-guardian" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Safety Guardian — periметр безопасности on-premise">
   <defs>
-    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:rgba(129,140,248,0.4);stop-opacity:1" />
-      <stop offset="100%" style="stop-color:rgba(99,102,241,0.2);stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="dataFlow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:rgba(165,180,252,0.8);stop-opacity:0" />
-      <stop offset="50%" style="stop-color:rgba(165,180,252,0.8);stop-opacity:1" />
-      <stop offset="100%" style="stop-color:rgba(165,180,252,0.8);stop-opacity:0" />
+    <radialGradient id="sgCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="rgba(165,180,252,0.45)"/>
+      <stop offset="55%" stop-color="rgba(129,140,248,0.1)"/>
+      <stop offset="100%" stop-color="rgba(129,140,248,0)"/>
+    </radialGradient>
+    <linearGradient id="sgSweep" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(165,180,252,0)"/>
+      <stop offset="100%" stop-color="rgba(165,180,252,0.85)"/>
     </linearGradient>
   </defs>
-  <rect x="30" y="30" width="240" height="240" rx="10" fill="none" stroke="rgba(129,140,248,0.4)" stroke-width="2" stroke-dasharray="10 5">
-    <animate attributeName="stroke-dashoffset" from="0" to="-15" dur="2s" repeatCount="indefinite"/>
-  </rect>
-  <g class="hex-grid">
-    <circle cx="80" cy="80" r="20" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="1.5" opacity="0.6"/>
-    <circle cx="80" cy="80" r="18" fill="none" stroke="rgba(129,140,248,0.2)" stroke-width="1" opacity="0.4"/>
-    <circle cx="220" cy="80" r="20" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="1.5" opacity="0.6"/>
-    <circle cx="220" cy="80" r="18" fill="none" stroke="rgba(129,140,248,0.2)" stroke-width="1" opacity="0.4"/>
-    <circle cx="150" cy="150" r="25" fill="none" stroke="rgba(129,140,248,0.4)" stroke-width="2" opacity="0.8"/>
-    <circle cx="150" cy="150" r="22" fill="none" stroke="rgba(129,140,248,0.2)" stroke-width="1" opacity="0.5"/>
-    <circle cx="80" cy="220" r="20" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="1.5" opacity="0.6"/>
-    <circle cx="80" cy="220" r="18" fill="none" stroke="rgba(129,140,248,0.2)" stroke-width="1" opacity="0.4"/>
-    <circle cx="220" cy="220" r="20" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="1.5" opacity="0.6"/>
-    <circle cx="220" cy="220" r="18" fill="none" stroke="rgba(129,140,248,0.2)" stroke-width="1" opacity="0.4"/>
+
+  <!-- ambient core glow -->
+  <circle cx="150" cy="150" r="125" fill="url(#sgCore)"/>
+
+  <!-- HUD corner brackets (frame) -->
+  <g stroke="rgba(129,140,248,0.4)" stroke-width="1.5" fill="none" stroke-linecap="square">
+    <path d="M20 44 L20 20 L44 20"/>
+    <path d="M256 20 L280 20 L280 44"/>
+    <path d="M280 256 L280 280 L256 280"/>
+    <path d="M44 280 L20 280 L20 256"/>
   </g>
+
+  <!-- outer dashed ring (rotating slowly) -->
   <g>
-    <path d="M150 110 L180 130 L180 180 Q150 200 150 200 Q150 200 120 180 L120 130 Z" fill="none" stroke="rgba(129,140,248,0.6)" stroke-width="2"/>
-    <g transform="translate(150,155) scale(0.8)">
-      <rect x="-12" y="-5" width="24" height="18" rx="2" fill="none" stroke="rgba(129,140,248,0.8)" stroke-width="1.5"/>
-      <path d="M-8 -5 Q-8 -15 0 -15 Q8 -15 8 -5" fill="none" stroke="rgba(129,140,248,0.8)" stroke-width="1.5"/>
-      <circle cx="0" cy="0" r="2" fill="rgba(129,140,248,0.8)"/>
-    </g>
-  </g>
-  <g class="nodes">
-    <circle cx="80" cy="80" r="4" fill="rgba(129,140,248,0.6)">
-      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="220" cy="80" r="4" fill="rgba(129,140,248,0.6)">
-      <animate attributeName="r" values="4;6;4" dur="2s" begin="0.4s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" begin="0.4s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="150" cy="150" r="5" fill="rgba(129,140,248,0.8)">
-      <animate attributeName="r" values="5;7;5" dur="2s" begin="0.2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" begin="0.2s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="80" cy="220" r="4" fill="rgba(129,140,248,0.6)">
-      <animate attributeName="r" values="4;6;4" dur="2s" begin="0.6s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" begin="0.6s" repeatCount="indefinite"/>
-    </circle>
-    <circle cx="220" cy="220" r="4" fill="rgba(129,140,248,0.6)">
-      <animate attributeName="r" values="4;6;4" dur="2s" begin="0.8s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="2s" begin="0.8s" repeatCount="indefinite"/>
+    <circle cx="150" cy="150" r="128" fill="none"
+            stroke="rgba(129,140,248,0.22)" stroke-width="1" stroke-dasharray="4 6">
+      <animateTransform attributeName="transform" type="rotate"
+                        from="0 150 150" to="360 150 150" dur="60s" repeatCount="indefinite"/>
     </circle>
   </g>
-  <g class="data-flows" opacity="0.5">
-    <path d="M150 20 L150 60" stroke="url(#dataFlow)" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <polygon points="150,55 147,65 153,65" fill="rgba(165,180,252,0.6)"/>
-    <path d="M280 150 L240 150" stroke="url(#dataFlow)" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <polygon points="245,150 235,147 235,153" fill="rgba(165,180,252,0.6)"/>
-    <path d="M150 280 L150 240" stroke="url(#dataFlow)" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <polygon points="150,245 147,235 153,235" fill="rgba(165,180,252,0.6)"/>
-    <path d="M20 150 L60 150" stroke="url(#dataFlow)" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <polygon points="55,150 65,147 65,153" fill="rgba(165,180,252,0.6)"/>
+
+  <!-- sweeping scanner (guardian watching) -->
+  <g>
+    <path d="M150 150 L150 22 A 128 128 0 0 1 232 52 Z"
+          fill="url(#sgSweep)" opacity="0.32">
+      <animateTransform attributeName="transform" type="rotate"
+                        from="0 150 150" to="360 150 150" dur="9s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- inner solid ring + 6 tick marks -->
+  <circle cx="150" cy="150" r="92" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="1"/>
+  <g stroke="rgba(165,180,252,0.5)" stroke-width="1">
+    <line x1="150" y1="54" x2="150" y2="62"/>
+    <line x1="233" y1="102" x2="227" y2="105"/>
+    <line x1="233" y1="198" x2="227" y2="195"/>
+    <line x1="150" y1="246" x2="150" y2="238"/>
+    <line x1="67" y1="198" x2="73" y2="195"/>
+    <line x1="67" y1="102" x2="73" y2="105"/>
+  </g>
+
+  <!-- spokes: satellite -> core -->
+  <g stroke="rgba(129,140,248,0.18)" stroke-width="1" fill="none">
+    <line x1="150" y1="58" x2="150" y2="150"/>
+    <line x1="230" y1="104" x2="150" y2="150"/>
+    <line x1="230" y1="196" x2="150" y2="150"/>
+    <line x1="150" y1="242" x2="150" y2="150"/>
+    <line x1="70" y1="196" x2="150" y2="150"/>
+    <line x1="70" y1="104" x2="150" y2="150"/>
+  </g>
+
+  <!-- pulses sat -> core (reliability signal) -->
+  <g fill="rgba(165,180,252,0.95)">
+    <circle r="2.2">
+      <animateMotion dur="2.4s" repeatCount="indefinite" path="M150 58 L150 150"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.2">
+      <animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite" path="M230 104 L150 150"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.2">
+      <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path="M230 196 L150 150"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="0.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.2">
+      <animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite" path="M150 242 L150 150"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.2">
+      <animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite" path="M70 196 L150 150"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="2.2">
+      <animateMotion dur="2.4s" begin="2.0s" repeatCount="indefinite" path="M70 104 L150 150"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="2.0s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- 6 satellite nodes (diamond-rotated squares) -->
+  <g fill="rgba(11,15,26,0.95)" stroke="rgba(165,180,252,0.8)" stroke-width="1.2">
+    <rect x="144" y="52" width="12" height="12" transform="rotate(45 150 58)"/>
+    <rect x="224" y="98" width="12" height="12" transform="rotate(45 230 104)"/>
+    <rect x="224" y="190" width="12" height="12" transform="rotate(45 230 196)"/>
+    <rect x="144" y="236" width="12" height="12" transform="rotate(45 150 242)"/>
+    <rect x="64" y="190" width="12" height="12" transform="rotate(45 70 196)"/>
+    <rect x="64" y="98" width="12" height="12" transform="rotate(45 70 104)"/>
+  </g>
+  <g fill="rgba(165,180,252,0.95)">
+    <circle cx="150" cy="58" r="1.6"/>
+    <circle cx="230" cy="104" r="1.6"/>
+    <circle cx="230" cy="196" r="1.6"/>
+    <circle cx="150" cy="242" r="1.6"/>
+    <circle cx="70" cy="196" r="1.6"/>
+    <circle cx="70" cy="104" r="1.6"/>
+  </g>
+
+  <!-- central hexagonal guardian -->
+  <circle cx="150" cy="150" r="40" fill="rgba(129,140,248,0.12)"/>
+  <polygon points="150,114 181,132 181,168 150,186 119,168 119,132"
+           fill="rgba(16,21,42,0.92)" stroke="rgba(165,180,252,0.9)" stroke-width="1.5"/>
+  <polygon points="150,126 171,138 171,162 150,174 129,162 129,138"
+           fill="none" stroke="rgba(129,140,248,0.45)" stroke-width="1"/>
+  <!-- shield + check glyph -->
+  <g stroke="rgba(165,180,252,0.98)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M150 136 L163 142 L163 155 Q163 163 150 169 Q137 163 137 155 L137 142 Z"/>
+    <path d="M143 151 L148 156 L157 146"/>
+  </g>
+  <!-- core pulse ring -->
+  <circle cx="150" cy="150" r="46" fill="none" stroke="rgba(165,180,252,0.55)" stroke-width="1">
+    <animate attributeName="r" values="42;58;42" dur="3.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.55;0;0.55" dur="3.2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- status label -->
+  <g font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.8" fill="rgba(129,140,248,0.75)">
+    <text x="150" y="295" text-anchor="middle">GUARDIAN · ON-PREM · 152-FZ</text>
   </g>
 </svg>
             </div>
