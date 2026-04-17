@@ -295,27 +295,46 @@ footer{border-top:1px solid rgba(129,140,248,0.12)!important;padding:3rem 3rem 0
 body{padding-top:60px!important;position:relative}
 .page-hero,.hero{padding-top:60px!important}
 
-/* === TECH SPINE: page-wide diamond rail === */
-.tech-spine{position:absolute;right:24px;top:620px;bottom:260px;width:172px;pointer-events:none;z-index:0;display:block}
-.tech-spine::before{content:'';position:absolute;left:80px;top:0;bottom:0;width:1px;background:repeating-linear-gradient(to bottom,rgba(129,140,248,0.32) 0 6px,transparent 6px 14px)}
-.tech-spine-stage{position:absolute;left:0;right:0;transform:translateY(-50%);display:flex;align-items:center;gap:14px;opacity:.88}
-.tech-spine-stage .ts-dia{position:relative;width:90px;height:54px;flex:0 0 auto}
-.tech-spine-stage .ts-dia svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 8px 24px rgba(99,102,241,0.22))}
-.tech-spine-stage .ts-dia .ts-top{fill:url(#tsTop);stroke:rgba(199,210,254,0.85);stroke-width:1.4}
-.tech-spine-stage .ts-dia .ts-side{fill:url(#tsSide);stroke:rgba(129,140,248,0.4);stroke-width:1}
-.tech-spine-stage .ts-dia .ts-halo{fill:rgba(129,140,248,0.18)}
-.tech-spine-stage .ts-copy{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(199,210,254,0.85);line-height:1.4;white-space:nowrap;text-align:left}
-.tech-spine-stage .ts-copy b{display:block;color:rgba(229,231,235,.98);font-weight:700;margin-bottom:3px;letter-spacing:2.4px}
-.tech-spine-stage .ts-copy span{display:block;color:rgba(165,180,252,0.6);font-size:9px}
-.tech-spine-stage .ts-dot{position:absolute;left:76px;top:50%;width:10px;height:10px;border-radius:50%;background:#22c55e;transform:translateY(-50%);box-shadow:0 0 14px rgba(34,197,94,.8);animation:ts-pulse 2.4s ease-in-out infinite}
-@keyframes ts-pulse{0%,100%{opacity:1}50%{opacity:.4}}
-.tech-spine-stage[data-c="indigo"] .ts-dot{background:#818cf8;box-shadow:0 0 14px rgba(129,140,248,.8)}
-.tech-spine-stage[data-c="gold"] .ts-dot{background:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.8)}
-@media (max-width: 1180px){
+/* === TECH SPINE: page-wide diamond rail (labels on LEFT, larger) === */
+.tech-spine{position:absolute;right:32px;top:640px;bottom:280px;width:380px;pointer-events:none;z-index:0;display:block}
+.tech-spine::before{content:'';position:absolute;right:84px;top:0;bottom:0;width:1px;background:repeating-linear-gradient(to bottom,rgba(129,140,248,0.32) 0 6px,transparent 6px 14px)}
+.tech-spine-stage{position:absolute;left:0;right:0;transform:translateY(-50%);display:flex;flex-direction:row-reverse;align-items:center;justify-content:flex-start;gap:20px;opacity:.92}
+.tech-spine-stage .ts-dia{position:relative;width:148px;height:88px;flex:0 0 auto;margin-right:8px}
+.tech-spine-stage .ts-dia svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 10px 28px rgba(99,102,241,0.3))}
+.tech-spine-stage .ts-dia .ts-top{fill:url(#tsTop);stroke:rgba(199,210,254,0.9);stroke-width:1.6}
+.tech-spine-stage .ts-dia .ts-side{fill:url(#tsSide);stroke:rgba(129,140,248,0.45);stroke-width:1.1}
+.tech-spine-stage .ts-dia .ts-halo{fill:rgba(129,140,248,0.2)}
+.tech-spine-stage .ts-copy{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2.2px;color:rgba(199,210,254,0.9);line-height:1.5;text-align:right;white-space:nowrap;flex:1 1 auto;padding-right:2px}
+.tech-spine-stage .ts-copy b{display:block;color:rgba(229,231,235,1);font-weight:700;margin-bottom:5px;letter-spacing:2.8px;font-size:14px}
+.tech-spine-stage .ts-copy span{display:block;color:rgba(165,180,252,0.65);font-size:10px;margin-top:3px;letter-spacing:2.4px}
+.tech-spine-stage .ts-dot{width:11px;height:11px;border-radius:50%;background:#22c55e;box-shadow:0 0 14px rgba(34,197,94,.85);animation:ts-pulse 2.4s ease-in-out infinite;flex:0 0 auto}
+@keyframes ts-pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.85)}}
+.tech-spine-stage[data-c="indigo"] .ts-dot{background:#818cf8;box-shadow:0 0 14px rgba(129,140,248,.85)}
+.tech-spine-stage[data-c="gold"] .ts-dot{background:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.85)}
+@media (max-width: 1439px){
   .tech-spine{display:none}
 }
-.tech-spine-foot{position:absolute;left:80px;bottom:-20px;transform:translate(-50%,0);width:12px;height:12px;border:1px solid rgba(165,180,252,0.65);border-radius:50%;background:rgba(16,21,42,0.85)}
+.tech-spine-foot{position:absolute;right:84px;bottom:-20px;transform:translate(50%,0);width:12px;height:12px;border:1px solid rgba(165,180,252,0.65);border-radius:50%;background:rgba(16,21,42,0.85)}
 .tech-spine-foot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:rgba(129,140,248,0.7)}
+
+/* === Presets section alignment override === */
+.content-wrap .presets-table{max-width:none !important;margin-left:0 !important;margin-right:0 !important}
+/* Remove double padding when content-wrap is nested inside s-pad — aligns tables with their titles */
+.s-pad > .content-wrap{padding-left:0;padding-right:0}
+.s-pad > .content-wrap[style*="max-width:900"],
+.s-pad > .content-wrap[style*="max-width:720"]{margin-left:0 !important}
+
+/* === Push content left on wide screens to clear the tech-spine === */
+@media (min-width: 1440px){
+  body > section:not(.page-hero):not(.cta-section) > .s-pad{
+    margin-right: 420px !important;
+    margin-left: auto !important;
+  }
+  body > section:not(.page-hero):not(.cta-section) > .arch-section-inner{
+    margin-right: 420px !important;
+    margin-left: auto !important;
+  }
+}
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -365,7 +384,7 @@ body{padding-top:60px!important;position:relative}
       </svg>
     </div>
     <div class="ts-dot"></div>
-    <div class="ts-copy"><b>L5 · API</b>FastAPI · gRPC · Webhook<span>INTEGRATIONS</span></div>
+    <div class="ts-copy"><b>L5 · API</b>FastAPI · gRPC<span>INTEGRATIONS</span></div>
   </div>
   <div class="tech-spine-stage" style="top:24%" data-c="indigo">
     <div class="ts-dia">
@@ -377,7 +396,7 @@ body{padding-top:60px!important;position:relative}
       </svg>
     </div>
     <div class="ts-dot"></div>
-    <div class="ts-copy"><b>L4 · AGENTS</b>LangGraph · AutoGen<span>ORCHESTRATION</span></div>
+    <div class="ts-copy"><b>L4 · AGENTS</b>LangGraph<span>ORCHESTRATION</span></div>
   </div>
   <div class="tech-spine-stage" style="top:48%" data-c="gold">
     <div class="ts-dia">
@@ -389,7 +408,7 @@ body{padding-top:60px!important;position:relative}
       </svg>
     </div>
     <div class="ts-dot"></div>
-    <div class="ts-copy"><b>L3 · LLM</b>vLLM · Ollama · TGI<span>INFERENCE · GPU</span></div>
+    <div class="ts-copy"><b>L3 · LLM</b>vLLM · Ollama<span>INFERENCE · GPU</span></div>
   </div>
   <div class="tech-spine-stage" style="top:72%" data-c="green">
     <div class="ts-dia">
@@ -401,7 +420,7 @@ body{padding-top:60px!important;position:relative}
       </svg>
     </div>
     <div class="ts-dot"></div>
-    <div class="ts-copy"><b>L2 · DATA</b>Qdrant · Postgres · Redis<span>VECTOR · RELATIONAL</span></div>
+    <div class="ts-copy"><b>L2 · DATA</b>Qdrant · Postgres<span>VECTOR · STORE</span></div>
   </div>
   <div class="tech-spine-stage" style="top:96%" data-c="indigo">
     <div class="ts-dia">
@@ -413,7 +432,7 @@ body{padding-top:60px!important;position:relative}
       </svg>
     </div>
     <div class="ts-dot"></div>
-    <div class="ts-copy"><b>L1 · INFRA</b>Docker · K8s · Linux<span>ON-PREMISE · 152-ФЗ</span></div>
+    <div class="ts-copy"><b>L1 · INFRA</b>Docker · K8s<span>ON-PREMISE · 152-ФЗ</span></div>
   </div>
   <div class="tech-spine-foot"></div>
 </div>
