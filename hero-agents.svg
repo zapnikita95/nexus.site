@@ -1,131 +1,239 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Multi-agent orchestration">
   <defs>
-    <radialGradient id="bg1" cx="70%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#1e2a55" stop-opacity="0.8"/>
+    <!-- Atmosphere -->
+    <radialGradient id="haAtmos" cx="72%" cy="48%" r="58%">
+      <stop offset="0%" stop-color="#3730a3" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#1e1b4b" stop-opacity="0.35"/>
       <stop offset="100%" stop-color="#0b0f1a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    <radialGradient id="haGlowHub" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.75"/>
+      <stop offset="70%" stop-color="#4f46e5" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="glow2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#a5b4fc" stop-opacity="0"/>
+    <radialGradient id="haGlowNode" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a5b4fc" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
     </radialGradient>
-    <filter id="blur1">
-      <feGaussianBlur stdDeviation="3"/>
-    </filter>
-    <filter id="blur2">
-      <feGaussianBlur stdDeviation="8"/>
-    </filter>
+    <linearGradient id="haHub" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="haNode" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2a55"/>
+      <stop offset="100%" stop-color="#0f142a"/>
+    </linearGradient>
+    <pattern id="haGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 L0 0 L0 40" fill="none" stroke="rgba(129,140,248,0.08)" stroke-width="1"/>
+    </pattern>
+    <filter id="haBlur"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="haSoft"><feGaussianBlur stdDeviation="4"/></filter>
+    <!-- Packet trail -->
+    <linearGradient id="haPacket" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(165,180,252,0)"/>
+      <stop offset="100%" stop-color="rgba(199,210,254,1)"/>
+    </linearGradient>
   </defs>
 
-  <!-- Background wash -->
   <rect width="1200" height="600" fill="#0b0f1a"/>
-  <rect width="1200" height="600" fill="url(#bg1)"/>
+  <rect width="1200" height="600" fill="url(#haGrid)"/>
+  <rect width="1200" height="600" fill="url(#haAtmos)"/>
 
-  <!-- Outer glow blobs -->
-  <ellipse cx="900" cy="280" rx="320" ry="280" fill="url(#glow1)" filter="url(#blur2)"/>
-  <ellipse cx="750" cy="350" rx="180" ry="160" fill="url(#glow2)" filter="url(#blur2)"/>
+  <!-- Soft blobs -->
+  <ellipse cx="870" cy="300" rx="380" ry="300" fill="rgba(99,102,241,0.18)" filter="url(#haBlur)"/>
+  <ellipse cx="760" cy="430" rx="220" ry="180" fill="rgba(165,180,252,0.12)" filter="url(#haBlur)"/>
 
-  <!-- Grid lines (perspective) -->
-  <g opacity="0.06" stroke="#818cf8" stroke-width="1">
-    <line x1="500" y1="0" x2="0" y2="600"/>
-    <line x1="620" y1="0" x2="120" y2="600"/>
-    <line x1="740" y1="0" x2="240" y2="600"/>
-    <line x1="860" y1="0" x2="360" y2="600"/>
-    <line x1="980" y1="0" x2="480" y2="600"/>
-    <line x1="1100" y1="0" x2="600" y2="600"/>
-    <line x1="1200" y1="60" x2="700" y2="600"/>
-    <line x1="400" y1="150" x2="1200" y2="150"/>
-    <line x1="350" y1="250" x2="1200" y2="250"/>
-    <line x1="300" y1="350" x2="1200" y2="350"/>
-    <line x1="250" y1="450" x2="1200" y2="450"/>
+  <!-- Scanning corner marks -->
+  <g stroke="rgba(129,140,248,0.45)" stroke-width="1.5" fill="none">
+    <path d="M430 70 L430 50 L470 50"/>
+    <path d="M1150 70 L1150 50 L1110 50"/>
+    <path d="M430 530 L430 550 L470 550"/>
+    <path d="M1150 530 L1150 550 L1110 550"/>
+  </g>
+  <text x="450" y="42" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2.5" fill="rgba(165,180,252,0.6)">MULTI-AGENT · ON-PREMISE · ACTIVE</text>
+  <text x="1148" y="560" text-anchor="end" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2.5" fill="rgba(165,180,252,0.45)">NX-CORE · v2.6</text>
+
+  <!-- Orbit rings (perspective ellipses) -->
+  <g fill="none" stroke="rgba(165,180,252,0.22)" stroke-width="1">
+    <ellipse cx="830" cy="300" rx="280" ry="190" stroke-dasharray="2 6"/>
+    <ellipse cx="830" cy="300" rx="205" ry="140" stroke-dasharray="2 4"/>
+    <ellipse cx="830" cy="300" rx="130" ry="90"/>
   </g>
 
-  <!-- Central orchestrator node -->
-  <g transform="translate(760, 290)">
-    <circle r="52" fill="#0b0f1a" stroke="#818cf8" stroke-width="1.5" opacity="0.9"/>
-    <circle r="52" fill="#818cf8" opacity="0.07"/>
-    <circle r="40" fill="none" stroke="#818cf8" stroke-width="0.5" stroke-dasharray="4,4" opacity="0.4"/>
-    <circle r="26" fill="#161c35" stroke="#a5b4fc" stroke-width="1" opacity="0.9"/>
-    <!-- Hex icon -->
-    <polygon points="0,-14 12,-7 12,7 0,14 -12,7 -12,-7" fill="none" stroke="#a5b4fc" stroke-width="1.5" opacity="0.9"/>
-    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="11" fill="#a5b4fc" opacity="0.9">ORCH</text>
+  <!-- Connections (behind nodes) -->
+  <g stroke="rgba(129,140,248,0.45)" stroke-width="1.2" fill="none">
+    <path d="M830 300 L545 168"/>
+    <path d="M830 300 L540 300"/>
+    <path d="M830 300 L545 432"/>
+    <path d="M830 300 L1112 168"/>
+    <path d="M830 300 L1120 300"/>
+    <path d="M830 300 L1112 432"/>
+  </g>
+  <!-- Dashed secondary links forming agent-mesh -->
+  <g stroke="rgba(165,180,252,0.22)" stroke-width="1" fill="none" stroke-dasharray="3 5">
+    <path d="M545 168 L545 432"/>
+    <path d="M1112 168 L1112 432"/>
+    <path d="M545 168 Q830 100 1112 168"/>
+    <path d="M545 432 Q830 520 1112 432"/>
   </g>
 
-  <!-- Worker nodes with connecting lines -->
-  <!-- Node 1: top-left -->
+  <!-- ORCHESTRATOR hub -->
   <g>
-    <line x1="760" y1="290" x2="570" y2="160" stroke="#818cf8" stroke-width="1" opacity="0.3" stroke-dasharray="5,3"/>
-    <circle cx="570" cy="160" r="32" fill="#10152a" stroke="#818cf8" stroke-width="1" opacity="0.8"/>
-    <circle cx="570" cy="160" r="32" fill="#818cf8" opacity="0.05"/>
-    <text x="570" y="155" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">COMPLIANCE</text>
-    <text x="570" y="168" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">AGENT</text>
-    <circle cx="570" cy="160" r="5" fill="#4ade80" opacity="0.8"/>
-    <circle cx="570" cy="160" r="5" fill="#4ade80" opacity="0.3">
-      <animate attributeName="r" from="5" to="18" dur="2s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" from="0.3" to="0" dur="2s" repeatCount="indefinite"/>
+    <circle cx="830" cy="300" r="140" fill="url(#haGlowHub)" filter="url(#haSoft)"/>
+    <circle cx="830" cy="300" r="78" fill="url(#haHub)" stroke="rgba(199,210,254,0.95)" stroke-width="2"/>
+    <circle cx="830" cy="300" r="96" fill="none" stroke="rgba(165,180,252,0.45)" stroke-width="1" stroke-dasharray="4 6"/>
+    <circle cx="830" cy="300" r="78" fill="none" stroke="rgba(199,210,254,0.6)" stroke-width="1.2">
+      <animate attributeName="r" values="78;112;78" dur="3.4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;0;0.8" dur="3.4s" repeatCount="indefinite"/>
+    </circle>
+    <!-- inner icon: orbits + center dot -->
+    <g transform="translate(830 300)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.6">
+      <circle r="26"/>
+      <ellipse rx="34" ry="15" transform="rotate(30)"/>
+      <ellipse rx="34" ry="15" transform="rotate(-30)"/>
+      <circle r="4" fill="rgba(199,210,254,1)" stroke="none"/>
+    </g>
+    <text x="830" y="400" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" letter-spacing="3" fill="rgba(199,210,254,1)">ORCHESTRATOR</text>
+    <text x="830" y="416" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.7)">ROUTE · DECOMPOSE · SUPERVISE</text>
+  </g>
+
+  <!-- Helper macro: role nodes. 6 around. -->
+
+  <!-- Node: ANALYZER (top-left) -->
+  <g transform="translate(545 168)">
+    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.7"/>
+    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
+      <circle cx="12" cy="12" r="9"/>
+      <line x1="19" y1="19" x2="26" y2="26"/>
+    </g>
+    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Analyzer</text>
+    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">SENTIMENT</text>
+    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">TOPICS · NER</text>
+    <!-- status dot -->
+    <circle cx="46" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/>
     </circle>
   </g>
 
-  <!-- Node 2: top-right -->
-  <g>
-    <line x1="760" y1="290" x2="940" y2="155" stroke="#818cf8" stroke-width="1" opacity="0.3" stroke-dasharray="5,3"/>
-    <circle cx="940" cy="155" r="32" fill="#10152a" stroke="#818cf8" stroke-width="1" opacity="0.8"/>
-    <circle cx="940" cy="155" r="32" fill="#818cf8" opacity="0.05"/>
-    <text x="940" y="150" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">FEEDBACK</text>
-    <text x="940" y="163" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">AGENT</text>
-    <circle cx="940" cy="155" r="5" fill="#4ade80" opacity="0.8"/>
-    <circle cx="940" cy="155" r="5" fill="#4ade80" opacity="0.3">
-      <animate attributeName="r" from="5" to="18" dur="2.4s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" from="0.3" to="0" dur="2.4s" repeatCount="indefinite"/>
+  <!-- Node: RESEARCHER (middle-left) -->
+  <g transform="translate(540 300)">
+    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.65"/>
+    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
+      <rect x="2" y="3" width="20" height="18" rx="1.5"/>
+      <line x1="6" y1="9" x2="18" y2="9"/>
+      <line x1="6" y1="13" x2="18" y2="13"/>
+      <line x1="6" y1="17" x2="14" y2="17"/>
+    </g>
+    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Researcher</text>
+    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">RAG · VECTOR</text>
+    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">Qdrant · BM25</text>
+    <circle cx="46" cy="-26" r="3.4" fill="rgba(99,102,241,0.95)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
     </circle>
   </g>
 
-  <!-- Node 3: right -->
-  <g>
-    <line x1="760" y1="290" x2="1010" y2="300" stroke="#818cf8" stroke-width="1" opacity="0.3" stroke-dasharray="5,3"/>
-    <circle cx="1010" cy="300" r="32" fill="#10152a" stroke="#818cf8" stroke-width="1" opacity="0.8"/>
-    <circle cx="1010" cy="300" r="32" fill="#818cf8" opacity="0.05"/>
-    <text x="1010" y="295" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">OPERATIONS</text>
-    <text x="1010" y="308" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">AGENT</text>
-    <circle cx="1010" cy="300" r="5" fill="#4ade80" opacity="0.8"/>
+  <!-- Node: EXTRACTOR (bottom-left) -->
+  <g transform="translate(545 432)">
+    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.6"/>
+    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
+      <path d="M4 3 L16 3 L21 8 L21 21 L4 21 Z"/>
+      <path d="M16 3 L16 8 L21 8"/>
+      <line x1="8" y1="13" x2="17" y2="13"/>
+      <line x1="8" y1="17" x2="14" y2="17"/>
+    </g>
+    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Extractor</text>
+    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">OCR · PARSE</text>
+    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">1С · ЭДО · API</text>
+    <circle cx="46" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.7s" repeatCount="indefinite"/>
+    </circle>
   </g>
 
-  <!-- Node 4: bottom-right -->
-  <g>
-    <line x1="760" y1="290" x2="920" y2="430" stroke="#818cf8" stroke-width="1" opacity="0.3" stroke-dasharray="5,3"/>
-    <circle cx="920" cy="430" r="32" fill="#10152a" stroke="#818cf8" stroke-width="1" opacity="0.8"/>
-    <circle cx="920" cy="430" r="32" fill="#818cf8" opacity="0.05"/>
-    <text x="920" y="425" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">VERIFIER</text>
-    <text x="920" y="438" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">AGENT</text>
-    <circle cx="920" cy="430" r="5" fill="#fbbf24" opacity="0.8"/>
+  <!-- Node: CRITIC (top-right, accent) -->
+  <g transform="translate(1112 168)">
+    <circle r="58" fill="rgba(129,140,248,0.45)" filter="url(#haSoft)" opacity="0.9"/>
+    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="rgba(67,56,202,0.55)" stroke="rgba(199,210,254,0.95)" stroke-width="1.5"/>
+    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,1)" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2 L22 7 L22 13 Q22 20 12 24 Q2 20 2 13 L2 7 Z"/>
+      <path d="M7 13 L11 17 L17 10"/>
+    </g>
+    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,1)">Critic</text>
+    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(199,210,254,1)">VERIFY</text>
+    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(199,210,254,0.7)">LLM-AS-JUDGE</text>
+    <circle cx="46" cy="-26" r="3.6" fill="rgba(250,204,21,0.95)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
   </g>
 
-  <!-- Node 5: bottom-left -->
-  <g>
-    <line x1="760" y1="290" x2="600" y2="420" stroke="#818cf8" stroke-width="1" opacity="0.3" stroke-dasharray="5,3"/>
-    <circle cx="600" cy="420" r="32" fill="#10152a" stroke="#818cf8" stroke-width="1" opacity="0.8"/>
-    <circle cx="600" cy="420" r="32" fill="#818cf8" opacity="0.05"/>
-    <text x="600" y="415" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">RAG</text>
-    <text x="600" y="428" text-anchor="middle" font-family="monospace" font-size="8" fill="#818cf8" opacity="0.7">WORKER</text>
-    <circle cx="600" cy="420" r="5" fill="#4ade80" opacity="0.8"/>
+  <!-- Node: EXECUTOR (middle-right) -->
+  <g transform="translate(1120 300)">
+    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.65"/>
+    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="4,3 22,12 4,21" fill="rgba(199,210,254,0.2)"/>
+    </g>
+    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Executor</text>
+    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">EXEC · WRITE</text>
+    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">CRM · ERP · API</text>
+    <circle cx="46" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.9s" repeatCount="indefinite"/>
+    </circle>
   </g>
 
-  <!-- Animated data packets -->
-  <g opacity="0.7">
-    <circle r="4" fill="#a5b4fc">
-      <animateMotion dur="2.8s" repeatCount="indefinite" path="M760,290 L570,160"/>
-      <animate attributeName="opacity" values="0;1;1;0" dur="2.8s" repeatCount="indefinite"/>
+  <!-- Node: NOTIFY / HITL (bottom-right) -->
+  <g transform="translate(1112 432)">
+    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.55"/>
+    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="9" r="5"/>
+      <path d="M2 22 Q12 14 22 22"/>
+    </g>
+    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">HITL</text>
+    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">HUMAN · LOOP</text>
+    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">APPROVE · EDIT</text>
+    <circle cx="46" cy="-26" r="3.4" fill="rgba(129,140,248,0.95)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
     </circle>
-    <circle r="4" fill="#a5b4fc">
-      <animateMotion dur="3.2s" repeatCount="indefinite" path="M760,290 L940,155"/>
-      <animate attributeName="opacity" values="0;1;1;0" dur="3.2s" repeatCount="indefinite"/>
+  </g>
+
+  <!-- Animated packets along links -->
+  <g fill="rgba(199,210,254,1)">
+    <circle r="3">
+      <animateMotion dur="3s" repeatCount="indefinite" path="M545 168 L830 300"/>
     </circle>
-    <circle r="3" fill="#4ade80">
-      <animateMotion dur="2.2s" repeatCount="indefinite" path="M920,430 L760,290"/>
-      <animate attributeName="opacity" values="0;0.8;0.8;0" dur="2.2s" repeatCount="indefinite"/>
+    <circle r="3" fill="rgba(165,180,252,1)">
+      <animateMotion dur="2.6s" begin="0.4s" repeatCount="indefinite" path="M540 300 L830 300"/>
     </circle>
+    <circle r="3" fill="rgba(99,102,241,1)">
+      <animateMotion dur="3.2s" begin="1s" repeatCount="indefinite" path="M545 432 L830 300"/>
+    </circle>
+    <circle r="3" fill="rgba(199,210,254,1)">
+      <animateMotion dur="2.8s" begin="0.8s" repeatCount="indefinite" path="M830 300 L1112 168"/>
+    </circle>
+    <circle r="3" fill="rgba(165,180,252,1)">
+      <animateMotion dur="3.4s" begin="0.2s" repeatCount="indefinite" path="M830 300 L1120 300"/>
+    </circle>
+    <circle r="3" fill="rgba(250,204,21,0.95)">
+      <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M830 300 L1112 432"/>
+    </circle>
+  </g>
+
+  <!-- Input label (far right, text chip) -->
+  <g transform="translate(1040 76)">
+    <rect x="-64" y="-12" width="128" height="22" rx="11" fill="rgba(16,21,42,0.7)" stroke="rgba(129,140,248,0.45)"/>
+    <circle cx="-50" cy="-1" r="3" fill="rgba(74,222,128,0.9)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="-40" y="3" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="1.2" fill="rgba(199,210,254,0.9)">INPUT · STREAM</text>
+  </g>
+
+  <!-- Output label (far right, bottom) -->
+  <g transform="translate(1040 540)">
+    <rect x="-64" y="-12" width="128" height="22" rx="11" fill="rgba(16,21,42,0.7)" stroke="rgba(74,222,128,0.5)"/>
+    <circle cx="-50" cy="-1" r="3" fill="rgba(74,222,128,0.9)"/>
+    <text x="-40" y="3" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="1.2" fill="rgba(199,210,254,0.9)">OUTPUT · VERIFIED</text>
   </g>
 </svg>

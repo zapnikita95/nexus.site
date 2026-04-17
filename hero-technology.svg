@@ -1,98 +1,245 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" role="img" aria-label="On-premise AI stack">
   <defs>
-    <radialGradient id="tg1" cx="60%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#1a2048" stop-opacity="0.9"/>
+    <radialGradient id="htAtmos" cx="72%" cy="48%" r="58%">
+      <stop offset="0%" stop-color="#3730a3" stop-opacity="0.55"/>
+      <stop offset="55%" stop-color="#1e1b4b" stop-opacity="0.35"/>
       <stop offset="100%" stop-color="#0b0f1a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="tg2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.25"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="tf1"><feGaussianBlur stdDeviation="12"/></filter>
+    <linearGradient id="htSlab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#312e81"/>
+      <stop offset="100%" stop-color="#0f142a"/>
+    </linearGradient>
+    <linearGradient id="htSlabTop" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="htSlabHi" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(99,102,241,0.9)"/>
+      <stop offset="100%" stop-color="rgba(30,27,75,0.9)"/>
+    </linearGradient>
+    <pattern id="htGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0 L0 0 L0 40" fill="none" stroke="rgba(129,140,248,0.08)" stroke-width="1"/>
+    </pattern>
+    <filter id="htBlur"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="htSoft"><feGaussianBlur stdDeviation="3"/></filter>
   </defs>
 
   <rect width="1200" height="600" fill="#0b0f1a"/>
-  <rect width="1200" height="600" fill="url(#tg1)"/>
-  <ellipse cx="780" cy="300" rx="400" ry="300" fill="url(#tg2)" filter="url(#tf1)"/>
+  <rect width="1200" height="600" fill="url(#htGrid)"/>
+  <rect width="1200" height="600" fill="url(#htAtmos)"/>
 
-  <!-- Isometric grid -->
-  <g opacity="0.06" stroke="#818cf8" stroke-width="1">
-    <!-- Horizontal lines -->
-    <line x1="400" y1="100" x2="1100" y2="100"/>
-    <line x1="370" y1="175" x2="1100" y2="175"/>
-    <line x1="340" y1="250" x2="1100" y2="250"/>
-    <line x1="310" y1="325" x2="1100" y2="325"/>
-    <line x1="280" y1="400" x2="1100" y2="400"/>
-    <line x1="250" y1="475" x2="1100" y2="475"/>
-    <!-- Diagonal left -->
-    <line x1="450" y1="100" x2="250" y2="475"/>
-    <line x1="565" y1="100" x2="365" y2="475"/>
-    <line x1="680" y1="100" x2="480" y2="475"/>
-    <line x1="795" y1="100" x2="595" y2="475"/>
-    <line x1="910" y1="100" x2="710" y2="475"/>
-    <line x1="1025" y1="100" x2="825" y2="475"/>
-    <!-- Diagonal right -->
-    <line x1="450" y1="100" x2="650" y2="475"/>
-    <line x1="565" y1="100" x2="765" y2="475"/>
-    <line x1="680" y1="100" x2="880" y2="475"/>
-    <line x1="795" y1="100" x2="995" y2="475"/>
-    <line x1="910" y1="100" x2="1100" y2="400"/>
+  <!-- Soft blobs -->
+  <ellipse cx="860" cy="300" rx="380" ry="300" fill="rgba(99,102,241,0.18)" filter="url(#htBlur)"/>
+  <ellipse cx="720" cy="450" rx="220" ry="180" fill="rgba(165,180,252,0.1)" filter="url(#htBlur)"/>
+
+  <!-- Scanning corner marks -->
+  <g stroke="rgba(129,140,248,0.45)" stroke-width="1.5" fill="none">
+    <path d="M440 70 L440 50 L480 50"/>
+    <path d="M1150 70 L1150 50 L1110 50"/>
+    <path d="M440 530 L440 550 L480 550"/>
+    <path d="M1150 530 L1150 550 L1110 550"/>
+  </g>
+  <text x="460" y="42" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2.5" fill="rgba(165,180,252,0.6)">ON-PREMISE · SOVEREIGN AI STACK</text>
+  <text x="1148" y="560" text-anchor="end" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2.5" fill="rgba(165,180,252,0.45)">AIR-GAPPED · NO TELEMETRY</text>
+
+  <!-- Data bus connector line (right side going up) -->
+  <g stroke="rgba(129,140,248,0.45)" stroke-width="1.4" fill="none">
+    <path d="M1090 100 L1090 500" stroke-dasharray="4 6"/>
+    <circle cx="1090" cy="100" r="4" fill="rgba(165,180,252,0.9)" stroke="none"/>
+    <circle cx="1090" cy="500" r="4" fill="rgba(165,180,252,0.9)" stroke="none"/>
   </g>
 
-  <!-- Stack layers (isometric boxes) -->
-  <!-- Layer 4: Python/Go -->
-  <g transform="translate(640, 160)">
-    <!-- Top face -->
-    <polygon points="0,-35 90,-10 0,15 -90,-10" fill="#161c35" stroke="#818cf8" stroke-width="1" opacity="0.9"/>
-    <!-- Right face -->
-    <polygon points="90,-10 90,30 0,55 0,15" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <!-- Left face -->
-    <polygon points="-90,-10 0,15 0,55 -90,30" fill="#0d1226" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <text x="0" y="-8" text-anchor="middle" font-family="monospace" font-size="10" fill="#a5b4fc" opacity="0.8">Python · Go · Rust</text>
-    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="9" fill="#525a72" opacity="0.9">[RUNTIME]</text>
+  <!-- Isometric stack of 5 layers -->
+  <!-- Layer coords (x,y center) for each plate. We use simplified isometric skew -->
+
+  <!-- Helper drawings reused inline -->
+
+  <!-- Layer 5 (bottom): Infrastructure — Docker · K8s · Linux -->
+  <g transform="translate(720 470)">
+    <!-- plate -->
+    <polygon points="-180,0 0,-58 180,0 0,58" fill="url(#htSlab)" stroke="rgba(165,180,252,0.45)" stroke-width="1.2"/>
+    <polygon points="-180,0 0,-58 180,0 0,58" fill="url(#htSlabHi)" opacity="0.25"/>
+    <!-- side depth -->
+    <polygon points="-180,0 0,58 0,72 -180,14" fill="rgba(30,27,75,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <polygon points="180,0 0,58 0,72 180,14" fill="rgba(16,21,42,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <!-- label chip -->
+    <rect x="-92" y="-14" width="184" height="24" rx="3" fill="rgba(11,15,26,0.6)" stroke="rgba(165,180,252,0.45)" stroke-width="0.8"/>
+    <text x="0" y="2" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="11" font-weight="700" letter-spacing="2" fill="rgba(229,231,235,1)">DOCKER · K8s · LINUX</text>
+    <text x="0" y="22" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="2.4" fill="rgba(165,180,252,0.6)">INFRASTRUCTURE · L1</text>
   </g>
 
-  <!-- Layer 3: LLM -->
-  <g transform="translate(640, 240)">
-    <polygon points="0,-35 90,-10 0,15 -90,-10" fill="#16204a" stroke="#818cf8" stroke-width="1" opacity="0.9"/>
-    <polygon points="90,-10 90,30 0,55 0,15" fill="#10172e" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <polygon points="-90,-10 0,15 0,55 -90,30" fill="#0d1428" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <text x="0" y="-8" text-anchor="middle" font-family="monospace" font-size="10" fill="#a5b4fc" opacity="0.8">vLLM · Ollama · TGI</text>
-    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="9" fill="#525a72" opacity="0.9">[INFERENCE]</text>
+  <!-- Layer 4: Data — Qdrant · PG · Redis -->
+  <g transform="translate(720 380)">
+    <polygon points="-170,0 0,-55 170,0 0,55" fill="url(#htSlab)" stroke="rgba(165,180,252,0.5)" stroke-width="1.2"/>
+    <polygon points="-170,0 0,-55 170,0 0,55" fill="url(#htSlabHi)" opacity="0.3"/>
+    <polygon points="-170,0 0,55 0,69 -170,14" fill="rgba(30,27,75,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <polygon points="170,0 0,55 0,69 170,14" fill="rgba(16,21,42,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <!-- row of 3 cylinder icons -->
+    <g transform="translate(-72 -12)" fill="rgba(165,180,252,0.12)" stroke="rgba(165,180,252,0.8)" stroke-width="1.2">
+      <ellipse cx="0" cy="0" rx="11" ry="4"/>
+      <path d="M-11 0 L-11 10 Q-11 14 0 14 Q11 14 11 10 L11 0" fill="rgba(129,140,248,0.25)"/>
+      <ellipse cx="0" cy="10" rx="11" ry="3.5" fill="rgba(129,140,248,0.25)"/>
+    </g>
+    <g transform="translate(0 -12)" fill="rgba(165,180,252,0.12)" stroke="rgba(165,180,252,0.8)" stroke-width="1.2">
+      <ellipse cx="0" cy="0" rx="11" ry="4"/>
+      <path d="M-11 0 L-11 10 Q-11 14 0 14 Q11 14 11 10 L11 0" fill="rgba(129,140,248,0.25)"/>
+      <ellipse cx="0" cy="10" rx="11" ry="3.5" fill="rgba(129,140,248,0.25)"/>
+    </g>
+    <g transform="translate(72 -12)" fill="rgba(165,180,252,0.12)" stroke="rgba(165,180,252,0.8)" stroke-width="1.2">
+      <ellipse cx="0" cy="0" rx="11" ry="4"/>
+      <path d="M-11 0 L-11 10 Q-11 14 0 14 Q11 14 11 10 L11 0" fill="rgba(129,140,248,0.25)"/>
+      <ellipse cx="0" cy="10" rx="11" ry="3.5" fill="rgba(129,140,248,0.25)"/>
+    </g>
+    <text x="0" y="24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" font-weight="700" letter-spacing="1.8" fill="rgba(229,231,235,1)">Qdrant · Postgres · Redis</text>
+    <text x="0" y="38" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="2.4" fill="rgba(165,180,252,0.6)">VECTOR · RELATIONAL · CACHE · L2</text>
   </g>
 
-  <!-- Layer 2: Vector DB -->
-  <g transform="translate(640, 320)">
-    <polygon points="0,-35 90,-10 0,15 -90,-10" fill="#1a2450" stroke="#818cf8" stroke-width="1" opacity="0.9"/>
-    <polygon points="90,-10 90,30 0,55 0,15" fill="#141b38" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <polygon points="-90,-10 0,15 0,55 -90,30" fill="#111530" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <text x="0" y="-8" text-anchor="middle" font-family="monospace" font-size="10" fill="#a5b4fc" opacity="0.8">Qdrant · PG · Redis</text>
-    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="9" fill="#525a72" opacity="0.9">[VECTOR DB]</text>
+  <!-- Layer 3: LLM Runtime — vLLM · Ollama · TGI -->
+  <g transform="translate(720 290)">
+    <polygon points="-160,0 0,-52 160,0 0,52" fill="url(#htSlab)" stroke="rgba(165,180,252,0.55)" stroke-width="1.3"/>
+    <polygon points="-160,0 0,-52 160,0 0,52" fill="url(#htSlabHi)" opacity="0.35"/>
+    <polygon points="-160,0 0,52 0,66 -160,14" fill="rgba(30,27,75,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <polygon points="160,0 0,52 0,66 160,14" fill="rgba(16,21,42,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <!-- Model "chips" -->
+    <g transform="translate(-70 -16)">
+      <rect x="-22" y="-8" width="44" height="16" rx="2" fill="rgba(16,21,42,0.85)" stroke="rgba(199,210,254,0.7)" stroke-width="1"/>
+      <text text-anchor="middle" y="3" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.2" fill="rgba(199,210,254,0.9)">LLAMA-70B</text>
+    </g>
+    <g transform="translate(0 -16)">
+      <rect x="-22" y="-8" width="44" height="16" rx="2" fill="rgba(79,70,229,0.55)" stroke="rgba(199,210,254,0.9)" stroke-width="1.2"/>
+      <text text-anchor="middle" y="3" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.2" fill="rgba(255,255,255,1)">QWEN-72B</text>
+    </g>
+    <g transform="translate(70 -16)">
+      <rect x="-22" y="-8" width="44" height="16" rx="2" fill="rgba(16,21,42,0.85)" stroke="rgba(199,210,254,0.7)" stroke-width="1"/>
+      <text text-anchor="middle" y="3" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.2" fill="rgba(199,210,254,0.9)">MISTRAL</text>
+    </g>
+    <!-- GPU indicator -->
+    <g transform="translate(0 6)">
+      <circle cx="0" cy="0" r="3.2" fill="rgba(74,222,128,0.95)">
+        <animate attributeName="opacity" values="1;0.25;1" dur="1.2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="8" y="3" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.4" fill="rgba(165,180,252,0.8)">GPU · UTIL 72%</text>
+    </g>
+    <text x="0" y="24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" font-weight="700" letter-spacing="1.8" fill="rgba(229,231,235,1)">vLLM · Ollama · TGI</text>
+    <text x="0" y="38" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="2.4" fill="rgba(165,180,252,0.6)">OPEN-SOURCE LLM RUNTIME · L3</text>
   </g>
 
-  <!-- Layer 1: Infra -->
-  <g transform="translate(640, 400)">
-    <polygon points="0,-35 90,-10 0,15 -90,-10" fill="#1e285a" stroke="#818cf8" stroke-width="1" opacity="0.9"/>
-    <polygon points="90,-10 90,30 0,55 0,15" fill="#16204a" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <polygon points="-90,-10 0,15 0,55 -90,30" fill="#131c42" stroke="#818cf8" stroke-width="0.7" opacity="0.7"/>
-    <text x="0" y="-8" text-anchor="middle" font-family="monospace" font-size="10" fill="#a5b4fc" opacity="0.8">Docker · K8s · Linux</text>
-    <text x="0" y="5" text-anchor="middle" font-family="monospace" font-size="9" fill="#525a72" opacity="0.9">[INFRA]</text>
+  <!-- Layer 2: Orchestration — LangGraph · Agents -->
+  <g transform="translate(720 200)">
+    <polygon points="-148,0 0,-48 148,0 0,48" fill="url(#htSlab)" stroke="rgba(165,180,252,0.65)" stroke-width="1.3"/>
+    <polygon points="-148,0 0,-48 148,0 0,48" fill="url(#htSlabHi)" opacity="0.45"/>
+    <polygon points="-148,0 0,48 0,62 -148,14" fill="rgba(30,27,75,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <polygon points="148,0 0,48 0,62 148,14" fill="rgba(16,21,42,0.95)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+    <!-- tiny graph nodes -->
+    <g transform="translate(-54 -16)" fill="none" stroke="rgba(199,210,254,0.85)" stroke-width="1.3">
+      <circle cx="0" cy="0" r="4.2" fill="rgba(79,70,229,0.6)"/>
+      <circle cx="18" cy="-8" r="4.2" fill="rgba(79,70,229,0.6)"/>
+      <circle cx="18" cy="8" r="4.2" fill="rgba(79,70,229,0.6)"/>
+      <line x1="4" y1="0" x2="14" y2="-7"/>
+      <line x1="4" y1="0" x2="14" y2="7"/>
+    </g>
+    <g transform="translate(20 -18)" fill="none" stroke="rgba(199,210,254,0.85)" stroke-width="1.3">
+      <circle cx="0" cy="0" r="5" fill="rgba(129,140,248,0.75)"/>
+      <circle cx="22" cy="-6" r="4" fill="rgba(79,70,229,0.6)"/>
+      <circle cx="22" cy="6" r="4" fill="rgba(79,70,229,0.6)"/>
+      <circle cx="44" cy="0" r="4" fill="rgba(79,70,229,0.6)"/>
+      <line x1="5" y1="0" x2="18" y2="-5"/>
+      <line x1="5" y1="0" x2="18" y2="5"/>
+      <line x1="26" y1="-5" x2="40" y2="-1"/>
+      <line x1="26" y1="5" x2="40" y2="1"/>
+    </g>
+    <text x="0" y="12" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" font-weight="700" letter-spacing="1.8" fill="rgba(229,231,235,1)">LangGraph · AutoGen · CrewAI</text>
+    <text x="0" y="26" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="2.4" fill="rgba(165,180,252,0.6)">AGENT ORCHESTRATION · L4</text>
   </g>
 
-  <!-- Glow on top layer -->
-  <ellipse cx="640" cy="125" rx="90" ry="18" fill="#818cf8" opacity="0.08" filter="url(#tf1)"/>
-
-  <!-- Data flow lines on right -->
-  <g transform="translate(820, 200)" opacity="0.55" font-family="monospace" font-size="10" fill="#525a72">
-    <text x="0" y="0">&gt; FastAPI · gRPC · REST</text>
-    <text x="0" y="40">&gt; 1C · SAP · EDO adapters</text>
-    <text x="0" y="80">&gt; LDAP · Active Directory</text>
-    <text x="0" y="120">&gt; SIEM · Kafka · S3</text>
+  <!-- Layer 1 (top): API / Runtime (bright, highlighted) -->
+  <g transform="translate(720 120)">
+    <polygon points="-135,0 0,-44 135,0 0,44" fill="rgba(67,56,202,0.8)" stroke="rgba(199,210,254,0.95)" stroke-width="1.6"/>
+    <polygon points="-135,0 0,-44 135,0 0,44" fill="rgba(165,180,252,0.18)"/>
+    <polygon points="-135,0 0,44 0,58 -135,14" fill="rgba(30,27,75,0.95)" stroke="rgba(199,210,254,0.6)" stroke-width="1"/>
+    <polygon points="135,0 0,44 0,58 135,14" fill="rgba(16,21,42,0.95)" stroke="rgba(199,210,254,0.6)" stroke-width="1"/>
+    <!-- endpoints row -->
+    <g transform="translate(0 -14)">
+      <g transform="translate(-54 0)">
+        <rect x="-20" y="-7" width="40" height="14" rx="2" fill="rgba(11,15,26,0.7)" stroke="rgba(199,210,254,0.75)"/>
+        <text y="3" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.4" fill="rgba(199,210,254,1)">FastAPI</text>
+      </g>
+      <g transform="translate(0 0)">
+        <rect x="-18" y="-7" width="36" height="14" rx="2" fill="rgba(11,15,26,0.7)" stroke="rgba(199,210,254,0.75)"/>
+        <text y="3" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.4" fill="rgba(199,210,254,1)">gRPC</text>
+      </g>
+      <g transform="translate(52 0)">
+        <rect x="-20" y="-7" width="40" height="14" rx="2" fill="rgba(11,15,26,0.7)" stroke="rgba(199,210,254,0.75)"/>
+        <text y="3" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.4" fill="rgba(199,210,254,1)">WEBHOOK</text>
+      </g>
+    </g>
+    <text x="0" y="18" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="10.5" font-weight="700" letter-spacing="1.8" fill="rgba(255,255,255,1)">API · Integrations</text>
+    <text x="0" y="32" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="2.4" fill="rgba(199,210,254,0.7)">FASTAPI · GRPC · LDAP · S3 · L5</text>
+    <!-- scan pulse -->
+    <circle cx="0" cy="-52" r="6" fill="rgba(165,180,252,0.3)">
+      <animate attributeName="r" values="6;22;6" dur="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.9;0;0.9" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="-52" r="3.5" fill="rgba(199,210,254,1)"/>
   </g>
 
-  <!-- Accent dots on stack edges -->
-  <circle cx="730" cy="125" r="3" fill="#4ade80" opacity="0.9"/>
-  <circle cx="730" cy="205" r="3" fill="#818cf8" opacity="0.9"/>
-  <circle cx="730" cy="285" r="3" fill="#818cf8" opacity="0.8"/>
-  <circle cx="730" cy="365" r="3" fill="#818cf8" opacity="0.7"/>
+  <!-- Vertical data stream tying layers -->
+  <g stroke="rgba(129,140,248,0.55)" stroke-width="1.2" fill="none" stroke-dasharray="3 4">
+    <line x1="720" y1="120" x2="720" y2="470"/>
+  </g>
+  <g fill="rgba(199,210,254,1)">
+    <circle r="3">
+      <animate attributeName="cy" values="120;470;120" dur="3.6s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="720;720" dur="3.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle r="3" fill="rgba(165,180,252,1)">
+      <animate attributeName="cy" values="470;120;470" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="cx" values="720;720" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Right side status column -->
+  <g transform="translate(950 110)" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="1.4">
+    <g transform="translate(0 0)">
+      <circle cx="0" cy="0" r="3.5" fill="rgba(74,222,128,0.95)">
+        <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+      </circle>
+      <text x="14" y="4" fill="rgba(199,210,254,0.9)">API · HEALTHY</text>
+    </g>
+    <g transform="translate(0 36)">
+      <circle cx="0" cy="0" r="3.5" fill="rgba(74,222,128,0.95)"/>
+      <text x="14" y="4" fill="rgba(199,210,254,0.9)">AGENTS · 12 ACTIVE</text>
+    </g>
+    <g transform="translate(0 72)">
+      <circle cx="0" cy="0" r="3.5" fill="rgba(129,140,248,0.95)"/>
+      <text x="14" y="4" fill="rgba(199,210,254,0.9)">MODELS · 4 LOADED</text>
+    </g>
+    <g transform="translate(0 108)">
+      <circle cx="0" cy="0" r="3.5" fill="rgba(74,222,128,0.95)"/>
+      <text x="14" y="4" fill="rgba(199,210,254,0.9)">VECTOR · 12.4M</text>
+    </g>
+    <g transform="translate(0 144)">
+      <circle cx="0" cy="0" r="3.5" fill="rgba(250,204,21,0.95)">
+        <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
+      </circle>
+      <text x="14" y="4" fill="rgba(199,210,254,0.9)">GPU · 72% UTIL</text>
+    </g>
+    <g transform="translate(0 180)">
+      <circle cx="0" cy="0" r="3.5" fill="rgba(74,222,128,0.95)"/>
+      <text x="14" y="4" fill="rgba(199,210,254,0.9)">AIRGAP · ON</text>
+    </g>
+    <g transform="translate(0 216)">
+      <circle cx="0" cy="0" r="3.5" fill="rgba(74,222,128,0.95)"/>
+      <text x="14" y="4" fill="rgba(199,210,254,0.9)">NO EGRESS · 0 KB</text>
+    </g>
+  </g>
+
+  <!-- On-premise shield at right bottom -->
+  <g transform="translate(1010 470)">
+    <path d="M0 -34 L28 -22 L28 6 Q28 28 0 40 Q-28 28 -28 6 L-28 -22 Z"
+          fill="rgba(79,70,229,0.35)" stroke="rgba(199,210,254,0.9)" stroke-width="1.5"/>
+    <text y="-8" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" font-weight="700" letter-spacing="2" fill="rgba(255,255,255,1)">ON-PREM</text>
+    <text y="8" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="2" fill="rgba(199,210,254,0.85)">152-ФЗ</text>
+    <text y="22" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.6" fill="rgba(199,210,254,0.6)">AIR-GAP</text>
+  </g>
 </svg>
