@@ -110,7 +110,7 @@ section.metrics{background:var(--surface);border-top:var(--line);border-bottom:v
 .cta-section{padding:5rem 2rem;background:var(--surface);border-top:var(--line);overflow-x:hidden}
 .cta-inner{max-width:760px;margin:0 auto;min-width:0}
 .cta-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
-.cta-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem}
+.cta-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem;line-height:1.6}
 .cta-sub{color:var(--text2);font-size:.95rem;line-height:1.75;margin-bottom:2rem}
 .terminal-window-a{border:1px solid rgba(129,140,248,.25);background:var(--bg);overflow:hidden;border-radius:4px;margin-top:2rem;max-width:100%;box-sizing:border-box}
 .terminal-titlebar-a{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2);border-bottom:var(--line);flex-wrap:wrap;min-width:0}
@@ -1068,71 +1068,174 @@ footer::before{content:'';position:absolute;top:0;left:50%;transform:translateX(
         // ===== CTA TERMINAL — scroll-triggered line-by-line reveal =====
         
 
-        // Hero Canvas Visualization
+        // ─── Hero Canvas: rotating wireframe icosahedron + data flows ───
+        // Signal: stability (slow rotation), system (geometric mesh),
+        // reliability (predictable pulses), security (closed shell + perimeter).
         const canvasHero = document.getElementById('hero-canvas');
         if (canvasHero) {
             const ctx = canvasHero.getContext('2d');
-            let animationFrameId;
-            let startTime = Date.now();
-            
+            const DPR = Math.max(1, window.devicePixelRatio || 1);
+            let W = 0, H = 0, cx = 0, cy = 0, R = 0;
+            const startTime = performance.now();
+
             function resizeCanvas() {
-                canvasHero.width = canvasHero.offsetWidth;
-                canvasHero.height = canvasHero.offsetHeight;
+                const rect = canvasHero.getBoundingClientRect();
+                W = rect.width;
+                H = rect.height;
+                canvasHero.width = Math.round(W * DPR);
+                canvasHero.height = Math.round(H * DPR);
+                canvasHero.style.width = W + 'px';
+                canvasHero.style.height = H + 'px';
+                ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+                cx = W * 0.72;
+                cy = H * 0.5;
+                R = Math.max(120, Math.min(W * 0.22, H * 0.42));
             }
-            
-            function drawHeroViz() {
-                const now = Date.now();
-                const time = (now - startTime) / 1000;
-                
-                ctx.clearRect(0, 0, canvasHero.width, canvasHero.height);
-                
-                const centerX = canvasHero.width * 0.65;
-                const centerY = canvasHero.height * 0.5;
-                
-                // Slow-moving circles (time * 0.05 for SLOW animation)
-                for (let i = 0; i < 3; i++) {
-                    const radius = 80 + i * 60;
-                    ctx.strokeStyle = 'rgba(129, 140, 248, ' + (0.3 - i * 0.08) + ')';
-                    ctx.lineWidth = 1.5;
+
+            // Icosahedron: 12 vertices, 30 edges
+            const P = (1 + Math.sqrt(5)) / 2;
+            const _norm = Math.hypot(1, P, 0);
+            const ICO_V = [
+                [-1,  P, 0], [ 1,  P, 0], [-1, -P, 0], [ 1, -P, 0],
+                [ 0, -1,  P], [ 0,  1,  P], [ 0, -1, -P], [ 0,  1, -P],
+                [ P,  0, -1], [ P,  0,  1], [-P,  0, -1], [-P,  0,  1]
+            ].map(v => ({ x: v[0] / _norm, y: v[1] / _norm, z: v[2] / _norm }));
+            const ICO_E = [
+                [0,1],[0,5],[0,7],[0,10],[0,11],[1,5],[1,7],[1,8],[1,9],[2,3],
+                [2,4],[2,6],[2,10],[2,11],[3,4],[3,6],[3,8],[3,9],[4,5],[4,9],
+                [4,11],[5,9],[5,11],[6,7],[6,8],[6,10],[7,8],[7,10],[8,9],[10,11]
+            ];
+            // Edges that carry data pulses (spread across the shell)
+            const PULSE_EDGES = [0, 3, 6, 9, 12, 15, 18, 21, 24, 27];
+
+            function rotate(v, ax, ay) {
+                const cA = Math.cos(ay), sA = Math.sin(ay);
+                const x1 = v.x * cA + v.z * sA;
+                const z1 = -v.x * sA + v.z * cA;
+                const cB = Math.cos(ax), sB = Math.sin(ax);
+                const y1 = v.y * cB - z1 * sB;
+                const z2 = v.y * sB + z1 * cB;
+                return { x: x1, y: y1, z: z2 };
+            }
+
+            function render() {
+                const t = (performance.now() - startTime) / 1000;
+                ctx.clearRect(0, 0, W, H);
+
+                // soft ambient glow behind the structure
+                const aG = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 2.4);
+                aG.addColorStop(0,   'rgba(129,140,248,0.09)');
+                aG.addColorStop(0.45,'rgba(129,140,248,0.025)');
+                aG.addColorStop(1,   'rgba(129,140,248,0)');
+                ctx.fillStyle = aG;
+                ctx.beginPath(); ctx.arc(cx, cy, R * 2.4, 0, Math.PI * 2); ctx.fill();
+
+                // perimeter rings (security boundaries)
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = 'rgba(129,140,248,0.11)';
+                ctx.beginPath(); ctx.arc(cx, cy, R * 1.55, 0, Math.PI * 2); ctx.stroke();
+                ctx.strokeStyle = 'rgba(129,140,248,0.06)';
+                ctx.beginPath(); ctx.arc(cx, cy, R * 1.95, 0, Math.PI * 2); ctx.stroke();
+                // tick marks on outer ring
+                ctx.strokeStyle = 'rgba(165,180,252,0.18)';
+                for (let i = 0; i < 48; i++) {
+                    const a = (i / 48) * Math.PI * 2;
+                    const r1 = R * 1.93, r2 = R * (1.97 + (i % 4 === 0 ? 0.05 : 0));
                     ctx.beginPath();
-                    ctx.arc(centerX, centerY, radius, time * 0.05, time * 0.05 + Math.PI * 2, false);
+                    ctx.moveTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1);
+                    ctx.lineTo(cx + Math.cos(a) * r2, cy + Math.sin(a) * r2);
                     ctx.stroke();
                 }
-                
-                // Slow-flowing packets
-                const packetCount = 5;
-                for (let i = 0; i < packetCount; i++) {
-                    const angle = (time * 0.05 + (i / packetCount) * Math.PI * 2);
-                    const x = centerX + Math.cos(angle) * 150;
-                    const y = centerY + Math.sin(angle) * 150;
-                    ctx.fillStyle = 'rgba(165, 180, 252, 0.8)';
-                    ctx.beginPath();
-                    ctx.arc(x, y, 4, 0, Math.PI * 2);
-                    ctx.fill();
+
+                // rotate & project vertices (orthographic + depth)
+                const ax = t * 0.11;
+                const ay = t * 0.17;
+                const pv = new Array(ICO_V.length);
+                for (let i = 0; i < ICO_V.length; i++) {
+                    const r = rotate(ICO_V[i], ax, ay);
+                    // slight perspective
+                    const persp = 1 + r.z * 0.18;
+                    pv[i] = { x: cx + r.x * R * persp, y: cy + r.y * R * persp, z: r.z };
                 }
-                
-                // 2 fast impulse pulses with trails — travel the same orbit as dots
-                for (let imp = 0; imp < 2; imp++) {
-                    const impulseAngle = time * 0.35 + imp * Math.PI;
-                    for (let t = 5; t >= 0; t--) {
-                        const tAngle = impulseAngle - t * 0.09;
-                        const tx = centerX + Math.cos(tAngle) * 150;
-                        const ty = centerY + Math.sin(tAngle) * 150;
-                        const alpha = Math.max(0, 1.0 - t * 0.18);
-                        const r = Math.max(0.1, 5.5 - t * 0.9);
-                        ctx.fillStyle = 'rgba(165, 180, 252, ' + alpha + ')';
-                        ctx.beginPath();
-                        ctx.arc(tx, ty, r, 0, Math.PI * 2);
-                        ctx.fill();
+
+                // draw edges, back-to-front with depth fade
+                const edges = ICO_E.map((e, idx) => {
+                    const a = pv[e[0]], b = pv[e[1]];
+                    return { idx, e, mz: (a.z + b.z) * 0.5 };
+                }).sort((A, B) => A.mz - B.mz);
+
+                for (const ed of edges) {
+                    const a = pv[ed.e[0]], b = pv[ed.e[1]];
+                    const depth = (ed.mz + 1) * 0.5; // 0..1
+                    const alpha = 0.10 + depth * 0.55;
+                    ctx.strokeStyle = 'rgba(165,180,252,' + alpha.toFixed(3) + ')';
+                    ctx.lineWidth = 0.7 + depth * 0.9;
+                    ctx.beginPath();
+                    ctx.moveTo(a.x, a.y);
+                    ctx.lineTo(b.x, b.y);
+                    ctx.stroke();
+                }
+
+                // vertex nodes
+                for (const v of pv) {
+                    const depth = (v.z + 1) * 0.5;
+                    const gAlpha = 0.18 + depth * 0.45;
+                    const g = ctx.createRadialGradient(v.x, v.y, 0, v.x, v.y, 9);
+                    g.addColorStop(0, 'rgba(165,180,252,' + gAlpha.toFixed(3) + ')');
+                    g.addColorStop(1, 'rgba(165,180,252,0)');
+                    ctx.fillStyle = g;
+                    ctx.beginPath(); ctx.arc(v.x, v.y, 9, 0, Math.PI * 2); ctx.fill();
+                    ctx.fillStyle = 'rgba(232,236,248,' + (0.55 + depth * 0.35).toFixed(3) + ')';
+                    ctx.beginPath(); ctx.arc(v.x, v.y, 1.8, 0, Math.PI * 2); ctx.fill();
+                }
+
+                // data pulses flowing along selected edges (reliability signal)
+                for (let k = 0; k < PULSE_EDGES.length; k++) {
+                    const e = ICO_E[PULSE_EDGES[k]];
+                    const a = pv[e[0]], b = pv[e[1]];
+                    const phase = ((t * 0.28 + k * 0.137) % 1);
+                    for (let s = 0; s < 7; s++) {
+                        const tp = phase - s * 0.045;
+                        if (tp < 0 || tp > 1) continue;
+                        const px = a.x + (b.x - a.x) * tp;
+                        const py = a.y + (b.y - a.y) * tp;
+                        const depth = (a.z + (b.z - a.z) * tp + 1) * 0.5;
+                        const al = Math.max(0, 0.9 - s * 0.15) * (0.35 + depth * 0.55);
+                        const rr = Math.max(0.4, 2.3 - s * 0.28);
+                        ctx.fillStyle = 'rgba(165,180,252,' + al.toFixed(3) + ')';
+                        ctx.beginPath(); ctx.arc(px, py, rr, 0, Math.PI * 2); ctx.fill();
                     }
                 }
 
-                animationFrameId = requestAnimationFrame(drawHeroViz);
+                // ambient orbital particles (slow elliptic drift — stability)
+                const ORB = 18;
+                for (let i = 0; i < ORB; i++) {
+                    const base = (i / ORB) * Math.PI * 2;
+                    const angle = base + t * 0.035;
+                    const rr = R * (1.55 + (i % 2 === 0 ? 0.4 : 0.0));
+                    const wob = Math.sin(t * 0.25 + i * 1.3) * 4;
+                    const px = cx + Math.cos(angle) * (rr + wob);
+                    const py = cy + Math.sin(angle) * (rr + wob) * 0.52;
+                    const al = 0.22 + 0.18 * Math.sin(t * 0.8 + i);
+                    ctx.fillStyle = 'rgba(165,180,252,' + al.toFixed(3) + ')';
+                    ctx.beginPath(); ctx.arc(px, py, 1.3, 0, Math.PI * 2); ctx.fill();
+                }
+
+                // core glow (heart of the system)
+                const pulse = 0.35 + 0.12 * Math.sin(t * 1.4);
+                const core = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 0.55);
+                core.addColorStop(0,   'rgba(165,180,252,' + (pulse).toFixed(3) + ')');
+                core.addColorStop(0.35,'rgba(129,140,248,' + (pulse * 0.28).toFixed(3) + ')');
+                core.addColorStop(1,   'rgba(129,140,248,0)');
+                ctx.fillStyle = core;
+                ctx.beginPath(); ctx.arc(cx, cy, R * 0.55, 0, Math.PI * 2); ctx.fill();
+
+                requestAnimationFrame(render);
             }
-            
+
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
-            drawHeroViz();
+            render();
         }
 
     </script>

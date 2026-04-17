@@ -230,13 +230,7 @@ footer .logo img{height:64px;opacity:0.95;max-width:200px}
 .ck{color:var(--accent);font-weight:700}
 .lo{color:var(--text3)}
 
-/* ── CTA ── */
-.cta-section{text-align:center;position:relative;padding:160px 56px;overflow:hidden}
-.cta-geo{position:absolute;inset:0;overflow:hidden;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.cta-geo-tri{position:absolute;width:0;height:0;border-left:300px solid transparent;border-right:300px solid transparent;border-bottom:520px solid rgba(129,140,248,0.02);transform:rotate(0deg)}
-.cta-geo-circ{position:absolute;width:400px;height:400px;border-radius:50%;border:1px solid rgba(129,140,248,0.06)}
-.cta-section h2{font-size:clamp(40px,5vw,72px);font-weight:900;letter-spacing:-3px;margin-bottom:24px;position:relative;z-index:2}
-.cta-section p{font-size:16px;color:var(--text2);line-height:1.8;margin-bottom:48px;position:relative;z-index:2;max-width:560px;margin-left:auto;margin-right:auto}
+/* ── CTA (legacy rules intentionally removed; canonical .cta-* rules are defined below) ── */
 
 /* ── FORM ── */
 .form-section{max-width:720px;margin:0 auto}
@@ -382,7 +376,7 @@ footer a.logo{color:#1d1d1f}
 .cta-section{padding:5rem 2rem;background:var(--surface);border-top:var(--line);overflow-x:hidden}
 .cta-inner{max-width:760px;margin:0 auto;min-width:0}
 .cta-tag{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem}
-.cta-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem}
+.cta-title{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:.75rem;line-height:1.6}
 .cta-sub{color:var(--text2);font-size:.95rem;line-height:1.75;margin-bottom:2rem}
 .terminal-window-a{border:1px solid rgba(129,140,248,.25);background:var(--bg);overflow:hidden;border-radius:4px;margin-top:2rem;max-width:100%;box-sizing:border-box}
 .terminal-titlebar-a{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--surface2);border-bottom:var(--line);flex-wrap:wrap;min-width:0}
