@@ -233,21 +233,26 @@ body{padding-top:60px!important}
 }
 .btn-outline:hover { border-color: #818cf8; color: #a5b4fc !important; }
 
-/* === INTERACTIVE HERO X-RAY SERVER === */
+/* === INTERACTIVE HERO X-RAY SERVER (spotlight lens) === */
 .hero-xray{
   position:absolute;
   top:50%;
-  right:max(4%, calc(50% - 620px));
+  right:max(8%, calc(50% - 520px));
   transform:translateY(-50%);
-  width:min(38vw, 400px);
+  width:min(36vw, 400px);
   aspect-ratio:340/460;
   z-index:2;
   cursor:crosshair;
-  --xray-open:0;
 }
 .hero-xray svg{width:100%;height:100%;display:block;overflow:visible}
-.hero-xray .xr-chassis{transition:opacity .5s ease;opacity:calc(1 - var(--xray-open) * 0.82)}
-.hero-xray .xr-inside{opacity:var(--xray-open);transition:opacity .55s ease}
+.hero-xray #xrLensHole{r:0;transition:r .28s cubic-bezier(.22,.9,.28,1)}
+.hero-xray.lens-on #xrLensHole{r:82}
+.hero-xray #xrLensRing,
+.hero-xray #xrLensRingInner,
+.hero-xray #xrLensGlow{opacity:0;transition:opacity .25s ease}
+.hero-xray.lens-on #xrLensRing,
+.hero-xray.lens-on #xrLensRingInner{opacity:1}
+.hero-xray.lens-on #xrLensGlow{opacity:.55}
 .hero-xray .xr-hint{
   position:absolute;right:12px;bottom:-30px;
   font-family:'JetBrains Mono',monospace;font-size:10px;
@@ -256,10 +261,9 @@ body{padding-top:60px!important}
   transition:opacity .3s ease;
 }
 .hero-xray .xr-hint::before{content:"› ";color:#818cf8}
-.hero-xray:hover{--xray-open:1}
-.hero-xray:hover .xr-hint{opacity:0}
+.hero-xray.lens-on .xr-hint{opacity:0}
 @media (hover:none){
-  .hero-xray{--xray-open:1}
+  .hero-xray .xr-chassis{opacity:.18}
   .hero-xray .xr-hint{display:none}
 }
 @media(max-width:1024px){.hero-xray{display:none !important}}
@@ -337,8 +341,8 @@ footer::before {
     </div>
   </div>
 
-  <!-- INTERACTIVE X-RAY SERVER -->
-  <div class="hero-xray" role="img" aria-label="Интерактивная визуализация on-premise сервера: наведите курсор чтобы заглянуть внутрь">
+  <!-- INTERACTIVE X-RAY SERVER (spotlight lens) -->
+  <div class="hero-xray" role="img" aria-label="Интерактивная визуализация on-premise сервера: наведите курсор — под ним корпус становится прозрачным">
     <svg viewBox="0 0 340 460" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="xrChassisBg" x1="0" y1="0" x2="1" y2="1">
@@ -355,6 +359,21 @@ footer::before {
           <stop offset="60%" stop-color="rgba(248,113,113,0.28)"/>
           <stop offset="100%" stop-color="rgba(248,113,113,0)"/>
         </radialGradient>
+        <radialGradient id="xrLensFade" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#000"/>
+          <stop offset="55%" stop-color="#000"/>
+          <stop offset="100%" stop-color="#fff"/>
+        </radialGradient>
+        <radialGradient id="xrLensGlowGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(165,180,252,0.35)"/>
+          <stop offset="70%" stop-color="rgba(129,140,248,0.08)"/>
+          <stop offset="100%" stop-color="rgba(129,140,248,0)"/>
+        </radialGradient>
+        <!-- Lens mask: white = chassis visible, gradient hole = chassis cut away -->
+        <mask id="xrLensMask" maskUnits="userSpaceOnUse" x="-100" y="-100" width="540" height="660">
+          <rect x="-100" y="-100" width="540" height="660" fill="#fff"/>
+          <circle id="xrLensHole" cx="-500" cy="-500" fill="url(#xrLensFade)"/>
+        </mask>
       </defs>
 
       <!-- HUD corner brackets -->
@@ -374,8 +393,91 @@ footer::before {
         <circle cx="170" cy="36" r="2.2" fill="#fca5a5"/>
       </g>
 
-      <!-- ===== CHASSIS (default view) ===== -->
-      <g class="xr-chassis">
+      <!-- ===== 1. INTERNAL ORGANS (rendered first — always present, chassis covers them) ===== -->
+      <g class="xr-inside">
+        <!-- ghost outline of chassis -->
+        <rect x="50" y="66" width="240" height="356" rx="14" fill="rgba(11,15,26,0.85)" stroke="rgba(129,140,248,0.22)" stroke-width="1" stroke-dasharray="3 4"/>
+
+        <!-- Incoming threat beam -->
+        <path d="M170 46 L170 94" stroke="rgba(248,113,113,0.65)" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <polygon points="170,94 166,86 174,86" fill="rgba(248,113,113,0.9)"/>
+        <text x="186" y="54" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(252,165,165,0.95)">PROMPT_INJECTION</text>
+
+        <!-- Input Guard -->
+        <rect x="76" y="94" width="188" height="46" rx="5" fill="rgba(74,222,128,0.08)" stroke="rgba(74,222,128,0.55)" stroke-width="1"/>
+        <g stroke="rgba(74,222,128,0.95)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M102 107 L114 103 L114 120 Q114 128 102 132 Q90 128 90 120 L90 103 Z"/>
+          <path d="M94 116 L100 121 L110 110"/>
+        </g>
+        <g font-family="'JetBrains Mono',monospace">
+          <text x="128" y="111" font-size="10" letter-spacing="1" fill="rgba(226,228,234,0.96)">INPUT GUARD</text>
+          <text x="128" y="125" font-size="7.5" letter-spacing="0.8" fill="rgba(148,163,184,0.85)">prompt-injection · BLOCKED</text>
+        </g>
+
+        <!-- flow: Input → Core -->
+        <line x1="170" y1="140" x2="170" y2="172" stroke="rgba(165,180,252,0.35)" stroke-width="1" stroke-dasharray="2 3"/>
+
+        <!-- Agent Core hexagon -->
+        <polygon points="170,172 205,192 205,232 170,252 135,232 135,192" fill="rgba(16,21,42,0.9)" stroke="rgba(129,140,248,0.85)" stroke-width="1.3"/>
+        <polygon points="170,182 197,198 197,226 170,242 143,226 143,198" fill="none" stroke="rgba(129,140,248,0.42)" stroke-width="1"/>
+        <circle cx="170" cy="212" r="6" fill="rgba(129,140,248,0.9)">
+          <animate attributeName="r" values="5;8;5" dur="2.4s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.7;1;0.7" dur="2.4s" repeatCount="indefinite"/>
+        </circle>
+        <text x="170" y="270" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="rgba(226,228,234,0.96)">AGENT CORE</text>
+        <text x="170" y="282" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.8" fill="rgba(148,163,184,0.8)">local LLM · no egress</text>
+
+        <!-- ▼ RED ZONE: PII Data Vault -->
+        <g>
+          <ellipse cx="262" cy="208" rx="36" ry="26" fill="url(#xrThreatGrad)" opacity="0.75">
+            <animate attributeName="opacity" values="0.35;0.85;0.35" dur="1.9s" repeatCount="indefinite"/>
+          </ellipse>
+          <ellipse cx="262" cy="196" rx="20" ry="5.5" fill="rgba(16,21,42,0.9)" stroke="rgba(248,113,113,0.75)" stroke-width="1.2"/>
+          <rect x="242" y="196" width="40" height="26" fill="rgba(16,21,42,0.9)" stroke="rgba(248,113,113,0.75)" stroke-width="1.2"/>
+          <ellipse cx="262" cy="222" rx="20" ry="5.5" fill="rgba(16,21,42,0.9)" stroke="rgba(248,113,113,0.75)" stroke-width="1.2"/>
+          <line x1="250" y1="205" x2="274" y2="205" stroke="rgba(248,113,113,0.45)" stroke-width="1"/>
+          <line x1="250" y1="213" x2="274" y2="213" stroke="rgba(248,113,113,0.45)" stroke-width="1"/>
+          <!-- lock glyph -->
+          <g stroke="rgba(252,165,165,0.95)" stroke-width="1.1" fill="none" stroke-linecap="round">
+            <rect x="258" y="206" width="8" height="7" rx="1"/>
+            <path d="M260 206 L260 203 Q260 200 262 200 Q264 200 264 203 L264 206"/>
+          </g>
+        </g>
+
+        <!-- flow: Core → Output -->
+        <line x1="170" y1="252" x2="170" y2="296" stroke="rgba(165,180,252,0.35)" stroke-width="1" stroke-dasharray="2 3"/>
+
+        <!-- Output Guard -->
+        <rect x="76" y="296" width="188" height="46" rx="5" fill="rgba(74,222,128,0.08)" stroke="rgba(74,222,128,0.55)" stroke-width="1"/>
+        <g stroke="rgba(74,222,128,0.95)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M102 309 L114 305 L114 322 Q114 330 102 334 Q90 330 90 322 L90 305 Z"/>
+          <path d="M94 318 L100 323 L110 312"/>
+        </g>
+        <g font-family="'JetBrains Mono',monospace">
+          <text x="128" y="313" font-size="10" letter-spacing="1" fill="rgba(226,228,234,0.96)">OUTPUT GUARD</text>
+          <text x="128" y="327" font-size="7.5" letter-spacing="0.8" fill="rgba(148,163,184,0.85)">PII masking · leak prevention</text>
+        </g>
+
+        <!-- exit arrow -->
+        <line x1="170" y1="342" x2="170" y2="388" stroke="rgba(165,180,252,0.45)" stroke-width="1"/>
+        <polygon points="170,388 166,380 174,380" fill="rgba(165,180,252,0.9)"/>
+        <text x="170" y="406" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.2" fill="rgba(148,163,184,0.85)">SANITIZED RESPONSE</text>
+
+        <!-- Data pulses flowing through -->
+        <g fill="rgba(165,180,252,0.95)">
+          <circle r="2.2">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M170 140 L170 172"/>
+            <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="2.2">
+            <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M170 252 L170 296"/>
+            <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="1s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+      </g>
+
+      <!-- ===== 2. CHASSIS on top with lens mask ===== -->
+      <g class="xr-chassis" mask="url(#xrLensMask)">
         <rect x="50" y="66" width="240" height="356" rx="14" fill="url(#xrChassisBg)" stroke="rgba(129,140,248,0.35)" stroke-width="1.2"/>
         <rect x="50" y="66" width="240" height="2" rx="1" fill="url(#xrPanelEdge)"/>
         <rect x="50" y="420" width="240" height="2" rx="1" fill="url(#xrPanelEdge)"/>
@@ -424,96 +526,49 @@ footer::before {
         </g>
       </g>
 
-      <!-- ===== X-RAY (internal organs) ===== -->
-      <g class="xr-inside">
-        <!-- ghost outline -->
-        <rect x="50" y="66" width="240" height="356" rx="14" fill="none" stroke="rgba(129,140,248,0.28)" stroke-width="1" stroke-dasharray="3 4"/>
+      <!-- ===== 3. Lens visuals (glow + ring) drawn on top ===== -->
+      <circle id="xrLensGlow" cx="-500" cy="-500" r="110" fill="url(#xrLensGlowGrad)" pointer-events="none"/>
+      <circle id="xrLensRing" cx="-500" cy="-500" r="82" fill="none" stroke="rgba(165,180,252,0.75)" stroke-width="1.3" pointer-events="none"/>
+      <circle id="xrLensRingInner" cx="-500" cy="-500" r="78" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="0.8" stroke-dasharray="3 4" pointer-events="none"/>
 
-        <!-- Incoming threat beam -->
-        <path d="M170 46 L170 94" stroke="rgba(248,113,113,0.65)" stroke-width="1.5" stroke-dasharray="3 3"/>
-        <polygon points="170,94 166,86 174,86" fill="rgba(248,113,113,0.9)"/>
-        <text x="186" y="54" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(252,165,165,0.95)">PROMPT_INJECTION</text>
-
-        <!-- Input Guard -->
-        <rect x="76" y="94" width="188" height="46" rx="5" fill="rgba(74,222,128,0.06)" stroke="rgba(74,222,128,0.55)" stroke-width="1"/>
-        <g stroke="rgba(74,222,128,0.95)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M102 107 L114 103 L114 120 Q114 128 102 132 Q90 128 90 120 L90 103 Z"/>
-          <path d="M94 116 L100 121 L110 110"/>
-        </g>
-        <g font-family="'JetBrains Mono',monospace">
-          <text x="128" y="111" font-size="10" letter-spacing="1" fill="rgba(226,228,234,0.96)">INPUT GUARD</text>
-          <text x="128" y="125" font-size="7.5" letter-spacing="0.8" fill="rgba(148,163,184,0.85)">prompt-injection · BLOCKED</text>
-        </g>
-
-        <!-- flow: Input → Core -->
-        <line x1="170" y1="140" x2="170" y2="172" stroke="rgba(165,180,252,0.35)" stroke-width="1" stroke-dasharray="2 3"/>
-
-        <!-- Agent Core hexagon -->
-        <polygon points="170,172 205,192 205,232 170,252 135,232 135,192" fill="rgba(16,21,42,0.85)" stroke="rgba(129,140,248,0.85)" stroke-width="1.3"/>
-        <polygon points="170,182 197,198 197,226 170,242 143,226 143,198" fill="none" stroke="rgba(129,140,248,0.42)" stroke-width="1"/>
-        <circle cx="170" cy="212" r="6" fill="rgba(129,140,248,0.9)">
-          <animate attributeName="r" values="5;8;5" dur="2.4s" repeatCount="indefinite"/>
-          <animate attributeName="opacity" values="0.7;1;0.7" dur="2.4s" repeatCount="indefinite"/>
-        </circle>
-        <text x="170" y="270" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9.5" letter-spacing="1.2" fill="rgba(226,228,234,0.96)">AGENT CORE</text>
-        <text x="170" y="282" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.8" fill="rgba(148,163,184,0.8)">local LLM · no egress</text>
-
-        <!-- ▼ RED ZONE: PII Data Vault -->
-        <g>
-          <ellipse cx="270" cy="208" rx="40" ry="30" fill="url(#xrThreatGrad)" opacity="0.75">
-            <animate attributeName="opacity" values="0.35;0.85;0.35" dur="1.9s" repeatCount="indefinite"/>
-          </ellipse>
-          <ellipse cx="270" cy="196" rx="22" ry="6" fill="rgba(16,21,42,0.9)" stroke="rgba(248,113,113,0.75)" stroke-width="1.2"/>
-          <rect x="248" y="196" width="44" height="28" fill="rgba(16,21,42,0.9)" stroke="rgba(248,113,113,0.75)" stroke-width="1.2"/>
-          <ellipse cx="270" cy="224" rx="22" ry="6" fill="rgba(16,21,42,0.9)" stroke="rgba(248,113,113,0.75)" stroke-width="1.2"/>
-          <line x1="258" y1="206" x2="282" y2="206" stroke="rgba(248,113,113,0.45)" stroke-width="1"/>
-          <line x1="258" y1="214" x2="282" y2="214" stroke="rgba(248,113,113,0.45)" stroke-width="1"/>
-          <!-- lock glyph -->
-          <g stroke="rgba(252,165,165,0.95)" stroke-width="1.1" fill="none" stroke-linecap="round">
-            <rect x="266" y="206" width="8" height="7" rx="1"/>
-            <path d="M268 206 L268 203 Q268 200 270 200 Q272 200 272 203 L272 206"/>
-          </g>
-          <text x="270" y="252" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1" fill="rgba(252,165,165,0.95)">PII · RED ZONE</text>
-          <text x="270" y="262" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="0.8" fill="rgba(252,165,165,0.7)">AES-256 · sealed</text>
-        </g>
-
-        <!-- flow: Core → Output -->
-        <line x1="170" y1="252" x2="170" y2="296" stroke="rgba(165,180,252,0.35)" stroke-width="1" stroke-dasharray="2 3"/>
-
-        <!-- Output Guard -->
-        <rect x="76" y="296" width="188" height="46" rx="5" fill="rgba(74,222,128,0.06)" stroke="rgba(74,222,128,0.55)" stroke-width="1"/>
-        <g stroke="rgba(74,222,128,0.95)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M102 309 L114 305 L114 322 Q114 330 102 334 Q90 330 90 322 L90 305 Z"/>
-          <path d="M94 318 L100 323 L110 312"/>
-        </g>
-        <g font-family="'JetBrains Mono',monospace">
-          <text x="128" y="313" font-size="10" letter-spacing="1" fill="rgba(226,228,234,0.96)">OUTPUT GUARD</text>
-          <text x="128" y="327" font-size="7.5" letter-spacing="0.8" fill="rgba(148,163,184,0.85)">PII masking · leak prevention</text>
-        </g>
-
-        <!-- exit arrow -->
-        <line x1="170" y1="342" x2="170" y2="388" stroke="rgba(165,180,252,0.45)" stroke-width="1"/>
-        <polygon points="170,388 166,380 174,380" fill="rgba(165,180,252,0.9)"/>
-        <text x="170" y="406" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.2" fill="rgba(148,163,184,0.85)">SANITIZED RESPONSE</text>
-
-        <!-- Data pulses flowing through -->
-        <g fill="rgba(165,180,252,0.95)">
-          <circle r="2.2">
-            <animateMotion dur="3s" repeatCount="indefinite" path="M170 140 L170 172"/>
-            <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite"/>
-          </circle>
-          <circle r="2.2">
-            <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M170 252 L170 296"/>
-            <animate attributeName="opacity" values="0;1;1;0" dur="3s" begin="1s" repeatCount="indefinite"/>
-          </circle>
-        </g>
-
-        <!-- Status footer -->
-        <text x="170" y="438" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.8" fill="rgba(129,140,248,0.75)">X-RAY · ON-PREM · 152-FZ · FSTEK</text>
-      </g>
+      <!-- Status footer (below chassis, always visible) -->
+      <text x="170" y="452" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.8" fill="rgba(129,140,248,0.7)">ON-PREM · 152-FZ · FSTEK</text>
     </svg>
     <div class="xr-hint">наведи курсор</div>
   </div>
+  <script>
+    (function(){
+      const wrap = document.querySelector('.hero-xray');
+      if (!wrap) return;
+      const svg = wrap.querySelector('svg');
+      const hole = svg.querySelector('#xrLensHole');
+      const ring = svg.querySelector('#xrLensRing');
+      const ringInner = svg.querySelector('#xrLensRingInner');
+      const glow = svg.querySelector('#xrLensGlow');
+      let raf = 0, pendingX = 0, pendingY = 0;
+      function applyPoint(){
+        raf = 0;
+        hole.setAttribute('cx', pendingX);
+        hole.setAttribute('cy', pendingY);
+        ring.setAttribute('cx', pendingX);
+        ring.setAttribute('cy', pendingY);
+        ringInner.setAttribute('cx', pendingX);
+        ringInner.setAttribute('cy', pendingY);
+        glow.setAttribute('cx', pendingX);
+        glow.setAttribute('cy', pendingY);
+      }
+      function onMove(e){
+        const rect = svg.getBoundingClientRect();
+        const vb = svg.viewBox.baseVal;
+        pendingX = ((e.clientX - rect.left) / rect.width) * vb.width;
+        pendingY = ((e.clientY - rect.top) / rect.height) * vb.height;
+        if (!raf) raf = requestAnimationFrame(applyPoint);
+      }
+      wrap.addEventListener('pointerenter', (e) => { onMove(e); wrap.classList.add('lens-on'); });
+      wrap.addEventListener('pointermove', onMove);
+      wrap.addEventListener('pointerleave', () => { wrap.classList.remove('lens-on'); });
+    })();
+  </script>
 </section>
 
 <!-- SECURITY FEATURES -->
