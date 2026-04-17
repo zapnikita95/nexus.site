@@ -101,9 +101,11 @@ footer .logo img{height:64px;opacity:0.95;max-width:200px}
 .sol-card:hover .sol-num{color:rgba(129,140,248,0.12)}
 .sol-card h3{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:12px}
 .sol-card p{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:28px}
-.sol-stats{display:flex;gap:28px}
-.ss-val{font-size:20px;font-weight:800;letter-spacing:-0.5px}
-.ss-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.sol-stats{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;padding:22px 4px;background:linear-gradient(165deg,rgba(16,21,42,0.7),rgba(11,15,26,0.7));border:1px solid rgba(129,140,248,0.18);border-radius:12px;backdrop-filter:blur(8px)}
+.sol-stats > div{padding:6px 22px;border-right:1px solid rgba(129,140,248,0.14);display:flex;flex-direction:column;justify-content:center}
+.sol-stats > div:last-child{border-right:none}
+.ss-val{font-size:24px;font-weight:800;letter-spacing:-0.5px;color:#e5e7eb;line-height:1.1}
+.ss-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px;margin-top:8px}
 .sol-link{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-top:24px;display:inline-block}
 .sol-viz{margin-top:32px;padding-top:24px;border-top:1px solid var(--border);height:100px;display:flex;align-items:center;justify-content:center}
 .sol-viz svg{width:100%;height:80px;opacity:0.2;transition:opacity .5s}
@@ -274,7 +276,7 @@ footer .logo img{height:64px;opacity:0.95;max-width:200px}
 /* ── DETAIL SECTION (inner pages) ── */
 .detail-section{padding:120px 0}
 .s-inner{max-width:1360px;margin:0 auto;padding:0 56px}
-.detail-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;max-width:1360px;margin:0 auto;padding:0 56px}
+.detail-split{display:grid;grid-template-columns:1.15fr 1fr;gap:80px;align-items:center;max-width:1360px;margin:0 auto;padding:0 56px}
 .detail-split--center{align-items:center}
 .detail-split .detail-content h3{font-size:28px;font-weight:800;letter-spacing:-1px;margin-bottom:16px}
 .detail-split .detail-content p{font-size:14px;color:var(--text2);line-height:1.9;margin-bottom:20px}
