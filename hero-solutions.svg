@@ -1,119 +1,196 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <radialGradient id="slg1" cx="65%" cy="45%" r="55%">
-      <stop offset="0%" stop-color="#1a2040" stop-opacity="0.9"/>
+    <radialGradient id="slBG" cx="65%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#1e2555" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#121a35" stop-opacity="0.7"/>
       <stop offset="100%" stop-color="#0b0f1a" stop-opacity="0"/>
     </radialGradient>
-    <radialGradient id="slg2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    <radialGradient id="slHub" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#6366f1" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#4338ca" stop-opacity="0"/>
     </radialGradient>
-    <filter id="slb1"><feGaussianBlur stdDeviation="10"/></filter>
-    <filter id="slb2"><feGaussianBlur stdDeviation="2"/></filter>
+    <linearGradient id="slCard" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2348" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0f1630" stop-opacity="0.95"/>
+    </linearGradient>
+    <linearGradient id="slRail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#818cf8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#a5b4fc" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#818cf8" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="slGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="rgba(129,140,248,0.08)" stroke-width="1"/>
+    </pattern>
+    <filter id="slGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
   </defs>
 
+  <!-- Base -->
   <rect width="1200" height="600" fill="#0b0f1a"/>
-  <rect width="1200" height="600" fill="url(#slg1)"/>
-  <ellipse cx="820" cy="280" rx="380" ry="300" fill="url(#slg2)" filter="url(#slb1)"/>
+  <rect width="1200" height="600" fill="url(#slGrid)"/>
+  <circle cx="780" cy="300" r="420" fill="url(#slBG)"/>
 
-  <!-- Outer orbit rings -->
-  <g transform="translate(800, 280)" opacity="0.1">
-    <circle r="250" fill="none" stroke="#818cf8" stroke-width="1" stroke-dasharray="4,8"/>
-    <circle r="190" fill="none" stroke="#818cf8" stroke-width="1" stroke-dasharray="2,6"/>
-    <circle r="130" fill="none" stroke="#a5b4fc" stroke-width="0.8" stroke-dasharray="3,5"/>
+  <!-- Corner tags -->
+  <g font-family="'JetBrains Mono',monospace" font-size="11" letter-spacing="3" fill="rgba(165,180,252,0.75)">
+    <text x="40" y="34">[SYS] ENTERPRISE · WORKFLOW · RUNNING</text>
+    <text x="1160" y="34" text-anchor="end">NX-CORE · v2.6</text>
+    <text x="40" y="580">ON-PREMISE · 152-ФЗ · AIR-GAP</text>
+    <text x="1160" y="580" text-anchor="end">LATENCY · p95 · 2.1s</text>
   </g>
 
-  <!-- Central hexagonal hub -->
-  <g transform="translate(800, 270)">
-    <!-- Glow -->
-    <polygon points="0,-100 87,-50 87,50 0,100 -87,50 -87,-50"
-          fill="#818cf8" opacity="0.05" filter="url(#slb1)"/>
-    <!-- Outer hex -->
-    <polygon points="0,-90 78,-45 78,45 0,90 -78,45 -78,-45"
-          fill="#10152a" stroke="#818cf8" stroke-width="1.5" opacity="0.8"/>
-    <!-- Inner hex -->
-    <polygon points="0,-60 52,-30 52,30 0,60 -52,30 -52,-30"
-          fill="none" stroke="#818cf8" stroke-width="0.8" opacity="0.3" stroke-dasharray="3,3"/>
+  <!-- Left source column: 3 input cards -->
+  <g font-family="'JetBrains Mono',monospace" font-size="9.5" letter-spacing="1.6">
+    <!-- Source 1: DOCS -->
+    <g transform="translate(120 160)">
+      <rect width="170" height="72" rx="10" fill="url(#slCard)" stroke="rgba(129,140,248,0.55)" stroke-width="1.3"/>
+      <g transform="translate(16 16)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.6" stroke-linecap="round">
+        <path d="M4 3 L24 3 L30 9 L30 32 L4 32 Z"/>
+        <path d="M24 3 L24 9 L30 9"/>
+        <line x1="9" y1="17" x2="25" y2="17"/>
+        <line x1="9" y1="23" x2="25" y2="23"/>
+      </g>
+      <text x="62" y="30" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="0" fill="#e5e7eb">Документы</text>
+      <text x="62" y="50" fill="rgba(165,180,252,0.85)">152-ФЗ · PDF · 1С</text>
+      <text x="62" y="62" fill="rgba(165,180,252,0.55)">COMPLIANCE</text>
+      <circle cx="154" cy="14" r="3.4" fill="#22c55e"><animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/></circle>
+    </g>
+    <!-- Source 2: CHATS -->
+    <g transform="translate(120 272)">
+      <rect width="170" height="72" rx="10" fill="url(#slCard)" stroke="rgba(129,140,248,0.55)" stroke-width="1.3"/>
+      <g transform="translate(16 16)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 6 Q3 3 6 3 L28 3 Q31 3 31 6 L31 22 Q31 25 28 25 L14 25 L8 31 L8 25 L6 25 Q3 25 3 22 Z"/>
+        <line x1="10" y1="11" x2="22" y2="11"/>
+        <line x1="10" y1="17" x2="18" y2="17"/>
+      </g>
+      <text x="62" y="30" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="0" fill="#e5e7eb">Обращения</text>
+      <text x="62" y="50" fill="rgba(165,180,252,0.85)">ЧАТ · EMAIL · VOICE</text>
+      <text x="62" y="62" fill="rgba(165,180,252,0.55)">FEEDBACK</text>
+      <circle cx="154" cy="14" r="3.4" fill="#6366f1"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+    </g>
+    <!-- Source 3: TASKS -->
+    <g transform="translate(120 384)">
+      <rect width="170" height="72" rx="10" fill="url(#slCard)" stroke="rgba(129,140,248,0.55)" stroke-width="1.3"/>
+      <g transform="translate(16 16)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.6" stroke-linecap="round">
+        <rect x="4" y="4" width="28" height="28" rx="3"/>
+        <path d="M9 14 L13 18 L21 10"/>
+        <line x1="9" y1="24" x2="22" y2="24"/>
+      </g>
+      <text x="62" y="30" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="700" letter-spacing="0" fill="#e5e7eb">Согласования</text>
+      <text x="62" y="50" fill="rgba(165,180,252,0.85)">CRM · ERP · BPM</text>
+      <text x="62" y="62" fill="rgba(165,180,252,0.55)">OPERATIONS</text>
+      <circle cx="154" cy="14" r="3.4" fill="#22c55e"><animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
+    </g>
+  </g>
 
-    <!-- Central icon: connected nodes -->
-    <circle cx="0" cy="-20" r="8" fill="#a5b4fc" opacity="0.8"/>
-    <circle cx="-22" cy="14" r="6" fill="#a5b4fc" opacity="0.6"/>
-    <circle cx="22" cy="14" r="6" fill="#a5b4fc" opacity="0.6"/>
-    <line x1="0" y1="-12" x2="-18" y2="10" stroke="#a5b4fc" stroke-width="1.2" opacity="0.7"/>
-    <line x1="0" y1="-12" x2="18" y2="10" stroke="#a5b4fc" stroke-width="1.2" opacity="0.7"/>
-    <line x1="-16" y1="14" x2="16" y2="14" stroke="#a5b4fc" stroke-width="1" opacity="0.5"/>
+  <!-- Central hexagon HUB -->
+  <g transform="translate(620 300)">
+    <!-- outer glow rings -->
+    <circle r="220" fill="url(#slHub)" filter="url(#slGlow)"/>
+    <circle r="160" fill="none" stroke="rgba(165,180,252,0.25)" stroke-width="1" stroke-dasharray="4 8"/>
+    <circle r="130" fill="none" stroke="rgba(165,180,252,0.18)" stroke-width="1" stroke-dasharray="2 10"/>
+    <!-- Hexagon -->
+    <polygon points="0,-108 93.5,-54 93.5,54 0,108 -93.5,54 -93.5,-54"
+             fill="rgba(67,56,202,0.35)" stroke="rgba(199,210,254,0.95)" stroke-width="2"/>
+    <polygon points="0,-108 93.5,-54 93.5,54 0,108 -93.5,54 -93.5,-54"
+             fill="none" stroke="rgba(199,210,254,0.6)" stroke-width="1.5">
+      <animate attributeName="opacity" values="1;0.2;1" dur="3.2s" repeatCount="indefinite"/>
+    </polygon>
+    <!-- inner ring detail -->
+    <circle r="74" fill="rgba(16,21,42,0.75)" stroke="rgba(165,180,252,0.55)" stroke-width="1.2"/>
+    <!-- atom icon -->
+    <g fill="none" stroke="rgba(199,210,254,0.95)" stroke-width="1.6">
+      <circle r="22"/>
+      <ellipse rx="44" ry="18" transform="rotate(30)"/>
+      <ellipse rx="44" ry="18" transform="rotate(-30)"/>
+      <circle r="5" fill="rgba(199,210,254,1)" stroke="none"/>
+    </g>
+    <!-- vertex labels -->
+    <g font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="1.6" fill="rgba(199,210,254,0.85)" text-anchor="middle">
+      <text y="-120">ROUTE</text>
+      <text x="106" y="-54">VERIFY</text>
+      <text x="106" y="62">EXECUTE</text>
+      <text y="128">NOTIFY</text>
+      <text x="-106" y="62">CRITIC</text>
+      <text x="-106" y="-54">PARSE</text>
+    </g>
+    <text y="160" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="13" font-weight="700" letter-spacing="4" fill="rgba(199,210,254,1)">NEXUS CORE</text>
+    <text y="178" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.7)">12 AGENTS · 3 WORKFLOWS</text>
+  </g>
 
-    <!-- Pulsing ring -->
-    <circle r="130" fill="none" stroke="#818cf8" stroke-width="1" opacity="0">
-      <animate attributeName="r" from="50" to="130" dur="3s" repeatCount="indefinite"/>
-      <animate attributeName="opacity" values="0.3;0" dur="3s" repeatCount="indefinite"/>
+  <!-- Right output column: status rail -->
+  <g transform="translate(950 140)">
+    <rect x="0" y="0" width="210" height="320" rx="12" fill="rgba(16,21,42,0.8)" stroke="rgba(129,140,248,0.35)" stroke-width="1.2"/>
+    <text x="20" y="28" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="3" fill="rgba(165,180,252,0.9)">LIVE · OUTPUTS</text>
+    <line x1="20" y1="40" x2="190" y2="40" stroke="rgba(129,140,248,0.25)"/>
+
+    <!-- Row: WORKFLOW -->
+    <g transform="translate(20 60)">
+      <circle cx="6" cy="8" r="5.5" fill="#22c55e"><animate attributeName="opacity" values="1;0.4;1" dur="1.4s" repeatCount="indefinite"/></circle>
+      <text x="22" y="6" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="2" fill="rgba(229,231,235,0.95)">WORKFLOW</text>
+      <text x="22" y="20" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="1.5" fill="rgba(165,180,252,0.7)">ACTIVE · 4 RUN</text>
+    </g>
+    <!-- Row: CITIZENS -->
+    <g transform="translate(20 110)">
+      <circle cx="6" cy="8" r="5.5" fill="#22c55e"><animate attributeName="opacity" values="1;0.4;1" dur="1.7s" repeatCount="indefinite"/></circle>
+      <text x="22" y="6" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="2" fill="rgba(229,231,235,0.95)">CITIZENS</text>
+      <text x="22" y="20" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="1.5" fill="rgba(165,180,252,0.7)">ROUTING · 12/s</text>
+    </g>
+    <!-- Row: ON-PREM -->
+    <g transform="translate(20 160)">
+      <circle cx="6" cy="8" r="5.5" fill="#818cf8"><animate attributeName="opacity" values="1;0.5;1" dur="2.1s" repeatCount="indefinite"/></circle>
+      <text x="22" y="6" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="2" fill="rgba(229,231,235,0.95)">ON-PREMISE</text>
+      <text x="22" y="20" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="1.5" fill="rgba(165,180,252,0.7)">AIR-GAP · ONLY</text>
+    </g>
+    <!-- Row: ROI -->
+    <g transform="translate(20 210)">
+      <circle cx="6" cy="8" r="5.5" fill="#fbbf24"><animate attributeName="opacity" values="1;0.4;1" dur="1.5s" repeatCount="indefinite"/></circle>
+      <text x="22" y="6" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="2" fill="rgba(229,231,235,0.95)">ROI · CALC</text>
+      <text x="22" y="20" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="1.5" fill="rgba(165,180,252,0.7)">3.4× · 11 MO</text>
+    </g>
+    <!-- Row: MULTIAGENT -->
+    <g transform="translate(20 260)">
+      <circle cx="6" cy="8" r="5.5" fill="#22c55e"><animate attributeName="opacity" values="1;0.4;1" dur="1.3s" repeatCount="indefinite"/></circle>
+      <text x="22" y="6" font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="2" fill="rgba(229,231,235,0.95)">MULTIAGENT</text>
+      <text x="22" y="20" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="1.5" fill="rgba(165,180,252,0.7)">READY · 12 NODES</text>
+    </g>
+  </g>
+
+  <!-- Connections from input cards to hub -->
+  <g stroke="rgba(129,140,248,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round">
+    <path d="M290 196 C420 196 440 300 520 270"/>
+    <path d="M290 308 C420 308 440 300 520 300"/>
+    <path d="M290 420 C420 420 440 300 520 330"/>
+  </g>
+
+  <!-- Connections from hub to status rail -->
+  <g stroke="rgba(129,140,248,0.4)" stroke-width="1.2" fill="none" stroke-dasharray="4 5">
+    <path d="M720 280 L950 220"/>
+    <path d="M720 300 L950 280"/>
+    <path d="M720 320 L950 340"/>
+  </g>
+
+  <!-- Animated packets on input->hub paths -->
+  <g>
+    <circle r="3.2" fill="#a5b4fc">
+      <animateMotion dur="2.6s" repeatCount="indefinite" path="M290 196 C420 196 440 300 520 270"/>
+    </circle>
+    <circle r="3.2" fill="#818cf8">
+      <animateMotion dur="2.8s" begin="0.6s" repeatCount="indefinite" path="M290 308 C420 308 440 300 520 300"/>
+    </circle>
+    <circle r="3.2" fill="#22c55e">
+      <animateMotion dur="3s" begin="1.2s" repeatCount="indefinite" path="M290 420 C420 420 440 300 520 330"/>
+    </circle>
+    <circle r="2.8" fill="#a5b4fc">
+      <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path="M720 280 L950 220"/>
+    </circle>
+    <circle r="2.8" fill="#a5b4fc">
+      <animateMotion dur="2.4s" begin="1.4s" repeatCount="indefinite" path="M720 300 L950 280"/>
     </circle>
   </g>
 
-  <!-- Solution category badges (all boxes same width + left-aligned column) -->
-  <g font-family="monospace" font-size="12" fill="#818cf8">
-    <!-- LEFT column: x=455, width=225, same for all 5 boxes -->
-    <g transform="translate(455, 140)" opacity="0.75">
-      <rect x="0" y="-14" width="225" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">152-ФЗ · COMPLIANT</text>
-      <line x1="225" y1="0" x2="650" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-    </g>
-    <g transform="translate(455, 200)" opacity="0.7">
-      <rect x="0" y="-14" width="225" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">ЧЕСТНЫЙ ЗНАК · AUTO</text>
-      <line x1="225" y1="0" x2="650" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-    </g>
-    <g transform="translate(455, 260)" opacity="0.65">
-      <rect x="0" y="-14" width="225" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">DOC CHECK · REALTIME</text>
-      <line x1="225" y1="0" x2="650" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-    </g>
-    <g transform="translate(455, 320)" opacity="0.7">
-      <rect x="0" y="-14" width="225" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#a5b4fc" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">ESCALATION · SMART</text>
-      <line x1="225" y1="0" x2="650" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-    </g>
-    <g transform="translate(455, 380)" opacity="0.65">
-      <rect x="0" y="-14" width="225" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">SLA 99.9% · STABLE</text>
-      <line x1="225" y1="0" x2="650" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-    </g>
+  <!-- Bright highlight rail bottom -->
+  <rect x="40" y="540" width="1120" height="1.5" fill="url(#slRail)" opacity="0.6"/>
 
-    <!-- RIGHT column: x=970, width=200, same for all 5 boxes -->
-    <g transform="translate(970, 150)" opacity="0.75">
-      <line x1="-120" y1="0" x2="0" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-      <rect x="0" y="-14" width="200" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">WORKFLOW · ACTIVE</text>
-    </g>
-    <g transform="translate(970, 215)" opacity="0.7">
-      <line x1="-120" y1="0" x2="0" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-      <rect x="0" y="-14" width="200" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">CITIZENS · ROUTING</text>
-    </g>
-    <g transform="translate(970, 280)" opacity="0.65">
-      <line x1="-120" y1="0" x2="0" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-      <rect x="0" y="-14" width="200" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">ON-PREMISE · ONLY</text>
-    </g>
-    <g transform="translate(970, 345)" opacity="0.7">
-      <line x1="-120" y1="0" x2="0" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-      <rect x="0" y="-14" width="200" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#fbbf24" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">ROI · CALCULATING</text>
-    </g>
-    <g transform="translate(970, 410)" opacity="0.65">
-      <line x1="-120" y1="0" x2="0" y2="0" stroke="#818cf8" stroke-width="0.5" opacity="0.3" stroke-dasharray="3,4"/>
-      <rect x="0" y="-14" width="200" height="22" fill="#10152a" stroke="#818cf8" stroke-width="0.7" opacity="0.6" rx="2"/>
-      <circle cx="10" cy="0" r="4" fill="#4ade80" opacity="0.9"/>
-      <text x="22" y="4" fill="#94a3b8" font-size="11">MULTIAGENT · READY</text>
-    </g>
-  </g>
 </svg>

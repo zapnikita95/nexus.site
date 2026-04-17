@@ -292,8 +292,30 @@ footer{border-top:1px solid rgba(129,140,248,0.12)!important;padding:3rem 3rem 0
 .rv-scale{opacity:0;transform:scale(.97);transition:opacity .5s ease,transform .5s ease}
 .rv-scale.visible{opacity:1;transform:none}
 /* === BODY PADDING FOR FIXED NAV === */
-body{padding-top:60px!important}
+body{padding-top:60px!important;position:relative}
 .page-hero,.hero{padding-top:60px!important}
+
+/* === TECH SPINE: page-wide diamond rail === */
+.tech-spine{position:absolute;right:24px;top:620px;bottom:260px;width:172px;pointer-events:none;z-index:0;display:block}
+.tech-spine::before{content:'';position:absolute;left:80px;top:0;bottom:0;width:1px;background:repeating-linear-gradient(to bottom,rgba(129,140,248,0.32) 0 6px,transparent 6px 14px)}
+.tech-spine-stage{position:absolute;left:0;right:0;transform:translateY(-50%);display:flex;align-items:center;gap:14px;opacity:.88}
+.tech-spine-stage .ts-dia{position:relative;width:90px;height:54px;flex:0 0 auto}
+.tech-spine-stage .ts-dia svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 8px 24px rgba(99,102,241,0.22))}
+.tech-spine-stage .ts-dia .ts-top{fill:url(#tsTop);stroke:rgba(199,210,254,0.85);stroke-width:1.4}
+.tech-spine-stage .ts-dia .ts-side{fill:url(#tsSide);stroke:rgba(129,140,248,0.4);stroke-width:1}
+.tech-spine-stage .ts-dia .ts-halo{fill:rgba(129,140,248,0.18)}
+.tech-spine-stage .ts-copy{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:rgba(199,210,254,0.85);line-height:1.4;white-space:nowrap;text-align:left}
+.tech-spine-stage .ts-copy b{display:block;color:rgba(229,231,235,.98);font-weight:700;margin-bottom:3px;letter-spacing:2.4px}
+.tech-spine-stage .ts-copy span{display:block;color:rgba(165,180,252,0.6);font-size:9px}
+.tech-spine-stage .ts-dot{position:absolute;left:76px;top:50%;width:10px;height:10px;border-radius:50%;background:#22c55e;transform:translateY(-50%);box-shadow:0 0 14px rgba(34,197,94,.8);animation:ts-pulse 2.4s ease-in-out infinite}
+@keyframes ts-pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.tech-spine-stage[data-c="indigo"] .ts-dot{background:#818cf8;box-shadow:0 0 14px rgba(129,140,248,.8)}
+.tech-spine-stage[data-c="gold"] .ts-dot{background:#fbbf24;box-shadow:0 0 14px rgba(251,191,36,.8)}
+@media (max-width: 1180px){
+  .tech-spine{display:none}
+}
+.tech-spine-foot{position:absolute;left:80px;bottom:-20px;transform:translate(-50%,0);width:12px;height:12px;border:1px solid rgba(165,180,252,0.65);border-radius:50%;background:rgba(16,21,42,0.85)}
+.tech-spine-foot::after{content:'';position:absolute;inset:3px;border-radius:50%;background:rgba(129,140,248,0.7)}
 
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -319,8 +341,86 @@ body{padding-top:60px!important}
   </div>
 </nav>
 
+<!-- TECH SPINE: diamond rail spanning the whole page -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="tsTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4f46e5" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="tsSide" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3730a3" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#1e1b4b" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+</svg>
+<div class="tech-spine" aria-hidden="true">
+  <div class="tech-spine-stage" style="top:0%" data-c="green">
+    <div class="ts-dia">
+      <svg viewBox="-55 -30 110 60">
+        <ellipse class="ts-halo" cx="0" cy="0" rx="58" ry="22"/>
+        <polygon class="ts-top" points="0,-24 52,0 0,24 -52,0"/>
+        <polygon class="ts-side" points="-52,0 0,24 0,34 -52,10"/>
+        <polygon class="ts-side" points="52,0 0,24 0,34 52,10"/>
+      </svg>
+    </div>
+    <div class="ts-dot"></div>
+    <div class="ts-copy"><b>L5 · API</b>FastAPI · gRPC · Webhook<span>INTEGRATIONS</span></div>
+  </div>
+  <div class="tech-spine-stage" style="top:24%" data-c="indigo">
+    <div class="ts-dia">
+      <svg viewBox="-55 -30 110 60">
+        <ellipse class="ts-halo" cx="0" cy="0" rx="58" ry="22"/>
+        <polygon class="ts-top" points="0,-24 52,0 0,24 -52,0"/>
+        <polygon class="ts-side" points="-52,0 0,24 0,34 -52,10"/>
+        <polygon class="ts-side" points="52,0 0,24 0,34 52,10"/>
+      </svg>
+    </div>
+    <div class="ts-dot"></div>
+    <div class="ts-copy"><b>L4 · AGENTS</b>LangGraph · AutoGen<span>ORCHESTRATION</span></div>
+  </div>
+  <div class="tech-spine-stage" style="top:48%" data-c="gold">
+    <div class="ts-dia">
+      <svg viewBox="-55 -30 110 60">
+        <ellipse class="ts-halo" cx="0" cy="0" rx="58" ry="22"/>
+        <polygon class="ts-top" points="0,-24 52,0 0,24 -52,0"/>
+        <polygon class="ts-side" points="-52,0 0,24 0,34 -52,10"/>
+        <polygon class="ts-side" points="52,0 0,24 0,34 52,10"/>
+      </svg>
+    </div>
+    <div class="ts-dot"></div>
+    <div class="ts-copy"><b>L3 · LLM</b>vLLM · Ollama · TGI<span>INFERENCE · GPU</span></div>
+  </div>
+  <div class="tech-spine-stage" style="top:72%" data-c="green">
+    <div class="ts-dia">
+      <svg viewBox="-55 -30 110 60">
+        <ellipse class="ts-halo" cx="0" cy="0" rx="58" ry="22"/>
+        <polygon class="ts-top" points="0,-24 52,0 0,24 -52,0"/>
+        <polygon class="ts-side" points="-52,0 0,24 0,34 -52,10"/>
+        <polygon class="ts-side" points="52,0 0,24 0,34 52,10"/>
+      </svg>
+    </div>
+    <div class="ts-dot"></div>
+    <div class="ts-copy"><b>L2 · DATA</b>Qdrant · Postgres · Redis<span>VECTOR · RELATIONAL</span></div>
+  </div>
+  <div class="tech-spine-stage" style="top:96%" data-c="indigo">
+    <div class="ts-dia">
+      <svg viewBox="-55 -30 110 60">
+        <ellipse class="ts-halo" cx="0" cy="0" rx="58" ry="22"/>
+        <polygon class="ts-top" points="0,-24 52,0 0,24 -52,0"/>
+        <polygon class="ts-side" points="-52,0 0,24 0,34 -52,10"/>
+        <polygon class="ts-side" points="52,0 0,24 0,34 52,10"/>
+      </svg>
+    </div>
+    <div class="ts-dot"></div>
+    <div class="ts-copy"><b>L1 · INFRA</b>Docker · K8s · Linux<span>ON-PREMISE · 152-ФЗ</span></div>
+  </div>
+  <div class="tech-spine-foot"></div>
+</div>
+
 <!-- PAGE HERO -->
 <section class="page-hero" style="background-image:url('hero-technology.svg')">
+  <div class="hero-mini" style="background-image:url('hero-technology.svg')"></div>
   <div class="s-pad">
     <div class="s-label rv">Технологии</div>
     <h1 class="s-title rv">Полный контроль<br>над стеком. ИИ<br>on-premise</h1>

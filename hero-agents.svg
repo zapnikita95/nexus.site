@@ -62,19 +62,19 @@
 
   <!-- Connections (behind nodes) -->
   <g stroke="rgba(129,140,248,0.45)" stroke-width="1.2" fill="none">
-    <path d="M830 300 L545 168"/>
-    <path d="M830 300 L540 300"/>
-    <path d="M830 300 L545 432"/>
-    <path d="M830 300 L1112 168"/>
-    <path d="M830 300 L1120 300"/>
-    <path d="M830 300 L1112 432"/>
+    <path d="M830 300 L535 168"/>
+    <path d="M830 300 L530 300"/>
+    <path d="M830 300 L535 432"/>
+    <path d="M830 300 L1122 168"/>
+    <path d="M830 300 L1130 300"/>
+    <path d="M830 300 L1122 432"/>
   </g>
   <!-- Dashed secondary links forming agent-mesh -->
   <g stroke="rgba(165,180,252,0.22)" stroke-width="1" fill="none" stroke-dasharray="3 5">
-    <path d="M545 168 L545 432"/>
-    <path d="M1112 168 L1112 432"/>
-    <path d="M545 168 Q830 100 1112 168"/>
-    <path d="M545 432 Q830 520 1112 432"/>
+    <path d="M535 168 L535 432"/>
+    <path d="M1122 168 L1122 432"/>
+    <path d="M535 168 Q830 100 1122 168"/>
+    <path d="M535 432 Q830 520 1122 432"/>
   </g>
 
   <!-- ORCHESTRATOR hub -->
@@ -100,101 +100,100 @@
   <!-- Helper macro: role nodes. 6 around. -->
 
   <!-- Node: ANALYZER (top-left) -->
-  <g transform="translate(545 168)">
-    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.7"/>
-    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
-    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
+  <g transform="translate(535 168)">
+    <circle r="62" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.7"/>
+    <rect x="-70" y="-34" width="140" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-52 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
       <circle cx="12" cy="12" r="9"/>
       <line x1="19" y1="19" x2="26" y2="26"/>
     </g>
-    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Analyzer</text>
-    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">SENTIMENT</text>
-    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">TOPICS · NER</text>
-    <!-- status dot -->
-    <circle cx="46" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
+    <text x="-8" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Analyzer</text>
+    <text x="-8" y="10" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.85)">SENTIMENT</text>
+    <text x="-8" y="22" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.6)">TOPICS · NER</text>
+    <circle cx="60" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
       <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/>
     </circle>
   </g>
 
   <!-- Node: RESEARCHER (middle-left) -->
-  <g transform="translate(540 300)">
-    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.65"/>
-    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
-    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
+  <g transform="translate(530 300)">
+    <circle r="62" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.65"/>
+    <rect x="-70" y="-34" width="140" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-52 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
       <rect x="2" y="3" width="20" height="18" rx="1.5"/>
       <line x1="6" y1="9" x2="18" y2="9"/>
       <line x1="6" y1="13" x2="18" y2="13"/>
       <line x1="6" y1="17" x2="14" y2="17"/>
     </g>
-    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Researcher</text>
-    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">RAG · VECTOR</text>
-    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">Qdrant · BM25</text>
-    <circle cx="46" cy="-26" r="3.4" fill="rgba(99,102,241,0.95)">
+    <text x="-8" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Researcher</text>
+    <text x="-8" y="10" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.85)">RAG · VECTOR</text>
+    <text x="-8" y="22" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.6)">Qdrant · BM25</text>
+    <circle cx="60" cy="-26" r="3.4" fill="rgba(99,102,241,0.95)">
       <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
     </circle>
   </g>
 
   <!-- Node: EXTRACTOR (bottom-left) -->
-  <g transform="translate(545 432)">
-    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.6"/>
-    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
-    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
+  <g transform="translate(535 432)">
+    <circle r="62" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.6"/>
+    <rect x="-70" y="-34" width="140" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-52 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round">
       <path d="M4 3 L16 3 L21 8 L21 21 L4 21 Z"/>
       <path d="M16 3 L16 8 L21 8"/>
       <line x1="8" y1="13" x2="17" y2="13"/>
       <line x1="8" y1="17" x2="14" y2="17"/>
     </g>
-    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Extractor</text>
-    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">OCR · PARSE</text>
-    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">1С · ЭДО · API</text>
-    <circle cx="46" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
+    <text x="-8" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Extractor</text>
+    <text x="-8" y="10" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.85)">OCR · PARSE</text>
+    <text x="-8" y="22" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.6)">1С · ЭДО · API</text>
+    <circle cx="60" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
       <animate attributeName="opacity" values="1;0.3;1" dur="1.7s" repeatCount="indefinite"/>
     </circle>
   </g>
 
   <!-- Node: CRITIC (top-right, accent) -->
-  <g transform="translate(1112 168)">
-    <circle r="58" fill="rgba(129,140,248,0.45)" filter="url(#haSoft)" opacity="0.9"/>
-    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="rgba(67,56,202,0.55)" stroke="rgba(199,210,254,0.95)" stroke-width="1.5"/>
-    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,1)" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(1122 168)">
+    <circle r="64" fill="rgba(129,140,248,0.45)" filter="url(#haSoft)" opacity="0.9"/>
+    <rect x="-70" y="-34" width="140" height="68" rx="10" fill="rgba(67,56,202,0.55)" stroke="rgba(199,210,254,0.95)" stroke-width="1.5"/>
+    <g transform="translate(-52 -18)" stroke="rgba(199,210,254,1)" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <path d="M12 2 L22 7 L22 13 Q22 20 12 24 Q2 20 2 13 L2 7 Z"/>
       <path d="M7 13 L11 17 L17 10"/>
     </g>
-    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,1)">Critic</text>
-    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(199,210,254,1)">VERIFY</text>
-    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(199,210,254,0.7)">LLM-AS-JUDGE</text>
-    <circle cx="46" cy="-26" r="3.6" fill="rgba(250,204,21,0.95)">
+    <text x="-8" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(255,255,255,1)">Critic</text>
+    <text x="-8" y="10" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(199,210,254,1)">VERIFY · QA</text>
+    <text x="-8" y="22" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(199,210,254,0.7)">LLM-AS-JUDGE</text>
+    <circle cx="60" cy="-26" r="3.6" fill="rgba(250,204,21,0.95)">
       <animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/>
     </circle>
   </g>
 
   <!-- Node: EXECUTOR (middle-right) -->
-  <g transform="translate(1120 300)">
-    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.65"/>
-    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
-    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(1130 300)">
+    <circle r="62" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.65"/>
+    <rect x="-70" y="-34" width="140" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-52 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="4,3 22,12 4,21" fill="rgba(199,210,254,0.2)"/>
     </g>
-    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Executor</text>
-    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">EXEC · WRITE</text>
-    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">CRM · ERP · API</text>
-    <circle cx="46" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
+    <text x="-8" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">Executor</text>
+    <text x="-8" y="10" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.85)">EXEC · WRITE</text>
+    <text x="-8" y="22" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.6)">CRM · ERP · API</text>
+    <circle cx="60" cy="-26" r="3.4" fill="rgba(74,222,128,0.95)">
       <animate attributeName="opacity" values="1;0.3;1" dur="1.9s" repeatCount="indefinite"/>
     </circle>
   </g>
 
   <!-- Node: NOTIFY / HITL (bottom-right) -->
-  <g transform="translate(1112 432)">
-    <circle r="56" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.55"/>
-    <rect x="-54" y="-34" width="108" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
-    <g transform="translate(-34 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(1122 432)">
+    <circle r="62" fill="url(#haGlowNode)" filter="url(#haSoft)" opacity="0.55"/>
+    <rect x="-70" y="-34" width="140" height="68" rx="10" fill="url(#haNode)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+    <g transform="translate(-52 -18)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="9" r="5"/>
       <path d="M2 22 Q12 14 22 22"/>
     </g>
-    <text x="10" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">HITL</text>
-    <text x="10" y="10" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.85)">HUMAN · LOOP</text>
-    <text x="10" y="22" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(165,180,252,0.6)">APPROVE · EDIT</text>
-    <circle cx="46" cy="-26" r="3.4" fill="rgba(129,140,248,0.95)">
+    <text x="-8" y="-6" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="rgba(229,231,235,1)">HITL</text>
+    <text x="-8" y="10" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.85)">HUMAN · LOOP</text>
+    <text x="-8" y="22" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="0.5" fill="rgba(165,180,252,0.6)">APPROVE · EDIT</text>
+    <circle cx="60" cy="-26" r="3.4" fill="rgba(129,140,248,0.95)">
       <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
     </circle>
   </g>
@@ -202,22 +201,22 @@
   <!-- Animated packets along links -->
   <g fill="rgba(199,210,254,1)">
     <circle r="3">
-      <animateMotion dur="3s" repeatCount="indefinite" path="M545 168 L830 300"/>
+      <animateMotion dur="3s" repeatCount="indefinite" path="M535 168 L830 300"/>
     </circle>
     <circle r="3" fill="rgba(165,180,252,1)">
-      <animateMotion dur="2.6s" begin="0.4s" repeatCount="indefinite" path="M540 300 L830 300"/>
+      <animateMotion dur="2.6s" begin="0.4s" repeatCount="indefinite" path="M530 300 L830 300"/>
     </circle>
     <circle r="3" fill="rgba(99,102,241,1)">
-      <animateMotion dur="3.2s" begin="1s" repeatCount="indefinite" path="M545 432 L830 300"/>
+      <animateMotion dur="3.2s" begin="1s" repeatCount="indefinite" path="M535 432 L830 300"/>
     </circle>
     <circle r="3" fill="rgba(199,210,254,1)">
-      <animateMotion dur="2.8s" begin="0.8s" repeatCount="indefinite" path="M830 300 L1112 168"/>
+      <animateMotion dur="2.8s" begin="0.8s" repeatCount="indefinite" path="M830 300 L1122 168"/>
     </circle>
     <circle r="3" fill="rgba(165,180,252,1)">
-      <animateMotion dur="3.4s" begin="0.2s" repeatCount="indefinite" path="M830 300 L1120 300"/>
+      <animateMotion dur="3.4s" begin="0.2s" repeatCount="indefinite" path="M830 300 L1130 300"/>
     </circle>
     <circle r="3" fill="rgba(250,204,21,0.95)">
-      <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M830 300 L1112 432"/>
+      <animateMotion dur="3s" begin="1.5s" repeatCount="indefinite" path="M830 300 L1122 432"/>
     </circle>
   </g>
 
