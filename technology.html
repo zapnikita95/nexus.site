@@ -679,15 +679,40 @@ body{padding-top:60px!important;position:relative}
         <label style="display:grid;gap:6px">
           <span style="font-size:13px;font-weight:700;color:var(--text)">Модель (размер)</span>
           <select id="kv-model" style="padding:12px 16px;font-size:15px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)">
-            <option value="4">Qwen 3.0 / 3.5 — 4B</option>
-            <option value="7">Qwen 2.5 / 3.x / Llama 3.2 — 7B</option>
-            <option value="9">Qwen 3.0 / 3.5 — 9B</option>
-            <option value="14">Qwen 2.5 / 3.5 / Llama — 14B</option>
-            <option value="14_1m">Qwen 2.5 — 14B 1M (контекст до 1M токенов)</option>
-            <option value="32">Qwen 2.5 / 3.5 — 32B</option>
-            <option value="35">Qwen 3.0 / 3.5 — 35B</option>
-            <option value="72">Qwen 2.5 / 3.5 / Llama — 72B</option>
-            <option value="235_22">Qwen 3.5 MoE — 235B-A22B (22B активных)</option>
+            <optgroup label="Qwen 3.6 (релиз — вчера)">
+              <option value="q36_235">Qwen 3.6 MoE — 235B-A22B (22B активных)</option>
+              <option value="q36_72">Qwen 3.6 — 72B</option>
+              <option value="q36_32" selected>Qwen 3.6 — 32B</option>
+              <option value="q36_14">Qwen 3.6 — 14B</option>
+              <option value="q36_8">Qwen 3.6 — 8B</option>
+              <option value="q36_4">Qwen 3.6 — 4B</option>
+            </optgroup>
+            <optgroup label="Qwen 3.5">
+              <option value="q35_235">Qwen 3.5 MoE — 235B-A22B (22B активных)</option>
+              <option value="q35_72">Qwen 3.5 — 72B</option>
+              <option value="q35_35">Qwen 3.5 — 35B</option>
+              <option value="q35_14">Qwen 3.5 — 14B</option>
+              <option value="q35_9">Qwen 3.5 — 9B</option>
+              <option value="q35_4">Qwen 3.5 — 4B</option>
+            </optgroup>
+            <optgroup label="Gemma 4 (Google)">
+              <option value="g4_70">Gemma 4 — 70B</option>
+              <option value="g4_27">Gemma 4 — 27B</option>
+              <option value="g4_12">Gemma 4 — 12B</option>
+              <option value="g4_4">Gemma 4 — 4B</option>
+            </optgroup>
+            <optgroup label="Qwen 3.0">
+              <option value="q30_35">Qwen 3.0 — 35B</option>
+              <option value="q30_9">Qwen 3.0 — 9B</option>
+              <option value="q30_4">Qwen 3.0 — 4B</option>
+            </optgroup>
+            <optgroup label="Qwen 2.5 / Llama 3.2">
+              <option value="q25_72">Qwen 2.5 / Llama 3.2 — 72B</option>
+              <option value="q25_32">Qwen 2.5 — 32B</option>
+              <option value="q25_14_1m">Qwen 2.5 — 14B (контекст до 1M токенов)</option>
+              <option value="q25_14">Qwen 2.5 / Llama — 14B</option>
+              <option value="q25_7">Qwen 2.5 / Llama 3.2 — 7B</option>
+            </optgroup>
           </select>
         </label>
         <label style="display:grid;gap:6px">
@@ -813,17 +838,37 @@ body{padding-top:60px!important;position:relative}
     });
   }
 })();
-// Калькулятор KV-cache: веса модели (ГБ), KV на 1K токенов (МБ)
+// Калькулятор KV-cache: веса модели (ГБ, fp16), KV на 1K токенов (МБ)
 var kvModelMeta = {
-  4: { weights: 8, kvPer1k: 0.35 },
-  7: { weights: 14, kvPer1k: 0.6 },
-  9: { weights: 18, kvPer1k: 0.5 },
-  14: { weights: 28, kvPer1k: 1.2 },
-  '14_1m': { weights: 28, kvPer1k: 1.2, maxContext: 1000000 },
-  32: { weights: 64, kvPer1k: 2.4 },
-  35: { weights: 70, kvPer1k: 2.2 },
-  72: { weights: 144, kvPer1k: 5 },
-  '235_22': { weights: 48, kvPer1k: 2.2 }
+  // Qwen 3.6 (релиз — вчера)
+  'q36_235': { weights: 48, kvPer1k: 2.2 },
+  'q36_72':  { weights: 144, kvPer1k: 5 },
+  'q36_32':  { weights: 64, kvPer1k: 2.4 },
+  'q36_14':  { weights: 28, kvPer1k: 1.2 },
+  'q36_8':   { weights: 16, kvPer1k: 0.55 },
+  'q36_4':   { weights: 8, kvPer1k: 0.35 },
+  // Qwen 3.5
+  'q35_235': { weights: 48, kvPer1k: 2.2 },
+  'q35_72':  { weights: 144, kvPer1k: 5 },
+  'q35_35':  { weights: 70, kvPer1k: 2.2 },
+  'q35_14':  { weights: 28, kvPer1k: 1.2 },
+  'q35_9':   { weights: 18, kvPer1k: 0.5 },
+  'q35_4':   { weights: 8, kvPer1k: 0.35 },
+  // Gemma 4
+  'g4_70':   { weights: 140, kvPer1k: 4.8 },
+  'g4_27':   { weights: 54, kvPer1k: 1.9 },
+  'g4_12':   { weights: 24, kvPer1k: 0.9 },
+  'g4_4':    { weights: 8, kvPer1k: 0.35 },
+  // Qwen 3.0
+  'q30_35':  { weights: 70, kvPer1k: 2.2 },
+  'q30_9':   { weights: 18, kvPer1k: 0.5 },
+  'q30_4':   { weights: 8, kvPer1k: 0.35 },
+  // Qwen 2.5 / Llama 3.2
+  'q25_72':    { weights: 144, kvPer1k: 5 },
+  'q25_32':    { weights: 64, kvPer1k: 2.4 },
+  'q25_14_1m': { weights: 28, kvPer1k: 1.2, maxContext: 1000000 },
+  'q25_14':    { weights: 28, kvPer1k: 1.2 },
+  'q25_7':     { weights: 14, kvPer1k: 0.6 }
 };
 (function(){
   var vramEl = document.getElementById('kv-vram');
@@ -836,9 +881,8 @@ var kvModelMeta = {
   if (!btn || !resultEl) return;
   btn.addEventListener('click', function(){
     var vram = parseInt(vramEl.value, 10) || 128;
-    var modelKey = modelEl.value || '7';
-    var model = modelKey === '14_1m' || modelKey === '235_22' ? modelKey : parseInt(modelKey, 10);
-    var meta = kvModelMeta[model] || kvModelMeta[7];
+    var modelKey = modelEl.value || 'q36_32';
+    var meta = kvModelMeta[modelKey] || kvModelMeta['q25_7'];
     var rag = parseInt(ragEl.value, 10) || 0;
     var docsWeek = parseInt(docsWeekEl.value, 10) || 0;
     var reqsWeek = parseInt(reqsWeekEl.value, 10) || 0;
@@ -849,7 +893,7 @@ var kvModelMeta = {
     var tokenStr = maxTokens >= 1000000 ? (maxTokens / 1000000).toFixed(1) + 'M' : (maxTokens >= 1000 ? (maxTokens / 1000).toFixed(1) + 'K' : String(maxTokens));
     var ragNote = rag > 0 ? ' Учитывайте: при RAG с ' + rag + ' тыс. документов в контекст подмешивается выборка чанков; рекомендуем окно не меньше 8–16K токенов для стабильного поиска.' : '';
     var warn = availableKV <= 0 ? ' Недостаточно VRAM для выбранной модели на этом GPU. Рассмотрите меньшую модель или увеличение VRAM.' : '';
-    var oneMNote = (model === '14_1m' && maxTokens >= 1000000) ? ' Модель поддерживает контекст до 1M токенов.' : '';
+    var oneMNote = (modelKey === 'q25_14_1m' && maxTokens >= 1000000) ? ' Модель поддерживает контекст до 1M токенов.' : '';
     var streamsHtml = '';
     if (docsWeek > 0 || reqsWeek > 0) {
       var totalWeek = docsWeek + reqsWeek;
