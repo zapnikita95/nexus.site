@@ -88,12 +88,16 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(11,15,26,0.95);b
 .principle-card p{font-size:.88rem;color:var(--text2);line-height:1.7}
 
 /* CASES */
-.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.case-card{background:var(--bg);border:1px solid rgba(129,140,248,.15);border-radius:8px;padding:24px;transition:border-color .3s;display:flex;flex-direction:column}
-.case-card:hover{border-color:var(--accent)}
-.case-badge{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.75rem;padding:.25rem .6rem;background:rgba(129,140,248,.08);border-radius:3px;display:inline-block}
-.case-card h4{font-size:1rem;font-weight:700;margin-bottom:.6rem;letter-spacing:-.01em;min-height:3rem}
-.case-card p{font-size:.85rem;color:var(--text2);line-height:1.75}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.case-card{position:relative;background:rgba(22,28,53,0.55);border:1px solid rgba(129,140,248,0.15);border-radius:14px;overflow:hidden;transition:transform .4s cubic-bezier(.22,.9,.28,1),border-color .4s,box-shadow .4s;display:flex;flex-direction:column}
+.case-card:hover{transform:translateY(-6px);border-color:rgba(129,140,248,0.38);box-shadow:0 24px 64px -12px rgba(129,140,248,0.18)}
+.case-visual{position:relative;height:210px;overflow:hidden;background:radial-gradient(120% 100% at 70% 20%, rgba(79,70,229,0.28) 0%, rgba(16,21,42,0.95) 55%, #0b0f1a 100%)}
+.case-visual svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.case-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, transparent 55%, rgba(11,15,26,0.95) 100%);pointer-events:none}
+.case-body{padding:24px 26px 28px;position:relative;flex:1;display:flex;flex-direction:column;gap:10px}
+.case-badge{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;padding:.25rem .6rem;background:rgba(129,140,248,.08);border:1px solid rgba(129,140,248,.2);border-radius:3px;align-self:flex-start;margin-top:-44px;z-index:2;backdrop-filter:blur(6px)}
+.case-card h4{font-size:1rem;font-weight:700;margin:2px 0 0;letter-spacing:-.01em}
+.case-card p{font-size:.85rem;color:var(--text2);line-height:1.7;margin:0}
 
 /* COMPARISON TABLE */
 .comp-table{width:100%;border-collapse:collapse;font-size:.88rem}
@@ -105,23 +109,7 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(11,15,26,0.95);b
 .comp-table tr:hover td{background:rgba(129,140,248,.03)}
 .ck{color:var(--ok)}
 
-/* FOOTER */
-footer{padding:3rem 2rem 2rem;border-top:var(--line);background:var(--bg)}
-.footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
-.footer-brand{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.4rem}
-.footer-brand-sub{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3);line-height:1.5}
-.footer-contact{margin-top:1rem}
-.footer-contact a{font-family:'JetBrains Mono',monospace;display:block;font-size:.78rem;color:var(--text2);text-decoration:none;margin-bottom:.3rem;transition:color .3s}
-.footer-contact a:hover{color:var(--accent)}
-.footer-col h4{font-family:'JetBrains Mono',monospace;font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--text3);text-transform:uppercase;margin-bottom:1rem}
-.footer-col ul{list-style:none}
-.footer-col ul li a{font-family:'JetBrains Mono',monospace;display:block;font-size:.78rem;color:var(--text2);text-decoration:none;margin-bottom:.5rem;transition:color .3s}
-.footer-col ul li a:hover{color:var(--accent)}
-.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-.footer-copyright{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3)}
-.footer-bottom-links{display:flex;gap:1.5rem}
-.footer-bottom-links a{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--text3);text-decoration:none;transition:color .3s}
-.footer-bottom-links a:hover{color:var(--accent)}
+/* FOOTER (legacy block removed — see canonical block below) */
 @media(max-width:960px){
   .phases-grid,.principles-grid,.cases-grid{grid-template-columns:1fr 1fr}
   .contract-grid{grid-template-columns:1fr}
@@ -204,26 +192,27 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .nav-burger{display:none;align-items:center;justify-content:center;flex-direction:column;gap:5px;width:44px;height:44px;padding:10px;background:transparent;border:1px solid var(--border);border-radius:4px;cursor:pointer;color:var(--text)}
 .nav-burger span{display:block;width:20px;height:2px;background:currentColor}
 @media(max-width:768px){nav{padding:0 1rem}.nav-links{display:none}.nav-open .nav-links{display:flex!important;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(11,15,26,0.98);border-bottom:1px solid var(--border);padding:1rem;gap:0.75rem;align-items:flex-start}.nav-burger{display:flex!important}.nav-open .nav-burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}.nav-open .nav-burger span:nth-child(2){opacity:0}.nav-open .nav-burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}}
-/* === CANONICAL FOOTER (override) === */
-footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
-.footer-content{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding-bottom:2.5rem;border-bottom:1px solid var(--border)}
-.footer-logo-col{display:flex;flex-direction:column;gap:0.75rem}
-.footer-brand{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.12em;color:var(--text);text-transform:uppercase}
-.footer-brand-sub{font-size:11px;color:var(--text3);line-height:1.5;max-width:180px}
-.footer-col h4{font-size:11px;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.75rem;font-weight:600}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
-.footer-col ul li a{font-size:12px;color:var(--text2);transition:color 0.2s;text-decoration:none}
-.footer-col ul li a:hover{color:var(--text)}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.5rem 0 2rem;font-size:11px}
-.footer-copyright{color:var(--text3);letter-spacing:0.04em}
-.footer-bottom-links{display:flex;gap:1.5rem}
-.footer-bottom-links a{color:var(--text3);transition:color 0.2s;text-decoration:none}
-.footer-bottom-links a:hover{color:var(--text2)}
-.footer-contact{display:flex;gap:1.5rem}
-.footer-contact a{color:var(--text3);transition:color 0.2s;text-decoration:none}
-.footer-contact a:hover{color:var(--accent)}
-@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr;gap:1.5rem}.footer-bottom{flex-direction:column;align-items:flex-start;gap:0.75rem}footer{padding:2rem 1rem 0}}
-@media(max-width:480px){.footer-content{grid-template-columns:1fr}}
+/* === CANONICAL FOOTER (solutions.html reference) === */
+footer{width:100%!important;background:#0b0f1a!important;border-top:1px solid rgba(129,140,248,0.12)!important;color:#94a3b8!important;box-sizing:border-box!important;padding:3rem 3rem 0!important;margin-top:4rem!important;position:relative!important}
+footer::before{display:none!important}
+.footer-content{display:grid!important;grid-template-columns:1fr 1fr 1fr 1fr!important;gap:2rem!important;max-width:none!important;width:auto!important;margin:0!important;padding-bottom:2.5rem!important;border-bottom:1px solid rgba(129,140,248,0.12)!important}
+.footer-logo-col{display:flex!important;flex-direction:column!important;gap:0.75rem!important}
+.footer-brand{font-family:'JetBrains Mono',monospace!important;font-size:13px!important;font-weight:700!important;letter-spacing:0.12em!important;color:#e8ecf8!important;text-transform:uppercase!important;margin:0!important}
+.footer-brand-sub{font-family:'JetBrains Mono',monospace!important;font-size:11px!important;color:#525a72!important;line-height:1.5!important;max-width:180px!important;margin:0!important}
+.footer-col h4{font-family:'JetBrains Mono',monospace!important;font-size:11px!important;color:#525a72!important;letter-spacing:0.12em!important;text-transform:uppercase!important;margin:0 0 0.75rem!important;font-weight:600!important}
+.footer-col ul{list-style:none!important;display:flex!important;flex-direction:column!important;gap:0.5rem!important;padding:0!important;margin:0!important}
+.footer-col ul li{display:block!important;margin:0!important}
+.footer-col ul li a{font-family:'JetBrains Mono',monospace!important;font-size:12px!important;color:#94a3b8!important;transition:color .2s!important;text-decoration:none!important;display:inline-block!important;margin:0!important;letter-spacing:0.02em!important}
+.footer-col ul li a:hover{color:#e8ecf8!important}
+.footer-bottom{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:wrap!important;gap:1rem!important;max-width:none!important;width:auto!important;margin:0!important;padding:1.5rem 0 2rem!important;border-top:none!important;font-size:11px!important}
+.footer-copyright{font-family:'JetBrains Mono',monospace!important;font-size:11px!important;color:#525a72!important;letter-spacing:0.04em!important}
+.footer-bottom-links{display:flex!important;gap:1.5rem!important;align-items:center!important}
+.footer-bottom-links a,.footer-contact a{font-family:'JetBrains Mono',monospace!important;font-size:11px!important;color:#525a72!important;transition:color .2s!important;text-decoration:none!important;display:inline-block!important;margin:0!important}
+.footer-bottom-links a:hover{color:#94a3b8!important}
+.footer-contact{display:flex!important;gap:1.5rem!important;align-items:center!important;margin:0!important}
+.footer-contact a:hover{color:#818cf8!important}
+@media(max-width:768px){.footer-content{grid-template-columns:1fr 1fr!important;gap:1.5rem!important}.footer-bottom{flex-direction:column!important;align-items:flex-start!important;gap:0.75rem!important}footer{padding:2rem 1rem 0!important}}
+@media(max-width:480px){.footer-content{grid-template-columns:1fr!important}}
 /* === footer-year JS fallback === */
 
 /* FOOTER GLOW ENHANCEMENT */
@@ -524,20 +513,273 @@ footer::before {
     <div class="s-title rv">Примеры применения</div>
     <p class="s-sub rv">Типовые сценарии внедрения без привязки к конкретным компаниям.</p>
     <div class="cases-grid">
+      <!-- Card 1: Комплаенс / Документы -->
       <div class="case-card rv">
-        <span class="case-badge">Комплаенс</span>
-        <h4>Проверка документов в производственной компании</h4>
-        <p>Развернули пилот проверки на соответствие 152-ФЗ и маркировке. За два месяца подключили выгрузки из 1С и ЭДО, обучили команду. Итог: сокращение времени первичной проверки, снижение доли ручных проверок.</p>
+        <div class="case-visual">
+          <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="pcCoreA" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4338ca"/>
+                <stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="pcDocA" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#312e81"/>
+                <stop offset="100%" stop-color="#0f0f2a"/>
+              </linearGradient>
+              <radialGradient id="pcCoreGlowA" cx="50%" cy="40%" r="55%">
+                <stop offset="0%" stop-color="rgba(129,140,248,0.3)"/>
+                <stop offset="100%" stop-color="rgba(129,140,248,0)"/>
+              </radialGradient>
+              <pattern id="pcGridA" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0 L0 0 L0 16" fill="none" stroke="rgba(129,140,248,0.08)" stroke-width="1"/>
+              </pattern>
+              <filter id="pcBlurA"><feGaussianBlur stdDeviation="6"/></filter>
+            </defs>
+            <rect width="400" height="210" fill="url(#pcGridA)"/>
+            <ellipse cx="200" cy="110" rx="170" ry="120" fill="url(#pcCoreGlowA)" filter="url(#pcBlurA)"/>
+
+            <!-- Back docs -->
+            <g transform="translate(118 34) rotate(-6 56 76)">
+              <rect width="112" height="152" rx="4" fill="url(#pcDocA)" stroke="rgba(129,140,248,0.35)" stroke-width="1"/>
+              <line x1="14" y1="28" x2="96" y2="28" stroke="rgba(129,140,248,0.3)"/>
+              <line x1="14" y1="40" x2="96" y2="40" stroke="rgba(129,140,248,0.3)"/>
+              <line x1="14" y1="52" x2="78" y2="52" stroke="rgba(129,140,248,0.3)"/>
+            </g>
+            <!-- Front doc with stamp -->
+            <g transform="translate(160 28)">
+              <rect width="128" height="160" rx="4" fill="url(#pcCoreA)" stroke="rgba(199,210,254,0.85)" stroke-width="1.3"/>
+              <text x="64" y="26" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="2.2" fill="rgba(199,210,254,0.75)">ДОКУМЕНТ · 1С</text>
+              <line x1="14" y1="40" x2="114" y2="40" stroke="rgba(165,180,252,0.55)"/>
+              <line x1="14" y1="52" x2="114" y2="52" stroke="rgba(165,180,252,0.4)"/>
+              <line x1="14" y1="64" x2="100" y2="64" stroke="rgba(165,180,252,0.4)"/>
+              <line x1="14" y1="76" x2="114" y2="76" stroke="rgba(165,180,252,0.4)"/>
+              <line x1="14" y1="88" x2="80" y2="88" stroke="rgba(165,180,252,0.4)"/>
+              <line x1="14" y1="100" x2="114" y2="100" stroke="rgba(165,180,252,0.4)"/>
+              <line x1="14" y1="112" x2="92" y2="112" stroke="rgba(165,180,252,0.4)"/>
+              <!-- Stamp "152-ФЗ OK" -->
+              <g transform="translate(92 126) rotate(-14)">
+                <rect x="-30" y="-12" width="60" height="24" rx="3" fill="none" stroke="rgba(74,222,128,0.9)" stroke-width="1.6"/>
+                <text text-anchor="middle" y="4" font-family="'JetBrains Mono',monospace" font-size="9" font-weight="700" letter-spacing="1.2" fill="rgba(74,222,128,1)">152-ФЗ OK</text>
+              </g>
+              <!-- Scan line -->
+              <rect x="4" y="140" width="120" height="1.5" fill="rgba(74,222,128,0.85)">
+                <animate attributeName="y" values="36;140;36" dur="3s" repeatCount="indefinite"/>
+              </rect>
+            </g>
+            <!-- Check seal right -->
+            <g transform="translate(336 172)">
+              <circle r="28" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.9)" stroke-width="1.5"/>
+              <circle r="21" fill="none" stroke="rgba(74,222,128,0.35)" stroke-width="1" stroke-dasharray="2 2"/>
+              <path d="M-8 0 L-2 6 L9 -6" fill="none" stroke="rgba(74,222,128,1)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="30" y="198" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="2" fill="rgba(165,180,252,0.55)">COMPLIANCE · AUTO · 1C / ЭДО</text>
+          </svg>
+        </div>
+        <div class="case-body">
+          <span class="case-badge">Комплаенс</span>
+          <h4>Проверка документов в производственной компании</h4>
+          <p>Развернули пилот проверки на соответствие 152-ФЗ и маркировке. За два месяца подключили выгрузки из 1С и ЭДО, обучили команду. Итог: сокращение времени первичной проверки, снижение доли ручных проверок.</p>
+        </div>
       </div>
+
+      <!-- Card 2: Обращения / Ритейл -->
       <div class="case-card rv">
-        <span class="case-badge">Обращения</span>
-        <h4>Обработка обращений в ритейле</h4>
-        <p>Заказчик — сеть с тысячами обращений в месяц (жалобы, вопросы по заказам, возвраты). Внедрили сценарий анализа тональности и генерации ответов с опорой на базу знаний. Сократилось время первичного ответа.</p>
+        <div class="case-visual">
+          <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="pcCoreB" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <radialGradient id="pcCoreGlowB" cx="50%" cy="50%" r="55%">
+                <stop offset="0%" stop-color="rgba(129,140,248,0.3)"/>
+                <stop offset="100%" stop-color="rgba(129,140,248,0)"/>
+              </radialGradient>
+              <pattern id="pcGridB" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0 L0 0 L0 16" fill="none" stroke="rgba(129,140,248,0.08)" stroke-width="1"/>
+              </pattern>
+              <filter id="pcBlurB"><feGaussianBlur stdDeviation="6"/></filter>
+            </defs>
+            <rect width="400" height="210" fill="url(#pcGridB)"/>
+            <ellipse cx="200" cy="105" rx="170" ry="120" fill="url(#pcCoreGlowB)" filter="url(#pcBlurB)"/>
+
+            <!-- Central AI core -->
+            <g transform="translate(200 105)">
+              <circle r="38" fill="url(#pcCoreB)" stroke="rgba(199,210,254,0.9)" stroke-width="1.4"/>
+              <circle r="48" fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="1" stroke-dasharray="2 4"/>
+              <circle r="58" fill="none" stroke="rgba(129,140,248,0.2)" stroke-width="1"/>
+              <text text-anchor="middle" y="-4" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(199,210,254,0.9)">AI</text>
+              <text text-anchor="middle" y="10" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.5" fill="rgba(165,180,252,0.75)">ROUTER</text>
+              <!-- Pulse -->
+              <circle r="38" fill="none" stroke="rgba(165,180,252,0.6)" stroke-width="1.2">
+                <animate attributeName="r" values="38;70;38" dur="2.8s" repeatCount="indefinite"/>
+                <animate attributeName="opacity" values="0.7;0;0.7" dur="2.8s" repeatCount="indefinite"/>
+              </circle>
+            </g>
+
+            <!-- Incoming chat bubbles (left) -->
+            <g fill="rgba(22,28,53,0.9)" stroke="rgba(129,140,248,0.55)" stroke-width="1">
+              <g transform="translate(48 52)">
+                <rect width="64" height="22" rx="11"/>
+                <circle cx="14" cy="11" r="2.2" fill="rgba(250,204,21,0.9)" stroke="none"/>
+                <line x1="22" y1="11" x2="56" y2="11" stroke="rgba(165,180,252,0.55)" stroke-width="1.2"/>
+              </g>
+              <g transform="translate(32 96)">
+                <rect width="74" height="22" rx="11"/>
+                <circle cx="14" cy="11" r="2.2" fill="rgba(239,68,68,0.85)" stroke="none"/>
+                <line x1="22" y1="11" x2="66" y2="11" stroke="rgba(165,180,252,0.55)" stroke-width="1.2"/>
+              </g>
+              <g transform="translate(48 140)">
+                <rect width="58" height="22" rx="11"/>
+                <circle cx="14" cy="11" r="2.2" fill="rgba(74,222,128,0.9)" stroke="none"/>
+                <line x1="22" y1="11" x2="50" y2="11" stroke="rgba(165,180,252,0.55)" stroke-width="1.2"/>
+              </g>
+            </g>
+
+            <!-- Outgoing bubbles (right) -->
+            <g fill="rgba(67,56,202,0.35)" stroke="rgba(165,180,252,0.7)" stroke-width="1">
+              <g transform="translate(292 60)">
+                <rect width="70" height="22" rx="11"/>
+                <line x1="10" y1="11" x2="60" y2="11" stroke="rgba(199,210,254,0.7)" stroke-width="1.2"/>
+              </g>
+              <g transform="translate(304 104)">
+                <rect width="66" height="22" rx="11"/>
+                <line x1="10" y1="11" x2="56" y2="11" stroke="rgba(199,210,254,0.7)" stroke-width="1.2"/>
+              </g>
+              <g transform="translate(292 148)">
+                <rect width="72" height="22" rx="11"/>
+                <line x1="10" y1="11" x2="62" y2="11" stroke="rgba(199,210,254,0.7)" stroke-width="1.2"/>
+              </g>
+            </g>
+
+            <!-- Connectors -->
+            <g fill="none" stroke="rgba(129,140,248,0.45)" stroke-width="1.2" stroke-dasharray="3 4">
+              <path d="M112 63 Q150 90 162 98"/>
+              <path d="M106 107 Q140 107 162 107"/>
+              <path d="M106 151 Q150 128 162 118"/>
+              <path d="M238 98 Q270 80 292 71"/>
+              <path d="M238 107 Q268 110 304 115"/>
+              <path d="M238 118 Q270 138 292 159"/>
+            </g>
+
+            <!-- Store icon bottom -->
+            <g transform="translate(200 188)" opacity="0.85">
+              <rect x="-18" y="-10" width="36" height="14" fill="rgba(22,28,53,0.9)" stroke="rgba(129,140,248,0.6)" stroke-width="1" rx="2"/>
+              <path d="M-18 -10 L-14 -16 L14 -16 L18 -10" fill="rgba(67,56,202,0.5)" stroke="rgba(129,140,248,0.6)" stroke-width="1"/>
+              <line x1="-10" y1="-5" x2="-10" y2="4" stroke="rgba(165,180,252,0.6)"/>
+              <line x1="0" y1="-5" x2="0" y2="4" stroke="rgba(165,180,252,0.6)"/>
+              <line x1="10" y1="-5" x2="10" y2="4" stroke="rgba(165,180,252,0.6)"/>
+            </g>
+            <text x="200" y="206" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="2" fill="rgba(165,180,252,0.6)">RETAIL · NLP · SENTIMENT</text>
+          </svg>
+        </div>
+        <div class="case-body">
+          <span class="case-badge">Обращения</span>
+          <h4>Обработка обращений в ритейле</h4>
+          <p>Заказчик — сеть с тысячами обращений в месяц (жалобы, вопросы по заказам, возвраты). Внедрили сценарий анализа тональности и генерации ответов с опорой на базу знаний. Сократилось время первичного ответа.</p>
+        </div>
       </div>
+
+      <!-- Card 3: Операционная / Согласования -->
       <div class="case-card rv">
-        <span class="case-badge">Операционная</span>
-        <h4>Согласования в финансовом секторе</h4>
-        <p>Оркестратор классифицирует тип запроса, назначаются согласующие, интеграция с внутренней системой учёта. Срок согласования сократился, прозрачность этапов выросла.</p>
+        <div class="case-visual">
+          <svg viewBox="0 0 400 210" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="pcNodeC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#4338ca"/>
+                <stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <radialGradient id="pcCoreGlowC" cx="50%" cy="40%" r="55%">
+                <stop offset="0%" stop-color="rgba(129,140,248,0.3)"/>
+                <stop offset="100%" stop-color="rgba(129,140,248,0)"/>
+              </radialGradient>
+              <pattern id="pcGridC" width="16" height="16" patternUnits="userSpaceOnUse">
+                <path d="M16 0 L0 0 L0 16" fill="none" stroke="rgba(129,140,248,0.08)" stroke-width="1"/>
+              </pattern>
+              <filter id="pcBlurC"><feGaussianBlur stdDeviation="6"/></filter>
+            </defs>
+            <rect width="400" height="210" fill="url(#pcGridC)"/>
+            <ellipse cx="200" cy="105" rx="170" ry="120" fill="url(#pcCoreGlowC)" filter="url(#pcBlurC)"/>
+
+            <!-- Connectors first (behind nodes) -->
+            <g fill="none" stroke="rgba(129,140,248,0.6)" stroke-width="1.4">
+              <path d="M74 105 L132 105" stroke-dasharray="4 4"/>
+              <path d="M190 105 L248 70"/>
+              <path d="M190 105 L248 140"/>
+              <path d="M306 70 L356 105"/>
+              <path d="M306 140 L356 105"/>
+            </g>
+
+            <!-- Node 1: Request -->
+            <g transform="translate(44 105)">
+              <circle r="26" fill="url(#pcNodeC)" stroke="rgba(165,180,252,0.85)" stroke-width="1.4"/>
+              <g transform="translate(-8 -8)" fill="none" stroke="rgba(199,210,254,0.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="0" y="0" width="16" height="16" rx="2"/>
+                <line x1="4" y1="6" x2="12" y2="6"/>
+                <line x1="4" y1="10" x2="10" y2="10"/>
+              </g>
+              <text y="44" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(199,210,254,0.85)">ЗАПРОС</text>
+            </g>
+
+            <!-- Node 2: Classifier (center) -->
+            <g transform="translate(160 105)">
+              <rect x="-30" y="-22" width="60" height="44" rx="6" fill="url(#pcNodeC)" stroke="rgba(165,180,252,0.85)" stroke-width="1.4"/>
+              <text text-anchor="middle" y="-4" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.9)" font-weight="700">AGENT</text>
+              <text text-anchor="middle" y="10" font-family="'JetBrains Mono',monospace" font-size="6.5" letter-spacing="1.3" fill="rgba(165,180,252,0.75)">CLASSIFY</text>
+              <circle cx="22" cy="-14" r="2.8" fill="rgba(74,222,128,0.95)">
+                <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/>
+              </circle>
+              <text y="40" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.2" fill="rgba(199,210,254,0.85)">ОРКЕСТРАТОР</text>
+            </g>
+
+            <!-- Node 3a: Approver top -->
+            <g transform="translate(276 70)">
+              <circle r="20" fill="url(#pcNodeC)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+              <g transform="translate(-6 -8)" fill="none" stroke="rgba(199,210,254,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="5" r="3.5"/>
+                <path d="M0 16 Q6 10 12 16"/>
+              </g>
+              <!-- check -->
+              <g transform="translate(14 -12)">
+                <circle r="7" fill="rgba(74,222,128,0.18)" stroke="rgba(74,222,128,0.9)" stroke-width="1.1"/>
+                <path d="M-3 0 L-1 2 L3 -2" fill="none" stroke="rgba(74,222,128,1)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </g>
+
+            <!-- Node 3b: Approver bottom -->
+            <g transform="translate(276 140)">
+              <circle r="20" fill="url(#pcNodeC)" stroke="rgba(165,180,252,0.75)" stroke-width="1.3"/>
+              <g transform="translate(-6 -8)" fill="none" stroke="rgba(199,210,254,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="6" cy="5" r="3.5"/>
+                <path d="M0 16 Q6 10 12 16"/>
+              </g>
+              <g transform="translate(14 -12)">
+                <circle r="7" fill="rgba(74,222,128,0.18)" stroke="rgba(74,222,128,0.9)" stroke-width="1.1"/>
+                <path d="M-3 0 L-1 2 L3 -2" fill="none" stroke="rgba(74,222,128,1)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </g>
+
+            <!-- Final result node -->
+            <g transform="translate(370 105)">
+              <circle r="22" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.9)" stroke-width="1.5"/>
+              <circle r="15" fill="none" stroke="rgba(74,222,128,0.35)" stroke-width="1" stroke-dasharray="2 2"/>
+              <path d="M-7 0 L-2 5 L7 -5" fill="none" stroke="rgba(74,222,128,1)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+
+            <!-- Animated packet -->
+            <circle r="3" fill="rgba(199,210,254,1)">
+              <animateMotion dur="3.6s" repeatCount="indefinite" path="M74 105 L132 105 L190 105 L248 70 L306 70 L356 105"/>
+              <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.1;0.5;0.9;1" dur="3.6s" repeatCount="indefinite"/>
+            </circle>
+
+            <text x="200" y="200" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="2" fill="rgba(165,180,252,0.6)">WORKFLOW · FINANCE · ON-PREMISE</text>
+          </svg>
+        </div>
+        <div class="case-body">
+          <span class="case-badge">Операционная</span>
+          <h4>Согласования в финансовом секторе</h4>
+          <p>Оркестратор классифицирует тип запроса, назначаются согласующие, интеграция с внутренней системой учёта. Срок согласования сократился, прозрачность этапов выросла.</p>
+        </div>
       </div>
     </div>
   </div>
