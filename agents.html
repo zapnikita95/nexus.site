@@ -843,7 +843,7 @@ document.querySelectorAll('.faq-q').forEach(q => {
     // Role blocks in this section
     const blocks = section.querySelectorAll('.role-rationale[data-role]');
 
-    // Node hover -> highlight block + update cycle
+    // Node hover -> highlight block + update cycle (без авто-скролла)
     svgNodes.forEach(node => {
       const role = node.getAttribute('data-role');
       const block = section.querySelector(`.role-rationale[data-role="${role}"]`);
@@ -852,7 +852,6 @@ document.querySelectorAll('.faq-q').forEach(q => {
         if (block) {
           block.classList.add('hl');
           if (cycleEl && block.dataset.cycle) cycleEl.textContent = block.dataset.cycle;
-          block.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
       });
       node.addEventListener('mouseleave', () => {
@@ -877,28 +876,51 @@ document.querySelectorAll('.faq-q').forEach(q => {
       });
     });
 
-    // Scroll-spy: highlight current rationale block's SVG node while scrolling
+    // Scroll-spy: на каждом scroll-событии выбираем блок ближайший к центру viewport.
     if (blocks.length) {
-      const spy = new IntersectionObserver((entries) => {
-        let active = null;
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            if (!active || e.intersectionRatio > active.intersectionRatio) active = e;
-          }
+      let lastRole = null;
+      let rafId = null;
+      const blocksArr = Array.from(blocks);
+      function pickActive() {
+        rafId = null;
+        const sectionRect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (sectionRect.bottom < 0 || sectionRect.top > vh) return;
+        const centerY = vh / 2;
+        let best = null;
+        let bestDist = Infinity;
+        blocksArr.forEach(b => {
+          const r = b.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) return;
+          const blockCenter = (r.top + r.bottom) / 2;
+          const dist = Math.abs(blockCenter - centerY);
+          if (dist < bestDist) { bestDist = dist; best = b; }
         });
-        if (!active) return;
-        const block = active.target;
-        const role = block.dataset.role;
-        const cycleText = block.dataset.cycle;
+        if (!best) return;
+        const role = best.dataset.role;
+        if (role === lastRole) return;
+        lastRole = role;
+        const cycleText = best.dataset.cycle;
         const svgNode = section.querySelector(`g[data-role="${role}"]`);
-        if (!svgNode) return;
-        svgNodes.forEach(n => n.querySelectorAll('.node-rect').forEach(el => el.classList.remove('hl')));
-        blocks.forEach(b => b.classList.remove('hl'));
-        svgNode.querySelectorAll('.node-rect').forEach(el => el.classList.add('hl'));
-        block.classList.add('hl');
+        svgNodes.forEach(n => {
+          n.classList.remove('active');
+          n.querySelectorAll('.node-rect').forEach(el => el.classList.remove('hl'));
+        });
+        blocksArr.forEach(b => b.classList.remove('hl'));
+        if (svgNode) {
+          svgNode.classList.add('active');
+          svgNode.querySelectorAll('.node-rect').forEach(el => el.classList.add('hl'));
+        }
+        best.classList.add('hl');
         if (cycleEl && cycleText) cycleEl.textContent = cycleText;
-      }, { threshold: [0.35, 0.6, 0.85], rootMargin: '-30% 0px -40% 0px' });
-      blocks.forEach(b => spy.observe(b));
+      }
+      function schedule() {
+        if (rafId) return;
+        rafId = requestAnimationFrame(pickActive);
+      }
+      window.addEventListener('scroll', schedule, { passive: true });
+      window.addEventListener('resize', schedule);
+      schedule();
     }
   });
 })();
