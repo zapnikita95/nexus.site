@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#0b0f1a"/>
+        <stop offset="0.55" stop-color="#10152a"/>
+        <stop offset="1" stop-color="#0b0f1a"/>
+      </linearGradient>
+      <radialGradient id="glow" cx="0.78" cy="0.38" r="0.55">
+        <stop offset="0" stop-color="#818cf8" stop-opacity="0.35"/>
+        <stop offset="0.55" stop-color="#4338ca" stop-opacity="0.12"/>
+        <stop offset="1" stop-color="#0b0f1a" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="accent" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#a5b4fc"/>
+        <stop offset="1" stop-color="#818cf8"/>
+      </linearGradient>
+      <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#1a2040" stop-opacity="0.85"/>
+        <stop offset="1" stop-color="#10152a" stop-opacity="0.75"/>
+      </linearGradient>
+      <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M40 0 L0 0 0 40" fill="none" stroke="rgba(129,140,248,0.05)" stroke-width="1"/>
+      </pattern>
+    </defs>
+  
+    <rect width="1200" height="630" fill="url(#bg)"/>
+    <rect width="1200" height="630" fill="url(#grid)"/>
+    <rect width="1200" height="630" fill="url(#glow)"/>
+    <rect x="0" y="0" width="1200" height="4" fill="url(#accent)"/>
+  
+    <g font-family="'JetBrains Mono',ui-monospace,monospace" font-size="18" letter-spacing="4" fill="#818cf8">
+      <text x="72" y="84">НЕКСУС-ТЕХ</text>
+    </g>
+    <g font-family="'JetBrains Mono',ui-monospace,monospace" font-size="14" letter-spacing="3" fill="rgba(165,180,252,0.7)">
+      <text x="1128" y="84" text-anchor="end">[SYS] ON-PREMISE · v2.6</text>
+    </g>
+    <line x1="72" y1="104" x2="1128" y2="104" stroke="rgba(129,140,248,0.2)" stroke-width="1"/>
+  
+    <g font-family="'JetBrains Mono',ui-monospace,monospace" font-size="16" letter-spacing="3" fill="#818cf8">
+      <text x="72" y="178">[SYS] СТАТЬИ И КЕЙСЫ</text>
+    </g>
+    <g font-family="'Manrope','Helvetica Neue',Arial,sans-serif" font-weight="800" fill="#e5e7eb" font-size="72" letter-spacing="-1">
+      <text x="72" y="262"><tspan x="72" dy="0">Исследования</tspan><tspan x="72" dy="84">и внедрения</tspan></text>
+    </g>
+    <g font-family="'Manrope','Helvetica Neue',Arial,sans-serif" font-weight="400" fill="rgba(200,205,220,0.85)" font-size="24" letter-spacing="0">
+      <text x="72" y="454"><tspan x="72" dy="0">Практика: банки, госсектор, энергетика, производство.</tspan></text>
+    </g>
+  
+    <g transform="translate(680 160)">
+      <rect x="0" y="0" width="440" height="340" rx="20" fill="url(#card)" stroke="rgba(129,140,248,0.35)" stroke-width="1.5"/>
+      
+    <g transform="translate(220 175)" stroke="rgba(199,210,254,0.9)" stroke-width="2" fill="none">
+      <g transform="translate(-40 -48) rotate(-4)">
+        <rect x="-100" y="-55" width="200" height="110" rx="8" fill="rgba(16,21,42,0.6)" stroke="rgba(129,140,248,0.4)"/>
+        <line x1="-80" y1="-30" x2="80" y2="-30" stroke="rgba(165,180,252,0.5)"/>
+        <line x1="-80" y1="-10" x2="40" y2="-10" stroke="rgba(165,180,252,0.35)"/>
+        <line x1="-80" y1="10" x2="60" y2="10" stroke="rgba(165,180,252,0.35)"/>
+        <line x1="-80" y1="30" x2="20" y2="30" stroke="rgba(165,180,252,0.35)"/>
+      </g>
+      <g transform="translate(-10 -24) rotate(-1)">
+        <rect x="-100" y="-55" width="200" height="110" rx="8" fill="rgba(16,21,42,0.75)" stroke="rgba(129,140,248,0.55)"/>
+        <line x1="-80" y1="-30" x2="80" y2="-30" stroke="rgba(165,180,252,0.6)"/>
+        <line x1="-80" y1="-10" x2="40" y2="-10" stroke="rgba(165,180,252,0.4)"/>
+        <line x1="-80" y1="10" x2="60" y2="10" stroke="rgba(165,180,252,0.4)"/>
+        <line x1="-80" y1="30" x2="20" y2="30" stroke="rgba(165,180,252,0.4)"/>
+      </g>
+      <g transform="translate(30 8) rotate(3)">
+        <rect x="-100" y="-55" width="200" height="110" rx="8" fill="rgba(67,56,202,0.35)" stroke="rgba(199,210,254,0.95)"/>
+        <line x1="-80" y1="-30" x2="80" y2="-30" stroke="rgba(199,210,254,0.85)"/>
+        <line x1="-80" y1="-10" x2="40" y2="-10" stroke="rgba(199,210,254,0.6)"/>
+        <line x1="-80" y1="10" x2="60" y2="10" stroke="rgba(199,210,254,0.6)"/>
+        <line x1="-80" y1="30" x2="20" y2="30" stroke="rgba(199,210,254,0.6)"/>
+      </g>
+    </g>
+    <g font-family="'JetBrains Mono',ui-monospace,monospace" font-size="13" letter-spacing="3" fill="rgba(165,180,252,0.75)">
+      <text x="220" y="305" text-anchor="middle">КЕЙСЫ · ТЕХНОЛОГИИ · 152-ФЗ</text>
+    </g>
+  
+    </g>
+  
+    <line x1="72" y1="548" x2="1128" y2="548" stroke="rgba(129,140,248,0.2)" stroke-width="1"/>
+    <g font-family="'JetBrains Mono',ui-monospace,monospace" font-size="16" letter-spacing="3" fill="rgba(229,231,235,0.85)">
+      <text x="72" y="586">нексус-тех.рф/articles</text>
+    </g>
+    <g font-family="'JetBrains Mono',ui-monospace,monospace" font-size="14" letter-spacing="3" fill="rgba(165,180,252,0.7)">
+      <text x="1128" y="586" text-anchor="end">CASES · TECH · 152-ФЗ</text>
+    </g>
+</svg>

@@ -3,10 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Модели агентов: мультиагентная система — Нексус-Тех</title>
-<meta name="description" content="Модели агентов: Compliance (152-ФЗ), Feedback, Operations. Компьютерное зрение (проверка печатей, скриншоты). Голосование, дебаты. Мультиагентный ИИ on-premise.">
+<title>Модели агентов: Compliance, Feedback, Operations — Нексус-Тех</title>
+<meta name="description" content="Три модели мультиагентной системы: Compliance (152-ФЗ), Feedback (обращения), Operations (оркестратор и HITL). Голосование, дебаты, Vision.">
+<meta name="keywords" content="мультиагентная система, оркестратор агентов, Compliance агент, Feedback агент, HITL, голосование агентов, дебаты, Vision, 152-ФЗ">
+<meta name="author" content="Нексус-Тех">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <link rel="canonical" href="https://нексус-тех.рф/agents.html">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Нексус-Тех">
+<meta property="og:url" content="https://нексус-тех.рф/agents.html">
+<meta property="og:title" content="Модели агентов: Compliance, Feedback, Operations — Нексус-Тех">
+<meta property="og:description" content="Три модели оркестрации агентов: Compliance — линейный поток, Feedback — анализ обращений, Operations — иерархия с HITL.">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:image" content="https://нексус-тех.рф/og/og-agents.png">
+<meta property="og:image:secure_url" content="https://нексус-тех.рф/og/og-agents.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="Модели агентов Нексус-Тех: Compliance, Feedback, Operations">
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Модели агентов: Compliance, Feedback, Operations — Нексус-Тех">
+<meta name="twitter:description" content="Три модели мультиагентной оркестрации: линейный поток, анализ обращений, HITL.">
+<meta name="twitter:image" content="https://нексус-тех.рф/og/og-agents.png">
+<!-- Schema.org -->
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Чем мультиагентный подход выгоднее одного универсального агента?","acceptedAnswer":{"@type":"Answer","text":"Один агент, который и извлекает данные, и проверяет нормы, и принимает решение, чаще даёт ошибочные выводы. Мы распределяем задачи по ролям: один модуль извлекает данные, другой проверяет соответствие нормативам, третий оценивает риски, четвёртый может вернуть на доработку. Каждый этап перепроверяется следующим. В результате — меньше пропусков и ложных срабатываний, полная прослеживаемость решений."}},{"@type":"Question","name":"Какой срок внедрения мультиагентного ИИ?","acceptedAnswer":{"@type":"Answer","text":"Пилотный проект разворачивается за 1–2 месяца: установка на ваших серверах, подключение к ключевым системам (1С, CRM, ЭДО), обучение сотрудников. Далее — масштабирование под ваши процессы. Срок зависит от объёма интеграций и сложности регламентов."}},{"@type":"Question","name":"Подходит ли платформа для проверки документов на 152-ФЗ и маркировку?","acceptedAnswer":{"@type":"Answer","text":"Да. Одно из основных решений — комплаенс: проверка договоров, актов, накладных на соответствие 152-ФЗ и маркировке «Честный знак». Цепочка модулей извлекает данные, сверяет с нормативами, оценивает риски и штрафы, верифицирует результат. Обработка выполняется в вашем периметре."}},{"@type":"Question","name":"Как обеспечивается защита от подмены инструкций (prompt injection)?","acceptedAnswer":{"@type":"Answer","text":"Ввод пользователя не смешивается со служебными инструкциями агентов: данные обрабатываются в выделенном контуре. По критичным решениям предусмотрен обязательный шаг с ответственным сотрудником. Защита соответствует требованиям приказа ФСТЭК России № 117. Все действия фиксируются в логах."}},{"@type":"Question","name":"Где хранятся данные и как обеспечивается конфиденциальность?","acceptedAnswer":{"@type":"Answer","text":"Обработка выполняется в вашей инфраструктуре: модели на ваших серверах или в вашем облаке, документы и обращения за пределы компании не передаются. Публичные API не используются. Соответствие 152-ФЗ и отраслевым требованиям закладывается на этапе проектирования."}},{"@type":"Question","name":"Почему в одних сценариях есть оркестратор, в других — нет?","acceptedAnswer":{"@type":"Answer","text":"Оркестратор используется там, где один запрос распадается на несколько подзадач, требуется маршрутизация по типу запроса или параллельное выполнение. В сценариях проверки документов и обработки обращений поток линейный. В сценариях согласований один запрос порождает несколько подзадач."}},{"@type":"Question","name":"Можно ли подключить платформу к нашим регламентам и базам знаний?","acceptedAnswer":{"@type":"Answer","text":"Да. Система работает с вашими нормативами, регламентами и прецедентами через базу знаний (RAG). Ответы и проверки опираются на внутренние правила компании, а не на общие данные модели."}},{"@type":"Question","name":"Как настраивается работа сценариев?","acceptedAnswer":{"@type":"Answer","text":"У администраторов есть возможность тонкой настройки каждого из агентов через конфигурацию с помощью весов (строгость, детализация ответов). Отдельно предусмотрены пресеты — заготовленные настройки под типовые сценарии."}},{"@type":"Question","name":"Нужно ли менять схему при смене сценария?","acceptedAnswer":{"@type":"Answer","text":"Саму схему обычно менять не требуется: можно использовать пресеты под разные задачи, сохранять несколько вариантов настроек. При необходимости схему можно дополнить (дебаты или голосование) или подключить дополнительные схемы."}},{"@type":"Question","name":"Поддерживает ли платформа компьютерное зрение для проверки печатей и скриншотов?","acceptedAnswer":{"@type":"Answer","text":"Да. Модуль Vision подключается к сценариям проверки и обращений. Анализирует изображения: печати и подписи на документах, скриншоты в обращениях клиентов. Включается в конфигурации или через API."}}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://нексус-тех.рф/"},{"@type":"ListItem","position":2,"name":"Модели агентов","item":"https://нексус-тех.рф/agents.html"}]}
+</script>
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -316,6 +349,8 @@ footer::before {
 .boot-la{word-break:break-word!important}
 
 </style>
+<meta name="theme-color" content="#0b0f1a">
+<script src="/seo-nav.js" defer></script>
 </head>
 <body>
 
