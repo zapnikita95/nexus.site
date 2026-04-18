@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /agents-lab.html
 Disallow: /draft-
 Disallow: /*.json$
 Disallow: /og/*.svg$

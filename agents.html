@@ -12,7 +12,6 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <link rel="canonical" href="https://нексус-тех.рф/agents.html">
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Нексус-Тех">
 <meta property="og:url" content="https://нексус-тех.рф/agents.html">
@@ -25,19 +24,16 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="Модели агентов Нексус-Тех: Compliance, Feedback, Operations">
-<!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Модели агентов: Compliance, Feedback, Operations — Нексус-Тех">
 <meta name="twitter:description" content="Три модели мультиагентной оркестрации: линейный поток, анализ обращений, HITL.">
 <meta name="twitter:image" content="https://нексус-тех.рф/og/og-agents.png">
-<!-- Schema.org -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Чем мультиагентный подход выгоднее одного универсального агента?","acceptedAnswer":{"@type":"Answer","text":"Один агент, который и извлекает данные, и проверяет нормы, и принимает решение, чаще даёт ошибочные выводы. Мы распределяем задачи по ролям: один модуль извлекает данные, другой проверяет соответствие нормативам, третий оценивает риски, четвёртый может вернуть на доработку. Каждый этап перепроверяется следующим. В результате — меньше пропусков и ложных срабатываний, полная прослеживаемость решений."}},{"@type":"Question","name":"Какой срок внедрения мультиагентного ИИ?","acceptedAnswer":{"@type":"Answer","text":"Пилотный проект разворачивается за 1–2 месяца: установка на ваших серверах, подключение к ключевым системам (1С, CRM, ЭДО), обучение сотрудников. Далее — масштабирование под ваши процессы. Срок зависит от объёма интеграций и сложности регламентов."}},{"@type":"Question","name":"Подходит ли платформа для проверки документов на 152-ФЗ и маркировку?","acceptedAnswer":{"@type":"Answer","text":"Да. Одно из основных решений — комплаенс: проверка договоров, актов, накладных на соответствие 152-ФЗ и маркировке «Честный знак». Цепочка модулей извлекает данные, сверяет с нормативами, оценивает риски и штрафы, верифицирует результат. Обработка выполняется в вашем периметре."}},{"@type":"Question","name":"Как обеспечивается защита от подмены инструкций (prompt injection)?","acceptedAnswer":{"@type":"Answer","text":"Ввод пользователя не смешивается со служебными инструкциями агентов: данные обрабатываются в выделенном контуре. По критичным решениям предусмотрен обязательный шаг с ответственным сотрудником. Защита соответствует требованиям приказа ФСТЭК России № 117. Все действия фиксируются в логах."}},{"@type":"Question","name":"Где хранятся данные и как обеспечивается конфиденциальность?","acceptedAnswer":{"@type":"Answer","text":"Обработка выполняется в вашей инфраструктуре: модели на ваших серверах или в вашем облаке, документы и обращения за пределы компании не передаются. Публичные API не используются. Соответствие 152-ФЗ и отраслевым требованиям закладывается на этапе проектирования."}},{"@type":"Question","name":"Почему в одних сценариях есть оркестратор, в других — нет?","acceptedAnswer":{"@type":"Answer","text":"Оркестратор используется там, где один запрос распадается на несколько подзадач, требуется маршрутизация по типу запроса или параллельное выполнение. В сценариях проверки документов и обработки обращений поток линейный. В сценариях согласований один запрос порождает несколько подзадач."}},{"@type":"Question","name":"Можно ли подключить платформу к нашим регламентам и базам знаний?","acceptedAnswer":{"@type":"Answer","text":"Да. Система работает с вашими нормативами, регламентами и прецедентами через базу знаний (RAG). Ответы и проверки опираются на внутренние правила компании, а не на общие данные модели."}},{"@type":"Question","name":"Как настраивается работа сценариев?","acceptedAnswer":{"@type":"Answer","text":"У администраторов есть возможность тонкой настройки каждого из агентов через конфигурацию с помощью весов (строгость, детализация ответов). Отдельно предусмотрены пресеты — заготовленные настройки под типовые сценарии."}},{"@type":"Question","name":"Нужно ли менять схему при смене сценария?","acceptedAnswer":{"@type":"Answer","text":"Саму схему обычно менять не требуется: можно использовать пресеты под разные задачи, сохранять несколько вариантов настроек. При необходимости схему можно дополнить (дебаты или голосование) или подключить дополнительные схемы."}},{"@type":"Question","name":"Поддерживает ли платформа компьютерное зрение для проверки печатей и скриншотов?","acceptedAnswer":{"@type":"Answer","text":"Да. Модуль Vision подключается к сценариям проверки и обращений. Анализирует изображения: печати и подписи на документах, скриншоты в обращениях клиентов. Включается в конфигурации или через API."}}]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://нексус-тех.рф/"},{"@type":"ListItem","position":2,"name":"Модели агентов","item":"https://нексус-тех.рф/agents.html"}]}
 </script>
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -107,7 +103,14 @@ nav{position:fixed;top:0;width:100%;z-index:999;background:rgba(11,15,26,0.95);b
 .agent-svg{width:100%;height:auto;display:block}
 .agent-svg .node-rect{fill:var(--bg);stroke:rgba(129,140,248,.25);stroke-width:1;transition:all .3s;cursor:pointer}
 .agent-svg .node-rect.accent{stroke:var(--accent);fill:rgba(129,140,248,.06)}
-.agent-svg .agent-node--hl .node-rect,.node-rect.hl{stroke:var(--accent)!important;fill:rgba(129,140,248,.1)!important;filter:drop-shadow(0 0 14px rgba(129,140,248,.28))}
+.agent-svg .agent-node--hl .node-rect,.agent-svg .node-rect.hl{stroke:var(--accent)!important;fill:rgba(129,140,248,.1)!important;filter:drop-shadow(0 0 14px rgba(129,140,248,.28))}
+/* Isometric plates (lab-svg) — keep gradient fill, just lift stroke + glow */
+.lab-svg .iso-node{transition:filter .25s ease,transform .25s ease;cursor:pointer}
+.lab-svg .iso-node:hover{filter:drop-shadow(0 0 14px rgba(129,140,248,.5))}
+.lab-svg .node-rect.hl{stroke:#c7d2fe!important;stroke-width:2!important;filter:drop-shadow(0 0 16px rgba(165,180,252,.65))}
+.lab-svg .iso-node.active{filter:drop-shadow(0 0 18px rgba(129,140,248,.6))}
+.agent-svg .iso-node{transition:filter .25s ease}
+.agent-svg .iso-node:hover{filter:drop-shadow(0 0 12px rgba(129,140,248,.45))}
 .agent-svg .node-text{fill:var(--text);font-family:'Manrope',Inter,sans-serif;font-size:12px;font-weight:800;pointer-events:none}
 .agent-svg .node-desc{fill:var(--text3);font-family:'Manrope',Inter,sans-serif;font-size:10px;pointer-events:none}
 .agent-svg .arrow-main{stroke:var(--accent);stroke-width:2;fill:none;opacity:.45;pointer-events:none}
@@ -230,16 +233,10 @@ footer{border-top:1px solid var(--border);padding:3rem 3rem 0;margin-top:4rem}
 /* AGENTS HERO BACKGROUND */
 section.hero {
   background-image: url('hero-agents.svg');
-  background-size: auto 100%;
-  background-position: 82% center;
+  background-size: cover;
+  background-position: center right;
   background-repeat: no-repeat;
   position: relative;
-}
-@media (min-width: 1600px){
-  section.hero { background-position: 76% center; }
-}
-@media (min-width: 1920px){
-  section.hero { background-position: 70% center; }
 }
 section.hero::before {
   content: '';
@@ -348,6 +345,40 @@ footer::before {
 .success-box-a{word-break:break-word!important}
 .boot-la{word-break:break-word!important}
 
+/* ============================================================= */
+/* LAB: EXPERIMENTAL AGENT DIAGRAMS v2                            */
+/* ============================================================= */
+.lab-diagram{position:relative;background:linear-gradient(165deg,rgba(22,28,53,0.7) 0%,rgba(11,15,26,0.92) 100%);border:1px solid rgba(129,140,248,0.22);border-radius:16px;padding:28px 24px 20px;overflow:hidden;box-shadow:0 24px 64px -20px rgba(99,102,241,0.18), inset 0 1px 0 rgba(199,210,254,0.06)}
+.lab-diagram::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(129,140,248,0.05) 1px,transparent 0);background-size:22px 22px;pointer-events:none;opacity:0.6}
+.lab-diagram::after{content:'';position:absolute;inset:0;background:radial-gradient(100% 60% at 50% 0%, rgba(99,102,241,0.15) 0%, transparent 70%);pointer-events:none}
+.lab-diagram > *{position:relative;z-index:1}
+.lab-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 2px 16px;border-bottom:1px dashed rgba(129,140,248,0.2);margin-bottom:18px;flex-wrap:wrap}
+.lab-head-left{display:flex;align-items:center;gap:10px}
+.lab-head-id{font-family:'JetBrains Mono',monospace;font-size:.65rem;color:rgba(165,180,252,0.7);letter-spacing:0.2em;padding:4px 8px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.22);border-radius:3px}
+.lab-head-title{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--text);letter-spacing:0.1em;font-weight:700;text-transform:uppercase}
+.lab-head-right{display:flex;align-items:center;gap:14px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:rgba(165,180,252,0.65);letter-spacing:0.14em}
+.lab-head-dot{display:inline-flex;align-items:center;gap:6px}
+.lab-head-dot::before{content:'';width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 10px rgba(74,222,128,0.8);animation:labPulse 1.4s ease-in-out infinite}
+@keyframes labPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}}
+.lab-svg{width:100%;height:auto;display:block}
+.lab-foot{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:14px;padding-top:14px;border-top:1px dashed rgba(129,140,248,0.2);flex-wrap:wrap}
+.lab-foot-stages{display:flex;align-items:center;gap:6px;flex:1;min-width:200px;flex-wrap:wrap}
+.lab-stage{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:rgba(165,180,252,0.55);letter-spacing:0.14em;padding:3px 8px;border:1px solid rgba(129,140,248,0.18);border-radius:3px;background:rgba(16,21,42,0.5)}
+.lab-stage.active{color:#fff;background:rgba(79,70,229,0.55);border-color:rgba(199,210,254,0.8);box-shadow:0 0 12px rgba(99,102,241,0.45)}
+.lab-foot-metric{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:rgba(199,210,254,0.75);letter-spacing:0.1em}
+.lab-foot-metric b{color:#4ade80;font-weight:700}
+.lab-cycle-note{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:rgba(165,180,252,0.65);letter-spacing:.1em;text-transform:uppercase;text-align:center;margin-top:14px}
+@media(max-width:700px){
+  .lab-head{flex-direction:column;align-items:flex-start}
+  .lab-foot{flex-direction:column;align-items:flex-start}
+  .lab-diagram{padding:18px 12px 14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .lab-diagram .lab-svg{min-width:620px}
+  .lab-head,.lab-foot,.lab-cycle-note{min-width:100%}
+  .vd-block{padding:22px 14px}
+  .vd-blocks .agent-diagram{padding:14px 6px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .vd-blocks .agent-diagram .agent-svg{min-width:420px}
+  .role-rationale{padding:16px 18px}
+}
 </style>
 <meta name="theme-color" content="#0b0f1a">
 <script src="/seo-nav.js" defer></script>
@@ -361,7 +392,7 @@ footer::before {
     <a href="solutions.html">Решения</a>
     <a href="security.html">Безопасность</a>
     <a href="technology.html">Технологии</a>
-    <a href="agents.html">Модели агентов</a>
+    <a href="agents.html" class="nav-active">Модели агентов</a>
     <a href="articles.html">Статьи</a>
     <a href="partnership.html">Партнёрство</a>
     <a href="order.html" class="nav-cta-terminal">
@@ -376,9 +407,9 @@ footer::before {
 <section class="hero">
   <div class="hero-mini" style="background-image:url('hero-agents.svg')"></div>
   <div class="hero-content">
-    <div class="hero-tag">[SYS] МОДЕЛИ АГЕНТОВ</div>
-    <h1>Мультиагентная система<br>для комплаенса и автоматизации</h1>
-    <p>Три бизнес-модели: Compliance — линейный поток, Feedback — анализ обращений, Operations — иерархия с оркестратором и декомпозицией задач.</p>
+    <div class="hero-tag" style="color:#facc15">[LAB] ЭКСПЕРИМЕНТАЛЬНЫЕ СХЕМЫ · v2</div>
+    <h1>Агенты в деталях:<br>новые визуализации</h1>
+    <p>Тестовая страница — прототип визуальных схем взаимодействия агентов с анимацией потоков, метриками и стадиями. Compliance, Feedback, Operations. Не индексируется.</p>
   </div>
 </section>
 
@@ -386,43 +417,181 @@ footer::before {
 <section id="compliance" class="model-section">
   <div class="s-wrap">
     <div class="s-tag rv">Модель 1</div>
-    <div class="s-title rv">Compliance — проверка документов.</div>
+    <div class="s-title rv">Compliance — проверка документов</div>
     <div class="model-grid">
       <div class="model-diagram-sticky rv-scale">
-        <div class="agent-diagram">
-          <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
-            <path class="arrow-cycle" d="M 515 40 Q 290 -20 65 40"/>
-            <g class="agent-node" data-role="Extractor" style="cursor:pointer">
-              <rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="65" y="68" text-anchor="middle">Extractor</text>
-              <text class="node-desc" x="65" y="88" text-anchor="middle">Извлечение данных</text>
+        <div class="lab-diagram">
+          <div class="lab-head">
+            <div class="lab-head-left">
+              <span class="lab-head-id">NX / M-01</span>
+              <span class="lab-head-title">Compliance Pipeline</span>
+            </div>
+            <div class="lab-head-right">
+              <span class="lab-head-dot">RUN</span>
+              <span>p95 · 840ms</span>
+              <span>THR · 24/s</span>
+            </div>
+          </div>
+
+          <svg class="lab-svg" viewBox="0 0 820 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="plateTopC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1f2552"/>
+                <stop offset="100%" stop-color="#131737"/>
+              </linearGradient>
+              <linearGradient id="plateRightC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#141937"/>
+                <stop offset="100%" stop-color="#0a0d1e"/>
+              </linearGradient>
+              <linearGradient id="plateLeftC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0c1028"/>
+                <stop offset="100%" stop-color="#06081a"/>
+              </linearGradient>
+              <linearGradient id="plateTopAccC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#312e81"/>
+              </linearGradient>
+              <linearGradient id="plateRightAccC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3b3796"/>
+                <stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="plateLeftAccC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a2870"/>
+                <stop offset="100%" stop-color="#14123a"/>
+              </linearGradient>
+              <linearGradient id="flowC" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%" stop-color="rgba(165,180,252,0)"/>
+                <stop offset="15%" stop-color="rgba(165,180,252,0.9)"/>
+                <stop offset="85%" stop-color="rgba(165,180,252,0.9)"/>
+                <stop offset="100%" stop-color="rgba(74,222,128,1)"/>
+              </linearGradient>
+              <linearGradient id="actionTopC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#22c55e"/>
+                <stop offset="100%" stop-color="#166534"/>
+              </linearGradient>
+              <linearGradient id="actionSideC" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#14532d"/>
+                <stop offset="100%" stop-color="#0a2615"/>
+              </linearGradient>
+              <filter id="plateGlowC"><feGaussianBlur stdDeviation="2.5"/></filter>
+              <marker id="labArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(250,204,21,0.9)"/>
+              </marker>
+              <!-- Standard isometric plate W=D=72, H=18, anchor at bottom-center -->
+              <symbol id="isoPlateC" overflow="visible">
+                <polygon class="iso-left" points="-62.4,0 0,36 0,18 -62.4,-18" fill="url(#plateLeftC)" stroke="rgba(129,140,248,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="62.4,0 0,36 0,18 62.4,-18" fill="url(#plateRightC)" stroke="rgba(129,140,248,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="node-rect iso-top" points="0,-54 62.4,-18 0,18 -62.4,-18" fill="url(#plateTopC)" stroke="rgba(165,180,252,0.85)" stroke-width="1.3" stroke-linejoin="round"/>
+              </symbol>
+              <symbol id="isoPlateAccC" overflow="visible">
+                <polygon class="iso-left" points="-62.4,0 0,36 0,18 -62.4,-18" fill="url(#plateLeftAccC)" stroke="rgba(199,210,254,0.6)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="62.4,0 0,36 0,18 62.4,-18" fill="url(#plateRightAccC)" stroke="rgba(199,210,254,0.6)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="node-rect iso-top" points="0,-54 62.4,-18 0,18 -62.4,-18" fill="url(#plateTopAccC)" stroke="rgba(199,210,254,1)" stroke-width="1.5" stroke-linejoin="round"/>
+              </symbol>
+              <symbol id="isoPlateGreenC" overflow="visible">
+                <polygon class="iso-left" points="-62.4,0 0,36 0,18 -62.4,-18" fill="url(#actionSideC)" stroke="rgba(74,222,128,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="62.4,0 0,36 0,18 62.4,-18" fill="url(#actionSideC)" stroke="rgba(74,222,128,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="node-rect iso-top" points="0,-54 62.4,-18 0,18 -62.4,-18" fill="url(#actionTopC)" stroke="rgba(74,222,128,1)" stroke-width="1.3" stroke-linejoin="round"/>
+              </symbol>
+            </defs>
+
+            <!-- Isometric floor line (horizon hint) -->
+            <g opacity="0.55">
+              <line x1="20" y1="180" x2="800" y2="180" stroke="rgba(129,140,248,0.18)" stroke-width="1" stroke-dasharray="2 7"/>
+              <line x1="20" y1="205" x2="800" y2="205" stroke="rgba(129,140,248,0.09)" stroke-width="1" stroke-dasharray="2 9"/>
             </g>
-            <path class="arrow-main" d="M 125 75 L 155 75"/>
-            <g class="agent-node" data-role="Checker" style="cursor:pointer">
-              <rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="215" y="68" text-anchor="middle">Checker</text>
-              <text class="node-desc" x="215" y="88" text-anchor="middle">Нормативы</text>
+
+            <!-- Flow line on floor (behind plates) -->
+            <path d="M72 180 L760 180" stroke="url(#flowC)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+            <!-- Animated packet -->
+            <circle r="4.5" fill="rgba(199,210,254,1)" filter="url(#plateGlowC)">
+              <animateMotion dur="4.6s" repeatCount="indefinite" path="M72 180 L760 180"/>
+            </circle>
+            <circle r="2.8" fill="#a5b4fc">
+              <animateMotion dur="4.6s" repeatCount="indefinite" path="M72 180 L760 180"/>
+            </circle>
+
+            <!-- Input chip (left, iso block) -->
+            <g transform="translate(36 180)">
+              <polygon points="-18,0 0,10 0,-8 -18,-18" fill="rgba(16,21,42,0.9)" stroke="rgba(129,140,248,0.5)" stroke-width="1"/>
+              <polygon points="18,0 0,10 0,-8 18,-18" fill="rgba(16,21,42,0.7)" stroke="rgba(129,140,248,0.5)" stroke-width="1"/>
+              <polygon points="0,-24 18,-18 0,-8 -18,-18" fill="rgba(79,70,229,0.35)" stroke="rgba(199,210,254,0.85)" stroke-width="1.2"/>
+              <text x="0" y="30" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.4" fill="rgba(165,180,252,0.8)">DOC · IN</text>
             </g>
-            <path class="arrow-main" d="M 275 75 L 305 75"/>
-            <g class="agent-node" data-role="Risk" style="cursor:pointer">
-              <rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="365" y="68" text-anchor="middle">Risk</text>
-              <text class="node-desc" x="365" y="88" text-anchor="middle">Оценка штрафов</text>
+
+            <!-- RETRY arc above plates -->
+            <path d="M570 108 Q380 20 180 108" fill="none" stroke="rgba(250,204,21,0.55)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#labArrow)"/>
+            <g transform="translate(375 42)">
+              <rect x="-54" y="-11" width="108" height="22" rx="11" fill="rgba(11,15,26,0.9)" stroke="rgba(250,204,21,0.5)" stroke-width="1"/>
+              <text text-anchor="middle" y="4" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="1.5" fill="rgba(250,204,21,0.95)">RETRY · LOOP · 3×</text>
             </g>
-            <path class="arrow-main" d="M 425 75 L 455 75"/>
-            <g class="agent-node" data-role="Critic" style="cursor:pointer">
-              <rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="515" y="68" text-anchor="middle">Critic</text>
-              <text class="node-desc" x="515" y="88" text-anchor="middle">Верификация</text>
+
+            <!-- Plate 1: Extractor (x=150) -->
+            <g class="iso-node" data-role="Extractor" transform="translate(150 180)">
+              <use href="#isoPlateC"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.55)">01</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Extractor</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">OCR · PARSE</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/></circle>
             </g>
-            <path class="arrow-main" d="M 575 75 L 605 75"/>
-            <g class="agent-node" data-role="Action" style="cursor:pointer">
-              <rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/>
-              <text class="node-text" x="660" y="68" text-anchor="middle">Action</text>
-              <text class="node-desc" x="660" y="88" text-anchor="middle">OK / Блок</text>
+
+            <!-- Plate 2: Checker (x=290) -->
+            <g class="iso-node" data-role="Checker" transform="translate(290 180)">
+              <use href="#isoPlateC"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.55)">02</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Checker</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">152-ФЗ · ФСТЭК</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Plate 3: Risk (x=430) -->
+            <g class="iso-node" data-role="Risk" transform="translate(430 180)">
+              <use href="#isoPlateC"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.55)">03</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Risk</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">FINES · SCORE</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#facc15"><animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Plate 4: Critic (accent, x=570) -->
+            <g class="iso-node" data-role="Critic" transform="translate(570 180)">
+              <use href="#isoPlateAccC"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(199,210,254,0.8)">04</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Critic</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.95)">VERIFY · JUDGE</text>
+              <circle cx="42" cy="-50" r="3.2" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Plate 5: Action (green, x=710) -->
+            <g class="iso-node" data-role="Action" transform="translate(710 180)">
+              <use href="#isoPlateGreenC"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(74,222,128,0.65)">05</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Action</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(74,222,128,0.95)">OK / BLOCK</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.1s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Output verdict indicator (far right) -->
+            <g transform="translate(785 180)">
+              <polygon points="-12,0 0,6 0,-4 -12,-10" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.8)" stroke-width="1"/>
+              <polygon points="12,0 0,6 0,-4 12,-10" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.8)" stroke-width="1"/>
+              <polygon points="0,-16 12,-10 0,-4 -12,-10" fill="rgba(74,222,128,0.3)" stroke="rgba(74,222,128,1)" stroke-width="1.2"/>
+              <path d="M-4 -10 L-1 -8 L4 -12" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round"/>
+              <text x="0" y="24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(74,222,128,0.9)">VERDICT</text>
             </g>
           </svg>
-          <div class="cycle-note" id="cycle-compliance" data-default="Critic может вернуть задачу на Extractor (цикл до 3 итераций)">Critic может вернуть задачу на Extractor (цикл до 3 итераций)</div>
+
+          <div class="lab-foot">
+            <div class="lab-foot-stages">
+              <span class="lab-stage">01 · EXTRACT</span>
+              <span class="lab-stage">02 · CHECK</span>
+              <span class="lab-stage">03 · RISK</span>
+              <span class="lab-stage active">04 · CRITIC</span>
+              <span class="lab-stage">05 · ACTION</span>
+            </div>
+            <div class="lab-foot-metric">loop · up to <b>3×</b> · HITL on-demand</div>
+          </div>
+          <div class="lab-cycle-note" id="cycle-compliance" data-default="Hover узла или прокрутите блок описания — подсветится соответствующий агент">Hover узла или прокрутите блок описания — подсветится соответствующий агент</div>
         </div>
       </div>
       <div class="model-text rv">
@@ -456,42 +625,191 @@ footer::before {
 <section id="feedback" class="model-section section-alt">
   <div class="s-wrap">
     <div class="s-tag rv">Модель 2</div>
-    <div class="s-title rv">Feedback — анализ обращений.</div>
+    <div class="s-title rv">Feedback — анализ обращений</div>
     <div class="model-grid">
       <div class="model-diagram-sticky rv-scale">
-        <div class="agent-diagram">
-          <svg class="agent-svg" viewBox="0 0 720 180" preserveAspectRatio="xMidYMid meet">
-            <g class="agent-node" data-role="Analyzer" style="cursor:pointer">
-              <rect class="node-rect" x="10" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="65" y="68" text-anchor="middle">Analyzer</text>
-              <text class="node-desc" x="65" y="88" text-anchor="middle">Тональность, темы</text>
+        <div class="lab-diagram">
+          <div class="lab-head">
+            <div class="lab-head-left">
+              <span class="lab-head-id">NX / M-02</span>
+              <span class="lab-head-title">Feedback Pipeline</span>
+            </div>
+            <div class="lab-head-right">
+              <span class="lab-head-dot">RUN</span>
+              <span>p95 · 620ms</span>
+              <span>INBOX · 412</span>
+            </div>
+          </div>
+
+          <svg class="lab-svg" viewBox="0 0 820 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="plateTopF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1f2552"/>
+                <stop offset="100%" stop-color="#131737"/>
+              </linearGradient>
+              <linearGradient id="plateRightF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#141937"/>
+                <stop offset="100%" stop-color="#0a0d1e"/>
+              </linearGradient>
+              <linearGradient id="plateLeftF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0c1028"/>
+                <stop offset="100%" stop-color="#06081a"/>
+              </linearGradient>
+              <linearGradient id="plateTopAccF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#312e81"/>
+              </linearGradient>
+              <linearGradient id="plateRightAccF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3b3796"/>
+                <stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="plateLeftAccF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a2870"/>
+                <stop offset="100%" stop-color="#14123a"/>
+              </linearGradient>
+              <linearGradient id="plateTopYellowF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#facc15"/>
+                <stop offset="100%" stop-color="#854d0e"/>
+              </linearGradient>
+              <linearGradient id="plateSideYellowF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#713f12"/>
+                <stop offset="100%" stop-color="#3a1f06"/>
+              </linearGradient>
+              <linearGradient id="flowF" x1="0" x2="1" y1="0" y2="0">
+                <stop offset="0%" stop-color="rgba(250,204,21,0)"/>
+                <stop offset="15%" stop-color="rgba(250,204,21,0.9)"/>
+                <stop offset="60%" stop-color="rgba(165,180,252,0.9)"/>
+                <stop offset="100%" stop-color="rgba(74,222,128,1)"/>
+              </linearGradient>
+              <filter id="plateGlowF"><feGaussianBlur stdDeviation="2.5"/></filter>
+              <marker id="arrowF" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(250,204,21,0.9)"/>
+              </marker>
+              <!-- Standard iso plate -->
+              <symbol id="isoPlateF" overflow="visible">
+                <polygon class="iso-left" points="-62.4,0 0,36 0,18 -62.4,-18" fill="url(#plateLeftF)" stroke="rgba(129,140,248,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="62.4,0 0,36 0,18 62.4,-18" fill="url(#plateRightF)" stroke="rgba(129,140,248,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="node-rect iso-top" points="0,-54 62.4,-18 0,18 -62.4,-18" fill="url(#plateTopF)" stroke="rgba(165,180,252,0.85)" stroke-width="1.3" stroke-linejoin="round"/>
+              </symbol>
+              <symbol id="isoPlateAccF" overflow="visible">
+                <polygon class="iso-left" points="-62.4,0 0,36 0,18 -62.4,-18" fill="url(#plateLeftAccF)" stroke="rgba(199,210,254,0.6)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="62.4,0 0,36 0,18 62.4,-18" fill="url(#plateRightAccF)" stroke="rgba(199,210,254,0.6)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="node-rect iso-top" points="0,-54 62.4,-18 0,18 -62.4,-18" fill="url(#plateTopAccF)" stroke="rgba(199,210,254,1)" stroke-width="1.5" stroke-linejoin="round"/>
+              </symbol>
+              <symbol id="isoPlateYellowF" overflow="visible">
+                <polygon class="iso-left" points="-62.4,0 0,36 0,18 -62.4,-18" fill="url(#plateSideYellowF)" stroke="rgba(250,204,21,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="62.4,0 0,36 0,18 62.4,-18" fill="url(#plateSideYellowF)" stroke="rgba(250,204,21,0.5)" stroke-width="1" stroke-linejoin="round"/>
+                <polygon class="node-rect iso-top" points="0,-54 62.4,-18 0,18 -62.4,-18" fill="url(#plateTopYellowF)" stroke="rgba(250,204,21,1)" stroke-width="1.3" stroke-linejoin="round"/>
+              </symbol>
+            </defs>
+
+            <!-- Iso floor -->
+            <g opacity="0.55">
+              <line x1="20" y1="180" x2="800" y2="180" stroke="rgba(129,140,248,0.18)" stroke-width="1" stroke-dasharray="2 7"/>
+              <line x1="20" y1="205" x2="800" y2="205" stroke="rgba(129,140,248,0.09)" stroke-width="1" stroke-dasharray="2 9"/>
             </g>
-            <path class="arrow-main" d="M 125 75 L 155 75"/>
-            <g class="agent-node" data-role="Researcher" style="cursor:pointer">
-              <rect class="node-rect" x="160" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="215" y="68" text-anchor="middle">Researcher</text>
-              <text class="node-desc" x="215" y="88" text-anchor="middle">RAG, контекст</text>
+
+            <!-- Sentiment bar above -->
+            <g transform="translate(220 36)">
+              <text y="0" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(165,180,252,0.55)">SENTIMENT · LAST 100</text>
+              <rect x="0" y="8" width="108" height="6" rx="3" fill="rgba(239,68,68,0.8)"/>
+              <rect x="108" y="8" width="168" height="6" rx="3" fill="rgba(250,204,21,0.8)"/>
+              <rect x="276" y="8" width="156" height="6" rx="3" fill="rgba(74,222,128,0.8)"/>
+              <text x="54" y="28" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="rgba(239,68,68,0.9)">neg 18%</text>
+              <text x="192" y="28" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="rgba(250,204,21,0.9)">neutral 44%</text>
+              <text x="354" y="28" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" fill="rgba(74,222,128,0.9)">pos 38%</text>
             </g>
-            <path class="arrow-main" d="M 275 75 L 305 75"/>
-            <g class="agent-node" data-role="Responder" style="cursor:pointer">
-              <rect class="node-rect" x="310" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="365" y="68" text-anchor="middle">Responder</text>
-              <text class="node-desc" x="365" y="88" text-anchor="middle">Генерация ответа</text>
+
+            <!-- Flow line -->
+            <path d="M72 180 L760 180" stroke="url(#flowF)" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.75"/>
+            <circle r="4.5" fill="rgba(250,204,21,1)" filter="url(#plateGlowF)">
+              <animateMotion dur="4.2s" repeatCount="indefinite" path="M72 180 L760 180"/>
+            </circle>
+            <circle r="2.8" fill="#a5b4fc">
+              <animateMotion dur="4.2s" repeatCount="indefinite" path="M72 180 L760 180"/>
+            </circle>
+
+            <!-- Escalate branch: arrow from Critic (570) diverting up to Escalate (710 top) -->
+            <path d="M570 130 Q640 80 710 130" fill="none" stroke="rgba(250,204,21,0.55)" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#arrowF)"/>
+            <g transform="translate(640 72)">
+              <rect x="-36" y="-10" width="72" height="20" rx="10" fill="rgba(11,15,26,0.9)" stroke="rgba(250,204,21,0.5)" stroke-width="1"/>
+              <text text-anchor="middle" y="4" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(250,204,21,0.95)">AUTO · 88%</text>
             </g>
-            <path class="arrow-main" d="M 425 75 L 455 75"/>
-            <g class="agent-node" data-role="Critic" style="cursor:pointer">
-              <rect class="node-rect accent" x="460" y="40" width="110" height="70" rx="8"/>
-              <text class="node-text" x="515" y="68" text-anchor="middle">Critic</text>
-              <text class="node-desc" x="515" y="88" text-anchor="middle">Проверка</text>
+
+            <!-- Input message bubble (iso) -->
+            <g transform="translate(36 180)">
+              <polygon points="-18,0 0,10 0,-8 -18,-18" fill="rgba(16,21,42,0.9)" stroke="rgba(250,204,21,0.5)" stroke-width="1"/>
+              <polygon points="18,0 0,10 0,-8 18,-18" fill="rgba(16,21,42,0.7)" stroke="rgba(250,204,21,0.5)" stroke-width="1"/>
+              <polygon points="0,-24 18,-18 0,-8 -18,-18" fill="rgba(250,204,21,0.25)" stroke="rgba(250,204,21,0.9)" stroke-width="1.2"/>
+              <text x="0" y="30" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.4" fill="rgba(165,180,252,0.8)">MSG · IN</text>
             </g>
-            <path class="arrow-main" d="M 575 75 L 605 75"/>
-            <g class="agent-node" data-role="Escalation" style="cursor:pointer">
-              <rect class="node-rect" x="610" y="40" width="100" height="70" rx="8"/>
-              <text class="node-text" x="660" y="68" text-anchor="middle">Escalation</text>
-              <text class="node-desc" x="660" y="88" text-anchor="middle">Эскалация</text>
+
+            <!-- Plate 1: Analyzer -->
+            <g class="iso-node" data-role="Analyzer" transform="translate(150 180)">
+              <use href="#isoPlateF"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.55)">01</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Analyzer</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">TONE · TOPIC</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Plate 2: Researcher -->
+            <g class="iso-node" data-role="Researcher" transform="translate(290 180)">
+              <use href="#isoPlateF"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.55)">02</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Researcher</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">RAG · Qdrant</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Plate 3: Responder -->
+            <g class="iso-node" data-role="Responder" transform="translate(430 180)">
+              <use href="#isoPlateF"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(165,180,252,0.55)">03</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Responder</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">GEN · REPLY</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.3s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Plate 4: Critic (accent) -->
+            <g class="iso-node" data-role="Critic" transform="translate(570 180)">
+              <use href="#isoPlateAccF"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(199,210,254,0.8)">04</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Critic</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.95)">QA · TONE</text>
+              <circle cx="42" cy="-50" r="3.2" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Plate 5: Escalation (yellow) -->
+            <g class="iso-node" data-role="Escalation" transform="translate(710 180)">
+              <use href="#isoPlateYellowF"/>
+              <text x="0" y="-76" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="2" fill="rgba(250,204,21,0.65)">05</text>
+              <text x="0" y="-60" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#e5e7eb">Escalate</text>
+              <text x="0" y="-24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(250,204,21,0.95)">CRM · HUMAN</text>
+              <circle cx="42" cy="-50" r="2.8" fill="#facc15"><animate attributeName="opacity" values="1;0.3;1" dur="1.1s" repeatCount="indefinite"/></circle>
+            </g>
+
+            <!-- Output: reply indicator -->
+            <g transform="translate(785 180)">
+              <polygon points="-12,0 0,6 0,-4 -12,-10" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.8)" stroke-width="1"/>
+              <polygon points="12,0 0,6 0,-4 12,-10" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.8)" stroke-width="1"/>
+              <polygon points="0,-16 12,-10 0,-4 -12,-10" fill="rgba(74,222,128,0.3)" stroke="rgba(74,222,128,1)" stroke-width="1.2"/>
+              <path d="M-4 -10 L-1 -8 L4 -12" fill="none" stroke="#4ade80" stroke-width="1.6" stroke-linecap="round"/>
+              <text x="0" y="24" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(74,222,128,0.9)">REPLY</text>
             </g>
           </svg>
-          <div class="cycle-note" id="cycle-feedback" data-default="Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости">Линейный поток: анализ → поиск контекста → ответ → верификация → эскалация при необходимости</div>
+
+          <div class="lab-foot">
+            <div class="lab-foot-stages">
+              <span class="lab-stage">01 · ANALYZE</span>
+              <span class="lab-stage">02 · RESEARCH</span>
+              <span class="lab-stage">03 · RESPOND</span>
+              <span class="lab-stage active">04 · CRITIC</span>
+              <span class="lab-stage">05 · ESCALATE</span>
+            </div>
+            <div class="lab-foot-metric">auto-reply · <b>88%</b> · human escalation on demand</div>
+          </div>
+          <div class="lab-cycle-note" id="cycle-feedback" data-default="Hover узла или прокрутите блок описания — подсветится соответствующий агент">Hover узла или прокрутите блок описания — подсветится соответствующий агент</div>
         </div>
       </div>
       <div class="model-text rv">
@@ -525,42 +843,264 @@ footer::before {
 <section id="operations" class="model-section">
   <div class="s-wrap">
     <div class="s-tag rv">Модель 3</div>
-    <div class="s-title rv">Operations — согласования и процессы.</div>
+    <div class="s-title rv">Operations — согласования и процессы</div>
     <div class="model-grid">
       <div class="model-diagram-sticky rv-scale">
-        <div class="agent-diagram">
-          <svg class="agent-svg" viewBox="0 0 720 200" preserveAspectRatio="xMidYMid meet">
-            <g class="agent-node" data-role="Orchestrator" style="cursor:pointer">
-              <rect class="node-rect accent" x="260" y="5" width="200" height="55" rx="8"/>
-              <text class="node-text" x="360" y="35" text-anchor="middle">Orchestrator</text>
-              <text class="node-desc" x="360" y="50" text-anchor="middle">Декомпозиция, маршрутизация</text>
+        <div class="lab-diagram">
+          <div class="lab-head">
+            <div class="lab-head-left">
+              <span class="lab-head-id">NX / M-03</span>
+              <span class="lab-head-title">Operations Orchestration</span>
+            </div>
+            <div class="lab-head-right">
+              <span class="lab-head-dot">RUN</span>
+              <span>ROUTES · 6</span>
+              <span>HITL · 2 PENDING</span>
+            </div>
+          </div>
+
+          <svg class="lab-svg" viewBox="0 0 820 360" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="plateTopO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1f2552"/>
+                <stop offset="100%" stop-color="#131737"/>
+              </linearGradient>
+              <linearGradient id="plateRightO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#141937"/>
+                <stop offset="100%" stop-color="#0a0d1e"/>
+              </linearGradient>
+              <linearGradient id="plateLeftO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0c1028"/>
+                <stop offset="100%" stop-color="#06081a"/>
+              </linearGradient>
+              <linearGradient id="plateTopAccO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#312e81"/>
+              </linearGradient>
+              <linearGradient id="plateRightAccO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3b3796"/>
+                <stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="plateLeftAccO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a2870"/>
+                <stop offset="100%" stop-color="#14123a"/>
+              </linearGradient>
+              <linearGradient id="cubeTopO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#818cf8"/>
+                <stop offset="100%" stop-color="#4338ca"/>
+              </linearGradient>
+              <linearGradient id="cubeRightO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#3b3796"/>
+                <stop offset="100%" stop-color="#1e1b4b"/>
+              </linearGradient>
+              <linearGradient id="cubeLeftO" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#2a2870"/>
+                <stop offset="100%" stop-color="#14123a"/>
+              </linearGradient>
+              <radialGradient id="hubGlowO" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(129,140,248,0.55)"/>
+                <stop offset="100%" stop-color="rgba(79,70,229,0)"/>
+              </radialGradient>
+              <filter id="plateGlowO"><feGaussianBlur stdDeviation="2.5"/></filter>
+              <marker id="arrowO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(199,210,254,0.85)"/>
+              </marker>
+              <!-- Pseudo-iso parallelepiped (top 120×44, depth offset (6,14)). Shared edge (60,22)→(66,36). -->
+              <symbol id="isoPlateO" overflow="visible">
+                <polygon class="iso-bottom" points="-60,22 60,22 66,36 -54,36" fill="url(#plateLeftO)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="60,-22 66,-8 66,36 60,22" fill="url(#plateRightO)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9" stroke-linejoin="round"/>
+                <rect class="node-rect iso-top" x="-60" y="-22" width="120" height="44" rx="3" fill="url(#plateTopO)" stroke="rgba(165,180,252,0.85)" stroke-width="1.3"/>
+              </symbol>
+              <symbol id="isoPlateAccO" overflow="visible">
+                <polygon class="iso-bottom" points="-60,22 60,22 66,36 -54,36" fill="url(#plateLeftAccO)" stroke="rgba(199,210,254,0.55)" stroke-width="0.9" stroke-linejoin="round"/>
+                <polygon class="iso-right" points="60,-22 66,-8 66,36 60,22" fill="url(#plateRightAccO)" stroke="rgba(199,210,254,0.55)" stroke-width="0.9" stroke-linejoin="round"/>
+                <rect class="node-rect iso-top" x="-60" y="-22" width="120" height="44" rx="3" fill="url(#plateTopAccO)" stroke="rgba(199,210,254,1)" stroke-width="1.5"/>
+              </symbol>
+              <!-- Orchestrator iso cube (W=D=H=64), anchor at cube centre -->
+              <symbol id="orchestratorCube" overflow="visible">
+                <!-- Outer glow -->
+                <circle r="88" fill="url(#hubGlowO)"/>
+                <!-- Left face (y=D plane) -->
+                <polygon class="node-rect" points="-55.4,-32 0,0 0,64 -55.4,32" fill="url(#cubeLeftO)" stroke="rgba(199,210,254,0.7)" stroke-width="1.2" stroke-linejoin="round"/>
+                <!-- Right face (x=W plane) -->
+                <polygon class="node-rect" points="55.4,-32 0,0 0,64 55.4,32" fill="url(#cubeRightO)" stroke="rgba(199,210,254,0.7)" stroke-width="1.2" stroke-linejoin="round"/>
+                <!-- Top face (z=H plane) -->
+                <polygon class="node-rect" points="0,-64 55.4,-32 0,0 -55.4,-32" fill="url(#cubeTopO)" stroke="rgba(199,210,254,1)" stroke-width="1.5" stroke-linejoin="round"/>
+                <!-- Inner vertex highlight -->
+                <circle cx="0" cy="0" r="2" fill="rgba(255,255,255,0.9)"/>
+                <!-- Pulsing ring -->
+                <circle cx="0" cy="0" r="56" fill="none" stroke="rgba(199,210,254,0.5)" stroke-width="1.2">
+                  <animate attributeName="r" values="56;72;56" dur="3s" repeatCount="indefinite"/>
+                  <animate attributeName="stroke-opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+                </circle>
+              </symbol>
+            </defs>
+
+            <!-- Input chip (iso) -->
+            <g transform="translate(56 90)">
+              <polygon points="-34,6 0,24 0,10 -34,-8" fill="url(#plateLeftO)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9"/>
+              <polygon points="34,6 0,24 0,10 34,-8" fill="url(#plateRightO)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9"/>
+              <polygon points="0,-24 34,-6 0,10 -34,-6" fill="url(#plateTopO)" stroke="rgba(165,180,252,0.7)" stroke-width="1.1"/>
+              <circle cx="-10" cy="-10" r="2.2" fill="rgba(74,222,128,0.95)"/>
+              <text x="5" y="-8" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.3" fill="rgba(199,210,254,0.9)">REQUEST</text>
+              <text x="0" y="42" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="6.5" letter-spacing="1.3" fill="rgba(165,180,252,0.55)">inbox · 412</text>
             </g>
-            <path class="arrow-main" d="M 360 60 L 135 105"/>
-            <path class="arrow-main" d="M 360 60 L 285 105"/>
-            <path class="arrow-main" d="M 360 60 L 435 105"/>
-            <path class="arrow-main" d="M 490 140 L 530 140"/>
-            <g class="agent-node" data-role="Resolver" style="cursor:pointer">
-              <rect class="node-rect" x="80" y="105" width="110" height="70" rx="8"/>
-              <text class="node-text" x="135" y="133" text-anchor="middle">Resolver</text>
-              <text class="node-desc" x="135" y="153" text-anchor="middle">Согласующие</text>
+
+            <!-- Main iso connector Request → Orchestrator -->
+            <path d="M90 90 L330 90" fill="none" stroke="rgba(129,140,248,0.55)" stroke-width="1.3" stroke-dasharray="3 4"/>
+            <circle r="3.2" fill="rgba(199,210,254,1)" filter="url(#plateGlowO)">
+              <animateMotion dur="3s" repeatCount="indefinite" path="M90 90 L330 90"/>
+            </circle>
+
+            <!-- ORCHESTRATOR iso cube -->
+            <g class="iso-node" data-role="Orchestrator" transform="translate(410 96)">
+              <use href="#orchestratorCube"/>
             </g>
-            <g class="agent-node" data-role="Critic" style="cursor:pointer">
-              <rect class="node-rect accent" x="230" y="105" width="110" height="70" rx="8"/>
-              <text class="node-text" x="285" y="133" text-anchor="middle">Critic</text>
-              <text class="node-desc" x="285" y="153" text-anchor="middle">HITL</text>
+            <g transform="translate(410 96)" text-anchor="middle" font-family="'JetBrains Mono',monospace" fill="rgba(255,255,255,0.95)" style="pointer-events:none">
+              <text y="-46" font-size="7" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">01 · HUB</text>
+              <text y="-24" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" letter-spacing="-0.01em">Orchestrator</text>
+              <text y="-8" font-size="7" letter-spacing="1.4" fill="rgba(199,210,254,0.75)">CLASSIFY · ROUTE · DECOMPOSE</text>
             </g>
-            <g class="agent-node" data-role="Executor" style="cursor:pointer">
-              <rect class="node-rect" x="380" y="105" width="110" height="70" rx="8"/>
-              <text class="node-text" x="435" y="133" text-anchor="middle">Executor</text>
-              <text class="node-desc" x="435" y="153" text-anchor="middle">ERP</text>
+            <!-- Side badges (right of cube) -->
+            <g transform="translate(490 70)" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.2">
+              <rect x="0" y="-8" width="58" height="16" rx="3" fill="rgba(11,15,26,0.75)" stroke="rgba(199,210,254,0.5)" stroke-width="0.9"/>
+              <text x="29" y="3" text-anchor="middle" fill="rgba(199,210,254,0.95)">LLM · 70B</text>
             </g>
-            <g class="agent-node" data-role="Notify" style="cursor:pointer">
-              <rect class="node-rect" x="530" y="105" width="110" height="70" rx="8"/>
-              <text class="node-text" x="585" y="133" text-anchor="middle">Notify</text>
-              <text class="node-desc" x="585" y="153" text-anchor="middle">Уведомления</text>
+            <g transform="translate(490 92)" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.2">
+              <rect x="0" y="-8" width="58" height="16" rx="3" fill="rgba(11,15,26,0.75)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9"/>
+              <text x="29" y="3" text-anchor="middle" fill="rgba(199,210,254,0.85)">routes · 6</text>
+            </g>
+            <g transform="translate(490 114)" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.2">
+              <rect x="0" y="-8" width="58" height="16" rx="3" fill="rgba(11,15,26,0.75)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9"/>
+              <text x="29" y="3" text-anchor="middle" fill="rgba(199,210,254,0.85)">p95 · 340ms</text>
+            </g>
+
+            <!-- Route category chips (mid band y=186) -->
+            <g font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.4" fill="rgba(165,180,252,0.75)">
+              <g transform="translate(158 186)">
+                <rect x="-44" y="-9" width="88" height="18" rx="9" fill="rgba(16,21,42,0.88)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9"/>
+                <circle cx="-30" cy="0" r="2" fill="rgba(129,140,248,0.9)"/>
+                <text text-anchor="middle" y="3">ДОГОВОР</text>
+              </g>
+              <g transform="translate(328 186)">
+                <rect x="-44" y="-9" width="88" height="18" rx="9" fill="rgba(16,21,42,0.88)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9"/>
+                <circle cx="-30" cy="0" r="2" fill="rgba(165,180,252,0.9)"/>
+                <text text-anchor="middle" y="3">ЗАКУПКА</text>
+              </g>
+              <g transform="translate(498 186)">
+                <rect x="-44" y="-9" width="88" height="18" rx="9" fill="rgba(16,21,42,0.88)" stroke="rgba(250,204,21,0.5)" stroke-width="0.9"/>
+                <circle cx="-30" cy="0" r="2" fill="rgba(250,204,21,0.9)"/>
+                <text text-anchor="middle" y="3">IT · ДОСТУП</text>
+              </g>
+              <g transform="translate(668 186)">
+                <rect x="-44" y="-9" width="88" height="18" rx="9" fill="rgba(16,21,42,0.88)" stroke="rgba(129,140,248,0.45)" stroke-width="0.9"/>
+                <circle cx="-30" cy="0" r="2" fill="rgba(99,102,241,0.9)"/>
+                <text text-anchor="middle" y="3">ОТПУСК</text>
+              </g>
+            </g>
+
+            <!-- Fan-out branches hub → route chips -->
+            <g fill="none" stroke="rgba(129,140,248,0.45)" stroke-width="1.1" stroke-dasharray="3 4">
+              <path d="M410 160 Q300 176 158 180"/>
+              <path d="M410 160 Q380 176 328 180"/>
+              <path d="M410 160 Q460 176 498 180"/>
+              <path d="M410 160 Q560 176 668 180"/>
+            </g>
+            <g fill="rgba(199,210,254,1)" filter="url(#plateGlowO)">
+              <circle r="2.6"><animateMotion dur="2.8s" repeatCount="indefinite" path="M410 160 Q300 176 158 180"/></circle>
+              <circle r="2.6" fill="rgba(165,180,252,1)"><animateMotion dur="3s" begin="0.4s" repeatCount="indefinite" path="M410 160 Q380 176 328 180"/></circle>
+              <circle r="2.6" fill="rgba(250,204,21,1)"><animateMotion dur="3.2s" begin="0.8s" repeatCount="indefinite" path="M410 160 Q460 176 498 180"/></circle>
+              <circle r="2.6" fill="rgba(99,102,241,1)"><animateMotion dur="3.4s" begin="1.2s" repeatCount="indefinite" path="M410 160 Q560 176 668 180"/></circle>
+            </g>
+
+            <!-- Route → chain connectors (dashed, into iso plates) -->
+            <g fill="none" stroke="rgba(129,140,248,0.3)" stroke-width="1" stroke-dasharray="2 3">
+              <path d="M158 196 L150 258"/>
+              <path d="M328 196 L320 258"/>
+              <path d="M498 196 L490 258"/>
+              <path d="M668 196 L660 258"/>
+            </g>
+
+            <!-- Row of iso plates (flat-top, centred labels) -->
+            <!-- 02 · Resolver -->
+            <g class="iso-node" data-role="Resolver" transform="translate(150 284)">
+              <use href="#isoPlateO"/>
+              <g style="pointer-events:none" text-anchor="middle">
+                <text x="0" y="-7" font-family="'JetBrains Mono',monospace" font-size="7.2" letter-spacing="1.4" fill="rgba(165,180,252,0.8)">02 · LDAP · AD</text>
+                <text x="0" y="11" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Resolver</text>
+                <circle cx="52" cy="-16" r="2.4" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/></circle>
+              </g>
+            </g>
+
+            <!-- 03 · Critic HITL -->
+            <g class="iso-node" data-role="Critic" transform="translate(320 284)">
+              <use href="#isoPlateAccO"/>
+              <g style="pointer-events:none" text-anchor="middle">
+                <text x="0" y="-7" font-family="'JetBrains Mono',monospace" font-size="7.2" letter-spacing="1.4" fill="rgba(199,210,254,0.95)">03 · HITL · pending 2</text>
+                <text x="0" y="11" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Critic</text>
+                <circle cx="52" cy="-16" r="2.6" fill="#facc15"><animate attributeName="opacity" values="1;0.2;1" dur="1.1s" repeatCount="indefinite"/></circle>
+              </g>
+            </g>
+
+            <!-- 04 · Executor -->
+            <g class="iso-node" data-role="Executor" transform="translate(490 284)">
+              <use href="#isoPlateO"/>
+              <g style="pointer-events:none" text-anchor="middle">
+                <text x="0" y="-7" font-family="'JetBrains Mono',monospace" font-size="7.2" letter-spacing="1.4" fill="rgba(165,180,252,0.8)">04 · 1С · ЭДО · CRM</text>
+                <text x="0" y="11" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Executor</text>
+                <circle cx="52" cy="-16" r="2.4" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
+              </g>
+            </g>
+
+            <!-- 05 · Notify -->
+            <g class="iso-node" data-role="Notify" transform="translate(660 284)">
+              <use href="#isoPlateO"/>
+              <g style="pointer-events:none" text-anchor="middle">
+                <text x="0" y="-7" font-family="'JetBrains Mono',monospace" font-size="7.2" letter-spacing="1.4" fill="rgba(165,180,252,0.8)">05 · TG · EMAIL</text>
+                <text x="0" y="11" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Notify</text>
+                <circle cx="52" cy="-16" r="2.4" fill="#4ade80"><animate attributeName="opacity" values="1;0.3;1" dur="1.3s" repeatCount="indefinite"/></circle>
+              </g>
+            </g>
+
+            <!-- Sequential flow arrows between iso plates -->
+            <g fill="none" stroke="rgba(165,180,252,0.5)" stroke-width="1.3" stroke-dasharray="3 4" marker-end="url(#arrowO)">
+              <path d="M216 284 L254 284"/>
+              <path d="M386 284 L424 284"/>
+              <path d="M556 284 L594 284"/>
+            </g>
+            <g fill="rgba(199,210,254,1)" filter="url(#plateGlowO)">
+              <circle r="2.8"><animateMotion dur="2.4s" begin="0.2s" repeatCount="indefinite" path="M216 284 L254 284"/></circle>
+              <circle r="2.8"><animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path="M386 284 L424 284"/></circle>
+              <circle r="2.8"><animateMotion dur="2.4s" begin="1.4s" repeatCount="indefinite" path="M556 284 L594 284"/></circle>
+            </g>
+
+            <!-- Final output -->
+            <g transform="translate(790 284)">
+              <circle cx="0" cy="0" r="14" fill="rgba(74,222,128,0.15)" stroke="rgba(74,222,128,0.9)" stroke-width="1.4"/>
+              <path d="M-5 0 L-1 4 L6 -4" fill="none" stroke="rgba(74,222,128,1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="0" y="28" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="6.5" letter-spacing="1.3" fill="rgba(74,222,128,0.85)">DONE</text>
+            </g>
+
+            <!-- Telemetry bar -->
+            <g transform="translate(60 336)">
+              <rect x="0" y="0" width="700" height="7" rx="3.5" fill="rgba(16,21,42,0.8)" stroke="rgba(129,140,248,0.25)" stroke-width="0.7"/>
+              <rect x="0" y="0" width="420" height="7" rx="3.5" fill="url(#labRail)"/>
+              <text x="0" y="-5" font-family="'JetBrains Mono',monospace" font-size="6.5" letter-spacing="1.3" fill="rgba(165,180,252,0.55)">WORKFLOW · 03/05 · HITL PAUSED</text>
+              <text x="700" y="-5" text-anchor="end" font-family="'JetBrains Mono',monospace" font-size="6.5" letter-spacing="1.3" fill="rgba(165,180,252,0.55)">avg eta · 8m</text>
             </g>
           </svg>
-          <div class="cycle-note" id="cycle-operations" data-default="Orchestrator классифицирует тип запроса и выбирает маршрут">Orchestrator классифицирует тип запроса и выбирает маршрут</div>
+
+          <div class="lab-foot">
+            <div class="lab-foot-stages">
+              <span class="lab-stage">01 · ORCHESTRATE</span>
+              <span class="lab-stage">02 · RESOLVE</span>
+              <span class="lab-stage active">03 · HITL</span>
+              <span class="lab-stage">04 · EXECUTE</span>
+              <span class="lab-stage">05 · NOTIFY</span>
+            </div>
+            <div class="lab-foot-metric">routes · <b>6</b> · HITL resume from any graph node</div>
+          </div>
+          <div class="lab-cycle-note" id="cycle-operations" data-default="Hover узла или прокрутите блок описания — подсветится соответствующий агент">Hover узла или прокрутите блок описания — подсветится соответствующий агент</div>
         </div>
       </div>
       <div class="model-text rv">
@@ -594,29 +1134,81 @@ footer::before {
 <section id="voting-debate" class="section section-alt">
   <div class="s-wrap">
     <div class="s-tag rv">Надстройки</div>
-    <div class="s-title rv">Дебаты и голосование.</div>
+    <div class="s-title rv">Дебаты и голосование</div>
     <p class="model-desc rv" style="max-width:700px;margin-bottom:3rem">В трёх моделях — Compliance, Feedback, Operations — доступны опциональные режимы без смены основной схемы. Включаются в пресетах и задаются в дашборде или API флагами <code style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);background:rgba(129,140,248,.1);padding:2px 6px;border-radius:3px">use_voting</code> и <code style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--accent2);background:rgba(129,140,248,.1);padding:2px 6px;border-radius:3px">use_debate</code>.</p>
     <div class="vd-blocks">
-      <!-- VOTING -->
+      <!-- VOTING (iso) -->
       <div class="vd-block rv">
         <div class="vd-title">Голосование (Voting)</div>
         <div class="vd-row">
           <div class="agent-diagram">
-            <svg class="agent-svg" viewBox="0 0 380 165" preserveAspectRatio="xMidYMid meet">
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="20" y="15" width="75" height="48" rx="8"/><text class="node-text" x="57" y="38" text-anchor="middle">Агент 1</text><text class="node-desc" x="57" y="50" text-anchor="middle">Роль</text></g>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="105" y="15" width="75" height="48" rx="8"/><text class="node-text" x="142" y="38" text-anchor="middle">Агент 2</text><text class="node-desc" x="142" y="50" text-anchor="middle">Роль</text></g>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="190" y="15" width="75" height="48" rx="8"/><text class="node-text" x="227" y="38" text-anchor="middle">Агент 3</text><text class="node-desc" x="227" y="50" text-anchor="middle">Роль</text></g>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="275" y="15" width="75" height="48" rx="8"/><text class="node-text" x="312" y="38" text-anchor="middle">Агент 4</text><text class="node-desc" x="312" y="50" text-anchor="middle">Роль</text></g>
-              <path class="arrow-main" d="M 57 63 L 57 82"/>
-              <path class="arrow-main" d="M 142 63 L 142 82"/>
-              <path class="arrow-main" d="M 227 63 L 227 82"/>
-              <path class="arrow-main" d="M 312 63 L 312 82"/>
-              <path class="arrow-main" d="M 57 82 L 192 82"/>
-              <path class="arrow-main" d="M 142 82 L 192 82"/>
-              <path class="arrow-main" d="M 227 82 L 192 82"/>
-              <path class="arrow-main" d="M 312 82 L 192 82"/>
-              <path class="arrow-main" d="M 192 82 L 192 95"/>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect accent" x="131" y="95" width="122" height="48" rx="8"/><text class="node-text" x="192" y="117" text-anchor="middle">Majority</text><text class="node-desc" x="192" y="130" text-anchor="middle">Итог по большинству</text></g>
+            <svg class="agent-svg" viewBox="0 0 520 280" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="vdVoteTop" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1f2552"/><stop offset="100%" stop-color="#131737"/>
+                </linearGradient>
+                <linearGradient id="vdVoteR" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#141937"/><stop offset="100%" stop-color="#0a0d1e"/>
+                </linearGradient>
+                <linearGradient id="vdVoteL" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0c1028"/><stop offset="100%" stop-color="#06081a"/>
+                </linearGradient>
+                <linearGradient id="vdVoteAcc" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#312e81"/>
+                </linearGradient>
+                <linearGradient id="vdVoteAccR" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#3b3796"/><stop offset="100%" stop-color="#1e1b4b"/>
+                </linearGradient>
+                <linearGradient id="vdVoteAccL" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2a2870"/><stop offset="100%" stop-color="#14123a"/>
+                </linearGradient>
+                <!-- Flat-top pseudo-iso plates (centred labels). Bottom & right share edge (x_max, y_max)→(x_max+dx, y_max+dy). -->
+                <symbol id="vdPlate" overflow="visible">
+                  <polygon points="-50,20 50,20 55,32 -45,32" fill="url(#vdVoteL)" stroke="rgba(129,140,248,0.4)" stroke-width="0.8"/>
+                  <polygon points="50,-20 55,-8 55,32 50,20" fill="url(#vdVoteR)" stroke="rgba(129,140,248,0.4)" stroke-width="0.8"/>
+                  <rect class="node-rect" x="-50" y="-20" width="100" height="40" rx="3" fill="url(#vdVoteTop)" stroke="rgba(165,180,252,0.75)" stroke-width="1.1"/>
+                </symbol>
+                <symbol id="vdPlateAcc" overflow="visible">
+                  <polygon points="-120,26 120,26 128,40 -112,40" fill="url(#vdVoteAccL)" stroke="rgba(199,210,254,0.55)" stroke-width="0.8"/>
+                  <polygon points="120,-26 128,-12 128,40 120,26" fill="url(#vdVoteAccR)" stroke="rgba(199,210,254,0.55)" stroke-width="0.8"/>
+                  <rect class="node-rect accent" x="-120" y="-26" width="240" height="52" rx="4" fill="url(#vdVoteAcc)" stroke="rgba(199,210,254,1)" stroke-width="1.5"/>
+                </symbol>
+              </defs>
+              <!-- Row of 4 agents -->
+              <g transform="translate(75 70)"><use href="#vdPlate"/>
+                <text x="0" y="-2" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="#fff">Агент 1</text>
+                <text x="0" y="13" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.3" fill="rgba(165,180,252,0.75)">РОЛЬ · VOTE</text>
+              </g>
+              <g transform="translate(215 70)"><use href="#vdPlate"/>
+                <text x="0" y="-2" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="#fff">Агент 2</text>
+                <text x="0" y="13" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.3" fill="rgba(165,180,252,0.75)">РОЛЬ · VOTE</text>
+              </g>
+              <g transform="translate(355 70)"><use href="#vdPlate"/>
+                <text x="0" y="-2" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="#fff">Агент 3</text>
+                <text x="0" y="13" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.3" fill="rgba(165,180,252,0.75)">РОЛЬ · VOTE</text>
+              </g>
+              <g transform="translate(495 70)"><use href="#vdPlate"/>
+                <text x="0" y="-2" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="12" font-weight="700" fill="#fff">Агент 4</text>
+                <text x="0" y="13" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.3" fill="rgba(165,180,252,0.75)">РОЛЬ · VOTE</text>
+              </g>
+              <!-- Converging arrows to Majority -->
+              <g fill="none" stroke="rgba(129,140,248,0.55)" stroke-width="1.3" stroke-dasharray="3 4">
+                <path d="M75 102 Q160 160 260 190"/>
+                <path d="M215 102 Q240 160 260 190"/>
+                <path d="M355 102 Q310 160 260 190"/>
+                <path d="M495 102 Q380 160 260 190"/>
+              </g>
+              <g fill="rgba(199,210,254,1)">
+                <circle r="2.4"><animateMotion dur="2.6s" repeatCount="indefinite" path="M75 102 Q160 160 260 190"/></circle>
+                <circle r="2.4"><animateMotion dur="2.6s" begin="0.3s" repeatCount="indefinite" path="M215 102 Q240 160 260 190"/></circle>
+                <circle r="2.4"><animateMotion dur="2.6s" begin="0.6s" repeatCount="indefinite" path="M355 102 Q310 160 260 190"/></circle>
+                <circle r="2.4"><animateMotion dur="2.6s" begin="0.9s" repeatCount="indefinite" path="M495 102 Q380 160 260 190"/></circle>
+              </g>
+              <!-- Majority (accent plate) -->
+              <g transform="translate(260 210)"><use href="#vdPlateAcc"/>
+                <text x="0" y="-6" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.5" fill="rgba(199,210,254,0.9)">MAJORITY · 3/4 · CONSENSUS</text>
+                <text x="0" y="14" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#fff">Итог по большинству</text>
+              </g>
             </svg>
           </div>
           <div class="vd-desc">
@@ -624,19 +1216,58 @@ footer::before {
           </div>
         </div>
       </div>
-      <!-- DEBATE -->
+      <!-- DEBATE (iso) -->
       <div class="vd-block rv">
         <div class="vd-title">Дебаты (Debate)</div>
         <div class="vd-row">
           <div class="agent-diagram">
-            <svg class="agent-svg" viewBox="0 0 320 165" preserveAspectRatio="xMidYMid meet">
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="25" y="15" width="90" height="50" rx="8"/><text class="node-text" x="70" y="38" text-anchor="middle">Агент A</text><text class="node-desc" x="70" y="52" text-anchor="middle">Вариант 1</text></g>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="205" y="15" width="90" height="50" rx="8"/><text class="node-text" x="250" y="38" text-anchor="middle">Агент B</text><text class="node-desc" x="250" y="52" text-anchor="middle">Вариант 2</text></g>
-              <path class="arrow-main" d="M 70 65 L 70 88"/>
-              <path class="arrow-main" d="M 250 65 L 250 88"/>
-              <path class="arrow-main" d="M 70 88 L 145 115"/>
-              <path class="arrow-main" d="M 250 88 L 175 115"/>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect accent" x="95" y="115" width="130" height="48" rx="8"/><text class="node-text" x="160" y="137" text-anchor="middle">Judge</text><text class="node-desc" x="160" y="150" text-anchor="middle">Выбор по аргументам</text></g>
+            <svg class="agent-svg" viewBox="0 0 480 280" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="vdDbTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1f2552"/><stop offset="100%" stop-color="#131737"/></linearGradient>
+                <linearGradient id="vdDbR" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#141937"/><stop offset="100%" stop-color="#0a0d1e"/></linearGradient>
+                <linearGradient id="vdDbL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0c1028"/><stop offset="100%" stop-color="#06081a"/></linearGradient>
+                <linearGradient id="vdDbAcc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#312e81"/></linearGradient>
+                <linearGradient id="vdDbAccR" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b3796"/><stop offset="100%" stop-color="#1e1b4b"/></linearGradient>
+                <linearGradient id="vdDbAccL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2870"/><stop offset="100%" stop-color="#14123a"/></linearGradient>
+                <symbol id="vdDbPlate" overflow="visible">
+                  <polygon points="-60,22 60,22 66,36 -54,36" fill="url(#vdDbL)" stroke="rgba(129,140,248,0.4)" stroke-width="0.8"/>
+                  <polygon points="60,-22 66,-8 66,36 60,22" fill="url(#vdDbR)" stroke="rgba(129,140,248,0.4)" stroke-width="0.8"/>
+                  <rect class="node-rect" x="-60" y="-22" width="120" height="44" rx="3" fill="url(#vdDbTop)" stroke="rgba(165,180,252,0.75)" stroke-width="1.1"/>
+                </symbol>
+                <symbol id="vdDbPlateAcc" overflow="visible">
+                  <polygon points="-130,26 130,26 138,40 -122,40" fill="url(#vdDbAccL)" stroke="rgba(199,210,254,0.55)" stroke-width="0.8"/>
+                  <polygon points="130,-26 138,-12 138,40 130,26" fill="url(#vdDbAccR)" stroke="rgba(199,210,254,0.55)" stroke-width="0.8"/>
+                  <rect class="node-rect accent" x="-130" y="-26" width="260" height="52" rx="4" fill="url(#vdDbAcc)" stroke="rgba(199,210,254,1)" stroke-width="1.5"/>
+                </symbol>
+              </defs>
+              <!-- Agent A / Agent B -->
+              <g transform="translate(110 70)"><use href="#vdDbPlate"/>
+                <text x="0" y="-4" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.3" fill="rgba(199,210,254,0.9)">01 · ARGUE</text>
+                <text x="0" y="11" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Агент A</text>
+              </g>
+              <g transform="translate(370 70)"><use href="#vdDbPlate"/>
+                <text x="0" y="-4" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7" letter-spacing="1.3" fill="rgba(199,210,254,0.9)">02 · ARGUE</text>
+                <text x="0" y="11" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="13" font-weight="700" fill="#fff">Агент B</text>
+              </g>
+              <!-- Cross arguments -->
+              <g fill="none" stroke="rgba(129,140,248,0.35)" stroke-width="1" stroke-dasharray="2 3">
+                <path d="M170 80 Q240 100 310 80"/>
+                <path d="M310 90 Q240 105 170 90"/>
+              </g>
+              <!-- Converging arrows to Judge -->
+              <g fill="none" stroke="rgba(129,140,248,0.55)" stroke-width="1.3" stroke-dasharray="3 4">
+                <path d="M110 110 Q170 170 240 195"/>
+                <path d="M370 110 Q310 170 240 195"/>
+              </g>
+              <g fill="rgba(199,210,254,1)">
+                <circle r="2.6"><animateMotion dur="2.6s" repeatCount="indefinite" path="M110 110 Q170 170 240 195"/></circle>
+                <circle r="2.6"><animateMotion dur="2.6s" begin="0.5s" repeatCount="indefinite" path="M370 110 Q310 170 240 195"/></circle>
+              </g>
+              <!-- Judge (accent) -->
+              <g transform="translate(240 215)"><use href="#vdDbPlateAcc"/>
+                <text x="0" y="-6" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="7.5" letter-spacing="1.5" fill="rgba(199,210,254,0.9)">JUDGE · LLM · BEST ARGUMENT</text>
+                <text x="0" y="14" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="14" font-weight="800" fill="#fff">Выбор по аргументам</text>
+              </g>
             </svg>
           </div>
           <div class="vd-desc">
@@ -644,18 +1275,59 @@ footer::before {
           </div>
         </div>
       </div>
-      <!-- VISION -->
+      <!-- VISION (iso) -->
       <div class="vd-block rv">
         <div class="vd-title">Компьютерное зрение (Vision)</div>
         <div class="vd-row">
           <div class="agent-diagram">
-            <svg class="agent-svg" viewBox="0 0 320 130" preserveAspectRatio="xMidYMid meet">
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="25" y="15" width="120" height="45" rx="8"/><text class="node-text" x="85" y="35" text-anchor="middle">Изображения</text><text class="node-desc" x="85" y="48" text-anchor="middle">PDF, скриншоты</text></g>
-              <path class="arrow-main" d="M 145 37 L 175 37"/>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect accent" x="180" y="15" width="115" height="45" rx="8"/><text class="node-text" x="237" y="35" text-anchor="middle">Vision</text><text class="node-desc" x="237" y="48" text-anchor="middle">Печати, подписи</text></g>
-              <path class="arrow-main" d="M 237 60 L 237 78"/>
-              <path class="arrow-main" d="M 237 78 L 160 78"/>
-              <g class="agent-node" style="cursor:default"><rect class="node-rect" x="95" y="78" width="130" height="40" rx="8"/><text class="node-text" x="160" y="98" text-anchor="middle">Checker / Critic</text><text class="node-desc" x="160" y="110" text-anchor="middle">Контекст для проверок</text></g>
+            <svg class="agent-svg" viewBox="0 0 560 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="vdVsTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1f2552"/><stop offset="100%" stop-color="#131737"/></linearGradient>
+                <linearGradient id="vdVsR" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#141937"/><stop offset="100%" stop-color="#0a0d1e"/></linearGradient>
+                <linearGradient id="vdVsL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0c1028"/><stop offset="100%" stop-color="#06081a"/></linearGradient>
+                <linearGradient id="vdVsAcc" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#312e81"/></linearGradient>
+                <linearGradient id="vdVsAccR" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3b3796"/><stop offset="100%" stop-color="#1e1b4b"/></linearGradient>
+                <linearGradient id="vdVsAccL" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2a2870"/><stop offset="100%" stop-color="#14123a"/></linearGradient>
+                <symbol id="vdVsPlate" overflow="visible">
+                  <polygon points="-80,28 80,28 88,44 -72,44" fill="url(#vdVsL)" stroke="rgba(129,140,248,0.4)" stroke-width="0.9"/>
+                  <polygon points="80,-28 88,-12 88,44 80,28" fill="url(#vdVsR)" stroke="rgba(129,140,248,0.4)" stroke-width="0.9"/>
+                  <rect class="node-rect" x="-80" y="-28" width="160" height="56" rx="4" fill="url(#vdVsTop)" stroke="rgba(165,180,252,0.75)" stroke-width="1.2"/>
+                </symbol>
+                <symbol id="vdVsPlateAcc" overflow="visible">
+                  <polygon points="-80,28 80,28 88,44 -72,44" fill="url(#vdVsAccL)" stroke="rgba(199,210,254,0.55)" stroke-width="0.9"/>
+                  <polygon points="80,-28 88,-12 88,44 80,28" fill="url(#vdVsAccR)" stroke="rgba(199,210,254,0.55)" stroke-width="0.9"/>
+                  <rect class="node-rect accent" x="-80" y="-28" width="160" height="56" rx="4" fill="url(#vdVsAcc)" stroke="rgba(199,210,254,1)" stroke-width="1.5"/>
+                </symbol>
+              </defs>
+              <!-- Images plate (left) -->
+              <g transform="translate(120 95)"><use href="#vdVsPlate"/>
+                <g transform="translate(-68 -22)" fill="none" stroke="rgba(199,210,254,0.85)" stroke-width="1.3">
+                  <rect x="0" y="0" width="18" height="14" rx="1.5"/>
+                  <path d="M2 11 L6 6 L9 9 L14 4 L16 11 Z" fill="rgba(199,210,254,0.4)"/>
+                </g>
+                <text x="0" y="-8" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.85)">INPUT · PDF · СКРИНШОТЫ</text>
+                <text x="0" y="14" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="15" font-weight="700" fill="#fff">Изображения</text>
+              </g>
+              <!-- Arrow to Vision -->
+              <path d="M200 95 Q280 95 360 95" fill="none" stroke="rgba(129,140,248,0.55)" stroke-width="1.4" stroke-dasharray="3 4"/>
+              <circle r="3" fill="rgba(199,210,254,1)"><animateMotion dur="2.4s" repeatCount="indefinite" path="M200 95 Q280 95 360 95"/></circle>
+              <!-- Vision (accent, center-right) -->
+              <g transform="translate(440 95)"><use href="#vdVsPlateAcc"/>
+                <g transform="translate(-68 -22)" fill="none" stroke="#fff" stroke-width="1.6">
+                  <ellipse cx="11" cy="8" rx="11" ry="6.5"/>
+                  <circle cx="11" cy="8" r="3.5" fill="rgba(255,255,255,0.95)"/>
+                </g>
+                <text x="0" y="-8" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.9)">VISION · LLAVA · OBJECT+TEXT</text>
+                <text x="0" y="14" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="15" font-weight="700" fill="#fff">Печати · подписи</text>
+              </g>
+              <!-- Arrow down-left to Checker -->
+              <path d="M440 155 Q420 200 300 230" fill="none" stroke="rgba(129,140,248,0.55)" stroke-width="1.4" stroke-dasharray="3 4"/>
+              <circle r="3" fill="rgba(199,210,254,1)"><animateMotion dur="2.6s" begin="0.3s" repeatCount="indefinite" path="M440 155 Q420 200 300 230"/></circle>
+              <!-- Checker/Critic plate -->
+              <g transform="translate(260 230)"><use href="#vdVsPlate"/>
+                <text x="0" y="-8" text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="8" letter-spacing="1.5" fill="rgba(199,210,254,0.9)">CONTEXT · В ВАШУ СХЕМУ</text>
+                <text x="0" y="14" text-anchor="middle" font-family="'Inter',system-ui,sans-serif" font-size="15" font-weight="700" fill="#fff">Checker · Critic</text>
+              </g>
             </svg>
           </div>
           <div class="vd-desc">
@@ -671,7 +1343,7 @@ footer::before {
 <section id="faq" class="section">
   <div class="s-wrap">
     <div class="s-tag rv">FAQ</div>
-    <div class="s-title rv">Частые вопросы.</div>
+    <div class="s-title rv">Частые вопросы</div>
     <div class="faq-list rv">
       <div class="faq-item open">
         <h4 class="faq-q">Чем мультиагентный подход выгоднее одного универсального агента?</h4>
@@ -885,6 +1557,7 @@ document.querySelectorAll('.faq-q').forEach(q => {
         rafId = null;
         const sectionRect = section.getBoundingClientRect();
         const vh = window.innerHeight;
+        // Работаем только пока секция в зоне видимости
         if (sectionRect.bottom < 0 || sectionRect.top > vh) return;
         const centerY = vh / 2;
         let best = null;
