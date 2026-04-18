@@ -51,39 +51,39 @@
   <g font-family="'JetBrains Mono',monospace" font-size="10" letter-spacing="1.6">
     <!-- Source 1: DOCS (top-left of hex) -->
     <g transform="translate(680 180)">
-      <rect x="-56" y="-22" width="112" height="44" rx="8" fill="url(#slCard)" stroke="rgba(129,140,248,0.6)" stroke-width="1.3"/>
-      <g transform="translate(-44 -14)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.3" stroke-linecap="round">
+      <rect x="-70" y="-24" width="140" height="48" rx="9" fill="url(#slCard)" stroke="rgba(129,140,248,0.6)" stroke-width="1.3"/>
+      <g transform="translate(-58 -10)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.3" stroke-linecap="round">
         <path d="M2 1 L14 1 L18 5 L18 19 L2 19 Z"/>
         <path d="M14 1 L14 5 L18 5"/>
         <line x1="5" y1="9" x2="15" y2="9"/>
         <line x1="5" y1="13" x2="15" y2="13"/>
       </g>
-      <text x="-10" y="-2" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#e5e7eb">Документы</text>
-      <text x="-10" y="12" fill="rgba(165,180,252,0.75)">152-ФЗ · PDF</text>
-      <circle cx="44" cy="-12" r="3" fill="#22c55e"><animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/></circle>
+      <text x="-30" y="-2" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#e5e7eb">Документы</text>
+      <text x="-30" y="12" fill="rgba(165,180,252,0.75)">152-ФЗ · PDF</text>
+      <circle cx="56" cy="-13" r="3" fill="#22c55e"><animate attributeName="opacity" values="1;0.3;1" dur="1.6s" repeatCount="indefinite"/></circle>
     </g>
     <!-- Source 2: CHATS (middle-left of hex) -->
     <g transform="translate(660 300)">
-      <rect x="-56" y="-22" width="112" height="44" rx="8" fill="url(#slCard)" stroke="rgba(129,140,248,0.6)" stroke-width="1.3"/>
-      <g transform="translate(-44 -14)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="-70" y="-24" width="140" height="48" rx="9" fill="url(#slCard)" stroke="rgba(129,140,248,0.6)" stroke-width="1.3"/>
+      <g transform="translate(-58 -10)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
         <path d="M2 4 Q2 2 4 2 L18 2 Q20 2 20 4 L20 15 Q20 17 18 17 L10 17 L6 21 L6 17 L4 17 Q2 17 2 15 Z"/>
         <line x1="6" y1="7" x2="16" y2="7"/>
         <line x1="6" y1="11" x2="13" y2="11"/>
       </g>
-      <text x="-10" y="-2" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#e5e7eb">Обращения</text>
-      <text x="-10" y="12" fill="rgba(165,180,252,0.75)">CRM · EMAIL</text>
-      <circle cx="44" cy="-12" r="3" fill="#6366f1"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
+      <text x="-30" y="-2" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#e5e7eb">Обращения</text>
+      <text x="-30" y="12" fill="rgba(165,180,252,0.75)">CRM · EMAIL</text>
+      <circle cx="56" cy="-13" r="3" fill="#6366f1"><animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/></circle>
     </g>
     <!-- Source 3: TASKS (bottom-left of hex) -->
     <g transform="translate(680 420)">
-      <rect x="-56" y="-22" width="112" height="44" rx="8" fill="url(#slCard)" stroke="rgba(129,140,248,0.6)" stroke-width="1.3"/>
-      <g transform="translate(-44 -14)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.3" stroke-linecap="round">
+      <rect x="-70" y="-24" width="140" height="48" rx="9" fill="url(#slCard)" stroke="rgba(129,140,248,0.6)" stroke-width="1.3"/>
+      <g transform="translate(-58 -10)" stroke="rgba(199,210,254,0.95)" fill="none" stroke-width="1.3" stroke-linecap="round">
         <rect x="2" y="2" width="18" height="18" rx="2"/>
         <path d="M6 10 L9 13 L15 7"/>
       </g>
-      <text x="-10" y="-2" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#e5e7eb">Согласов.</text>
-      <text x="-10" y="12" fill="rgba(165,180,252,0.75)">1С · ERP</text>
-      <circle cx="44" cy="-12" r="3" fill="#22c55e"><animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
+      <text x="-30" y="-2" font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="700" letter-spacing="0" fill="#e5e7eb">Операции</text>
+      <text x="-30" y="12" fill="rgba(165,180,252,0.75)">1С · ERP</text>
+      <circle cx="56" cy="-13" r="3" fill="#22c55e"><animate attributeName="opacity" values="1;0.3;1" dur="1.8s" repeatCount="indefinite"/></circle>
     </g>
   </g>
 
@@ -151,9 +151,9 @@
 
   <!-- Connections from source chips to hub (short, staying inside right area) -->
   <g stroke="rgba(129,140,248,0.55)" stroke-width="1.3" fill="none" stroke-linecap="round">
-    <path d="M740 180 C780 180 790 220 800 246"/>
-    <path d="M720 300 L796 300"/>
-    <path d="M740 420 C780 420 790 380 800 354"/>
+    <path d="M754 180 C790 180 798 220 804 246"/>
+    <path d="M734 300 L800 300"/>
+    <path d="M754 420 C790 420 798 380 804 354"/>
   </g>
 
   <!-- Connections from hub to status rail -->
@@ -166,13 +166,13 @@
   <!-- Animated packets -->
   <g>
     <circle r="3" fill="#a5b4fc">
-      <animateMotion dur="2.6s" repeatCount="indefinite" path="M740 180 C780 180 790 220 800 246"/>
+      <animateMotion dur="2.6s" repeatCount="indefinite" path="M754 180 C790 180 798 220 804 246"/>
     </circle>
     <circle r="3" fill="#818cf8">
-      <animateMotion dur="2.8s" begin="0.6s" repeatCount="indefinite" path="M720 300 L796 300"/>
+      <animateMotion dur="2.8s" begin="0.6s" repeatCount="indefinite" path="M734 300 L800 300"/>
     </circle>
     <circle r="3" fill="#22c55e">
-      <animateMotion dur="3s" begin="1.2s" repeatCount="indefinite" path="M740 420 C780 420 790 380 800 354"/>
+      <animateMotion dur="3s" begin="1.2s" repeatCount="indefinite" path="M754 420 C790 420 798 380 804 354"/>
     </circle>
     <circle r="2.6" fill="#a5b4fc">
       <animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path="M984 260 L1000 210"/>
