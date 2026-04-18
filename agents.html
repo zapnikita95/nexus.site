@@ -867,15 +867,39 @@ document.querySelectorAll('.faq-q').forEach(q => {
       const cycleText = block.dataset.cycle;
       const svgNode = section.querySelector(`g[data-role="${role}"]`);
       block.addEventListener('mouseenter', () => {
-        svgNodes.forEach(n => n.querySelector('.node-rect')?.classList.remove('hl'));
-        if (svgNode) svgNode.querySelector('.node-rect')?.classList.add('hl');
+        svgNodes.forEach(n => n.querySelectorAll('.node-rect').forEach(el => el.classList.remove('hl')));
+        if (svgNode) svgNode.querySelectorAll('.node-rect').forEach(el => el.classList.add('hl'));
         if (cycleEl && cycleText) cycleEl.textContent = cycleText;
       });
       block.addEventListener('mouseleave', () => {
-        if (svgNode) svgNode.querySelector('.node-rect')?.classList.remove('hl');
+        if (svgNode) svgNode.querySelectorAll('.node-rect').forEach(el => el.classList.remove('hl'));
         if (cycleEl) cycleEl.textContent = defaultText;
       });
     });
+
+    // Scroll-spy: highlight current rationale block's SVG node while scrolling
+    if (blocks.length) {
+      const spy = new IntersectionObserver((entries) => {
+        let active = null;
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            if (!active || e.intersectionRatio > active.intersectionRatio) active = e;
+          }
+        });
+        if (!active) return;
+        const block = active.target;
+        const role = block.dataset.role;
+        const cycleText = block.dataset.cycle;
+        const svgNode = section.querySelector(`g[data-role="${role}"]`);
+        if (!svgNode) return;
+        svgNodes.forEach(n => n.querySelectorAll('.node-rect').forEach(el => el.classList.remove('hl')));
+        blocks.forEach(b => b.classList.remove('hl'));
+        svgNode.querySelectorAll('.node-rect').forEach(el => el.classList.add('hl'));
+        block.classList.add('hl');
+        if (cycleEl && cycleText) cycleEl.textContent = cycleText;
+      }, { threshold: [0.35, 0.6, 0.85], rootMargin: '-30% 0px -40% 0px' });
+      blocks.forEach(b => spy.observe(b));
+    }
   });
 })();
 </script>
