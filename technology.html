@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Технологии: on-premise LLM, агенты, память — Нексус-Тех</title>
-<meta name="description" content="Архитектура мультиагентного ИИ on-premise: LLM на серверах клиента, LangGraph-агенты, KV-cache, интеграции с 1С, Bitrix24, ЭДО. Air-gap.">
-<meta name="keywords" content="on-premise LLM, мультиагентные системы, LangGraph, KV-cache, Qwen, Llama, векторная БД, 1С, Bitrix24, ЭДО, air-gap, ФСТЭК">
+<meta name="description" content="Архитектура мультиагентного ИИ on-premise: LLM, LangGraph-агенты, компьютерное зрение и YOLO на периметре, KV-cache, интеграции с 1С, Bitrix24, ЭДО. Air-gap.">
+<meta name="keywords" content="on-premise LLM, YOLO, компьютерное зрение, детекция объектов, мультиагентные системы, LangGraph, KV-cache, Qwen, Llama, векторная БД, 1С, Bitrix24, ЭДО, air-gap, ФСТЭК">
 <meta name="author" content="Нексус-Тех">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="icon" href="favicon.png" type="image/png">
@@ -17,7 +17,7 @@
 <meta property="og:site_name" content="Нексус-Тех">
 <meta property="og:url" content="https://нексус-тех.рф/technology.html">
 <meta property="og:title" content="Технологии: on-premise LLM, агенты, память — Нексус-Тех">
-<meta property="og:description" content="Архитектура ИИ на вашем периметре: агенты, LLM, KV-cache, векторная БД, интеграции с 1С/ЭДО. Air-gap.">
+<meta property="og:description" content="Архитектура ИИ на вашем периметре: агенты, LLM, Vision/YOLO, KV-cache, векторная БД, интеграции с 1С/ЭДО. Air-gap.">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:image" content="https://нексус-тех.рф/og/og-technology.png">
 <meta property="og:image:secure_url" content="https://нексус-тех.рф/og/og-technology.png">
@@ -482,7 +482,7 @@ section.cta-section{background:var(--surface,#10152a)}
   <div class="s-pad">
     <div class="s-label rv">Технологии</div>
     <h1 class="s-title rv">Полный контроль<br>над стеком. ИИ<br>on-premise</h1>
-    <div class="s-sub rv">Open-source LLM на ваших серверах. LangGraph · vLLM · Qdrant · FastAPI. Полная прозрачность. Независимость от облачных провайдеров.</div>
+    <div class="s-sub rv">Open-source LLM на ваших серверах. LangGraph · vLLM · Qdrant · FastAPI. При необходимости — детекция объектов YOLO и vision-модели на периметре. Полная прозрачность и независимость от облака.</div>
     <div class="page-hero-cta rv">
       <a href="order.html" class="btn-accent">Развернуть стек →</a>
       <a href="agents.html" class="btn-outline">Модели агентов →</a>
@@ -514,6 +514,38 @@ section.cta-section{background:var(--surface,#10152a)}
           <h4 style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Интеграции</h4>
           <p style="font-size:14px;color:var(--text2);line-height:1.75">1С (ERP, бухгалтерия), Bitrix24 (CRM), ЭДО (Диадок, СБИС), Честный Знак (маркировка).</p>
         </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:24px">
+          <h4 style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:12px">Vision / YOLO</h4>
+          <p style="font-size:14px;color:var(--text2);line-height:1.75">Детекция объектов на вашем железе: склад, производство, PPE. Baseline и дообучение, API детекции, метрики качества и задержки — без вывода кадров наружу.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Vision / YOLO -->
+<section id="vision-yolo" style="padding:0 0 96px;background:var(--surface)">
+  <div class="s-pad">
+    <div class="s-label rv">Vision</div>
+    <h2 class="s-title rv">Компьютерное зрение и YOLO на вашем периметре</h2>
+    <p class="s-sub rv" style="max-width:760px;margin-bottom:28px">Отдельный контур для задач, где важны объекты на кадре, а не только текст: учёт и полки, дефекты на линии, контроль СИЗ. Данные и видео остаются у вас; фиксируются понятные KPI пилота — точность, скорость, доля ложных срабатываний — и решение о масштабировании.</p>
+    <div class="content-wrap rv" style="max-width:1100px">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:22px 22px 24px">
+          <h3 style="font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Склад и ритейл</h3>
+          <p style="font-size:14px;color:var(--text2);line-height:1.8;margin:0">Подсчёт паллет и упаковок, контроль пустых слотов и OOS, сигналы в WMS и отчёты near real-time. Снижение ручных пересчётов и расхождений в учёте.</p>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:22px 22px 24px">
+          <h3 style="font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Производство</h3>
+          <p style="font-size:14px;color:var(--text2);line-height:1.8;margin:0">Поверхностные и геометрические дефекты, пропущенные или смещённые элементы на контрольных участках — ранняя остановка брака и меньше rework.</p>
+        </div>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:22px 22px 24px">
+          <h3 style="font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:10px">Промбезопасность (PPE)</h3>
+          <p style="font-size:14px;color:var(--text2);line-height:1.8;margin:0">Детекция типовых нарушений (каска, жилет), фиксация инцидентов и тренды по зонам и сменам — прозрачнее, чем выборочный обход.</p>
+        </div>
+      </div>
+      <div style="margin-top:28px;padding:20px 22px;border-left:2px solid rgba(129,140,248,0.5);border-radius:0 8px 8px 0;background:rgba(129,140,248,0.06)">
+        <p style="font-size:14px;color:var(--text2);line-height:1.85;margin:0">Типовой цикл: готовность данных и лицензий → baseline на открытых или ваших выборках → дообучение и сравнение метрик → нагрузочный прогон API и наблюдаемость (latency, запросы). Итог — единое решение Go/No-Go по масштабированию. Подробнее в <a href="article-yolo-kiwitron-vision.html" style="color:var(--accent);text-decoration:underline">статье про Kiwitron и YOLO</a>; схема связки vision с агентами — в разделе <a href="agents.html#vision-agents" style="color:var(--accent);text-decoration:underline">Модели агентов</a>.</p>
       </div>
     </div>
   </div>

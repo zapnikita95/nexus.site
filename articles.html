@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Статьи и кейсы: on-premise ИИ, 152-ФЗ — Нексус-Тех</title>
-<meta name="description" content="Практические материалы и кейсы: внедрения мультиагентных ИИ-систем, 152-ФЗ, автоматизация комплаенса, банки, госсектор, энергетика.">
-<meta name="keywords" content="статьи, кейсы, on-premise ИИ, 152-ФЗ, автоматизация комплаенса, мультиагентные системы, enterprise AI, внедрение LLM">
+<meta name="description" content="Практические материалы и кейсы: внедрения мультиагентных ИИ-систем, компьютерное зрение и YOLO, 152-ФЗ, автоматизация комплаенса, банки, госсектор, энергетика.">
+<meta name="keywords" content="статьи, кейсы, on-premise ИИ, YOLO, компьютерное зрение, 152-ФЗ, автоматизация комплаенса, мультиагентные системы, enterprise AI, внедрение LLM">
 <meta name="author" content="Нексус-Тех">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="icon" href="favicon.png" type="image/png">
@@ -361,7 +361,7 @@ footer::before {
       </button>
       <div class="featured-dots" id="featured-dots"></div>
       <div class="featured-progress"><div class="featured-progress-bar" id="featured-progress-bar"></div></div>
-      <div class="featured-counter" id="featured-counter">01 / 04</div>
+      <div class="featured-counter" id="featured-counter">01 / 05</div>
       <button class="featured-btn" data-featured-next aria-label="Следующая публикация">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
@@ -666,6 +666,54 @@ footer::before {
         </div>
       </article>
 
+      <!-- Slide 5: Kiwitron / YOLO -->
+      <article class="featured-slide" data-active="false">
+        <div class="featured-visual">
+          <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <pattern id="fc5Grid" width="18" height="18" patternUnits="userSpaceOnUse">
+                <path d="M18 0 L0 0 L0 18" fill="none" stroke="rgba(129,140,248,0.08)" stroke-width="1"/>
+              </pattern>
+              <radialGradient id="fc5Cam" cx="50%" cy="45%" r="60%">
+                <stop offset="0%" stop-color="rgba(74,222,128,0.25)"/>
+                <stop offset="100%" stop-color="rgba(11,15,26,0)"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#fc5Grid)"/>
+            <ellipse cx="200" cy="140" rx="170" ry="120" fill="url(#fc5Cam)"/>
+            <!-- Floor / hazard cone -->
+            <g stroke="rgba(250,204,21,0.45)" stroke-width="1.2" fill="none" stroke-dasharray="4 5">
+              <path d="M80 220 L200 120 L320 220"/>
+            </g>
+            <!-- Camera -->
+            <g transform="translate(200 88)">
+              <rect x="-28" y="-14" width="56" height="36" rx="4" fill="rgba(16,21,42,0.95)" stroke="rgba(129,140,248,0.85)" stroke-width="1.5"/>
+              <circle cx="0" cy="4" r="14" fill="rgba(11,15,26,0.9)" stroke="rgba(199,210,254,0.6)" stroke-width="1.2"/>
+              <circle cx="0" cy="4" r="7" fill="none" stroke="rgba(74,222,128,0.7)" stroke-width="1"/>
+              <rect x="-8" y="-22" width="16" height="10" rx="2" fill="rgba(129,140,248,0.3)"/>
+            </g>
+            <!-- Detection rays -->
+            <g stroke="rgba(74,222,128,0.35)" stroke-width="1" fill="none">
+              <path d="M200 120 L140 200"/><path d="M200 120 L200 215"/><path d="M200 120 L260 200"/>
+            </g>
+            <g transform="translate(140 205)">
+              <rect x="-12" y="-8" width="24" height="16" rx="2" fill="rgba(16,21,42,0.85)" stroke="rgba(199,210,254,0.5)"/>
+            </g>
+            <g transform="translate(260 205)">
+              <rect x="-18" y="-10" width="36" height="20" rx="3" fill="rgba(16,21,42,0.85)" stroke="rgba(250,204,21,0.55)"/>
+            </g>
+            <text x="18" y="24" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="2" fill="rgba(165,180,252,0.65)">YOLO · EDGE · SAFETY</text>
+            <text x="382" y="286" text-anchor="end" font-family="'JetBrains Mono',monospace" font-size="8.5" letter-spacing="2" fill="rgba(165,180,252,0.5)">IT · Logistics</text>
+          </svg>
+        </div>
+        <div class="featured-body">
+          <span class="featured-slide-tag case">КЕЙС · VISION</span>
+          <h3>Kiwitron: YOLO для опасностей на промплощадке</h3>
+          <p>Итальянский индустриальный вендор: KiwiEye на Ultralytics YOLO, детекция до ~30 м, edge-инференс, heatmaps и near-miss. Разбор для логистики и промбезопасности с похожей ЦА.</p>
+          <a href="article-yolo-kiwitron-vision.html" class="featured-cta">Читать разбор <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        </div>
+      </article>
+
     </div>
   </div>
 </div>
@@ -740,6 +788,22 @@ footer::before {
 
 <div class="articles-section">
     <div class="articles-grid">
+
+    <a href="article-yolo-kiwitron-vision.html" class="art-card-link">
+    <article class="art-card rv" data-type="case">
+      <div class="art-meta">
+        <span class="art-tag art-tag-case">[КЕЙС]</span>
+        <span class="art-date">2026-04-19</span>
+        <span class="art-read">11 мин</span>
+      </div>
+      <h3>Kiwitron и YOLO: зрение для промбезопасности и логистики</h3>
+      <p>Разбор публичного кейса KiwiEye (Ultralytics): детекция опасностей на полу цеха и склада, edge, метрики. Зачем такой же класс заказчикам в enterprise on-prem.</p>
+      <div class="art-footer">
+        <span class="art-author">// нексус-тех.рф</span>
+        <span class="art-arrow">→ читать</span>
+      </div>
+    </article>
+    </a>
 
     <a href="article-case-boras-energi.html" class="art-card-link">
     <article class="art-card rv" data-type="case">
